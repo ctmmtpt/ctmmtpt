@@ -12,15 +12,11 @@
 const CONFIG = {
 
     /*
-     * IMPORTANT
      * ----------------------------------------------------------
-     * Paste the deployed Google Apps Script Web App URL here.
+     * GOOGLE APPS SCRIPT WEB APP
+     * ----------------------------------------------------------
      *
-     * Example:
-     * https://script.google.com/macros/s/XXXXXXXXXXXX/exec
-     *
-     * This URL must be the Web App deployment of the
-     * CTM PATH™ backend.
+     * Deployed CTM PATH™ backend endpoint.
      */
 
     BACKEND_URL:
@@ -28,11 +24,26 @@ const CONFIG = {
 
 
     /*
-     * First assessment page.
+     * ----------------------------------------------------------
+     * FIRST ASSESSMENT PAGE
+     * ----------------------------------------------------------
+     *
+     * All HTML pages are now kept in the ROOT.
+     *
+     * Therefore:
+     *
+     *     index.html
+     *     01.html
+     *     02.html
+     *     03.html
+     *
+     * NOT:
+     *
+     *     html/page01.html
      */
 
     FIRST_PAGE:
-        'html/page01.html'
+        '01.html'
 
 };
 
@@ -63,6 +74,7 @@ if (!form) {
 
 }
 
+
 if (!beginButton) {
 
     console.error(
@@ -70,6 +82,7 @@ if (!beginButton) {
     );
 
 }
+
 
 if (!formStatus) {
 
@@ -184,6 +197,7 @@ async function handleRegistration(event) {
         valid = false;
 
     }
+
     else if (!isValidMobile(mobile)) {
 
         showFieldError(
@@ -206,6 +220,7 @@ async function handleRegistration(event) {
         valid = false;
 
     }
+
     else if (!isValidEmail(email)) {
 
         showFieldError(
@@ -477,7 +492,7 @@ async function handleRegistration(event) {
 
 
         /* ----------------------------------------------------
-           MOVE TO PAGE 01
+           MOVE TO 01.HTML
            ---------------------------------------------------- */
 
         setTimeout(
@@ -529,8 +544,10 @@ async function sendToBackend(payload) {
 
 
     /*
-     * IMPORTANT
      * ----------------------------------------------------------
+     * APPS SCRIPT WEB APP REQUEST
+     * ----------------------------------------------------------
+     *
      * Apps Script Web Apps can respond with redirects.
      *
      * Using text/plain avoids unnecessary CORS preflight
@@ -637,6 +654,7 @@ function isValidMobile(mobile) {
             /\D/g,
             ''
         );
+
 
     return (
         digits.length >= 10 &&
