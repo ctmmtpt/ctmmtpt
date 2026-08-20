@@ -24,7 +24,7 @@ const CONFIG = {
      */
 
     BACKEND_URL:
-        'PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE',
+        'https://script.google.com/macros/s/AKfycbx9eJru7EJYUpReeLv4Sym9wDVLgE_ruSw_ZUJ4ycDoneUKlkI_fcsJ2UJmKM7W_PXtEg/exec',
 
 
     /*
