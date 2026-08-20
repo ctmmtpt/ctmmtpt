@@ -1,7 +1,7 @@
 
 /* ============================================================
    CTM PATH™ MILLIONAIRES™
-   PAGE 01
+   PAGE 01 — PREMIUM STYLES
    ============================================================ */
 
 
@@ -29,20 +29,27 @@
     --text-soft: #b8bfd0;
     --text-muted: #7f889e;
 
-    --border: rgba(245, 201, 79, 0.24);
-    --border-soft: rgba(255, 255, 255, 0.07);
+    --border:
+        rgba(245, 201, 79, 0.24);
+
+    --border-soft:
+        rgba(255,255,255,0.07);
 
     --red: #ef4444;
-    --red-soft: rgba(239, 68, 68, 0.16);
+    --red-soft:
+        rgba(239,68,68,0.16);
 
     --orange: #f59e0b;
-    --orange-soft: rgba(245, 158, 11, 0.16);
+    --orange-soft:
+        rgba(245,158,11,0.16);
 
     --green: #22c55e;
-    --green-soft: rgba(34, 197, 94, 0.16);
+    --green-soft:
+        rgba(34,197,94,0.16);
 
     --shadow:
-        0 20px 60px rgba(0, 0, 0, 0.35);
+        0 20px 60px rgba(0,0,0,0.35);
+
 }
 
 
@@ -51,14 +58,19 @@
    ============================================================ */
 
 * {
+
     margin: 0;
     padding: 0;
+
     box-sizing: border-box;
+
 }
 
 
 html {
+
     scroll-behavior: smooth;
+
 }
 
 
@@ -70,13 +82,13 @@ body {
 
         radial-gradient(
             circle at 10% 15%,
-            rgba(0, 183, 165, 0.10),
+            rgba(0,183,165,0.10),
             transparent 30%
         ),
 
         radial-gradient(
             circle at 90% 10%,
-            rgba(245, 201, 79, 0.07),
+            rgba(245,201,79,0.07),
             transparent 28%
         ),
 
@@ -92,10 +104,12 @@ body {
     font-family:
         "Noto Sans Tamil",
         "Latha",
+        "Nirmala UI",
         Arial,
         sans-serif;
 
     line-height: 1.6;
+
 }
 
 
@@ -118,11 +132,13 @@ body {
 
     align-items: center;
 
-    padding: 16px 28px;
+    padding:
+        14px 28px;
 
     z-index: 100;
 
     pointer-events: none;
+
 }
 
 
@@ -137,13 +153,13 @@ body {
     justify-content: center;
 
     text-decoration: none;
+
 }
 
 
 .brand-logo {
 
     width: 76px;
-
     height: 76px;
 
     object-fit: contain;
@@ -153,8 +169,9 @@ body {
     filter:
         drop-shadow(
             0 8px 20px
-            rgba(0, 0, 0, 0.45)
+            rgba(0,0,0,0.45)
         );
+
 }
 
 
@@ -170,12 +187,12 @@ body {
             calc(100% - 48px)
         );
 
-    margin: 0 auto;
+    margin:
+        0 auto;
 
     padding:
-        112px
-        48px
-        60px;
+        112px 48px 60px;
+
 }
 
 
@@ -188,7 +205,8 @@ body {
     text-align: center;
 
     padding:
-        12px 20px 40px;
+        20px 20px 40px;
+
 }
 
 
@@ -203,6 +221,7 @@ body {
     letter-spacing: 4px;
 
     margin-bottom: 18px;
+
 }
 
 
@@ -211,20 +230,24 @@ body {
     color: var(--gold);
 
     font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+        "Noto Sans Tamil",
+        "Latha",
+        "Nirmala UI",
+        sans-serif;
 
     font-size:
         clamp(
-            34px,
+            38px,
             4vw,
-            58px
+            64px
         );
 
-    line-height: 1.15;
+    font-weight: 900;
 
-    margin-bottom: 14px;
+    line-height: 1.25;
+
+    margin-bottom: 18px;
+
 }
 
 
@@ -244,6 +267,7 @@ body {
     letter-spacing: 0.8px;
 
     margin-bottom: 12px;
+
 }
 
 
@@ -251,11 +275,12 @@ body {
 
     color: var(--teal-bright);
 
-    font-size: 27px;
+    font-size: 29px;
 
-    font-weight: 700;
+    font-weight: 800;
 
     margin-top: 8px;
+
 }
 
 
@@ -270,6 +295,7 @@ body {
     font-weight: 700;
 
     margin-top: 3px;
+
 }
 
 
@@ -277,12 +303,13 @@ body {
 
     color: var(--text);
 
-    font-size: 18px;
+    font-size: 19px;
 
-    max-width: 950px;
+    max-width: 1000px;
 
     margin:
-        26px auto 8px;
+        28px auto 8px;
+
 }
 
 
@@ -293,6 +320,7 @@ body {
     font-size: 16px;
 
     margin-top: 6px;
+
 }
 
 
@@ -309,10 +337,13 @@ body {
         24px 26px;
 
     border-top:
-        1px solid var(--border);
+        1px solid
+        var(--border);
 
     border-bottom:
-        1px solid var(--border);
+        1px solid
+        var(--border);
+
 }
 
 
@@ -320,11 +351,13 @@ body {
 
     display: flex;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
 
     align-items: center;
 
     gap: 25px;
+
 }
 
 
@@ -332,11 +365,13 @@ body {
 
     display: block;
 
-    color: var(--ivory);
+    color:
+        var(--ivory);
 
     font-size: 22px;
 
     font-weight: 800;
+
 }
 
 
@@ -344,13 +379,15 @@ body {
 
     display: block;
 
-    color: var(--text-muted);
+    color:
+        var(--text-muted);
 
     font-size: 12px;
 
     letter-spacing: 2px;
 
     font-weight: 700;
+
 }
 
 
@@ -362,19 +399,24 @@ body {
 
     text-align: right;
 
-    color: var(--text-soft);
+    color:
+        var(--text-soft);
 
     font-size: 13px;
+
 }
 
 
 .scale-high {
-    color: var(--green);
+
+    color:
+        var(--green);
+
 }
 
 
 /* ============================================================
-   COLOUR LEGEND
+   COLOUR GUIDE
    ============================================================ */
 
 .colour-guide {
@@ -386,6 +428,7 @@ body {
     gap: 18px;
 
     margin-top: 15px;
+
 }
 
 
@@ -400,46 +443,65 @@ body {
     font-size: 12px;
 
     font-weight: 800;
+
 }
 
 
 .legend-dot {
 
     width: 9px;
-
     height: 9px;
 
     border-radius: 50%;
+
 }
 
 
 .legend-red {
-    color: #ff7b7b;
+
+    color:
+        #ff7b7b;
+
 }
 
 
 .legend-red .legend-dot {
-    background: var(--red);
+
+    background:
+        var(--red);
+
 }
 
 
 .legend-orange {
-    color: #ffbf45;
+
+    color:
+        #ffbf45;
+
 }
 
 
 .legend-orange .legend-dot {
-    background: var(--orange);
+
+    background:
+        var(--orange);
+
 }
 
 
 .legend-green {
-    color: #65e995;
+
+    color:
+        #65e995;
+
 }
 
 
 .legend-green .legend-dot {
-    background: var(--green);
+
+    background:
+        var(--green);
+
 }
 
 
@@ -454,10 +516,11 @@ body {
     grid-template-columns:
         repeat(
             2,
-            minmax(0, 1fr)
+            minmax(0,1fr)
         );
 
     gap: 22px;
+
 }
 
 
@@ -470,15 +533,16 @@ body {
     position: relative;
 
     background:
+
         linear-gradient(
             145deg,
-            rgba(12, 21, 49, 0.96),
-            rgba(6, 13, 35, 0.96)
+            rgba(12,21,49,0.97),
+            rgba(6,13,35,0.97)
         );
 
     border:
         1px solid
-        rgba(0, 183, 165, 0.45);
+        rgba(0,183,165,0.42);
 
     border-radius: 22px;
 
@@ -492,12 +556,13 @@ body {
 
     box-shadow:
         0 15px 40px
-        rgba(0, 0, 0, 0.22);
+        rgba(0,0,0,0.22);
 
     transition:
         transform 0.25s ease,
         border-color 0.25s ease,
         box-shadow 0.25s ease;
+
 }
 
 
@@ -507,13 +572,18 @@ body {
         translateY(-3px);
 
     border-color:
-        rgba(0, 183, 165, 0.75);
+        rgba(0,183,165,0.78);
 
     box-shadow:
         0 20px 50px
-        rgba(0, 0, 0, 0.32);
+        rgba(0,0,0,0.32);
+
 }
 
+
+/* ============================================================
+   SELVAM HEADER
+   ============================================================ */
 
 .selvam-top {
 
@@ -524,16 +594,17 @@ body {
     gap: 15px;
 
     margin-bottom: 17px;
+
 }
 
 
 .selvam-number {
 
     width: 48px;
-
     height: 48px;
 
-    flex: 0 0 48px;
+    flex:
+        0 0 48px;
 
     display: flex;
 
@@ -543,33 +614,38 @@ body {
 
     border:
         1px solid
-        rgba(245, 201, 79, 0.55);
+        rgba(245,201,79,0.55);
 
     border-radius: 50%;
 
-    color: var(--gold);
+    color:
+        var(--gold);
 
     font-size: 15px;
 
     font-weight: 800;
+
 }
 
 
 .selvam-title-ta {
 
-    color: var(--ivory);
+    color:
+        var(--ivory);
 
     font-size: 24px;
 
     font-weight: 800;
 
-    line-height: 1.2;
+    line-height: 1.25;
+
 }
 
 
 .selvam-title-en {
 
-    color: var(--teal-bright);
+    color:
+        var(--teal-bright);
 
     font-size: 12px;
 
@@ -578,30 +654,39 @@ body {
     font-weight: 800;
 
     margin-top: 2px;
+
 }
 
 
+/* ============================================================
+   QUESTIONS
+   ============================================================ */
+
 .selvam-question-ta {
 
-    color: var(--text);
+    color:
+        var(--text);
 
     font-size: 17px;
 
     line-height: 1.65;
 
     margin-bottom: 8px;
+
 }
 
 
 .selvam-question-en {
 
-    color: var(--text-muted);
+    color:
+        var(--text-muted);
 
     font-size: 13px;
 
     line-height: 1.5;
 
     min-height: 42px;
+
 }
 
 
@@ -624,6 +709,7 @@ body {
     margin-top: auto;
 
     padding-top: 20px;
+
 }
 
 
@@ -633,16 +719,19 @@ body {
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.06);
+        rgba(255,255,255,0.08);
 
     background:
-        rgba(255, 255, 255, 0.018);
+        rgba(255,255,255,0.018);
 
-    color: var(--text-soft);
+    color:
+        var(--text-soft);
 
     border-radius: 9px;
 
     height: 42px;
+
+    font-family: inherit;
 
     font-size: 13px;
 
@@ -654,71 +743,110 @@ body {
         transform 0.15s ease,
         color 0.15s ease,
         background 0.15s ease,
-        border-color 0.15s ease;
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+
 }
 
+
+/* ------------------------------------------------------------
+   1 — 3 : RED
+   ------------------------------------------------------------ */
 
 .score-button[data-score="1"],
 .score-button[data-score="2"],
 .score-button[data-score="3"] {
 
-    --score-color: var(--red);
+    --score-color:
+        var(--red);
 
-    --score-bg: var(--red-soft);
+    --score-bg:
+        var(--red-soft);
+
 }
 
+
+/* ------------------------------------------------------------
+   4 — 7 : ORANGE
+   ------------------------------------------------------------ */
 
 .score-button[data-score="4"],
 .score-button[data-score="5"],
 .score-button[data-score="6"],
 .score-button[data-score="7"] {
 
-    --score-color: var(--orange);
+    --score-color:
+        var(--orange);
 
-    --score-bg: var(--orange-soft);
+    --score-bg:
+        var(--orange-soft);
+
 }
 
+
+/* ------------------------------------------------------------
+   8 — 10 : GREEN
+   ------------------------------------------------------------ */
 
 .score-button[data-score="8"],
 .score-button[data-score="9"],
 .score-button[data-score="10"] {
 
-    --score-color: var(--green);
+    --score-color:
+        var(--green);
 
-    --score-bg: var(--green-soft);
+    --score-bg:
+        var(--green-soft);
+
 }
 
+
+/* ------------------------------------------------------------
+   HOVER
+   ------------------------------------------------------------ */
 
 .score-button:hover {
 
-    color: var(--score-color);
+    color:
+        var(--score-color);
 
-    border-color: var(--score-color);
+    border-color:
+        var(--score-color);
 
-    background: var(--score-bg);
+    background:
+        var(--score-bg);
 
     transform:
         translateY(-2px);
+
 }
 
+
+/* ------------------------------------------------------------
+   SELECTED
+   ------------------------------------------------------------ */
 
 .score-button.selected {
 
-    color: #ffffff;
+    color:
+        #ffffff;
 
-    border-color: var(--score-color);
+    border-color:
+        var(--score-color);
 
-    background: var(--score-color);
+    background:
+        var(--score-color);
 
     box-shadow:
         0 6px 18px
-        color-mix(
-            in srgb,
-            var(--score-color) 30%,
-            transparent
-        );
+        rgba(0,0,0,0.28);
+
 }
 
+
+/* ============================================================
+   SELECTED SCORE
+   ============================================================ */
 
 .selected-score {
 
@@ -728,22 +856,26 @@ body {
 
     text-align: right;
 
-    color: var(--text-muted);
+    color:
+        var(--text-muted);
 
     font-size: 12px;
 
     font-weight: 700;
+
 }
 
 
 .selected-score.has-value {
 
-    color: var(--teal-bright);
+    color:
+        var(--teal-bright);
+
 }
 
 
 /* ============================================================
-   LIFE SCORE
+   LIFE SCORE SECTION
    ============================================================ */
 
 .life-score-section {
@@ -755,39 +887,44 @@ body {
 
     border:
         1px solid
-        rgba(245, 201, 79, 0.25);
+        rgba(245,201,79,0.25);
 
     border-radius: 26px;
 
     background:
+
         linear-gradient(
             145deg,
-            rgba(15, 16, 39, 0.97),
-            rgba(7, 12, 31, 0.97)
+            rgba(15,16,39,0.98),
+            rgba(7,12,31,0.98)
         );
 
     box-shadow:
         var(--shadow);
 
     text-align: center;
+
 }
 
 
 .score-kicker {
 
-    color: var(--teal-bright);
+    color:
+        var(--teal-bright);
 
     font-size: 15px;
 
     font-weight: 900;
 
     letter-spacing: 3px;
+
 }
 
 
 .life-score-section h2 {
 
-    color: var(--ivory);
+    color:
+        var(--ivory);
 
     font-size:
         clamp(
@@ -798,8 +935,13 @@ body {
 
     margin:
         8px 0 30px;
+
 }
 
+
+/* ============================================================
+   SCORE CARDS
+   ============================================================ */
 
 .score-cards {
 
@@ -815,7 +957,9 @@ body {
 
     max-width: 950px;
 
-    margin: 0 auto;
+    margin:
+        0 auto;
+
 }
 
 
@@ -826,30 +970,37 @@ body {
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.05);
+        rgba(255,255,255,0.05);
 
     border-radius: 18px;
 
     background:
-        rgba(255, 255, 255, 0.018);
+        rgba(255,255,255,0.018);
+
 }
 
 
 .score-card-primary {
 
     border-color:
-        rgba(245, 201, 79, 0.35);
+        rgba(245,201,79,0.35);
 
     background:
-        rgba(245, 201, 79, 0.035);
+        rgba(245,201,79,0.035);
+
 }
 
+
+/* ============================================================
+   MAIN SCORE
+   ============================================================ */
 
 .score-number {
 
     display: inline-block;
 
-    color: var(--gold);
+    color:
+        var(--gold);
 
     font-family:
         Georgia,
@@ -860,6 +1011,7 @@ body {
     line-height: 1;
 
     font-weight: 900;
+
 }
 
 
@@ -867,19 +1019,26 @@ body {
 
     display: inline-block;
 
-    color: var(--text-muted);
+    color:
+        var(--text-muted);
 
     font-size: 22px;
 
     margin-left: 4px;
+
 }
 
+
+/* ============================================================
+   SECONDARY SCORE
+   ============================================================ */
 
 .score-number-small {
 
     display: inline-block;
 
-    color: var(--gold-bright);
+    color:
+        var(--gold-bright);
 
     font-family:
         Georgia,
@@ -890,6 +1049,7 @@ body {
     line-height: 1;
 
     font-weight: 900;
+
 }
 
 
@@ -897,29 +1057,34 @@ body {
 
     display: inline-block;
 
-    color: var(--text-muted);
+    color:
+        var(--text-muted);
 
     font-size: 16px;
 
     margin-left: 3px;
+
 }
 
 
 .score-label-ta {
 
-    color: var(--ivory);
+    color:
+        var(--ivory);
 
     font-size: 15px;
 
     font-weight: 800;
 
     margin-top: 12px;
+
 }
 
 
 .score-label-en {
 
-    color: var(--text-muted);
+    color:
+        var(--text-muted);
 
     font-size: 10px;
 
@@ -928,6 +1093,7 @@ body {
     font-weight: 800;
 
     margin-top: 3px;
+
 }
 
 
@@ -940,26 +1106,37 @@ body {
     margin:
         30px auto 20px;
 
-    color: var(--text-soft);
+    color:
+        var(--text-soft);
 
     font-size: 17px;
 
     max-width: 900px;
+
 }
 
 
 .score-message.score-low {
-    color: #ff8585;
+
+    color:
+        #ff8585;
+
 }
 
 
 .score-message.score-mid {
-    color: #ffc45a;
+
+    color:
+        #ffc45a;
+
 }
 
 
 .score-message.score-high {
-    color: #62e99a;
+
+    color:
+        #62e99a;
+
 }
 
 
@@ -982,9 +1159,10 @@ body {
         var(--teal);
 
     background:
-        rgba(0, 183, 165, 0.035);
+        rgba(0,183,165,0.035);
 
     text-align: left;
+
 }
 
 
@@ -992,9 +1170,11 @@ body {
 
     display: block;
 
-    color: var(--ivory);
+    color:
+        var(--ivory);
 
     font-size: 16px;
+
 }
 
 
@@ -1002,21 +1182,25 @@ body {
 
     display: block;
 
-    color: var(--teal-bright);
+    color:
+        var(--teal-bright);
 
     font-size: 12px;
 
     margin-top: 3px;
+
 }
 
 
 .score-note p {
 
-    color: var(--text-soft);
+    color:
+        var(--text-soft);
 
     font-size: 13px;
 
     margin-top: 8px;
+
 }
 
 
@@ -1033,24 +1217,35 @@ body {
 
     text-align: center;
 
-    color: var(--text-muted);
+    color:
+        var(--text-muted);
 
     font-size: 14px;
+
 }
 
 
 .page-status.success {
-    color: var(--green);
+
+    color:
+        var(--green);
+
 }
 
 
 .page-status.error {
-    color: #ff8585;
+
+    color:
+        #ff8585;
+
 }
 
 
 .page-status.loading {
-    color: var(--gold);
+
+    color:
+        var(--gold);
+
 }
 
 
@@ -1071,6 +1266,7 @@ body {
 
     margin:
         35px auto 0;
+
 }
 
 
@@ -1102,6 +1298,7 @@ body {
         border-color 0.2s ease,
         background 0.2s ease,
         opacity 0.2s ease;
+
 }
 
 
@@ -1113,12 +1310,14 @@ body {
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.12);
+        rgba(255,255,255,0.12);
 
     background:
-        rgba(255, 255, 255, 0.025);
+        rgba(255,255,255,0.025);
 
-    color: var(--text-soft);
+    color:
+        var(--text-soft);
+
 }
 
 
@@ -1128,10 +1327,11 @@ body {
         translateY(-2px);
 
     border-color:
-        rgba(0, 183, 165, 0.55);
+        rgba(0,183,165,0.55);
 
     background:
-        rgba(0, 183, 165, 0.055);
+        rgba(0,183,165,0.055);
+
 }
 
 
@@ -1143,9 +1343,10 @@ body {
 
     border:
         1px solid
-        rgba(245, 201, 79, 0.45);
+        rgba(245,201,79,0.45);
 
     background:
+
         linear-gradient(
             135deg,
             #b68725,
@@ -1157,7 +1358,8 @@ body {
 
     box-shadow:
         0 12px 30px
-        rgba(0, 0, 0, 0.25);
+        rgba(0,0,0,0.25);
+
 }
 
 
@@ -1168,6 +1370,7 @@ body {
 
     filter:
         brightness(1.08);
+
 }
 
 
@@ -1181,8 +1384,13 @@ body {
 
     filter:
         grayscale(0.35);
+
 }
 
+
+/* ============================================================
+   NAVIGATION CONTENT
+   ============================================================ */
 
 .nav-icon {
 
@@ -1191,6 +1399,7 @@ body {
     line-height: 1;
 
     font-weight: 700;
+
 }
 
 
@@ -1201,6 +1410,7 @@ body {
     flex-direction: column;
 
     text-align: center;
+
 }
 
 
@@ -1211,6 +1421,7 @@ body {
     font-weight: 900;
 
     line-height: 1.3;
+
 }
 
 
@@ -1223,6 +1434,7 @@ body {
     font-weight: 900;
 
     margin-top: 3px;
+
 }
 
 
@@ -1232,13 +1444,15 @@ body {
 
 .continue-note {
 
-    color: var(--text-muted);
+    color:
+        var(--text-muted);
 
     font-size: 12px;
 
     text-align: center;
 
     margin-top: 12px;
+
 }
 
 
@@ -1253,6 +1467,7 @@ body {
     margin-top: 55px;
 
     padding-top: 25px;
+
 }
 
 
@@ -1263,38 +1478,43 @@ body {
     height: 1px;
 
     background:
-        rgba(245, 201, 79, 0.16);
+        rgba(245,201,79,0.16);
 
     margin-bottom: 22px;
+
 }
 
 
 .footer-tagline {
 
-    color: var(--gold);
+    color:
+        var(--gold);
 
     font-size: 13px;
 
     font-weight: 800;
 
     letter-spacing: 3px;
+
 }
 
 
 .footer-brand {
 
-    color: var(--text-muted);
+    color:
+        var(--text-muted);
 
     font-size: 11px;
 
     letter-spacing: 2px;
 
     margin-top: 6px;
+
 }
 
 
 /* ============================================================
-   RESPONSIVE
+   RESPONSIVE — TABLET
    ============================================================ */
 
 @media (max-width: 900px) {
@@ -1306,48 +1526,66 @@ body {
 
         padding:
             100px 18px 45px;
+
     }
 
 
     .selvam-grid {
 
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
+
     }
 
 
     .score-cards {
 
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
+
     }
 
 
     .guide-title {
 
-        flex-direction: column;
+        flex-direction:
+            column;
 
-        align-items: flex-start;
+        align-items:
+            flex-start;
+
     }
 
 
     .guide-scale {
 
-        text-align: left;
+        text-align:
+            left;
+
     }
 
 
     .colour-guide {
 
-        justify-content: flex-start;
+        justify-content:
+            flex-start;
+
     }
 
 
     .journey-navigation {
 
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
+
     }
 
 }
 
+
+/* ============================================================
+   RESPONSIVE — MOBILE
+   ============================================================ */
 
 @media (max-width: 600px) {
 
@@ -1355,86 +1593,115 @@ body {
 
         padding:
             12px 16px;
+
     }
 
 
     .brand-logo {
 
         width: 58px;
-
         height: 58px;
+
     }
 
 
     .page-shell {
 
-        padding-top: 88px;
+        padding-top:
+            88px;
+
     }
 
 
     .hero {
 
-        padding-left: 4px;
+        padding-left:
+            4px;
 
-        padding-right: 4px;
+        padding-right:
+            4px;
+
     }
 
 
     .hero h1 {
 
-        font-size: 32px;
+        font-size:
+            32px;
+
+        line-height:
+            1.3;
+
     }
 
 
     .hero h2 {
 
-        font-size: 17px;
+        font-size:
+            17px;
+
     }
 
 
     .hero-title-ta {
 
-        font-size: 22px;
+        font-size:
+            22px;
+
     }
 
 
     .hero-message-ta {
 
-        font-size: 16px;
+        font-size:
+            16px;
+
     }
 
 
     .selvam-card {
 
-        min-height: auto;
+        min-height:
+            auto;
 
-        padding: 21px;
+        padding:
+            21px;
+
     }
 
 
     .selvam-title-ta {
 
-        font-size: 21px;
+        font-size:
+            21px;
+
     }
 
 
     .selvam-question-ta {
 
-        font-size: 16px;
+        font-size:
+            16px;
+
     }
 
 
     .score-buttons {
 
-        gap: 5px;
+        gap:
+            5px;
+
     }
 
 
     .score-button {
 
-        height: 38px;
+        height:
+            38px;
 
-        font-size: 12px;
+        font-size:
+            12px;
+
     }
 
 
@@ -1442,18 +1709,169 @@ body {
 
         padding:
             30px 18px;
+
     }
 
 
     .score-number {
 
-        font-size: 56px;
+        font-size:
+            56px;
+
     }
 
 
     .journey-nav {
 
-        min-height: 70px;
+        min-height:
+            70px;
+
+    }
+
+}
+
+
+/* ============================================================
+   RESPONSIVE — SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 420px) {
+
+    .page-shell {
+
+        width:
+            calc(100% - 18px);
+
+        padding-left:
+            9px;
+
+        padding-right:
+            9px;
+
+    }
+
+
+    .brand-logo {
+
+        width:
+            52px;
+
+        height:
+            52px;
+
+    }
+
+
+    .hero h1 {
+
+        font-size:
+            28px;
+
+    }
+
+
+    .hero-title-ta {
+
+        font-size:
+            20px;
+
+    }
+
+
+    .hero-message-ta {
+
+        font-size:
+            15px;
+
+    }
+
+
+    .guide-ta {
+
+        font-size:
+            19px;
+
+    }
+
+
+    .selvam-card {
+
+        padding:
+            18px;
+
+        border-radius:
+            18px;
+
+    }
+
+
+    .selvam-title-ta {
+
+        font-size:
+            19px;
+
+    }
+
+
+    .selvam-question-ta {
+
+        font-size:
+            15px;
+
+    }
+
+
+    .score-buttons {
+
+        grid-template-columns:
+            repeat(
+                5,
+                1fr
+            );
+
+        gap:
+            6px;
+
+    }
+
+
+    .score-button {
+
+        height:
+            40px;
+
+    }
+
+
+    .score-number {
+
+        font-size:
+            48px;
+
+    }
+
+
+    .score-number-small {
+
+        font-size:
+            38px;
+
+    }
+
+
+    .journey-nav {
+
+        padding:
+            14px 16px;
+
+    }
+
+
+    .nav-ta {
+
+        font-size:
+            15px;
+
     }
 
 }
