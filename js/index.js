@@ -12,12 +12,15 @@
 const CONFIG = {
 
     /*
-     * Replace this with the deployed
-     * Google Apps Script Web App URL.
+     * IMPORTANT
+     * ----------------------------------------------------------
+     * Paste the deployed Google Apps Script Web App URL here.
      *
      * Example:
-     *
      * https://script.google.com/macros/s/XXXXXXXXXXXX/exec
+     *
+     * This URL must be the Web App deployment of the
+     * CTM PATH™ backend.
      */
 
     BACKEND_URL:
@@ -49,13 +52,46 @@ const formStatus =
 
 
 /* ============================================================
+   SAFETY CHECK
+   ============================================================ */
+
+if (!form) {
+
+    console.error(
+        'CTM PATH™: kycForm was not found.'
+    );
+
+}
+
+if (!beginButton) {
+
+    console.error(
+        'CTM PATH™: beginButton was not found.'
+    );
+
+}
+
+if (!formStatus) {
+
+    console.error(
+        'CTM PATH™: formStatus was not found.'
+    );
+
+}
+
+
+/* ============================================================
    FORM SUBMIT
    ============================================================ */
 
-form.addEventListener(
-    'submit',
-    handleRegistration
-);
+if (form) {
+
+    form.addEventListener(
+        'submit',
+        handleRegistration
+    );
+
+}
 
 
 /* ============================================================
@@ -67,8 +103,16 @@ async function handleRegistration(event) {
     event.preventDefault();
 
 
+    /* --------------------------------------------------------
+       CLEAR PREVIOUS ERRORS
+       -------------------------------------------------------- */
+
     clearErrors();
 
+
+    /* --------------------------------------------------------
+       READ FORM VALUES
+       -------------------------------------------------------- */
 
     const fullName =
         document
@@ -206,6 +250,31 @@ async function handleRegistration(event) {
 
 
     /* --------------------------------------------------------
+       BACKEND CONFIGURATION CHECK
+       -------------------------------------------------------- */
+
+    if (
+        !CONFIG.BACKEND_URL ||
+        CONFIG.BACKEND_URL.includes(
+            'PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE'
+        )
+    ) {
+
+        showStatus(
+            'Backend is not connected yet. Please configure the Apps Script Web App URL.',
+            'error'
+        );
+
+        console.error(
+            'CTM PATH™: BACKEND_URL has not been configured.'
+        );
+
+        return;
+
+    }
+
+
+    /* --------------------------------------------------------
        PREVENT DOUBLE SUBMISSION
        -------------------------------------------------------- */
 
@@ -224,9 +293,17 @@ async function handleRegistration(event) {
 
     const payload = {
 
+        /*
+         * Backend router action.
+         */
+
         action:
             'createParticipant',
 
+
+        /*
+         * KYC
+         */
 
         fullName:
             fullName,
@@ -248,6 +325,10 @@ async function handleRegistration(event) {
             state || 'Tamil Nadu',
 
 
+        /*
+         * Tracking
+         */
+
         referralSource:
             'Website',
 
@@ -259,6 +340,10 @@ async function handleRegistration(event) {
         device:
             getDeviceType(),
 
+
+        /*
+         * Journey state
+         */
 
         currentPage:
             0,
@@ -284,34 +369,34 @@ async function handleRegistration(event) {
             await sendToBackend(payload);
 
 
-        /*
-         * The backend should return:
-         *
-         * {
-         *     success: true,
-         *     visitorId: "CTM-XXXXXXXX",
-         *     ...
-         * }
-         */
+        console.log(
+            'CTM PATH™ backend response:',
+            result
+        );
 
+
+        /* ----------------------------------------------------
+           BACKEND FAILURE
+           ---------------------------------------------------- */
 
         if (
-            result &&
+            !result ||
             result.success === false
         ) {
 
             throw new Error(
-                result.message ||
-                'Registration failed.'
+                result &&
+                result.message
+                    ? result.message
+                    : 'Registration failed. Your details were not saved.'
             );
 
         }
 
 
-        /*
-         * Save participant information locally
-         * so Pages 01–15 can identify the visitor.
-         */
+        /* ----------------------------------------------------
+           GET VISITOR ID
+           ---------------------------------------------------- */
 
         const visitorId =
             result &&
@@ -322,22 +407,42 @@ async function handleRegistration(event) {
             );
 
 
-        if (visitorId) {
+        /*
+         * A valid VisitorID is required.
+         *
+         * We do NOT create a temporary ID here.
+         * The backend must successfully create the participant.
+         */
 
-            localStorage.setItem(
-                'ctmVisitorId',
-                visitorId
+        if (!visitorId) {
+
+            throw new Error(
+                'The server did not return a Visitor ID. Your details may not have been saved.'
             );
 
         }
 
+
+        /* ----------------------------------------------------
+           SAVE VISITOR ID
+           ---------------------------------------------------- */
+
+        localStorage.setItem(
+            'ctmVisitorId',
+            visitorId
+        );
+
+
+        /* ----------------------------------------------------
+           SAVE PARTICIPANT LOCALLY
+           ---------------------------------------------------- */
 
         localStorage.setItem(
             'ctmParticipant',
             JSON.stringify({
 
                 visitorId:
-                    visitorId || '',
+                    visitorId,
 
                 fullName:
                     fullName,
@@ -361,15 +466,19 @@ async function handleRegistration(event) {
         );
 
 
-        /*
-         * Move to Page 01.
-         */
+        /* ----------------------------------------------------
+           JOURNEY START SUCCESS
+           ---------------------------------------------------- */
 
         showStatus(
             'பயணம் தொடங்குகிறது... Journey begins...',
             'success'
         );
 
+
+        /* ----------------------------------------------------
+           MOVE TO PAGE 01
+           ---------------------------------------------------- */
 
         setTimeout(
             function () {
@@ -378,22 +487,29 @@ async function handleRegistration(event) {
                     CONFIG.FIRST_PAGE;
 
             },
-            500
+            700
         );
 
-
     }
+
+
+    /* --------------------------------------------------------
+       ERROR HANDLING
+       -------------------------------------------------------- */
+
     catch (error) {
 
         console.error(
-            'CTM registration error:',
+            'CTM PATH™ registration error:',
             error
         );
 
 
         showStatus(
-            error.message ||
-            'Unable to connect to the server. Please try again.',
+            error &&
+            error.message
+                ? error.message
+                : 'Unable to connect to the server. Please try again.',
             'error'
         );
 
@@ -412,54 +528,28 @@ async function handleRegistration(event) {
 async function sendToBackend(payload) {
 
 
-    if (
-        !CONFIG.BACKEND_URL ||
-        CONFIG.BACKEND_URL.includes(
-            'PASTE_YOUR'
-        )
-    ) {
-
-        /*
-         * Development fallback.
-         *
-         * This prevents the page from becoming
-         * unusable before the real Web App URL
-         * is inserted.
-         */
-
-        console.warn(
-            'Apps Script Web App URL has not been configured.'
-        );
-
-
-        return {
-
-            success: true,
-
-            visitorId:
-                createTemporaryVisitorId(),
-
-            developmentMode:
-                true
-
-        };
-
-    }
-
+    /*
+     * IMPORTANT
+     * ----------------------------------------------------------
+     * Apps Script Web Apps can respond with redirects.
+     *
+     * Using text/plain avoids unnecessary CORS preflight
+     * behaviour and is appropriate for this JSON POST.
+     */
 
     const response =
         await fetch(
             CONFIG.BACKEND_URL,
             {
 
-                method: 'POST',
+                method:
+                    'POST',
 
-                headers: {
-
-                    'Content-Type':
-                        'text/plain;charset=utf-8'
-
-                },
+                headers:
+                    {
+                        'Content-Type':
+                            'text/plain;charset=utf-8'
+                    },
 
                 body:
                     JSON.stringify(payload)
@@ -467,6 +557,10 @@ async function sendToBackend(payload) {
             }
         );
 
+
+    /* --------------------------------------------------------
+       HTTP ERROR
+       -------------------------------------------------------- */
 
     if (!response.ok) {
 
@@ -477,39 +571,43 @@ async function sendToBackend(payload) {
     }
 
 
+    /* --------------------------------------------------------
+       READ RESPONSE
+       -------------------------------------------------------- */
+
     const text =
         await response.text();
 
 
     if (!text) {
 
-        return {
-
-            success: true
-
-        };
+        throw new Error(
+            'The server returned an empty response.'
+        );
 
     }
 
+
+    /* --------------------------------------------------------
+       PARSE JSON
+       -------------------------------------------------------- */
 
     try {
 
         return JSON.parse(text);
 
     }
+
     catch (error) {
 
-        console.warn(
-            'Backend response was not JSON:',
+        console.error(
+            'Invalid backend response:',
             text
         );
 
-
-        return {
-
-            success: true
-
-        };
+        throw new Error(
+            'The server returned an invalid response.'
+        );
 
     }
 
@@ -517,7 +615,7 @@ async function sendToBackend(payload) {
 
 
 /* ============================================================
-   VALIDATION HELPERS
+   EMAIL VALIDATION
    ============================================================ */
 
 function isValidEmail(email) {
@@ -528,13 +626,22 @@ function isValidEmail(email) {
 }
 
 
+/* ============================================================
+   MOBILE VALIDATION
+   ============================================================ */
+
 function isValidMobile(mobile) {
 
     const digits =
-        mobile.replace(/\D/g, '');
+        mobile.replace(
+            /\D/g,
+            ''
+        );
 
-    return digits.length >= 10 &&
-           digits.length <= 15;
+    return (
+        digits.length >= 10 &&
+        digits.length <= 15
+    );
 
 }
 
@@ -549,7 +656,10 @@ function showFieldError(
 ) {
 
     const element =
-        document.getElementById(elementId);
+        document.getElementById(
+            elementId
+        );
+
 
     if (element) {
 
@@ -561,34 +671,58 @@ function showFieldError(
 }
 
 
+/* ============================================================
+   CLEAR ERRORS
+   ============================================================ */
+
 function clearErrors() {
 
     document
-        .querySelectorAll('.field-error')
+        .querySelectorAll(
+            '.field-error'
+        )
         .forEach(
             function (element) {
 
-                element.textContent = '';
+                element.textContent =
+                    '';
 
             }
         );
 
 
-    formStatus.textContent = '';
+    if (formStatus) {
 
-    formStatus.className =
-        'form-status';
+        formStatus.textContent =
+            '';
+
+        formStatus.className =
+            'form-status';
+
+    }
 
 }
 
+
+/* ============================================================
+   STATUS MESSAGE
+   ============================================================ */
 
 function showStatus(
     message,
     type
 ) {
 
+    if (!formStatus) {
+
+        return;
+
+    }
+
+
     formStatus.textContent =
         message;
+
 
     formStatus.className =
         'form-status ' +
@@ -597,40 +731,72 @@ function showStatus(
 }
 
 
+/* ============================================================
+   LOADING STATE
+   ============================================================ */
+
 function setLoading(
     loading
 ) {
+
+    if (!beginButton) {
+
+        return;
+
+    }
+
 
     beginButton.disabled =
         loading;
 
 
+    const tamilText =
+        beginButton.querySelector(
+            '.button-tamil'
+        );
+
+
+    const englishText =
+        beginButton.querySelector(
+            '.button-english'
+        );
+
+
     if (loading) {
 
-        beginButton.querySelector(
-            '.button-tamil'
-        ).textContent =
-            'தயவுசெய்து காத்திருக்கவும்...';
+        if (tamilText) {
+
+            tamilText.textContent =
+                'தயவுசெய்து காத்திருக்கவும்...';
+
+        }
 
 
-        beginButton.querySelector(
-            '.button-english'
-        ).textContent =
-            'SAVING YOUR DETAILS...';
+        if (englishText) {
+
+            englishText.textContent =
+                'SAVING YOUR DETAILS...';
+
+        }
 
     }
+
     else {
 
-        beginButton.querySelector(
-            '.button-tamil'
-        ).textContent =
-            'என் பயணத்தைத் தொடங்குகிறேன்';
+        if (tamilText) {
+
+            tamilText.textContent =
+                'என் பயணத்தைத் தொடங்குகிறேன்';
+
+        }
 
 
-        beginButton.querySelector(
-            '.button-english'
-        ).textContent =
-            'BEGIN MY JOURNEY →';
+        if (englishText) {
+
+            englishText.textContent =
+                'BEGIN MY JOURNEY →';
+
+        }
 
     }
 
@@ -638,7 +804,7 @@ function setLoading(
 
 
 /* ============================================================
-   DEVICE
+   DEVICE TYPE
    ============================================================ */
 
 function getDeviceType() {
@@ -667,29 +833,5 @@ function getDeviceType() {
 
 
 /* ============================================================
-   TEMPORARY DEVELOPMENT ID
+   END
    ============================================================ */
-
-function createTemporaryVisitorId() {
-
-    const date =
-        new Date();
-
-
-    const datePart =
-        date
-            .toISOString()
-            .slice(0, 10)
-            .replace(/-/g, '');
-
-
-    const randomPart =
-        Math.random()
-            .toString(36)
-            .substring(2, 8)
-            .toUpperCase();
-
-
-    return `CTM-${datePart}-${randomPart}`;
-
-}
