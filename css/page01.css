@@ -1,5 +1,6 @@
 
 
+
 /* =========================================================
    CTM PATH™ MILLIONAIRES™ — PAGE 01
    Complete replacement stylesheet
@@ -404,77 +405,165 @@ body {
 
 
 /* =========================================================
-   SCORE OPTIONS
+   SCORE OPTIONS — 1–3 RED / 4–7 ORANGE / 8–10 GREEN
+   IMPORTANT: uses data-score so it works with the existing
+   HTML buttons and does not depend on JavaScript class names.
    ========================================================= */
 
 .score-options {
     display: grid;
     grid-template-columns: repeat(10, minmax(38px, 1fr));
     gap: 8px;
-
     margin-top: 20px;
 }
 
+/* Base button */
 .score-options button {
     min-height: 42px;
-
-    border: 1px solid rgba(244, 197, 66, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: 10px;
-
     background: rgba(255, 255, 255, 0.035);
-
     color: var(--ivory);
-
     font-family: var(--font-en);
     font-size: 0.9rem;
     font-weight: 700;
-
     cursor: pointer;
-
     transition:
         background 0.18s ease,
         border-color 0.18s ease,
         color 0.18s ease,
-        transform 0.18s ease;
+        transform 0.18s ease,
+        box-shadow 0.18s ease;
 }
 
-.score-options button:hover {
+/* =========================================================
+   UNSELECTED COLOUR BANDS
+   ========================================================= */
+
+/* 1–3 = RED */
+.score-options button[data-score="1"],
+.score-options button[data-score="2"],
+.score-options button[data-score="3"] {
+    border-color: rgba(214, 90, 69, 0.55);
+    background: rgba(214, 90, 69, 0.10);
+    color: #f5b8ae;
+}
+
+/* 4–7 = ORANGE */
+.score-options button[data-score="4"],
+.score-options button[data-score="5"],
+.score-options button[data-score="6"],
+.score-options button[data-score="7"] {
+    border-color: rgba(232, 135, 36, 0.55);
+    background: rgba(232, 135, 36, 0.10);
+    color: #ffd09b;
+}
+
+/* 8–10 = GREEN */
+.score-options button[data-score="8"],
+.score-options button[data-score="9"],
+.score-options button[data-score="10"] {
+    border-color: rgba(41, 196, 125, 0.55);
+    background: rgba(41, 196, 125, 0.10);
+    color: #a9efc9;
+}
+
+/* =========================================================
+   HOVER — STAY WITHIN THE CORRECT COLOUR BAND
+   ========================================================= */
+
+.score-options button[data-score="1"]:hover,
+.score-options button[data-score="2"]:hover,
+.score-options button[data-score="3"]:hover {
     transform: translateY(-1px);
-
-    border-color: var(--gold);
-    background: rgba(244, 197, 66, 0.12);
-
-    color: var(--gold);
+    border-color: #d65a45;
+    background: #d65a45;
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(214, 90, 69, 0.25);
 }
 
-.score-options button.selected,
-.score-options button[aria-pressed="true"] {
-    border-color: var(--gold);
+.score-options button[data-score="4"]:hover,
+.score-options button[data-score="5"]:hover,
+.score-options button[data-score="6"]:hover,
+.score-options button[data-score="7"]:hover {
+    transform: translateY(-1px);
+    border-color: #e88724;
+    background: #e88724;
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(232, 135, 36, 0.25);
+}
 
-    background: linear-gradient(
-        135deg,
-        var(--gold),
-        var(--gold-soft)
-    );
+.score-options button[data-score="8"]:hover,
+.score-options button[data-score="9"]:hover,
+.score-options button[data-score="10"]:hover {
+    transform: translateY(-1px);
+    border-color: #29c47d;
+    background: #18a66a;
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(41, 196, 125, 0.25);
+}
 
-    color: #08101c;
+/* =========================================================
+   SELECTED — MUST OVERRIDE THE OLD GOLD RULE
+   ========================================================= */
 
-    box-shadow:
-        0 8px 20px rgba(244, 197, 66, 0.2);
+/* 1–3 selected = RED */
+.score-options button[data-score="1"].selected,
+.score-options button[data-score="2"].selected,
+.score-options button[data-score="3"].selected,
+.score-options button[data-score="1"][aria-pressed="true"],
+.score-options button[data-score="2"][aria-pressed="true"],
+.score-options button[data-score="3"][aria-pressed="true"] {
+    border-color: #d65a45 !important;
+    background: #d65a45 !important;
+    color: #ffffff !important;
+    box-shadow: 0 8px 22px rgba(214, 90, 69, 0.35) !important;
+}
+
+/* 4–7 selected = ORANGE */
+.score-options button[data-score="4"].selected,
+.score-options button[data-score="5"].selected,
+.score-options button[data-score="6"].selected,
+.score-options button[data-score="7"].selected,
+.score-options button[data-score="4"][aria-pressed="true"],
+.score-options button[data-score="5"][aria-pressed="true"],
+.score-options button[data-score="6"][aria-pressed="true"],
+.score-options button[data-score="7"][aria-pressed="true"] {
+    border-color: #e88724 !important;
+    background: #e88724 !important;
+    color: #ffffff !important;
+    box-shadow: 0 8px 22px rgba(232, 135, 36, 0.35) !important;
+}
+
+/* 8–10 selected = GREEN */
+.score-options button[data-score="8"].selected,
+.score-options button[data-score="9"].selected,
+.score-options button[data-score="10"].selected,
+.score-options button[data-score="8"][aria-pressed="true"],
+.score-options button[data-score="9"][aria-pressed="true"],
+.score-options button[data-score="10"][aria-pressed="true"] {
+    border-color: #29c47d !important;
+    background: #18a66a !important;
+    color: #ffffff !important;
+    box-shadow: 0 8px 22px rgba(41, 196, 125, 0.35) !important;
+}
+
+/* Selected score text follows the selected band's colour */
+.score-options button[data-score="1"].selected ~ .selected-score,
+.score-options button[data-score="2"].selected ~ .selected-score,
+.score-options button[data-score="3"].selected ~ .selected-score {
+    color: #f5b8ae;
 }
 
 .selected-score {
     margin-top: 12px;
-
     color: var(--text-muted);
-
     font-family: var(--font-ta);
     font-size: 0.9rem;
 }
 
 .selected-score strong {
     color: var(--gold);
-
     font-family: var(--font-en);
     font-size: 1rem;
 }
@@ -985,5 +1074,3 @@ body {
         animation-iteration-count: 1 !important;
     }
 }
-
-
