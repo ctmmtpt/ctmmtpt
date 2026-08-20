@@ -2,6 +2,7 @@
 /* ============================================================
    CTM PATH™ MILLIONAIRES™
    INDEX PAGE
+   PREMIUM DESIGN SYSTEM
    ============================================================ */
 
 
@@ -28,6 +29,7 @@ body {
     font-family:
         Arial,
         "Noto Sans Tamil",
+        "Latha",
         sans-serif;
 
     color: #f5f1e8;
@@ -45,11 +47,12 @@ body {
             #11102b 100%
         );
 
+    overflow-x: hidden;
 }
 
 
 /* ============================================================
-   BRAND HEADER
+   SITE HEADER
    ============================================================ */
 
 .site-header {
@@ -60,11 +63,12 @@ body {
     left: 0;
 
     width: 100%;
-    height: 92px;
+    height: 100px;
 
     display: flex;
 
     align-items: center;
+    justify-content: center;
 
     padding: 12px 24px;
 
@@ -73,22 +77,34 @@ body {
     background:
         linear-gradient(
             to bottom,
-            rgba(5, 8, 23, 0.97),
-            rgba(5, 8, 23, 0.78),
-            transparent
+            rgba(5, 8, 23, 0.98),
+            rgba(5, 8, 23, 0.88),
+            rgba(5, 8, 23, 0)
         );
-
 }
 
 
+/* ============================================================
+   BRAND LOGO — TOP LEFT
+   ============================================================ */
+
 .brand-logo {
+
+    position: absolute;
+
+    top: 18px;
+    left: 28px;
 
     display: inline-flex;
 
     align-items: center;
 
-    text-decoration: none;
+    justify-content: center;
 
+    width: 145px;
+    height: 65px;
+
+    text-decoration: none;
 }
 
 
@@ -96,19 +112,46 @@ body {
 
     display: block;
 
-    width: 190px;
+    width: 145px;
 
-    height: auto;
-
-    max-height: 70px;
+    height: 65px;
 
     object-fit: contain;
 
+    object-position: left center;
 }
 
 
 /* ============================================================
-   MAIN
+   PRIMARY TAMIL IDENTITY — TOP CENTRE
+   ============================================================ */
+
+.brand-tamil {
+
+    position: relative;
+
+    color: #18b7b0;
+
+    font-size: 1.35rem;
+
+    font-weight: 700;
+
+    line-height: 1.2;
+
+    letter-spacing: 0.06em;
+
+    text-align: center;
+
+    white-space: nowrap;
+
+    text-shadow:
+        0 0 18px
+        rgba(24, 183, 176, 0.18);
+}
+
+
+/* ============================================================
+   MAIN PAGE
    ============================================================ */
 
 .welcome-page {
@@ -120,30 +163,30 @@ body {
     justify-content: center;
 
     padding:
-
-        120px
+        125px
         20px
-        50px;
-
+        55px;
 }
 
 
 /* ============================================================
-   CARD
+   MAIN CARD
    ============================================================ */
 
 .welcome-card {
 
     width: 100%;
 
-    max-width: 900px;
+    max-width: 1160px;
 
-    padding: 55px 70px 45px;
+    padding:
+        58px
+        70px
+        48px;
 
     border:
-
         1px solid
-        rgba(202, 153, 39, 0.45);
+        rgba(202, 153, 39, 0.40);
 
     border-radius: 28px;
 
@@ -152,7 +195,7 @@ body {
         linear-gradient(
             145deg,
             rgba(12, 16, 40, 0.97),
-            rgba(8, 10, 29, 0.96)
+            rgba(8, 10, 29, 0.97)
         );
 
     box-shadow:
@@ -173,17 +216,23 @@ body {
 
     justify-content: center;
 
-    margin-bottom: 35px;
-
+    margin-bottom: 42px;
 }
 
 
 .journey-indicator span {
 
-    padding: 9px 24px;
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        9px
+        27px;
 
     border:
-
         1px solid
         #c9982e;
 
@@ -196,130 +245,135 @@ body {
     font-weight: 700;
 
     letter-spacing: 3px;
-
 }
 
 
 /* ============================================================
-   WELCOME CONTENT
+   HERO CONTENT
    ============================================================ */
 
 .welcome-content {
 
     text-align: center;
-
 }
 
 
-.eyebrow-tamil {
+/* ============================================================
+   PRIMARY TAMIL TITLE
+   ============================================================ */
 
-    margin-bottom: 18px;
+.hero-title-tamil {
 
-    color: #008f87;
+    max-width: 1050px;
 
-    font-size: 22px;
+    margin:
+        0
+        auto;
 
-    font-weight: 700;
-
-}
-
-
-.welcome-content h1 {
+    color: #f6c94f;
 
     font-family:
         Georgia,
+        "Noto Serif Tamil",
         "Times New Roman",
         serif;
 
-    font-size: clamp(
-        48px,
-        8vw,
-        86px
-    );
+    font-size:
+        clamp(
+            42px,
+            6vw,
+            78px
+        );
 
-    line-height: 0.95;
+    font-weight: 800;
 
-    letter-spacing: 2px;
+    line-height: 1.25;
 
-    color: #f6c94f;
+    letter-spacing: 0;
 
     text-shadow:
 
         0 4px 18px
         rgba(246, 201, 79, 0.18);
-
 }
 
 
-.welcome-content h1 span {
+/* ============================================================
+   ENGLISH SECONDARY TITLE
+   ============================================================ */
 
-    color: #f6c94f;
+.hero-title-english {
 
+    margin-top: 24px;
+
+    color: #19aaa8;
+
+    font-size:
+        clamp(
+            17px,
+            2.2vw,
+            25px
+        );
+
+    font-weight: 700;
+
+    letter-spacing: 0.10em;
+
+    line-height: 1.5;
 }
 
 
-.tamil-title {
+/* ============================================================
+   TAMIL HERO MESSAGE
+   ============================================================ */
 
-    margin-top: 28px;
+.hero-message-tamil {
 
-    color: #008f87;
+    max-width: 850px;
 
-    font-size: clamp(
-        22px,
-        3vw,
+    margin:
         34px
-    );
-
-    line-height: 1.4;
-
-}
-
-
-.english-title {
-
-    margin-top: 18px;
-
-    font-size: 17px;
-
-    letter-spacing: 2px;
+        auto
+        8px;
 
     color: #f5f1e8;
 
+    font-size:
+        clamp(
+            18px,
+            2vw,
+            24px
+        );
+
+    font-weight: 500;
+
+    line-height: 1.8;
 }
 
 
-.english-title strong {
+/* ============================================================
+   ENGLISH HERO MESSAGE
+   ============================================================ */
 
-    color: #f6c94f;
+.hero-message-english {
 
+    max-width: 760px;
+
+    margin:
+        0
+        auto;
+
+    color: #aeb5c4;
+
+    font-size: 16px;
+
+    line-height: 1.7;
 }
 
 
-.tamil-message {
-
-    margin-top: 30px;
-
-    font-size: 23px;
-
-    font-weight: 600;
-
-    color: #f5f1e8;
-
-}
-
-
-.english-message {
-
-    margin-top: 10px;
-
-    color: #d7d3cb;
-
-    font-size: 14px;
-
-    letter-spacing: 2px;
-
-}
-
+/* ============================================================
+   HERO DIVIDER
+   ============================================================ */
 
 .welcome-divider {
 
@@ -327,54 +381,41 @@ body {
 
     height: 2px;
 
-    margin: 30px auto;
-
-    background: #c9982e;
-
-}
-
-
-.intro-text {
-
-    max-width: 680px;
-
     margin:
+        34px
+        auto
+        0;
 
-        10px auto;
+    background:
 
-    color: #c9c6be;
-
-    font-size: 16px;
-
-    line-height: 1.8;
-
-}
-
-
-.tamil-text {
-
-    font-size: 17px;
-
+        linear-gradient(
+            90deg,
+            transparent,
+            #c9982e,
+            transparent
+        );
 }
 
 
 /* ============================================================
-   KYC
+   KYC SECTION
    ============================================================ */
 
 .kyc-section {
 
     margin-top: 50px;
 
-    padding-top: 40px;
+    padding-top: 42px;
 
     border-top:
-
         1px solid
-        rgba(255,255,255,0.08);
-
+        rgba(255, 255, 255, 0.08);
 }
 
+
+/* ============================================================
+   SECTION HEADING
+   ============================================================ */
 
 .section-heading {
 
@@ -385,7 +426,6 @@ body {
     gap: 18px;
 
     margin-bottom: 30px;
-
 }
 
 
@@ -403,7 +443,6 @@ body {
     flex-shrink: 0;
 
     border:
-
         1px solid
         #c9982e;
 
@@ -414,36 +453,40 @@ body {
     font-size: 14px;
 
     font-weight: 700;
-
 }
 
 
-.section-heading h3 {
+.section-heading h2 {
 
     color: #f5f1e8;
 
-    font-size: 20px;
+    font-family:
+        "Noto Sans Tamil",
+        Arial,
+        sans-serif;
 
-    line-height: 1.4;
+    font-size: 21px;
 
+    font-weight: 700;
+
+    line-height: 1.5;
 }
 
 
 .section-heading p {
 
-    margin-top: 4px;
+    margin-top: 5px;
 
     color: #8d918f;
 
     font-size: 11px;
 
     letter-spacing: 2px;
-
 }
 
 
 /* ============================================================
-   FORM
+   KYC FORM
    ============================================================ */
 
 #kycForm {
@@ -454,22 +497,24 @@ body {
         repeat(2, 1fr);
 
     gap: 22px;
-
 }
 
+
+/* ============================================================
+   FORM GROUP
+   ============================================================ */
 
 .form-group {
 
     display: flex;
 
     flex-direction: column;
-
 }
 
 
 .form-group label {
 
-    margin-bottom: 8px;
+    margin-bottom: 9px;
 
     color: #e8e4db;
 
@@ -477,6 +522,7 @@ body {
 
     font-weight: 600;
 
+    line-height: 1.5;
 }
 
 
@@ -488,37 +534,51 @@ body {
 
     font-weight: 400;
 
+    letter-spacing: 0.02em;
 }
 
+
+/* ============================================================
+   FORM INPUT
+   ============================================================ */
 
 .form-group input {
 
     width: 100%;
 
-    padding: 15px 16px;
+    min-height: 52px;
+
+    padding:
+        14px
+        16px;
 
     border:
-
         1px solid
-        rgba(255,255,255,0.13);
+        rgba(255, 255, 255, 0.13);
 
     border-radius: 10px;
 
     outline: none;
 
     background:
-
-        rgba(255,255,255,0.045);
+        rgba(255, 255, 255, 0.045);
 
     color: #ffffff;
+
+    font-family:
+        Arial,
+        "Noto Sans Tamil",
+        sans-serif;
 
     font-size: 15px;
 
     transition:
 
         border-color 0.2s ease,
-        background 0.2s ease;
 
+        background 0.2s ease,
+
+        box-shadow 0.2s ease;
 }
 
 
@@ -526,6 +586,14 @@ body {
 
     color: #777d7b;
 
+    opacity: 1;
+}
+
+
+.form-group input:hover {
+
+    border-color:
+        rgba(201, 152, 46, 0.35);
 }
 
 
@@ -534,11 +602,29 @@ body {
     border-color: #c9982e;
 
     background:
+        rgba(255, 255, 255, 0.07);
 
-        rgba(255,255,255,0.07);
+    box-shadow:
 
+        0 0 0 3px
+        rgba(201, 152, 46, 0.08);
 }
 
+
+/* ============================================================
+   INVALID INPUT
+   ============================================================ */
+
+.form-group input.input-error {
+
+    border-color:
+        #e88d8d;
+}
+
+
+/* ============================================================
+   FIELD ERROR
+   ============================================================ */
 
 .field-error {
 
@@ -550,6 +636,7 @@ body {
 
     font-size: 11px;
 
+    line-height: 1.4;
 }
 
 
@@ -571,29 +658,36 @@ body {
 
     color: #aeb2b0;
 
+    font-family:
+        "Noto Sans Tamil",
+        Arial,
+        sans-serif;
+
     font-size: 12px;
 
-    line-height: 1.7;
+    line-height: 1.8;
 
     cursor: pointer;
-
 }
 
 
 .consent-row input {
 
-    width: 17px;
-    height: 17px;
+    width: 18px;
+    height: 18px;
 
-    margin-top: 2px;
+    flex-shrink: 0;
+
+    margin-top: 3px;
 
     accent-color: #c9982e;
 
+    cursor: pointer;
 }
 
 
 /* ============================================================
-   STATUS
+   FORM STATUS
    ============================================================ */
 
 .form-status {
@@ -602,29 +696,32 @@ body {
 
     min-height: 24px;
 
+    padding:
+        2px
+        0;
+
     text-align: center;
 
     font-size: 13px;
 
+    line-height: 1.6;
 }
 
 
 .form-status.error {
 
     color: #e88d8d;
-
 }
 
 
 .form-status.success {
 
     color: #55c7ad;
-
 }
 
 
 /* ============================================================
-   BEGIN BUTTON
+   BEGIN JOURNEY BUTTON
    ============================================================ */
 
 .begin-button {
@@ -639,13 +736,17 @@ body {
 
     justify-content: center;
 
-    gap: 4px;
+    gap: 5px;
 
     width: 100%;
 
+    min-height: 78px;
+
     margin-top: 8px;
 
-    padding: 17px 25px;
+    padding:
+        16px
+        25px;
 
     border: none;
 
@@ -663,6 +764,11 @@ body {
 
     color: #080b18;
 
+    font-family:
+        Arial,
+        "Noto Sans Tamil",
+        sans-serif;
+
     font-weight: 800;
 
     box-shadow:
@@ -673,20 +779,32 @@ body {
     transition:
 
         transform 0.2s ease,
-        box-shadow 0.2s ease;
 
+        box-shadow 0.2s ease,
+
+        filter 0.2s ease;
 }
 
 
 .begin-button:hover {
 
-    transform: translateY(-2px);
+    transform:
+        translateY(-2px);
 
     box-shadow:
 
         0 16px 36px
         rgba(201, 152, 46, 0.32);
 
+    filter:
+        brightness(1.04);
+}
+
+
+.begin-button:active {
+
+    transform:
+        translateY(0);
 }
 
 
@@ -698,15 +816,31 @@ body {
 
     transform: none;
 
+    box-shadow:
+        none;
 }
 
+
+/* ============================================================
+   BUTTON TAMIL
+   ============================================================ */
 
 .button-tamil {
 
-    font-size: 15px;
+    font-family:
+        "Noto Sans Tamil",
+        Arial,
+        sans-serif;
 
+    font-size: 16px;
+
+    line-height: 1.5;
 }
 
+
+/* ============================================================
+   BUTTON ENGLISH
+   ============================================================ */
 
 .button-english {
 
@@ -714,6 +848,7 @@ body {
 
     letter-spacing: 2px;
 
+    line-height: 1.4;
 }
 
 
@@ -728,12 +863,10 @@ body {
     padding-top: 25px;
 
     border-top:
-
         1px solid
-        rgba(255,255,255,0.07);
+        rgba(255, 255, 255, 0.07);
 
     text-align: center;
-
 }
 
 
@@ -743,78 +876,239 @@ body {
 
     font-size: 11px;
 
-    letter-spacing: 3px;
+    font-weight: 700;
 
+    letter-spacing: 3px;
 }
 
 
-.welcome-footer span {
+/* ============================================================
+   RESPONSIVE — TABLET
+   ============================================================ */
 
-    display: block;
+@media (max-width: 900px) {
 
-    margin-top: 8px;
+    .welcome-card {
 
-    color: #777d7b;
+        max-width: 900px;
 
-    font-size: 10px;
+        padding:
+            50px
+            45px
+            42px;
+    }
 
-    letter-spacing: 1.5px;
+
+    .hero-title-tamil {
+
+        font-size:
+            clamp(
+                38px,
+                6vw,
+                60px
+            );
+    }
 
 }
 
 
 /* ============================================================
-   MOBILE
+   RESPONSIVE — MOBILE
    ============================================================ */
 
 @media (max-width: 700px) {
 
+    /* --------------------------------------------------------
+       HEADER
+       -------------------------------------------------------- */
+
     .site-header {
 
-        height: 72px;
+        height: 82px;
 
-        padding: 8px 14px;
+        padding:
+            8px
+            14px;
+    }
 
+
+    .brand-logo {
+
+        top: 10px;
+
+        left: 14px;
+
+        width: 82px;
+
+        height: 54px;
     }
 
 
     .brand-logo img {
 
-        width: 145px;
+        width: 82px;
 
-        max-height: 55px;
-
+        height: 54px;
     }
 
+
+    .brand-tamil {
+
+        font-size: 1.05rem;
+
+        letter-spacing: 0.04em;
+    }
+
+
+    /* --------------------------------------------------------
+       MAIN
+       -------------------------------------------------------- */
 
     .welcome-page {
 
         padding:
-
-            90px
+            100px
             12px
             30px;
-
     }
 
+
+    /* --------------------------------------------------------
+       CARD
+       -------------------------------------------------------- */
 
     .welcome-card {
 
         padding:
-
             35px
             20px
             30px;
 
         border-radius: 20px;
-
     }
 
+
+    /* --------------------------------------------------------
+       JOURNEY INDICATOR
+       -------------------------------------------------------- */
+
+    .journey-indicator {
+
+        margin-bottom: 32px;
+    }
+
+
+    .journey-indicator span {
+
+        padding:
+            8px
+            20px;
+
+        font-size: 10px;
+
+        letter-spacing: 2.5px;
+    }
+
+
+    /* --------------------------------------------------------
+       HERO
+       -------------------------------------------------------- */
+
+    .hero-title-tamil {
+
+        font-size:
+            clamp(
+                32px,
+                9vw,
+                48px
+            );
+
+        line-height: 1.35;
+    }
+
+
+    .hero-title-english {
+
+        margin-top: 18px;
+
+        font-size: 15px;
+
+        letter-spacing: 0.07em;
+    }
+
+
+    .hero-message-tamil {
+
+        margin-top: 25px;
+
+        font-size: 17px;
+
+        line-height: 1.8;
+    }
+
+
+    .hero-message-english {
+
+        font-size: 14px;
+
+        line-height: 1.7;
+    }
+
+
+    /* --------------------------------------------------------
+       KYC
+       -------------------------------------------------------- */
+
+    .kyc-section {
+
+        margin-top: 40px;
+
+        padding-top: 32px;
+    }
+
+
+    .section-heading {
+
+        gap: 12px;
+
+        margin-bottom: 24px;
+    }
+
+
+    .section-number {
+
+        width: 42px;
+        height: 42px;
+
+        font-size: 12px;
+    }
+
+
+    .section-heading h2 {
+
+        font-size: 17px;
+
+        line-height: 1.5;
+    }
+
+
+    .section-heading p {
+
+        font-size: 9px;
+
+        letter-spacing: 1.5px;
+    }
+
+
+    /* --------------------------------------------------------
+       FORM
+       -------------------------------------------------------- */
 
     #kycForm {
 
         grid-template-columns: 1fr;
 
+        gap: 18px;
     }
 
 
@@ -823,65 +1117,224 @@ body {
     .begin-button {
 
         grid-column: 1;
-
     }
 
 
-    .welcome-content h1 {
+    .form-group input {
 
-        font-size: 48px;
-
-    }
-
-
-    .tamil-title {
-
-        font-size: 21px;
-
-    }
-
-
-    .tamil-message {
-
-        font-size: 19px;
-
-    }
-
-
-    .intro-text {
+        min-height: 50px;
 
         font-size: 14px;
+    }
 
+
+    .consent-row {
+
+        font-size: 11px;
+
+        line-height: 1.7;
+    }
+
+
+    /* --------------------------------------------------------
+       BUTTON
+       -------------------------------------------------------- */
+
+    .begin-button {
+
+        min-height: 72px;
+
+        padding:
+            14px
+            18px;
+    }
+
+
+    .button-tamil {
+
+        font-size: 14px;
+    }
+
+
+    .button-english {
+
+        font-size: 10px;
+
+        letter-spacing: 1.7px;
+    }
+
+
+    /* --------------------------------------------------------
+       FOOTER
+       -------------------------------------------------------- */
+
+    .welcome-footer {
+
+        margin-top: 35px;
+
+        padding-top: 20px;
+    }
+
+
+    .welcome-footer p {
+
+        font-size: 9px;
+
+        letter-spacing: 2.5px;
     }
 
 }
 
 
 /* ============================================================
-   SMALL MOBILE
+   RESPONSIVE — SMALL MOBILE
    ============================================================ */
 
 @media (max-width: 420px) {
 
-    .welcome-content h1 {
+    .site-header {
 
-        font-size: 40px;
-
+        height: 76px;
     }
 
 
-    .section-heading h3 {
+    .brand-logo {
 
-        font-size: 17px;
+        left: 10px;
 
+        width: 68px;
+
+        height: 48px;
+    }
+
+
+    .brand-logo img {
+
+        width: 68px;
+
+        height: 48px;
+    }
+
+
+    .brand-tamil {
+
+        font-size: 0.95rem;
+
+        letter-spacing: 0.02em;
+    }
+
+
+    .welcome-page {
+
+        padding:
+            92px
+            9px
+            25px;
+    }
+
+
+    .welcome-card {
+
+        padding:
+            30px
+            16px
+            26px;
+    }
+
+
+    .hero-title-tamil {
+
+        font-size: 30px;
+
+        line-height: 1.4;
+    }
+
+
+    .hero-title-english {
+
+        font-size: 13px;
+
+        letter-spacing: 0.05em;
+    }
+
+
+    .hero-message-tamil {
+
+        font-size: 15px;
+    }
+
+
+    .hero-message-english {
+
+        font-size: 13px;
+    }
+
+
+    .section-heading h2 {
+
+        font-size: 15px;
+    }
+
+
+    .section-heading p {
+
+        font-size: 8px;
     }
 
 
     .button-tamil {
 
         font-size: 13px;
+    }
 
+
+    .button-english {
+
+        font-size: 9px;
+
+        letter-spacing: 1.4px;
     }
 
 }
 
+
+/* ============================================================
+   ACCESSIBILITY
+   ============================================================ */
+
+.begin-button:focus-visible,
+.form-group input:focus-visible,
+.consent-row input:focus-visible {
+
+    outline:
+        2px solid
+        #f6c94f;
+
+    outline-offset: 3px;
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+
+        scroll-behavior: auto;
+    }
+
+
+    *,
+    *::before,
+    *::after {
+
+        transition-duration: 0.01ms !important;
+
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+    }
+
+}
