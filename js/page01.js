@@ -269,6 +269,8 @@ function initializePage() {
 
     updateScore();
 
+    updateAllSelectedStates();
+
 }
 
 
@@ -331,9 +333,7 @@ function renderSelvams() {
 
 
                 <div class="score-buttons">
-
                     ${createScoreButtons(selvam.id)}
-
                 </div>
 
 
@@ -345,7 +345,6 @@ function renderSelvams() {
                 </div>
 
             `;
-
 
             selvamGrid.appendChild(card);
 
@@ -374,14 +373,23 @@ function createScoreButtons(
         score++
     ) {
 
+        const scoreBand =
+            score <= 3
+                ? 'score-low'
+                : score <= 7
+                    ? 'score-mid'
+                    : 'score-high';
+
+
         html += `
 
             <button
                 type="button"
-                class="score-button"
+                class="score-button ${scoreBand}"
                 data-question-id="${questionId}"
                 data-score="${score}"
                 aria-label="${questionId} score ${score}"
+                aria-pressed="false"
             >
                 ${score}
             </button>
@@ -393,6 +401,200 @@ function createScoreButtons(
     return html;
 
 }
+
+
+/* ============================================================
+   SCORE BUTTON COLOUR SYSTEM
+   ============================================================ */
+
+(function installScoreButtonColours() {
+
+    if (
+        document.getElementById(
+            'ctm-page01-score-colours'
+        )
+    ) {
+        return;
+    }
+
+
+    const style =
+        document.createElement('style');
+
+
+    style.id =
+        'ctm-page01-score-colours';
+
+
+    style.textContent = `
+
+        /* =========================================
+           1 – 3 : RED
+           ========================================= */
+
+        .score-button.score-low {
+
+            border-color:
+                rgba(214, 90, 69, 0.45);
+
+            color:
+                #f5c1b7;
+
+            background:
+                rgba(214, 90, 69, 0.08);
+
+        }
+
+
+        .score-button.score-low:hover {
+
+            border-color:
+                #d65a45;
+
+            color:
+                #ffffff;
+
+            background:
+                #d65a45;
+
+        }
+
+
+        /* =========================================
+           4 – 7 : ORANGE
+           ========================================= */
+
+        .score-button.score-mid {
+
+            border-color:
+                rgba(232, 135, 36, 0.45);
+
+            color:
+                #ffd19c;
+
+            background:
+                rgba(232, 135, 36, 0.08);
+
+        }
+
+
+        .score-button.score-mid:hover {
+
+            border-color:
+                #e88724;
+
+            color:
+                #ffffff;
+
+            background:
+                #e88724;
+
+        }
+
+
+        /* =========================================
+           8 – 10 : GREEN
+           ========================================= */
+
+        .score-button.score-high {
+
+            border-color:
+                rgba(41, 196, 125, 0.45);
+
+            color:
+                #a9f0ca;
+
+            background:
+                rgba(41, 196, 125, 0.08);
+
+        }
+
+
+        .score-button.score-high:hover {
+
+            border-color:
+                #29c47d;
+
+            color:
+                #ffffff;
+
+            background:
+                #18a66a;
+
+        }
+
+
+        /* =========================================
+           SELECTED — RED
+           ========================================= */
+
+        .score-button.score-low.selected {
+
+            border-color:
+                #d65a45;
+
+            background:
+                #d65a45;
+
+            color:
+                #ffffff;
+
+            box-shadow:
+                0 8px 20px
+                rgba(214, 90, 69, 0.25);
+
+        }
+
+
+        /* =========================================
+           SELECTED — ORANGE
+           ========================================= */
+
+        .score-button.score-mid.selected {
+
+            border-color:
+                #e88724;
+
+            background:
+                #e88724;
+
+            color:
+                #ffffff;
+
+            box-shadow:
+                0 8px 20px
+                rgba(232, 135, 36, 0.25);
+
+        }
+
+
+        /* =========================================
+           SELECTED — GREEN
+           ========================================= */
+
+        .score-button.score-high.selected {
+
+            border-color:
+                #29c47d;
+
+            background:
+                #18a66a;
+
+            color:
+                #ffffff;
+
+            box-shadow:
+                0 8px 20px
+                rgba(41, 196, 125, 0.25);
+
+        }
+
+    `;
+
+
+    document.head.appendChild(style);
+
+})();
 
 
 /* ============================================================
@@ -424,13 +626,25 @@ async function handleScoreSelection(
     const button =
         event.currentTarget;
 
+
     const questionId =
         button.dataset.questionId;
+
 
     const score =
         Number(
             button.dataset.score
         );
+
+
+    if (
+        !questionId ||
+        !Number.isFinite(score) ||
+        score < 1 ||
+        score > 10
+    ) {
+        return;
+    }
 
 
     answers[questionId] =
@@ -443,13 +657,59 @@ async function handleScoreSelection(
     );
 
 
+    /*
+     * Update the visible totals FIRST.
+     * The calculation must never depend on the backend response.
+     */
+
     updateScore();
 
     saveLocalAnswers();
 
+
+    /*
+     * Backend saving is secondary.
+     * A network/backend failure must not prevent
+     * the local score calculation.
+     */
+
     await saveAnswerToBackend(
         questionId,
         score
+    );
+
+}
+
+
+/* ============================================================
+   UPDATE ALL SELECTED STATES
+   ============================================================ */
+
+function updateAllSelectedStates() {
+
+    SELVAMS.forEach(
+        function(selvam) {
+
+            const score =
+                Number(
+                    answers[selvam.id]
+                );
+
+
+            if (
+                Number.isFinite(score) &&
+                score >= 1 &&
+                score <= 10
+            ) {
+
+                updateSelectedButton(
+                    selvam.id,
+                    score
+                );
+
+            }
+
+        }
     );
 
 }
@@ -471,11 +731,21 @@ function updateSelectedButton(
         .forEach(
             function(button) {
 
-                button.classList.toggle(
-                    'selected',
+                const isSelected =
                     Number(
                         button.dataset.score
-                    ) === score
+                    ) === score;
+
+
+                button.classList.toggle(
+                    'selected',
+                    isSelected
+                );
+
+
+                button.setAttribute(
+                    'aria-pressed',
+                    String(isSelected)
                 );
 
             }
@@ -508,24 +778,40 @@ function updateSelectedButton(
 
 function calculateScores() {
 
-    const values =
-        Object.values(answers);
+    /*
+     * Always calculate from the official 16 SELVAMS.
+     * This prevents unrelated localStorage keys or malformed
+     * values from affecting the result.
+     */
+
+    let rawTotal = 0;
+
+    let answeredCount = 0;
 
 
-    const rawTotal =
-        values.reduce(
-            function(total, score) {
+    SELVAMS.forEach(
+        function(selvam) {
 
-                return total +
-                    Number(score);
-
-            },
-            0
-        );
+            const score =
+                Number(
+                    answers[selvam.id]
+                );
 
 
-    const answeredCount =
-        values.length;
+            if (
+                Number.isFinite(score) &&
+                score >= 1 &&
+                score <= 10
+            ) {
+
+                rawTotal += score;
+
+                answeredCount++;
+
+            }
+
+        }
+    );
 
 
     const average =
@@ -535,15 +821,26 @@ function calculateScores() {
 
 
     /*
-     * 16 questions × 10 marks = 160 raw maximum.
+     * 16 Selvam × 10 = 160 maximum.
      *
-     * Convert the raw score to a 100-point score.
+     * Convert the completed raw score
+     * to a 100-point score.
+     *
+     * Do NOT calculate a normalized score
+     * until all 16 questions have been answered.
      */
 
     const normalized =
-        rawTotal > 0
+        answeredCount === CONFIG.TOTAL_QUESTIONS
             ? Math.round(
-                (rawTotal / 160) * 100
+                (
+                    rawTotal /
+                    (
+                        CONFIG.TOTAL_QUESTIONS *
+                        10
+                    )
+                ) *
+                100
             )
             : 0;
 
@@ -576,7 +873,9 @@ function updateScore() {
     if (rawTotalElement) {
 
         rawTotalElement.textContent =
-            scores.rawTotal;
+            String(
+                scores.rawTotal
+            );
 
     }
 
@@ -592,12 +891,16 @@ function updateScore() {
     if (normalizedScoreElement) {
 
         normalizedScoreElement.textContent =
-            scores.normalized;
+            String(
+                scores.normalized
+            );
 
     }
 
 
-    updateScoreMessage(scores);
+    updateScoreMessage(
+        scores
+    );
 
 
     if (continueButton) {
@@ -661,6 +964,7 @@ function updateScoreMessage(
             'score-low'
         );
 
+
         scoreMessageElement.textContent =
             'இது உங்கள் வாழ்க்கையின் இறுதி தீர்ப்பு அல்ல. இது உங்கள் மாற்றத்தின் தொடக்கப் புள்ளி.';
 
@@ -677,6 +981,7 @@ function updateScoreMessage(
             'score-mid'
         );
 
+
         scoreMessageElement.textContent =
             'உங்கள் வாழ்க்கையின் பல பகுதிகளில் நல்ல அடித்தளம் உள்ளது. அடுத்த கட்ட வளர்ச்சிக்கான வாய்ப்புகளை இப்போது தெளிவாக பார்க்கலாம்.';
 
@@ -688,6 +993,7 @@ function updateScoreMessage(
     scoreMessageElement.classList.add(
         'score-high'
     );
+
 
     scoreMessageElement.textContent =
         'உங்கள் வாழ்க்கையில் பல வலுவான பகுதிகள் உள்ளன. அவற்றை மேலும் ஆழப்படுத்தி சமநிலையுடன் வளர்த்துக் கொள்ளுங்கள்.';
@@ -724,7 +1030,8 @@ async function saveAnswerToBackend(
         SELVAMS.find(
             function(item) {
 
-                return item.id === questionId;
+                return item.id ===
+                    questionId;
 
             }
         );
@@ -737,7 +1044,8 @@ async function saveAnswerToBackend(
 
     const payload = {
 
-        action: 'save_answer',
+        action:
+            'save_answer',
 
         data: {
 
@@ -751,9 +1059,11 @@ async function saveAnswerToBackend(
             question:
                 `${selvam.ta} — ${selvam.en}`,
 
-            answer: score,
+            answer:
+                score,
 
-            score: score
+            score:
+                score
 
         }
 
@@ -773,7 +1083,8 @@ async function saveAnswerToBackend(
                 CONFIG.BACKEND_URL,
                 {
 
-                    method: 'POST',
+                    method:
+                        'POST',
 
                     headers: {
 
@@ -810,7 +1121,9 @@ async function saveAnswerToBackend(
         try {
 
             result =
-                JSON.parse(text);
+                JSON.parse(
+                    text
+                );
 
         }
         catch (error) {
@@ -863,12 +1176,40 @@ async function saveAnswerToBackend(
    CONTINUE TO PAGE 02
    ============================================================ */
 
-if (continueButton) {
+function attachContinueHandler() {
 
-    continueButton.addEventListener(
-        'click',
-        handleContinue
+    const button =
+        document.getElementById(
+            'continueButton'
+        );
+
+
+    if (button) {
+
+        button.addEventListener(
+            'click',
+            handleContinue
+        );
+
+    }
+
+}
+
+
+if (
+    document.readyState ===
+    'loading'
+) {
+
+    document.addEventListener(
+        'DOMContentLoaded',
+        attachContinueHandler
     );
+
+}
+else {
+
+    attachContinueHandler();
 
 }
 
@@ -941,7 +1282,8 @@ async function handleContinue() {
         normalizedScore:
             scores.normalized,
 
-        completed: true,
+        completed:
+            true,
 
         completedAt:
             new Date().toISOString()
@@ -992,7 +1334,9 @@ function saveLocalAnswers() {
 
     localStorage.setItem(
         'ctmPage01Answers',
-        JSON.stringify(answers)
+        JSON.stringify(
+            answers
+        )
     );
 
 }
@@ -1014,7 +1358,9 @@ function restoreLocalAnswers() {
     try {
 
         const saved =
-            JSON.parse(stored);
+            JSON.parse(
+                stored
+            );
 
 
         Object.keys(saved)
@@ -1023,11 +1369,28 @@ function restoreLocalAnswers() {
 
                     const score =
                         Number(
-                            saved[questionId]
+                            saved[
+                                questionId
+                            ]
+                        );
+
+
+                    const knownQuestion =
+                        SELVAMS.some(
+                            function(selvam) {
+
+                                return (
+                                    selvam.id ===
+                                    questionId
+                                );
+
+                            }
                         );
 
 
                     if (
+                        knownQuestion &&
+                        Number.isFinite(score) &&
                         score >= 1 &&
                         score <= 10
                     ) {
@@ -1035,12 +1398,6 @@ function restoreLocalAnswers() {
                         answers[
                             questionId
                         ] = score;
-
-
-                        updateSelectedButton(
-                            questionId,
-                            score
-                        );
 
                     }
 
@@ -1096,6 +1453,9 @@ function setStatus(
 
     pageStatus.className =
         'page-status ' +
-        (type || '');
+        (
+            type ||
+            ''
+        );
 
 }
