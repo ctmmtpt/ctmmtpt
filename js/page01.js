@@ -1,2036 +1,1796 @@
 
-/* ============================================================
+/* ================================================================
    CTM PATH™ MILLIONAIRES™
    PAGE 01 — JAVASCRIPT
-   COMPLETE REPLACEMENT
-   ============================================================ */
+   ================================================================
+
+   PURPOSE
+   -------
+   This file is written specifically for the existing 01.html DOM.
+
+   IMPORTANT
+   ---------
+   Do NOT add another assessment renderer.
+   Do NOT generate the Selvam cards from JavaScript.
+
+   The HTML already contains all 16 cards and all 10 score buttons.
+
+   SCORE MODEL
+   -----------
+   16 Selvams
+   Each Selvam = 1–10
+
+   Raw Total:
+       maximum = 160
+
+   Life Score:
+       Raw Total / 160 × 100
+
+   Average Selvam Score:
+       Raw Total / 16
+
+   SCORE COLOURS
+   -------------
+   1–3   = RED
+   4–7   = ORANGE
+   8–10  = GREEN
+   ================================================================ */
+
+'use strict';
 
 
-/* ============================================================
+/* ================================================================
    CONFIGURATION
-   ============================================================ */
+   ================================================================ */
 
-const CONFIG = {
+const PAGE01_CONFIG = Object.freeze({
 
-    BACKEND_URL:
-        'https://script.google.com/macros/s/AKfycbx9eJru7EJYUpReeLv4Sym9wDVLgE_ruSw_ZUJ4ycDoneUKlkI_fcsJ2UJmKM7W_PXtEg/exec',
+    STORAGE_KEY: 'ctm_path_page01_scores',
 
-    PAGE_NUMBER: 1,
+    PAGE_NUMBER: '01',
 
-    NEXT_PAGE: '/02',
+    TOTAL_SELVAMS: 16,
 
-    TOTAL_QUESTIONS: 16,
+    MIN_SCORE: 1,
 
-    MAX_SCORE_PER_QUESTION: 10,
+    MAX_SCORE: 10,
 
-    MAX_RAW_SCORE: 160,
+    RAW_MAX: 160,
 
-    MAX_NORMALIZED_SCORE: 100,
+    LIFE_SCORE_MAX: 100,
 
-    ANSWERS_STORAGE_KEY:
-        'ctmPage01Answers',
+    AVERAGE_MAX: 10,
 
-    SUMMARY_STORAGE_KEY:
-        'ctmPage01Summary',
+    SCORE_RANGES: Object.freeze({
 
-    VISITOR_ID_KEY:
-        'ctmVisitorId'
+        LOW: {
+            min: 1,
+            max: 3,
+            className: 'score-low',
+            colour: 'red'
+        },
 
-};
+        MID: {
+            min: 4,
+            max: 7,
+            className: 'score-medium',
+            colour: 'orange'
+        },
+
+        HIGH: {
+            min: 8,
+            max: 10,
+            className: 'score-high',
+            colour: 'green'
+        }
+
+    })
+
+});
 
 
-/* ============================================================
-   SELVAMS
-   ============================================================ */
+/* ================================================================
+   SELVAM DEFINITIONS
+   ================================================================
 
-const SELVAMS = [
+   These keys MUST match the data-field values in 01.html.
+   ================================================================ */
+
+const SELVAMS = Object.freeze([
 
     {
-        id: 'SV01',
         number: '01',
-        ta: 'கல்வி',
-        en: 'EDUCATION',
-        questionTa:
-            'உங்கள் அறிவு, கற்றல் மற்றும் கல்வி வளர்ச்சியில் நீங்கள் எவ்வளவு நிறைவாக இருக்கிறீர்கள்?',
-        questionEn:
-            'Your knowledge, learning and educational growth'
+        field: 'education',
+        tamil: 'கல்வி',
+        english: 'EDUCATION'
     },
 
     {
-        id: 'SV02',
         number: '02',
-        ta: 'செல்வம்',
-        en: 'WEALTH',
-        questionTa:
-            'உங்கள் தற்போதைய செல்வம் மற்றும் நிதி நிலை உங்கள் வாழ்க்கை இலக்குகளுக்கு போதுமானதாக உள்ளதா?',
-        questionEn:
-            'Your wealth and financial position'
+        field: 'wealth',
+        tamil: 'செல்வம்',
+        english: 'WEALTH'
     },
 
     {
-        id: 'SV03',
         number: '03',
-        ta: 'தானியம்',
-        en: 'FOOD & PROSPERITY',
-        questionTa:
-            'உங்கள் குடும்பத்தின் உணவு, வளம் மற்றும் அடிப்படை வாழ்வாதாரத்தில் நீங்கள் எவ்வளவு நிறைவாக இருக்கிறீர்கள்?',
-        questionEn:
-            'Food, prosperity and material well-being'
+        field: 'foodProsperity',
+        tamil: 'தானியம்',
+        english: 'FOOD & PROSPERITY'
     },
 
     {
-        id: 'SV04',
         number: '04',
-        ta: 'வீரம்',
-        en: 'COURAGE',
-        questionTa:
-            'சவால்களை எதிர்கொண்டு, தேவையான முடிவுகளைத் துணிவுடன் எடுக்கும் உங்கள் திறனை எவ்வாறு மதிப்பிடுவீர்கள்?',
-        questionEn:
-            'Your courage to face challenges and make difficult decisions'
+        field: 'courage',
+        tamil: 'வீரம்',
+        english: 'COURAGE'
     },
 
     {
-        id: 'SV05',
         number: '05',
-        ta: 'வெற்றி',
-        en: 'SUCCESS',
-        questionTa:
-            'நீங்கள் விரும்பிய இலக்குகளை அடைந்து வருகிறீர்கள் என்ற உணர்வு உங்களுக்கு எவ்வளவு உள்ளது?',
-        questionEn:
-            'Your progress toward the success you desire'
+        field: 'success',
+        tamil: 'வெற்றி',
+        english: 'SUCCESS'
     },
 
     {
-        id: 'SV06',
         number: '06',
-        ta: 'நலம்',
-        en: 'HEALTH',
-        questionTa:
-            'உங்கள் உடல் நலம் மற்றும் ஒட்டுமொத்த ஆரோக்கியத்தில் நீங்கள் எவ்வளவு நிறைவாக இருக்கிறீர்கள்?',
-        questionEn:
-            'Your physical health and overall well-being'
+        field: 'health',
+        tamil: 'நலம்',
+        english: 'HEALTH'
     },
 
     {
-        id: 'SV07',
         number: '07',
-        ta: 'ஆயுள்',
-        en: 'LONGEVITY',
-        questionTa:
-            'நீண்ட, ஆரோக்கியமான மற்றும் அர்த்தமுள்ள வாழ்க்கைக்காக நீங்கள் எவ்வளவு தயாராக வாழ்கிறீர்கள்?',
-        questionEn:
-            'Your readiness to build a long, healthy and meaningful life'
+        field: 'longevity',
+        tamil: 'ஆயுள்',
+        english: 'LONGEVITY'
     },
 
     {
-        id: 'SV08',
         number: '08',
-        ta: 'அழகு',
-        en: 'BEAUTY',
-        questionTa:
-            'உங்கள் தோற்றம், தனிப்பட்ட பராமரிப்பு மற்றும் உங்களைப் பற்றிய நம்பிக்கையில் நீங்கள் எவ்வளவு நிறைவாக இருக்கிறீர்கள்?',
-        questionEn:
-            'Your appearance, personal care and self-confidence'
+        field: 'beauty',
+        tamil: 'அழகு',
+        english: 'BEAUTY'
     },
 
     {
-        id: 'SV09',
         number: '09',
-        ta: 'புகழ்',
-        en: 'GOOD REPUTATION',
-        questionTa:
-            'உங்களைப் பற்றி குடும்பம், நண்பர்கள் மற்றும் சமூகத்தில் உருவாகியுள்ள நல்ல மதிப்பை எவ்வாறு மதிப்பிடுவீர்கள்?',
-        questionEn:
-            'The respect and reputation you have built'
+        field: 'reputation',
+        tamil: 'புகழ்',
+        english: 'GOOD REPUTATION'
     },
 
     {
-        id: 'SV10',
         number: '10',
-        ta: 'அறிவு',
-        en: 'WISDOM',
-        questionTa:
-            'சரியானதை அறிந்து, சரியான நேரத்தில் சரியான முடிவை எடுக்கும் உங்கள் ஞானத்தை எவ்வாறு மதிப்பிடுவீர்கள்?',
-        questionEn:
-            'Your wisdom and ability to make sound decisions'
+        field: 'wisdom',
+        tamil: 'அறிவு',
+        english: 'WISDOM'
     },
 
     {
-        id: 'SV11',
         number: '11',
-        ta: 'குடும்ப வளம்',
-        en: 'HAPPY FAMILY',
-        questionTa:
-            'உங்கள் குடும்ப வாழ்க்கையில் அன்பு, மகிழ்ச்சி, பாதுகாப்பு மற்றும் ஒற்றுமை எவ்வளவு உள்ளது?',
-        questionEn:
-            'Love, happiness, security and harmony in your family'
+        field: 'family',
+        tamil: 'குடும்ப வளம்',
+        english: 'HAPPY FAMILY'
     },
 
     {
-        id: 'SV12',
         number: '12',
-        ta: 'மகப்பேறு',
-        en: 'BLESSED CHILDREN',
-        questionTa:
-            'உங்கள் குழந்தைகள் மற்றும் அவர்களின் எதிர்காலம் குறித்து நீங்கள் எவ்வளவு நிறைவாகவும் நம்பிக்கையுடனும் இருக்கிறீர்கள்?',
-        questionEn:
-            'Your children’s well-being and future'
+        field: 'children',
+        tamil: 'மகப்பேறு',
+        english: 'BLESSED CHILDREN'
     },
 
     {
-        id: 'SV13',
         number: '13',
-        ta: 'நல்ல நட்பு / உறவு',
-        en: 'GOOD RELATIONSHIPS',
-        questionTa:
-            'உங்கள் வாழ்க்கையில் உள்ள முக்கியமான உறவுகள் உங்களுக்கு அன்பு, ஆதரவு மற்றும் நம்பிக்கையை வழங்குகின்றனவா?',
-        questionEn:
-            'The quality of your important relationships'
+        field: 'relationships',
+        tamil: 'நல்ல நட்பு / உறவு',
+        english: 'GOOD RELATIONSHIPS'
     },
 
     {
-        id: 'SV14',
         number: '14',
-        ta: 'மனநிறைவு',
-        en: 'INNER PEACE',
-        questionTa:
-            'உங்கள் மனதில் அமைதி, சமநிலை மற்றும் வாழ்க்கையை ஏற்றுக்கொள்ளும் நிறைவு எவ்வளவு உள்ளது?',
-        questionEn:
-            'Your inner peace, emotional balance and contentment'
+        field: 'innerPeace',
+        tamil: 'மனநிறைவு',
+        english: 'INNER PEACE'
     },
 
     {
-        id: 'SV15',
         number: '15',
-        ta: 'அறம்',
-        en: 'DHARMA',
-        questionTa:
-            'உங்கள் மதிப்புகள், பொறுப்பு மற்றும் நீங்கள் சரி என்று நம்பும் வாழ்க்கை முறைக்கு ஏற்ப வாழ்கிறீர்களா?',
-        questionEn:
-            'Living according to your values, responsibility and principles'
+        field: 'dharma',
+        tamil: 'அறம்',
+        english: 'DHARMA'
     },
 
     {
-        id: 'SV16',
         number: '16',
-        ta: 'இறை நிலை',
-        en: 'SPIRITUAL GROWTH',
-        questionTa:
-            'உங்கள் உள்ளார்ந்த வளர்ச்சி, ஆன்மீக உணர்வு மற்றும் வாழ்க்கையின் ஆழமான அர்த்தத்துடன் உங்களுக்குள்ள தொடர்பை எவ்வாறு மதிப்பிடுவீர்கள்?',
-        questionEn:
-            'Your inner growth, spiritual awareness and sense of meaning'
+        field: 'spiritualGrowth',
+        tamil: 'இறை நிலை',
+        english: 'SPIRITUAL GROWTH'
     }
 
-];
+]);
 
 
-/* ============================================================
+/* ================================================================
    APPLICATION STATE
-   ============================================================ */
+   ================================================================ */
 
-const answers = {};
+const state = {
 
-let DOM = {
+    scores: {},
 
-    selvamGrid: null,
+    totalAnswered: 0,
 
-    normalizedScore: null,
+    rawTotal: 0,
 
-    rawTotal: null,
+    lifeScore: null,
 
     averageScore: null,
 
-    scoreMessage: null,
-
-    continueButton: null,
-
-    pageStatus: null
+    initialized: false
 
 };
 
 
-/* ============================================================
-   DOM INITIALIZATION
-   IMPORTANT:
-   All DOM references are obtained AFTER DOM is ready.
-   ============================================================ */
+/* ================================================================
+   DOM REFERENCES
+   ================================================================ */
 
-function cacheDOM() {
+const DOM = {
 
-    DOM.selvamGrid =
-        document.getElementById(
-            'selvamGrid'
-        );
+    form: null,
 
-    DOM.normalizedScore =
-        document.getElementById(
-            'normalizedScore'
-        );
+    cards: [],
 
-    DOM.rawTotal =
-        document.getElementById(
-            'rawTotal'
-        );
+    scoreGroups: [],
 
-    DOM.averageScore =
-        document.getElementById(
-            'averageScore'
-        );
+    totalScore: null,
 
-    DOM.scoreMessage =
-        document.getElementById(
-            'scoreMessage'
-        );
+    averageScore: null,
 
-    DOM.continueButton =
-        document.getElementById(
-            'continueButton'
-        );
+    backButton: null,
 
-    DOM.pageStatus =
-        document.getElementById(
-            'pageStatus'
-        );
+    continueButton: null
 
-}
+};
 
 
-/* ============================================================
-   INITIALIZE PAGE
-   ============================================================ */
+/* ================================================================
+   INITIALIZATION
+   ================================================================ */
 
-function initializePage() {
+document.addEventListener('DOMContentLoaded', function () {
+
+    initializePage01();
+
+});
+
+
+function initializePage01() {
+
+    if (state.initialized) {
+        return;
+    }
 
     cacheDOM();
 
-    installScoreStyles();
+    validateDOM();
 
-    restoreLocalAnswers();
+    initializeScoreState();
 
-    renderSelvams();
+    bindScoreButtons();
 
-    updateAllSelectedStates();
+    bindNavigation();
 
-    updateScore();
+    restoreSavedScores();
 
-    attachContinueHandler();
+    calculateAndRender();
 
-}
+    state.initialized = true;
 
-
-/* ============================================================
-   START APPLICATION
-   ============================================================ */
-
-if (
-    document.readyState ===
-    'loading'
-) {
-
-    document.addEventListener(
-        'DOMContentLoaded',
-        initializePage,
-        {
-            once: true
-        }
+    console.log(
+        '[CTM PATH™] Page 01 initialized successfully.'
     );
 
 }
-else {
 
-    initializePage();
+
+/* ================================================================
+   CACHE DOM
+   ================================================================ */
+
+function cacheDOM() {
+
+    DOM.form =
+        document.getElementById('assessmentForm');
+
+    DOM.cards =
+        Array.from(
+            document.querySelectorAll('.selvam-card')
+        );
+
+    DOM.scoreGroups =
+        Array.from(
+            document.querySelectorAll('.score-options')
+        );
+
+    DOM.totalScore =
+        document.getElementById('totalScore100');
+
+    DOM.averageScore =
+        document.getElementById('averageScore');
+
+    DOM.backButton =
+        document.getElementById('backToIndex');
+
+    DOM.continueButton =
+        document.getElementById('continueToPage02');
 
 }
 
 
-/* ============================================================
-   RENDER SELVAMS
-   ============================================================ */
+/* ================================================================
+   DOM VALIDATION
+   ================================================================ */
 
-function renderSelvams() {
+function validateDOM() {
 
-    if (!DOM.selvamGrid) {
+    const errors = [];
+
+    if (!DOM.form) {
+        errors.push('#assessmentForm');
+    }
+
+    if (DOM.cards.length !== PAGE01_CONFIG.TOTAL_SELVAMS) {
+
+        console.warn(
+            '[CTM PATH™] Expected 16 Selvam cards but found:',
+            DOM.cards.length
+        );
+
+    }
+
+    if (!DOM.totalScore) {
+        errors.push('#totalScore100');
+    }
+
+    if (!DOM.averageScore) {
+        errors.push('#averageScore');
+    }
+
+    if (!DOM.backButton) {
+        errors.push('#backToIndex');
+    }
+
+    if (!DOM.continueButton) {
+        errors.push('#continueToPage02');
+    }
+
+    if (errors.length > 0) {
 
         console.error(
-            'CTM PATH™ Page 01: #selvamGrid not found.'
+            '[CTM PATH™] Page 01 missing required DOM elements:',
+            errors
         );
-
-        return;
 
     }
 
-
-    DOM.selvamGrid.innerHTML = '';
-
-
-    SELVAMS.forEach(
-        function(selvam) {
-
-            const card =
-                document.createElement(
-                    'article'
-                );
+}
 
 
-            card.className =
-                'selvam-card';
+/* ================================================================
+   INITIALIZE SCORE STATE
+   ================================================================ */
+
+function initializeScoreState() {
+
+    SELVAMS.forEach(function (selvam) {
+
+        state.scores[selvam.field] = null;
+
+    });
+
+}
 
 
-            card.dataset.questionId =
-                selvam.id;
+/* ================================================================
+   BIND SCORE BUTTONS
+   ================================================================ */
 
+function bindScoreButtons() {
 
-            card.innerHTML = `
+    DOM.scoreGroups.forEach(function (group) {
 
-                <div class="selvam-top">
+        const field =
+            group.getAttribute('data-field');
 
-                    <div class="selvam-number">
-                        ${selvam.number}
-                    </div>
+        if (!field) {
 
-                    <div>
-
-                        <div class="selvam-title-ta">
-                            ${selvam.ta}
-                        </div>
-
-                        <div class="selvam-title-en">
-                            ${selvam.en}
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="selvam-question-ta">
-                    ${selvam.questionTa}
-                </div>
-
-
-                <div class="selvam-question-en">
-                    ${selvam.questionEn}
-                </div>
-
-
-                <div class="score-buttons">
-
-                    ${createScoreButtons(
-                        selvam.id
-                    )}
-
-                </div>
-
-
-                <div
-                    class="selected-score"
-                    id="selected-${selvam.id}"
-                >
-                    உங்கள் மதிப்பீடு: —
-                </div>
-
-            `;
-
-
-            DOM.selvamGrid.appendChild(
-                card
+            console.warn(
+                '[CTM PATH™] Score group has no data-field:',
+                group
             );
 
+            return;
+
         }
-    );
 
+        const buttons =
+            Array.from(
+                group.querySelectorAll(
+                    'button[data-score]'
+                )
+            );
 
-    attachScoreHandlers();
+        buttons.forEach(function (button) {
+
+            button.addEventListener(
+                'click',
+                function () {
+
+                    handleScoreSelection(
+                        field,
+                        button
+                    );
+
+                }
+            );
+
+        });
+
+    });
 
 }
 
 
-/* ============================================================
-   CREATE SCORE BUTTONS
-   ============================================================ */
-
-function createScoreButtons(
-    questionId
-) {
-
-    let html = '';
-
-
-    for (
-        let score = 1;
-        score <= CONFIG.MAX_SCORE_PER_QUESTION;
-        score++
-    ) {
-
-        let scoreClass;
-
-
-        if (score <= 3) {
-
-            scoreClass =
-                'score-low';
-
-        }
-        else if (score <= 7) {
-
-            scoreClass =
-                'score-mid';
-
-        }
-        else {
-
-            scoreClass =
-                'score-high';
-
-        }
-
-
-        html += `
-
-            <button
-                type="button"
-                class="score-button ${scoreClass}"
-                data-question-id="${questionId}"
-                data-score="${score}"
-                aria-label="${questionId} score ${score}"
-                aria-pressed="false"
-            >
-                ${score}
-            </button>
-
-        `;
-
-    }
-
-
-    return html;
-
-}
-
-
-/* ============================================================
-   SCORE BUTTON STYLES
-   ============================================================ */
-
-function installScoreStyles() {
-
-    if (
-        document.getElementById(
-            'ctm-page01-score-styles'
-        )
-    ) {
-
-        return;
-
-    }
-
-
-    const style =
-        document.createElement(
-            'style'
-        );
-
-
-    style.id =
-        'ctm-page01-score-styles';
-
-
-    style.textContent = `
-
-        /* ---------------------------------------------
-           1–3 RED
-           --------------------------------------------- */
-
-        .score-button.score-low {
-            border-color:
-                rgba(214, 90, 69, 0.55) !important;
-
-            color:
-                #f5c1b7 !important;
-
-            background:
-                rgba(214, 90, 69, 0.08) !important;
-        }
-
-
-        .score-button.score-low:hover {
-            border-color:
-                #d65a45 !important;
-
-            color:
-                #ffffff !important;
-
-            background:
-                #d65a45 !important;
-        }
-
-
-        /* ---------------------------------------------
-           4–7 ORANGE
-           --------------------------------------------- */
-
-        .score-button.score-mid {
-            border-color:
-                rgba(232, 135, 36, 0.55) !important;
-
-            color:
-                #ffd19c !important;
-
-            background:
-                rgba(232, 135, 36, 0.08) !important;
-        }
-
-
-        .score-button.score-mid:hover {
-            border-color:
-                #e88724 !important;
-
-            color:
-                #ffffff !important;
-
-            background:
-                #e88724 !important;
-        }
-
-
-        /* ---------------------------------------------
-           8–10 GREEN
-           --------------------------------------------- */
-
-        .score-button.score-high {
-            border-color:
-                rgba(41, 196, 125, 0.55) !important;
-
-            color:
-                #a9f0ca !important;
-
-            background:
-                rgba(41, 196, 125, 0.08) !important;
-        }
-
-
-        .score-button.score-high:hover {
-            border-color:
-                #29c47d !important;
-
-            color:
-                #ffffff !important;
-
-            background:
-                #18a66a !important;
-        }
-
-
-        /* ---------------------------------------------
-           SELECTED RED
-           --------------------------------------------- */
-
-        .score-button.score-low.selected {
-            border-color:
-                #d65a45 !important;
-
-            background:
-                #d65a45 !important;
-
-            color:
-                #ffffff !important;
-
-            box-shadow:
-                0 8px 20px
-                rgba(214, 90, 69, 0.30) !important;
-        }
-
-
-        /* ---------------------------------------------
-           SELECTED ORANGE
-           --------------------------------------------- */
-
-        .score-button.score-mid.selected {
-            border-color:
-                #e88724 !important;
-
-            background:
-                #e88724 !important;
-
-            color:
-                #ffffff !important;
-
-            box-shadow:
-                0 8px 20px
-                rgba(232, 135, 36, 0.30) !important;
-        }
-
-
-        /* ---------------------------------------------
-           SELECTED GREEN
-           --------------------------------------------- */
-
-        .score-button.score-high.selected {
-            border-color:
-                #29c47d !important;
-
-            background:
-                #18a66a !important;
-
-            color:
-                #ffffff !important;
-
-            box-shadow:
-                0 8px 20px
-                rgba(41, 196, 125, 0.30) !important;
-        }
-
-
-        /* ---------------------------------------------
-           SCORE READOUT
-           --------------------------------------------- */
-
-        .selected-score.has-value {
-            opacity: 1;
-        }
-
-    `;
-
-
-    document.head.appendChild(
-        style
-    );
-
-}
-
-
-/* ============================================================
-   SCORE BUTTON EVENTS
-   ============================================================ */
-
-function attachScoreHandlers() {
-
-    document
-        .querySelectorAll(
-            '.score-button'
-        )
-        .forEach(
-            function(button) {
-
-                button.addEventListener(
-                    'click',
-                    handleScoreSelection
-                );
-
-            }
-        );
-
-}
-
-
-/* ============================================================
+/* ================================================================
    HANDLE SCORE SELECTION
-   ============================================================ */
+   ================================================================ */
 
-async function handleScoreSelection(
-    event
+function handleScoreSelection(
+    field,
+    button
 ) {
 
-    const button =
-        event.currentTarget;
-
-
-    if (!button) {
+    if (!field || !button) {
         return;
     }
-
-
-    const questionId =
-        button.dataset.questionId;
-
 
     const score =
         Number(
-            button.dataset.score
+            button.getAttribute('data-score')
         );
 
-
-    if (
-        !questionId ||
-        !Number.isFinite(score) ||
-        score < 1 ||
-        score > CONFIG.MAX_SCORE_PER_QUESTION
-    ) {
+    if (!isValidScore(score)) {
 
         console.error(
-            'Invalid Page 01 score selection:',
-            questionId,
-            score
+            '[CTM PATH™] Invalid score:',
+            score,
+            'for field:',
+            field
         );
 
         return;
 
     }
 
+    state.scores[field] = score;
 
-    /*
-     * -----------------------------------------
-     * 1. STORE ANSWER
-     * -----------------------------------------
-     */
-
-    answers[questionId] =
-        score;
-
-
-    /*
-     * -----------------------------------------
-     * 2. UPDATE BUTTON
-     * -----------------------------------------
-     */
-
-    updateSelectedButton(
-        questionId,
+    updateScoreButtons(
+        field,
         score
     );
 
-
-    /*
-     * -----------------------------------------
-     * 3. SAVE LOCALLY IMMEDIATELY
-     * -----------------------------------------
-     */
-
-    saveLocalAnswers();
-
-
-    /*
-     * -----------------------------------------
-     * 4. RECALCULATE SCORE IMMEDIATELY
-     * -----------------------------------------
-     *
-     * This MUST happen before any backend call.
-     */
-
-    updateScore();
-
-
-    /*
-     * -----------------------------------------
-     * 5. BACKEND SAVE
-     * -----------------------------------------
-     *
-     * Backend failure must never erase or
-     * interrupt the local assessment.
-     */
-
-    saveAnswerToBackend(
-        questionId,
+    updateSelectedScoreDisplay(
+        field,
         score
+    );
+
+    calculateAndRender();
+
+    saveScores();
+
+}
+
+
+/* ================================================================
+   VALIDATE SCORE
+   ================================================================ */
+
+function isValidScore(score) {
+
+    return (
+        Number.isInteger(score) &&
+        score >= PAGE01_CONFIG.MIN_SCORE &&
+        score <= PAGE01_CONFIG.MAX_SCORE
     );
 
 }
 
 
-/* ============================================================
-   UPDATE SELECTED BUTTON
-   ============================================================ */
+/* ================================================================
+   UPDATE SCORE BUTTONS
+   ================================================================ */
 
-function updateSelectedButton(
-    questionId,
-    score
+function updateScoreButtons(
+    field,
+    selectedScore
 ) {
 
-    const buttons =
-        document.querySelectorAll(
-            `.score-button[data-question-id="${questionId}"]`
+    const group =
+        document.querySelector(
+            '.score-options[data-field="' +
+            escapeAttribute(field) +
+            '"]'
         );
 
+    if (!group) {
+        return;
+    }
 
-    buttons.forEach(
-        function(button) {
+    const buttons =
+        Array.from(
+            group.querySelectorAll(
+                'button[data-score]'
+            )
+        );
 
-            const buttonScore =
-                Number(
-                    button.dataset.score
-                );
+    buttons.forEach(function (button) {
 
-
-            const selected =
-                buttonScore === score;
-
-
-            button.classList.toggle(
-                'selected',
-                selected
+        const buttonScore =
+            Number(
+                button.getAttribute('data-score')
             );
 
+        /*
+         * Remove ALL state classes first.
+         */
+        button.classList.remove(
+            'selected',
+            'score-low',
+            'score-medium',
+            'score-high',
+            'score-red',
+            'score-orange',
+            'score-green'
+        );
+
+        button.removeAttribute(
+            'aria-pressed'
+        );
+
+        /*
+         * Reset inline colour properties that
+         * may have been introduced by an older
+         * version of the JavaScript.
+         */
+        button.style.removeProperty(
+            'background-color'
+        );
+
+        button.style.removeProperty(
+            'border-color'
+        );
+
+        button.style.removeProperty(
+            'color'
+        );
+
+        /*
+         * Only the selected button gets
+         * the score colour.
+         */
+        if (
+            buttonScore === selectedScore
+        ) {
+
+            button.classList.add('selected');
+
+            applyScoreColour(
+                button,
+                selectedScore
+            );
 
             button.setAttribute(
                 'aria-pressed',
-                String(selected)
+                'true'
             );
 
+        } else {
 
-            /*
-             * Inline visual enforcement.
-             *
-             * This guarantees that an existing
-             * page stylesheet cannot turn the
-             * selected score back to gold/yellow.
-             */
-
-            if (selected) {
-
-                if (score <= 3) {
-
-                    button.style.setProperty(
-                        'background',
-                        '#d65a45',
-                        'important'
-                    );
-
-                    button.style.setProperty(
-                        'border-color',
-                        '#d65a45',
-                        'important'
-                    );
-
-                    button.style.setProperty(
-                        'color',
-                        '#ffffff',
-                        'important'
-                    );
-
-                }
-                else if (score <= 7) {
-
-                    button.style.setProperty(
-                        'background',
-                        '#e88724',
-                        'important'
-                    );
-
-                    button.style.setProperty(
-                        'border-color',
-                        '#e88724',
-                        'important'
-                    );
-
-                    button.style.setProperty(
-                        'color',
-                        '#ffffff',
-                        'important'
-                    );
-
-                }
-                else {
-
-                    button.style.setProperty(
-                        'background',
-                        '#18a66a',
-                        'important'
-                    );
-
-                    button.style.setProperty(
-                        'border-color',
-                        '#29c47d',
-                        'important'
-                    );
-
-                    button.style.setProperty(
-                        'color',
-                        '#ffffff',
-                        'important'
-                    );
-
-                }
-
-            }
-            else {
-
-                button.style.removeProperty(
-                    'background'
-                );
-
-                button.style.removeProperty(
-                    'border-color'
-                );
-
-                button.style.removeProperty(
-                    'color'
-                );
-
-            }
+            button.setAttribute(
+                'aria-pressed',
+                'false'
+            );
 
         }
-    );
+
+    });
+
+}
 
 
-    /*
-     * -----------------------------------------
-     * UPDATE READOUT
-     * -----------------------------------------
-     */
+/* ================================================================
+   APPLY SCORE COLOUR
+   ================================================================ */
 
-    const readout =
-        document.getElementById(
-            `selected-${questionId}`
-        );
+function applyScoreColour(
+    element,
+    score
+) {
 
-
-    if (readout) {
-
-        readout.textContent =
-            `உங்கள் மதிப்பீடு: ${score} / 10`;
-
-
-        readout.classList.add(
-            'has-value'
-        );
-
+    if (!element || !isValidScore(score)) {
+        return;
     }
 
-}
-
-
-/* ============================================================
-   RESTORE ALL SELECTED BUTTONS
-   ============================================================ */
-
-function updateAllSelectedStates() {
-
-    SELVAMS.forEach(
-        function(selvam) {
-
-            const score =
-                Number(
-                    answers[
-                        selvam.id
-                    ]
-                );
-
-
-            if (
-                Number.isFinite(score) &&
-                score >= 1 &&
-                score <= CONFIG.MAX_SCORE_PER_QUESTION
-            ) {
-
-                updateSelectedButton(
-                    selvam.id,
-                    score
-                );
-
-            }
-
-        }
-    );
-
-}
-
-
-/* ============================================================
-   CALCULATE SCORES
-   ============================================================ */
-
-function calculateScores() {
-
-    let rawTotal = 0;
-
-    let answeredCount = 0;
-
-
     /*
-     * Only the official 16 SELVAMS
-     * are included in the calculation.
+     * 1–3 = RED
      */
-
-    SELVAMS.forEach(
-        function(selvam) {
-
-            const value =
-                answers[
-                    selvam.id
-                ];
-
-
-            const score =
-                Number(value);
-
-
-            if (
-                Number.isFinite(score) &&
-                score >= 1 &&
-                score <= CONFIG.MAX_SCORE_PER_QUESTION
-            ) {
-
-                rawTotal += score;
-
-                answeredCount++;
-
-            }
-
-        }
-    );
-
-
-    /*
-     * Average is calculated from
-     * answered questions only.
-     */
-
-    const average =
-        answeredCount > 0
-            ? rawTotal / answeredCount
-            : 0;
-
-
-    /*
-     * Final Life Score:
-     *
-     * 16 questions × 10 = 160 maximum.
-     *
-     * 160 → 100
-     */
-
-    let normalized = 0;
-
-
     if (
-        answeredCount ===
-        CONFIG.TOTAL_QUESTIONS
+        score >= PAGE01_CONFIG.SCORE_RANGES.LOW.min &&
+        score <= PAGE01_CONFIG.SCORE_RANGES.LOW.max
     ) {
 
-        normalized =
-            Math.round(
-                (
-                    rawTotal /
-                    CONFIG.MAX_RAW_SCORE
-                ) *
-                CONFIG.MAX_NORMALIZED_SCORE
-            );
+        element.classList.add(
+            PAGE01_CONFIG.SCORE_RANGES.LOW.className
+        );
 
+        element.classList.add(
+            'score-red'
+        );
+
+        /*
+         * Inline fallback guarantees the
+         * requested colour even if the CSS
+         * does not yet contain the classes.
+         */
+        element.style.backgroundColor =
+            'rgba(190, 45, 45, 0.18)';
+
+        element.style.borderColor =
+            '#ef5350';
+
+        element.style.color =
+            '#ff6b6b';
+
+        return;
     }
 
 
-    return {
+    /*
+     * 4–7 = ORANGE
+     */
+    if (
+        score >= PAGE01_CONFIG.SCORE_RANGES.MID.min &&
+        score <= PAGE01_CONFIG.SCORE_RANGES.MID.max
+    ) {
 
-        answeredCount:
+        element.classList.add(
+            PAGE01_CONFIG.SCORE_RANGES.MID.className
+        );
 
-            answeredCount,
+        element.classList.add(
+            'score-orange'
+        );
 
-        rawTotal:
+        element.style.backgroundColor =
+            'rgba(230, 126, 34, 0.18)';
 
-            rawTotal,
+        element.style.borderColor =
+            '#f39c12';
 
-        average:
+        element.style.color =
+            '#ffb347';
 
-            average,
+        return;
+    }
 
-        normalized:
 
-            normalized
+    /*
+     * 8–10 = GREEN
+     */
+    if (
+        score >= PAGE01_CONFIG.SCORE_RANGES.HIGH.min &&
+        score <= PAGE01_CONFIG.SCORE_RANGES.HIGH.max
+    ) {
 
-    };
+        element.classList.add(
+            PAGE01_CONFIG.SCORE_RANGES.HIGH.className
+        );
+
+        element.classList.add(
+            'score-green'
+        );
+
+        element.style.backgroundColor =
+            'rgba(39, 174, 96, 0.18)';
+
+        element.style.borderColor =
+            '#2ecc71';
+
+        element.style.color =
+            '#4ade80';
+
+    }
 
 }
 
 
-/* ============================================================
-   UPDATE SCORE DISPLAY
-   ============================================================ */
+/* ================================================================
+   UPDATE SELECTED SCORE TEXT
+   ================================================================ */
 
-function updateScore() {
+function updateSelectedScoreDisplay(
+    field,
+    score
+) {
+
+    const target =
+        document.querySelector(
+            '[data-selected-score="' +
+            escapeAttribute(field) +
+            '"]'
+        );
+
+    if (!target) {
+
+        console.warn(
+            '[CTM PATH™] Selected-score element not found for:',
+            field
+        );
+
+        return;
+
+    }
+
+    target.textContent =
+        String(score);
+
+    /*
+     * Give the displayed score the same
+     * semantic colour as the selected button.
+     */
+    target.classList.remove(
+        'score-low',
+        'score-medium',
+        'score-high',
+        'score-red',
+        'score-orange',
+        'score-green'
+    );
+
+    target.style.removeProperty(
+        'color'
+    );
+
+    if (
+        score >= PAGE01_CONFIG.SCORE_RANGES.LOW.min &&
+        score <= PAGE01_CONFIG.SCORE_RANGES.LOW.max
+    ) {
+
+        target.classList.add(
+            'score-low',
+            'score-red'
+        );
+
+        target.style.color =
+            '#ff6b6b';
+
+    } else if (
+        score >= PAGE01_CONFIG.SCORE_RANGES.MID.min &&
+        score <= PAGE01_CONFIG.SCORE_RANGES.MID.max
+    ) {
+
+        target.classList.add(
+            'score-medium',
+            'score-orange'
+        );
+
+        target.style.color =
+            '#ffb347';
+
+    } else if (
+        score >= PAGE01_CONFIG.SCORE_RANGES.HIGH.min &&
+        score <= PAGE01_CONFIG.SCORE_RANGES.HIGH.max
+    ) {
+
+        target.classList.add(
+            'score-high',
+            'score-green'
+        );
+
+        target.style.color =
+            '#4ade80';
+
+    }
+
+}
+
+
+/* ================================================================
+   CALCULATE EVERYTHING
+   ================================================================ */
+
+function calculateAndRender() {
 
     const scores =
-        calculateScores();
+        SELVAMS.map(function (selvam) {
+
+            return state.scores[
+                selvam.field
+            ];
+
+        });
+
+
+    /*
+     * Only valid numerical scores count.
+     */
+    const answeredScores =
+        scores.filter(function (score) {
+
+            return isValidScore(score);
+
+        });
+
+
+    state.totalAnswered =
+        answeredScores.length;
 
 
     /*
      * RAW TOTAL
+     *
+     * Example:
+     * 16 answers of 10
+     * = 160
      */
+    state.rawTotal =
+        answeredScores.reduce(
+            function (total, score) {
 
-    if (DOM.rawTotal) {
+                return total + score;
 
-        DOM.rawTotal.textContent =
-            String(
-                scores.rawTotal
+            },
+            0
+        );
+
+
+    /*
+     * LIFE SCORE / 100
+     *
+     * We calculate from all 16 Selvams.
+     *
+     * If the assessment is incomplete,
+     * the score remains provisional.
+     */
+    if (
+        state.totalAnswered ===
+        PAGE01_CONFIG.TOTAL_SELVAMS
+    ) {
+
+        state.lifeScore =
+            roundToOneDecimal(
+                (
+                    state.rawTotal /
+                    PAGE01_CONFIG.RAW_MAX
+                ) *
+                PAGE01_CONFIG.LIFE_SCORE_MAX
             );
+
+
+        state.averageScore =
+            roundToOneDecimal(
+                state.rawTotal /
+                PAGE01_CONFIG.TOTAL_SELVAMS
+            );
+
+    } else {
+
+        /*
+         * Do not falsely calculate a final
+         * score from an incomplete assessment.
+         */
+        state.lifeScore = null;
+
+        state.averageScore = null;
+
+    }
+
+
+    renderSummary();
+
+    updateContinueState();
+
+}
+
+
+/* ================================================================
+   RENDER SUMMARY
+   ================================================================ */
+
+function renderSummary() {
+
+    /*
+     * LIFE SCORE /100
+     */
+    if (DOM.totalScore) {
+
+        if (state.lifeScore === null) {
+
+            DOM.totalScore.textContent =
+                '—';
+
+        } else {
+
+            DOM.totalScore.textContent =
+                formatScore(
+                    state.lifeScore
+                );
+
+        }
 
     }
 
 
     /*
-     * AVERAGE
+     * AVERAGE /10
      */
-
     if (DOM.averageScore) {
 
-        DOM.averageScore.textContent =
-            scores.average.toFixed(
-                1
-            );
+        if (state.averageScore === null) {
 
-    }
+            DOM.averageScore.textContent =
+                '—';
 
+        } else {
 
-    /*
-     * LIFE SCORE
-     */
-
-    if (DOM.normalizedScore) {
-
-        DOM.normalizedScore.textContent =
-            String(
-                scores.normalized
-            );
-
-    }
-
-
-    /*
-     * MESSAGE
-     */
-
-    updateScoreMessage(
-        scores
-    );
-
-
-    /*
-     * CONTINUE BUTTON
-     */
-
-    if (DOM.continueButton) {
-
-        DOM.continueButton.disabled =
-            scores.answeredCount !==
-            CONFIG.TOTAL_QUESTIONS;
-
-    }
-
-
-    /*
-     * DEBUG
-     *
-     * This makes browser-console verification
-     * very easy.
-     */
-
-    console.log(
-        'CTM PATH™ Page 01 Score:',
-        scores
-    );
-
-}
-
-
-/* ============================================================
-   SCORE MESSAGE
-   ============================================================ */
-
-function updateScoreMessage(
-    scores
-) {
-
-    if (!DOM.scoreMessage) {
-        return;
-    }
-
-
-    DOM.scoreMessage.className =
-        'score-message';
-
-
-    /*
-     * NOTHING ANSWERED
-     */
-
-    if (
-        scores.answeredCount === 0
-    ) {
-
-        DOM.scoreMessage.textContent =
-            'உங்கள் மதிப்பீடு இங்கே தோன்றும்.';
-
-        return;
-
-    }
-
-
-    /*
-     * PARTIALLY ANSWERED
-     */
-
-    if (
-        scores.answeredCount <
-        CONFIG.TOTAL_QUESTIONS
-    ) {
-
-        DOM.scoreMessage.textContent =
-            `${scores.answeredCount} / 16 மதிப்பீடுகள் முடிந்துள்ளன. மீதமுள்ளவற்றையும் மதிப்பிடுங்கள்.`;
-
-        return;
-
-    }
-
-
-    /*
-     * COMPLETE — LOW
-     */
-
-    if (
-        scores.normalized <= 39
-    ) {
-
-        DOM.scoreMessage.classList.add(
-            'score-low'
-        );
-
-
-        DOM.scoreMessage.textContent =
-            'இது உங்கள் வாழ்க்கையின் இறுதி தீர்ப்பு அல்ல. இது உங்கள் மாற்றத்தின் தொடக்கப் புள்ளி.';
-
-        return;
-
-    }
-
-
-    /*
-     * COMPLETE — DEVELOPING
-     */
-
-    if (
-        scores.normalized <= 69
-    ) {
-
-        DOM.scoreMessage.classList.add(
-            'score-mid'
-        );
-
-
-        DOM.scoreMessage.textContent =
-            'உங்கள் வாழ்க்கையின் பல பகுதிகளில் நல்ல அடித்தளம் உள்ளது. அடுத்த கட்ட வளர்ச்சிக்கான வாய்ப்புகளை இப்போது தெளிவாக பார்க்கலாம்.';
-
-        return;
-
-    }
-
-
-    /*
-     * COMPLETE — STRONG
-     */
-
-    DOM.scoreMessage.classList.add(
-        'score-high'
-    );
-
-
-    DOM.scoreMessage.textContent =
-        'உங்கள் வாழ்க்கையில் பல வலுவான பகுதிகள் உள்ளன. அவற்றை மேலும் ஆழப்படுத்தி சமநிலையுடன் வளர்த்துக் கொள்ளுங்கள்.';
-
-}
-
-
-/* ============================================================
-   LOCAL STORAGE — SAVE
-   ============================================================ */
-
-function saveLocalAnswers() {
-
-    try {
-
-        localStorage.setItem(
-            CONFIG.ANSWERS_STORAGE_KEY,
-            JSON.stringify(
-                answers
-            )
-        );
-
-    }
-    catch (error) {
-
-        console.error(
-            'CTM PATH™ Page 01 local save error:',
-            error
-        );
-
-    }
-
-}
-
-
-/* ============================================================
-   LOCAL STORAGE — RESTORE
-   ============================================================ */
-
-function restoreLocalAnswers() {
-
-    let stored = null;
-
-
-    try {
-
-        stored =
-            localStorage.getItem(
-                CONFIG.ANSWERS_STORAGE_KEY
-            );
-
-    }
-    catch (error) {
-
-        console.error(
-            'Unable to access Page 01 localStorage:',
-            error
-        );
-
-        return;
-
-    }
-
-
-    if (!stored) {
-        return;
-    }
-
-
-    try {
-
-        const saved =
-            JSON.parse(
-                stored
-            );
-
-
-        if (
-            !saved ||
-            typeof saved !== 'object'
-        ) {
-
-            return;
-
-        }
-
-
-        SELVAMS.forEach(
-            function(selvam) {
-
-                const score =
-                    Number(
-                        saved[
-                            selvam.id
-                        ]
-                    );
-
-
-                if (
-                    Number.isFinite(score) &&
-                    score >= 1 &&
-                    score <= CONFIG.MAX_SCORE_PER_QUESTION
-                ) {
-
-                    answers[
-                        selvam.id
-                    ] = score;
-
-                }
-
-            }
-        );
-
-
-        console.log(
-            'CTM PATH™ Page 01 restored answers:',
-            answers
-        );
-
-    }
-    catch (error) {
-
-        console.warn(
-            'Unable to restore Page 01 answers:',
-            error
-        );
-
-    }
-
-}
-
-
-/* ============================================================
-   VISITOR ID
-   ============================================================ */
-
-function getVisitorId() {
-
-    try {
-
-        return (
-            localStorage.getItem(
-                CONFIG.VISITOR_ID_KEY
-            ) ||
-            ''
-        ).trim();
-
-    }
-    catch (error) {
-
-        console.warn(
-            'Unable to read VisitorID:',
-            error
-        );
-
-        return '';
-
-    }
-
-}
-
-
-/* ============================================================
-   BACKEND SAVE
-   ============================================================ */
-
-async function saveAnswerToBackend(
-    questionId,
-    score
-) {
-
-    const visitorId =
-        getVisitorId();
-
-
-    /*
-     * No VisitorID?
-     *
-     * Do NOT block the assessment.
-     * Local assessment remains authoritative
-     * for the current browser session.
-     */
-
-    if (!visitorId) {
-
-        console.warn(
-            'CTM PATH™ Page 01: VisitorID not available. Local score retained.'
-        );
-
-        return;
-
-    }
-
-
-    const selvam =
-        SELVAMS.find(
-            function(item) {
-
-                return (
-                    item.id ===
-                    questionId
-                );
-
-            }
-        );
-
-
-    if (!selvam) {
-
-        console.warn(
-            'Unknown Page 01 question:',
-            questionId
-        );
-
-        return;
-
-    }
-
-
-    const payload = {
-
-        action:
-            'save_answer',
-
-        data: {
-
-            visitorId:
-
-                visitorId,
-
-            pageNumber:
-
-                CONFIG.PAGE_NUMBER,
-
-            questionId:
-
-                questionId,
-
-            question:
-
-                `${selvam.ta} — ${selvam.en}`,
-
-            answer:
-
-                score,
-
-            score:
-
-                score
-
-        }
-
-    };
-
-
-    try {
-
-        const response =
-            await fetch(
-                CONFIG.BACKEND_URL,
-                {
-
-                    method:
-                        'POST',
-
-                    headers: {
-
-                        'Content-Type':
-                            'text/plain;charset=utf-8'
-
-                    },
-
-                    body:
-                        JSON.stringify(
-                            payload
-                        )
-
-                }
-            );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                `Server error: ${response.status}`
-            );
-
-        }
-
-
-        const text =
-            await response.text();
-
-
-        if (!text) {
-
-            console.warn(
-                'Page 01 backend returned an empty response.'
-            );
-
-            return;
-
-        }
-
-
-        let result;
-
-
-        try {
-
-            result =
-                JSON.parse(
-                    text
+            DOM.averageScore.textContent =
+                formatScore(
+                    state.averageScore
                 );
 
         }
-        catch (error) {
-
-            console.warn(
-                'Page 01 backend response was not JSON:',
-                text
-            );
-
-            return;
-
-        }
-
-
-        if (
-            result &&
-            result.success === false
-        ) {
-
-            throw new Error(
-                result.message ||
-                'Unable to save assessment.'
-            );
-
-        }
-
-
-        /*
-         * Do not replace the score message with
-         * "saved" after every single click.
-         *
-         * The score display belongs to the assessment.
-         */
-
-        console.log(
-            'CTM PATH™ Page 01 backend saved:',
-            {
-                questionId:
-                    questionId,
-
-                score:
-                    score,
-
-                result:
-                    result
-            }
-        );
-
-    }
-    catch (error) {
-
-        /*
-         * IMPORTANT:
-         *
-         * Backend failure does NOT affect:
-         *
-         * 1. selected button
-         * 2. raw total
-         * 3. average
-         * 4. life score
-         * 5. localStorage
-         */
-
-        console.error(
-            'CTM PATH™ Page 01 backend save error:',
-            error
-        );
 
     }
 
 }
 
 
-/* ============================================================
-   CONTINUE HANDLER
-   ============================================================ */
+/* ================================================================
+   UPDATE CONTINUE BUTTON
+   ================================================================ */
 
-function attachContinueHandler() {
+function updateContinueState() {
 
     if (!DOM.continueButton) {
-
-        console.warn(
-            'CTM PATH™ Page 01: #continueButton not found.'
-        );
-
         return;
-
     }
+
+    const complete =
+        state.totalAnswered ===
+        PAGE01_CONFIG.TOTAL_SELVAMS;
 
 
     /*
-     * Prevent duplicate event handlers.
+     * We deliberately do NOT use disabled=true
+     * because the existing design may depend on
+     * the button remaining visually present.
      */
+    DOM.continueButton.setAttribute(
+        'aria-disabled',
+        complete ? 'false' : 'true'
+    );
 
-    if (
-        DOM.continueButton.dataset.page01Bound ===
-        'true'
-    ) {
+    if (complete) {
 
-        return;
+        DOM.continueButton.classList.remove(
+            'navigation-disabled'
+        );
+
+    } else {
+
+        DOM.continueButton.classList.add(
+            'navigation-disabled'
+        );
 
     }
-
-
-    DOM.continueButton.dataset.page01Bound =
-        'true';
-
-
-    DOM.continueButton.addEventListener(
-        'click',
-        handleContinue
-    );
 
 }
 
 
-/* ============================================================
-   CONTINUE TO PAGE 02
-   ============================================================ */
+/* ================================================================
+   NAVIGATION
+   ================================================================ */
 
-async function handleContinue() {
-
-    /*
-     * ALWAYS recalculate directly from
-     * the current answers.
-     */
-
-    const scores =
-        calculateScores();
-
-
-    console.log(
-        'CTM PATH™ Page 01 Continue:',
-        scores
-    );
-
+function bindNavigation() {
 
     /*
-     * REQUIRE ALL 16 ANSWERS
+     * BACK TO INDEX
      */
+    if (DOM.backButton) {
 
-    if (
-        scores.answeredCount !==
-        CONFIG.TOTAL_QUESTIONS
-    ) {
+        DOM.backButton.addEventListener(
+            'click',
+            function (event) {
 
-        setStatus(
-            `முதலில் 16 மதிப்பீடுகளையும் முடிக்கவும். ${scores.answeredCount} / 16 முடிந்துள்ளன.`,
-            'error'
+                event.preventDefault();
+
+                window.location.href = '/';
+
+            }
         );
-
-
-        /*
-         * Scroll to the first unanswered card.
-         */
-
-        scrollToFirstUnanswered();
-
-
-        return;
 
     }
 
 
     /*
-     * VISITOR ID
-     *
-     * We retain the existing requirement for
-     * progression, but do not require VisitorID
-     * for score calculation.
+     * CONTINUE TO PAGE 02
      */
-
-    const visitorId =
-        getVisitorId();
-
-
-    if (!visitorId) {
-
-        setStatus(
-            'VisitorID கிடைக்கவில்லை. Index பக்கத்திலிருந்து பயணத்தைத் தொடங்கவும்.',
-            'error'
-        );
-
-        return;
-
-    }
-
-
-    /*
-     * DISABLE CONTINUE
-     */
-
     if (DOM.continueButton) {
 
-        DOM.continueButton.disabled =
-            true;
+        DOM.continueButton.addEventListener(
+            'click',
+            function (event) {
 
-    }
+                event.preventDefault();
 
+                if (
+                    state.totalAnswered !==
+                    PAGE01_CONFIG.TOTAL_SELVAMS
+                ) {
 
-    setStatus(
-        'உங்கள் மதிப்பெண் பாதுகாக்கப்படுகிறது...',
-        'loading'
-    );
+                    showIncompleteMessage();
 
+                    scrollToFirstUnanswered();
 
-    /*
-     * SAVE ANSWERS LOCALLY
-     */
+                    return;
 
-    saveLocalAnswers();
-
-
-    /*
-     * CREATE PAGE 01 SUMMARY
-     */
-
-    const page01Summary = {
-
-        visitorId:
-
-            visitorId,
-
-        pageNumber:
-
-            CONFIG.PAGE_NUMBER,
-
-        rawTotal:
-
-            scores.rawTotal,
-
-        average:
-
-            Number(
-                scores.average.toFixed(
-                    1
-                )
-            ),
-
-        normalizedScore:
-
-            scores.normalized,
-
-        answeredCount:
-
-            scores.answeredCount,
-
-        completed:
-
-            true,
-
-        completedAt:
-
-            new Date().toISOString()
-
-    };
+                }
 
 
-    /*
-     * SAVE SUMMARY LOCALLY
-     */
+                /*
+                 * Save one final time before
+                 * leaving Page 01.
+                 */
+                saveScores();
 
-    try {
 
-        localStorage.setItem(
-            CONFIG.SUMMARY_STORAGE_KEY,
-            JSON.stringify(
-                page01Summary
-            )
+                /*
+                 * Make the final assessment
+                 * object available to Page 02
+                 * through sessionStorage.
+                 */
+                saveFinalAssessment();
+
+
+                /*
+                 * Navigate to Page 02.
+                 */
+                window.location.href =
+                    '/02';
+
+            }
         );
 
     }
-    catch (error) {
-
-        console.error(
-            'Unable to save Page 01 summary:',
-            error
-        );
-
-    }
-
-
-    /*
-     * FINAL STATUS
-     */
-
-    setStatus(
-        '✓ மதிப்பீடு முடிந்தது / Assessment complete',
-        'success'
-    );
-
-
-    /*
-     * SHORT DELAY FOR USER FEEDBACK
-     *
-     * Then navigate to Page 02.
-     */
-
-    setTimeout(
-        function() {
-
-            window.location.href =
-                CONFIG.NEXT_PAGE;
-
-        },
-        450
-    );
 
 }
 
 
-/* ============================================================
-   SCROLL TO FIRST UNANSWERED QUESTION
-   ============================================================ */
+/* ================================================================
+   INCOMPLETE MESSAGE
+   ================================================================ */
+
+function showIncompleteMessage() {
+
+    const remaining =
+        PAGE01_CONFIG.TOTAL_SELVAMS -
+        state.totalAnswered;
+
+
+    const message =
+        remaining === 1
+            ? 'Please complete the remaining Selvam before continuing.'
+            : 'Please complete all 16 Selvams before continuing.';
+
+
+    /*
+     * Use a simple browser alert rather than
+     * creating another UI dependency.
+     */
+    window.alert(message);
+
+}
+
+
+/* ================================================================
+   SCROLL TO FIRST UNANSWERED
+   ================================================================ */
 
 function scrollToFirstUnanswered() {
 
-    const unanswered =
-        SELVAMS.find(
-            function(selvam) {
+    const firstUnanswered =
+        SELVAMS.find(function (selvam) {
 
-                const score =
-                    Number(
-                        answers[
-                            selvam.id
-                        ]
-                    );
+            return !isValidScore(
+                state.scores[selvam.field]
+            );
+
+        });
 
 
-                return !(
-                    Number.isFinite(score) &&
-                    score >= 1 &&
-                    score <= CONFIG.MAX_SCORE_PER_QUESTION
-                );
-
-            }
-        );
-
-
-    if (!unanswered) {
+    if (!firstUnanswered) {
         return;
     }
 
 
     const card =
         document.querySelector(
-            `.selvam-card[data-question-id="${unanswered.id}"]`
+            '.selvam-card[data-field="' +
+            escapeAttribute(firstUnanswered.field) +
+            '"]'
         );
 
 
-    if (!card) {
+    /*
+     * Some versions of the HTML place
+     * data-field only on the article,
+     * while others place it on the
+     * score-options container.
+     *
+     * Therefore use a second lookup.
+     */
+    const fallbackCard =
+        card ||
+        document.querySelector(
+            '.selvam-card:has(.score-options[data-field="' +
+            escapeAttribute(firstUnanswered.field) +
+            '"])'
+        );
+
+
+    const target =
+        fallbackCard ||
+        document.querySelector(
+            '.score-options[data-field="' +
+            escapeAttribute(firstUnanswered.field) +
+            '"]'
+        );
+
+
+    if (!target) {
         return;
     }
 
 
-    card.scrollIntoView(
-        {
-            behavior:
-                'smooth',
+    target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+    });
 
-            block:
-                'center'
+}
+
+
+/* ================================================================
+   SAVE SCORES
+   ================================================================ */
+
+function saveScores() {
+
+    const payload =
+        buildAssessmentPayload();
+
+
+    try {
+
+        localStorage.setItem(
+            PAGE01_CONFIG.STORAGE_KEY,
+            JSON.stringify(payload)
+        );
+
+    } catch (error) {
+
+        console.error(
+            '[CTM PATH™] Unable to save Page 01 scores:',
+            error
+        );
+
+    }
+
+
+    /*
+     * Also keep the current assessment in
+     * sessionStorage so the next page can
+     * access it during the current journey.
+     */
+    try {
+
+        sessionStorage.setItem(
+            PAGE01_CONFIG.STORAGE_KEY,
+            JSON.stringify(payload)
+        );
+
+    } catch (error) {
+
+        console.warn(
+            '[CTM PATH™] Unable to save Page 01 session data:',
+            error
+        );
+
+    }
+
+
+    /*
+     * Expose the latest payload globally.
+     * This gives later scripts a clean interface
+     * without forcing them to inspect the DOM.
+     */
+    window.CTMPathPage01 =
+        payload;
+
+}
+
+
+/* ================================================================
+   SAVE FINAL ASSESSMENT
+   ================================================================ */
+
+function saveFinalAssessment() {
+
+    const payload =
+        buildAssessmentPayload();
+
+
+    payload.completed =
+        state.totalAnswered ===
+        PAGE01_CONFIG.TOTAL_SELVAMS;
+
+
+    payload.completedAt =
+        new Date().toISOString();
+
+
+    try {
+
+        sessionStorage.setItem(
+            'ctm_path_page01_final',
+            JSON.stringify(payload)
+        );
+
+        localStorage.setItem(
+            'ctm_path_page01_final',
+            JSON.stringify(payload)
+        );
+
+    } catch (error) {
+
+        console.error(
+            '[CTM PATH™] Unable to save final Page 01 assessment:',
+            error
+        );
+
+    }
+
+
+    window.CTMPathPage01Final =
+        payload;
+
+}
+
+
+/* ================================================================
+   BUILD ASSESSMENT PAYLOAD
+   ================================================================ */
+
+function buildAssessmentPayload() {
+
+    const individualScores = {};
+
+
+    SELVAMS.forEach(function (selvam) {
+
+        individualScores[
+            selvam.field
+        ] =
+            isValidScore(
+                state.scores[selvam.field]
+            )
+                ? state.scores[selvam.field]
+                : null;
+
+    });
+
+
+    return {
+
+        page: PAGE01_CONFIG.PAGE_NUMBER,
+
+        assessment: '16 Selwams of a Fulfilled Life',
+
+        totalSelvams:
+            PAGE01_CONFIG.TOTAL_SELVAMS,
+
+        answered:
+            state.totalAnswered,
+
+        complete:
+            state.totalAnswered ===
+            PAGE01_CONFIG.TOTAL_SELVAMS,
+
+        rawTotal:
+            state.rawTotal,
+
+        rawMaximum:
+            PAGE01_CONFIG.RAW_MAX,
+
+        lifeScore:
+            state.lifeScore,
+
+        lifeScoreMaximum:
+            PAGE01_CONFIG.LIFE_SCORE_MAX,
+
+        averageScore:
+            state.averageScore,
+
+        averageMaximum:
+            PAGE01_CONFIG.AVERAGE_MAX,
+
+        scores:
+            individualScores,
+
+        timestamp:
+            new Date().toISOString()
+
+    };
+
+}
+
+
+/* ================================================================
+   RESTORE SAVED SCORES
+   ================================================================ */
+
+function restoreSavedScores() {
+
+    let savedData = null;
+
+
+    /*
+     * Try localStorage first.
+     */
+    try {
+
+        const raw =
+            localStorage.getItem(
+                PAGE01_CONFIG.STORAGE_KEY
+            );
+
+        if (raw) {
+
+            savedData =
+                JSON.parse(raw);
+
         }
+
+    } catch (error) {
+
+        console.warn(
+            '[CTM PATH™] Could not read saved Page 01 scores:',
+            error
+        );
+
+    }
+
+
+    /*
+     * If localStorage has nothing useful,
+     * try sessionStorage.
+     */
+    if (
+        !savedData ||
+        !savedData.scores
+    ) {
+
+        try {
+
+            const raw =
+                sessionStorage.getItem(
+                    PAGE01_CONFIG.STORAGE_KEY
+                );
+
+            if (raw) {
+
+                savedData =
+                    JSON.parse(raw);
+
+            }
+
+        } catch (error) {
+
+            console.warn(
+                '[CTM PATH™] Could not read Page 01 session scores:',
+                error
+            );
+
+        }
+
+    }
+
+
+    if (
+        !savedData ||
+        !savedData.scores
+    ) {
+
+        return;
+
+    }
+
+
+    SELVAMS.forEach(function (selvam) {
+
+        const savedScore =
+            Number(
+                savedData.scores[
+                    selvam.field
+                ]
+            );
+
+
+        if (
+            isValidScore(savedScore)
+        ) {
+
+            state.scores[
+                selvam.field
+            ] =
+                savedScore;
+
+
+            updateScoreButtons(
+                selvam.field,
+                savedScore
+            );
+
+
+            updateSelectedScoreDisplay(
+                selvam.field,
+                savedScore
+            );
+
+        }
+
+    });
+
+
+    console.log(
+        '[CTM PATH™] Previous Page 01 scores restored.'
     );
 
 }
 
 
-/* ============================================================
-   STATUS
-   ============================================================ */
+/* ================================================================
+   PUBLIC API
+   ================================================================ */
 
-function setStatus(
-    message,
-    type
-) {
+window.CTMPathPage01API = {
 
-    if (!DOM.pageStatus) {
-        return;
+    /*
+     * Get the current scores.
+     */
+    getScores: function () {
+
+        return {
+            ...state.scores
+        };
+
+    },
+
+
+    /*
+     * Get the current calculations.
+     */
+    getResults: function () {
+
+        return {
+
+            answered:
+                state.totalAnswered,
+
+            rawTotal:
+                state.rawTotal,
+
+            rawMaximum:
+                PAGE01_CONFIG.RAW_MAX,
+
+            lifeScore:
+                state.lifeScore,
+
+            averageScore:
+                state.averageScore,
+
+            complete:
+                state.totalAnswered ===
+                PAGE01_CONFIG.TOTAL_SELVAMS
+
+        };
+
+    },
+
+
+    /*
+     * Get the complete assessment object.
+     */
+    getAssessment: function () {
+
+        return buildAssessmentPayload();
+
+    },
+
+
+    /*
+     * Force a save.
+     */
+    save: function () {
+
+        saveScores();
+
+        return buildAssessmentPayload();
+
+    },
+
+
+    /*
+     * Clear Page 01.
+     */
+    clear: function () {
+
+        clearAssessment();
+
     }
 
-
-    DOM.pageStatus.textContent =
-        message;
+};
 
 
-    DOM.pageStatus.className =
-        'page-status';
+/* ================================================================
+   CLEAR ASSESSMENT
+   ================================================================ */
+
+function clearAssessment() {
+
+    SELVAMS.forEach(function (selvam) {
+
+        state.scores[
+            selvam.field
+        ] = null;
 
 
-    if (type) {
+        updateScoreButtons(
+            selvam.field,
+            null
+        );
 
-        DOM.pageStatus.classList.add(
-            type
+
+        const target =
+            document.querySelector(
+                '[data-selected-score="' +
+                escapeAttribute(
+                    selvam.field
+                ) +
+                '"]'
+            );
+
+
+        if (target) {
+
+            target.textContent =
+                '—';
+
+            target.classList.remove(
+                'score-low',
+                'score-medium',
+                'score-high',
+                'score-red',
+                'score-orange',
+                'score-green'
+            );
+
+            target.style.removeProperty(
+                'color'
+            );
+
+        }
+
+    });
+
+
+    state.totalAnswered = 0;
+
+    state.rawTotal = 0;
+
+    state.lifeScore = null;
+
+    state.averageScore = null;
+
+
+    try {
+
+        localStorage.removeItem(
+            PAGE01_CONFIG.STORAGE_KEY
+        );
+
+        localStorage.removeItem(
+            'ctm_path_page01_final'
+        );
+
+    } catch (error) {
+
+        console.warn(
+            '[CTM PATH™] Could not clear localStorage:',
+            error
         );
 
     }
 
+
+    try {
+
+        sessionStorage.removeItem(
+            PAGE01_CONFIG.STORAGE_KEY
+        );
+
+        sessionStorage.removeItem(
+            'ctm_path_page01_final'
+        );
+
+    } catch (error) {
+
+        console.warn(
+            '[CTM PATH™] Could not clear sessionStorage:',
+            error
+        );
+
+    }
+
+
+    calculateAndRender();
+
 }
+
+
+/* ================================================================
+   UTILITY — ROUND TO ONE DECIMAL
+   ================================================================ */
+
+function roundToOneDecimal(value) {
+
+    if (!Number.isFinite(value)) {
+        return null;
+    }
+
+    return Math.round(
+        (value + Number.EPSILON) * 10
+    ) / 10;
+
+}
+
+
+/* ================================================================
+   UTILITY — FORMAT SCORE
+   ================================================================ */
+
+function formatScore(value) {
+
+    if (!Number.isFinite(value)) {
+        return '—';
+    }
+
+
+    /*
+     * Keep whole numbers clean:
+     *
+     * 80 → "80"
+     * 8  → "8"
+     *
+     * Decimal values:
+     *
+     * 81.3 → "81.3"
+     * 7.6  → "7.6"
+     */
+    if (
+        Number.isInteger(value)
+    ) {
+
+        return String(value);
+
+    }
+
+
+    return value.toFixed(1);
+
+}
+
+
+/* ================================================================
+   UTILITY — ESCAPE ATTRIBUTE
+   ================================================================ */
+
+function escapeAttribute(value) {
+
+    if (
+        window.CSS &&
+        typeof window.CSS.escape === 'function'
+    ) {
+
+        return window.CSS.escape(
+            String(value)
+        );
+
+    }
+
+
+    /*
+     * Safe fallback for the known field
+     * names used by this page.
+     */
+    return String(value)
+        .replace(
+            /\\/g,
+            '\\\\'
+        )
+        .replace(
+            /"/g,
+            '\\"'
+        );
+
+}
+
+
+/* ================================================================
+   DEBUG INFORMATION
+   ================================================================ */
+
+window.addEventListener(
+    'error',
+    function (event) {
+
+        /*
+         * Keep unexpected JavaScript errors
+         * visible in the console so debugging
+         * Page 01 does not become guesswork.
+         */
+        console.error(
+            '[CTM PATH™] Page 01 JavaScript error:',
+            event.error || event.message
+        );
+
+    }
+);
+
+
+/* ================================================================
+   DEVELOPMENT CONSOLE HELPER
+   ================================================================ */
+
+console.log(
+    '[CTM PATH™] Page 01 scoring engine loaded.'
+);
+
+console.log(
+    '[CTM PATH™] Scoring:',
+    '1–3 RED | 4–7 ORANGE | 8–10 GREEN'
+);
+
+console.log(
+    '[CTM PATH™] Calculation:',
+    'Raw Total / 160 × 100 = Life Score / 100'
+);
+
+console.log(
+    '[CTM PATH™] Calculation:',
+    'Raw Total / 16 = Average / 10'
+);
