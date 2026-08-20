@@ -1,27 +1,7 @@
 
 /* ============================================================
    CTM PATH™ MILLIONAIRES™
-   GUIDED JOURNEY™
-
-   FILE:
-   js/page01.js
-
-   PAGE:
-   01 / 16
-
-   PURPOSE:
-   16 Selvam assessment
-
-   SCORING:
-   Individual score = 1–10
-   Raw total        = /160
-   Normalized score = /100
-   Average          = /10
-
-   COLOUR SCALE:
-   1–3  = RED
-   4–7  = ORANGE
-   8–10 = GREEN
+   PAGE 01 — JAVASCRIPT
    ============================================================ */
 
 
@@ -34,20 +14,17 @@ const CONFIG = {
     BACKEND_URL:
         'https://script.google.com/macros/s/AKfycbx9eJru7EJYUpReeLv4Sym9wDVLgE_ruSw_ZUJ4ycDoneUKlkI_fcsJ2UJmKM7W_PXtEg/exec',
 
-    PAGE_NUMBER:
-        1,
+    PAGE_NUMBER: 1,
 
-    NEXT_PAGE:
-        'page02.html',
+    NEXT_PAGE: 'page02.html',
 
-    TOTAL_QUESTIONS:
-        16
+    TOTAL_QUESTIONS: 16
 
 };
 
 
 /* ============================================================
-   SELVAM DATA
+   SELVAMS
    ============================================================ */
 
 const SELVAMS = [
@@ -243,39 +220,25 @@ const answers = {};
    ============================================================ */
 
 const selvamGrid =
-    document.getElementById(
-        'selvamGrid'
-    );
+    document.getElementById('selvamGrid');
 
 const normalizedScoreElement =
-    document.getElementById(
-        'normalizedScore'
-    );
+    document.getElementById('normalizedScore');
 
 const rawTotalElement =
-    document.getElementById(
-        'rawTotal'
-    );
+    document.getElementById('rawTotal');
 
 const averageScoreElement =
-    document.getElementById(
-        'averageScore'
-    );
+    document.getElementById('averageScore');
 
 const scoreMessageElement =
-    document.getElementById(
-        'scoreMessage'
-    );
+    document.getElementById('scoreMessage');
 
 const continueButton =
-    document.getElementById(
-        'continueButton'
-    );
+    document.getElementById('continueButton');
 
 const pageStatus =
-    document.getElementById(
-        'pageStatus'
-    );
+    document.getElementById('pageStatus');
 
 
 /* ============================================================
@@ -300,7 +263,7 @@ function initializePage() {
 
 
 /* ============================================================
-   RENDER SELVAMS
+   RENDER
    ============================================================ */
 
 function renderSelvams() {
@@ -315,21 +278,13 @@ function renderSelvams() {
         function(selvam) {
 
             const card =
-                document.createElement(
-                    'article'
-                );
+                document.createElement('article');
 
             card.className =
                 'selvam-card';
 
             card.dataset.questionId =
                 selvam.id;
-
-
-            const buttons =
-                createScoreButtons(
-                    selvam.id
-                );
 
 
             card.innerHTML = `
@@ -366,7 +321,9 @@ function renderSelvams() {
 
 
                 <div class="score-buttons">
-                    ${buttons}
+
+                    ${createScoreButtons(selvam.id)}
+
                 </div>
 
 
@@ -380,9 +337,7 @@ function renderSelvams() {
             `;
 
 
-            selvamGrid.appendChild(
-                card
-            );
+            selvamGrid.appendChild(card);
 
         }
     );
@@ -426,38 +381,31 @@ function createScoreButtons(
     }
 
     return html;
+
 }
 
 
 /* ============================================================
-   SCORE HANDLERS
+   SCORE EVENTS
    ============================================================ */
 
 function attachScoreHandlers() {
 
-    const buttons =
-        document.querySelectorAll(
-            '.score-button'
+    document
+        .querySelectorAll('.score-button')
+        .forEach(
+            function(button) {
+
+                button.addEventListener(
+                    'click',
+                    handleScoreSelection
+                );
+
+            }
         );
-
-
-    buttons.forEach(
-        function(button) {
-
-            button.addEventListener(
-                'click',
-                handleScoreSelection
-            );
-
-        }
-    );
 
 }
 
-
-/* ============================================================
-   SELECT SCORE
-   ============================================================ */
 
 async function handleScoreSelection(
     event
@@ -475,23 +423,9 @@ async function handleScoreSelection(
         );
 
 
-    if (
-        !questionId ||
-        !score
-    ) {
-
-        return;
-
-    }
-
-
     answers[questionId] =
         score;
 
-
-    /* --------------------------------------------------------
-       UI
-       -------------------------------------------------------- */
 
     updateSelectedButton(
         questionId,
@@ -501,13 +435,7 @@ async function handleScoreSelection(
 
     updateScore();
 
-
     saveLocalAnswers();
-
-
-    /* --------------------------------------------------------
-       BACKEND
-       -------------------------------------------------------- */
 
     await saveAnswerToBackend(
         questionId,
@@ -518,7 +446,7 @@ async function handleScoreSelection(
 
 
 /* ============================================================
-   UPDATE SELECTED BUTTON
+   SELECTED BUTTON
    ============================================================ */
 
 function updateSelectedButton(
@@ -526,28 +454,22 @@ function updateSelectedButton(
     score
 ) {
 
-    const buttons =
-        document.querySelectorAll(
+    document
+        .querySelectorAll(
             `.score-button[data-question-id="${questionId}"]`
-        );
+        )
+        .forEach(
+            function(button) {
 
-
-    buttons.forEach(
-        function(button) {
-
-            const buttonScore =
-                Number(
-                    button.dataset.score
+                button.classList.toggle(
+                    'selected',
+                    Number(
+                        button.dataset.score
+                    ) === score
                 );
 
-
-            button.classList.toggle(
-                'selected',
-                buttonScore === score
-            );
-
-        }
-    );
+            }
+        );
 
 
     const readout =
@@ -577,9 +499,7 @@ function updateSelectedButton(
 function calculateScores() {
 
     const values =
-        Object.values(
-            answers
-        );
+        Object.values(answers);
 
 
     const rawTotal =
@@ -600,45 +520,27 @@ function calculateScores() {
 
     const average =
         answeredCount > 0
-            ? rawTotal /
-              answeredCount
+            ? rawTotal / answeredCount
             : 0;
 
-
-    /*
-     * Normalized score:
-     *
-     * 160 raw marks = 100
-     *
-     * Therefore:
-     *
-     * rawTotal / 160 × 100
-     */
 
     const normalized =
         rawTotal > 0
             ? Math.round(
-                (
-                    rawTotal /
-                    160
-                ) * 100
+                (rawTotal / 160) * 100
             )
             : 0;
 
 
     return {
 
-        answeredCount:
-            answeredCount,
+        answeredCount,
 
-        rawTotal:
-            rawTotal,
+        rawTotal,
 
-        average:
-            average,
+        average,
 
-        normalized:
-            normalized
+        normalized
 
     };
 
@@ -646,7 +548,7 @@ function calculateScores() {
 
 
 /* ============================================================
-   UPDATE SCORE DISPLAY
+   SCORE DISPLAY
    ============================================================ */
 
 function updateScore() {
@@ -667,9 +569,7 @@ function updateScore() {
         scores.normalized;
 
 
-    updateScoreMessage(
-        scores
-    );
+    updateScoreMessage(scores);
 
 
     continueButton.disabled =
@@ -759,7 +659,7 @@ function updateScoreMessage(
 
 
 /* ============================================================
-   SAVE ANSWER TO BACKEND
+   BACKEND SAVE
    ============================================================ */
 
 async function saveAnswerToBackend(
@@ -787,8 +687,7 @@ async function saveAnswerToBackend(
         SELVAMS.find(
             function(item) {
 
-                return item.id ===
-                    questionId;
+                return item.id === questionId;
 
             }
         );
@@ -801,28 +700,23 @@ async function saveAnswerToBackend(
 
     const payload = {
 
-        action:
-            'save_answer',
+        action: 'save_answer',
 
         data: {
 
-            visitorId:
-                visitorId,
+            visitorId,
 
             pageNumber:
                 CONFIG.PAGE_NUMBER,
 
-            questionId:
-                questionId,
+            questionId,
 
             question:
                 `${selvam.ta} — ${selvam.en}`,
 
-            answer:
-                score,
+            answer: score,
 
-            score:
-                score
+            score: score
 
         }
 
@@ -842,8 +736,7 @@ async function saveAnswerToBackend(
                 CONFIG.BACKEND_URL,
                 {
 
-                    method:
-                        'POST',
+                    method: 'POST',
 
                     headers: {
 
@@ -876,18 +769,13 @@ async function saveAnswerToBackend(
 
         let result;
 
-
         try {
 
             result =
-                JSON.parse(
-                    text
-                );
+                JSON.parse(text);
 
         }
-        catch (
-            parseError
-        ) {
+        catch (error) {
 
             throw new Error(
                 'The server returned an invalid response.'
@@ -915,9 +803,7 @@ async function saveAnswerToBackend(
         );
 
     }
-    catch (
-        error
-    ) {
+    catch (error) {
 
         console.error(
             'CTM PATH™ Page 01 save error:',
@@ -936,7 +822,7 @@ async function saveAnswerToBackend(
 
 
 /* ============================================================
-   CONTINUE
+   CONTINUE TO PAGE 02
    ============================================================ */
 
 continueButton.addEventListener(
@@ -987,7 +873,7 @@ async function handleContinue() {
 
 
     setStatus(
-        'உங்கள் மதிப்பெண் பாதுகாக்கப்படுகிறது... Saving your final Page 01 score...',
+        'உங்கள் மதிப்பெண் பாதுகாக்கப்படுகிறது...',
         'loading'
     );
 
@@ -995,18 +881,9 @@ async function handleContinue() {
     saveLocalAnswers();
 
 
-    /*
-     * The individual answers have already been sent
-     * to the backend.
-     *
-     * Store the Page 01 summary locally as well,
-     * so Page 02 and subsequent pages can access it.
-     */
-
     const page01Summary = {
 
-        visitorId:
-            visitorId,
+        visitorId,
 
         pageNumber:
             CONFIG.PAGE_NUMBER,
@@ -1022,8 +899,7 @@ async function handleContinue() {
         normalizedScore:
             scores.normalized,
 
-        completed:
-            true,
+        completed: true,
 
         completedAt:
             new Date().toISOString()
@@ -1038,11 +914,6 @@ async function handleContinue() {
         )
     );
 
-
-    /*
-     * Give the final backend answer writes
-     * a short moment to settle before navigation.
-     */
 
     setTimeout(
         function() {
@@ -1065,9 +936,7 @@ function saveLocalAnswers() {
 
     localStorage.setItem(
         'ctmPage01Answers',
-        JSON.stringify(
-            answers
-        )
+        JSON.stringify(answers)
     );
 
 }
@@ -1089,59 +958,41 @@ function restoreLocalAnswers() {
     try {
 
         const saved =
-            JSON.parse(
-                stored
-            );
+            JSON.parse(stored);
 
 
-        if (
-            !saved ||
-            typeof saved !==
-            'object'
-        ) {
+        Object.keys(saved)
+            .forEach(
+                function(questionId) {
 
-            return;
+                    const score =
+                        Number(
+                            saved[questionId]
+                        );
 
-        }
 
+                    if (
+                        score >= 1 &&
+                        score <= 10
+                    ) {
 
-        Object.keys(
-            saved
-        ).forEach(
-            function(questionId) {
-
-                const score =
-                    Number(
-                        saved[
+                        answers[
                             questionId
-                        ]
-                    );
+                        ] = score;
 
 
-                if (
-                    score >= 1 &&
-                    score <= 10
-                ) {
+                        updateSelectedButton(
+                            questionId,
+                            score
+                        );
 
-                    answers[
-                        questionId
-                    ] =
-                        score;
-
-                    updateSelectedButton(
-                        questionId,
-                        score
-                    );
+                    }
 
                 }
-
-            }
-        );
+            );
 
     }
-    catch (
-        error
-    ) {
+    catch (error) {
 
         console.warn(
             'Unable to restore Page 01 answers:',
@@ -1183,14 +1034,6 @@ function setStatus(
 
     pageStatus.className =
         'page-status ' +
-        (
-            type ||
-            ''
-        );
+        (type || '');
 
 }
-
-
-/* ============================================================
-   END
-   ============================================================ */
