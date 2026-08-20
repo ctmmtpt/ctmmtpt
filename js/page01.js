@@ -16,7 +16,17 @@ const CONFIG = {
 
     PAGE_NUMBER: 1,
 
-    NEXT_PAGE: 'page02.html',
+    /*
+     * Clean Cloudflare Pages route.
+     * Page 01 must open as:
+     *
+     * https://ctmmtpt.pages.dev/02
+     *
+     * NOT:
+     *
+     * /html/page02.html
+     */
+    NEXT_PAGE: '/02',
 
     TOTAL_QUESTIONS: 16
 
@@ -524,6 +534,12 @@ function calculateScores() {
             : 0;
 
 
+    /*
+     * 16 questions × 10 marks = 160 raw maximum.
+     *
+     * Convert the raw score to a 100-point score.
+     */
+
     const normalized =
         rawTotal > 0
             ? Math.round(
@@ -557,24 +573,40 @@ function updateScore() {
         calculateScores();
 
 
-    rawTotalElement.textContent =
-        scores.rawTotal;
+    if (rawTotalElement) {
+
+        rawTotalElement.textContent =
+            scores.rawTotal;
+
+    }
 
 
-    averageScoreElement.textContent =
-        scores.average.toFixed(1);
+    if (averageScoreElement) {
+
+        averageScoreElement.textContent =
+            scores.average.toFixed(1);
+
+    }
 
 
-    normalizedScoreElement.textContent =
-        scores.normalized;
+    if (normalizedScoreElement) {
+
+        normalizedScoreElement.textContent =
+            scores.normalized;
+
+    }
 
 
     updateScoreMessage(scores);
 
 
-    continueButton.disabled =
-        scores.answeredCount !==
-        CONFIG.TOTAL_QUESTIONS;
+    if (continueButton) {
+
+        continueButton.disabled =
+            scores.answeredCount !==
+            CONFIG.TOTAL_QUESTIONS;
+
+    }
 
 }
 
@@ -586,6 +618,11 @@ function updateScore() {
 function updateScoreMessage(
     scores
 ) {
+
+    if (!scoreMessageElement) {
+        return;
+    }
+
 
     scoreMessageElement.className =
         'score-message';
@@ -769,6 +806,7 @@ async function saveAnswerToBackend(
 
         let result;
 
+
         try {
 
             result =
@@ -825,10 +863,14 @@ async function saveAnswerToBackend(
    CONTINUE TO PAGE 02
    ============================================================ */
 
-continueButton.addEventListener(
-    'click',
-    handleContinue
-);
+if (continueButton) {
+
+    continueButton.addEventListener(
+        'click',
+        handleContinue
+    );
+
+}
 
 
 async function handleContinue() {
@@ -914,6 +956,20 @@ async function handleContinue() {
         )
     );
 
+
+    /*
+     * --------------------------------------------------------
+     * NAVIGATION
+     * --------------------------------------------------------
+     *
+     * Page 01 → Page 02
+     *
+     * Clean URL:
+     * https://ctmmtpt.pages.dev/02
+     *
+     * No /html/
+     * No page02.html
+     */
 
     setTimeout(
         function() {
@@ -1029,8 +1085,14 @@ function setStatus(
     type
 ) {
 
+    if (!pageStatus) {
+        return;
+    }
+
+
     pageStatus.textContent =
         message;
+
 
     pageStatus.className =
         'page-status ' +
