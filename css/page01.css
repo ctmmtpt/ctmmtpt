@@ -1,16 +1,7 @@
 
 /* ============================================================
    CTM PATH™ MILLIONAIRES™
-   GUIDED JOURNEY™
-
-   FILE:
-   css/page01.css
-
-   PAGE:
-   01 / 16
-
-   PURPOSE:
-   First assessment page — 16 Selwams
+   PAGE 01
    ============================================================ */
 
 
@@ -20,74 +11,50 @@
 
 :root {
 
-    --bg-main:
-        #05091d;
+    --bg-main: #05091d;
 
-    --bg-panel:
-        #090f29;
+    --bg-panel: #090f29;
 
-    --bg-panel-soft:
-        #0c132f;
+    --bg-panel-soft: #0c132f;
 
-    --bg-card:
-        #0a122d;
+    --bg-card: #0a122d;
 
-    --bg-card-hover:
-        #0d1737;
+    --bg-card-hover: #0d1737;
 
-    --gold:
-        #f5c94f;
+    --gold: #f5c94f;
 
-    --gold-bright:
-        #ffd866;
+    --gold-bright: #ffd866;
 
-    --gold-dark:
-        #9c7418;
+    --teal: #00b7a5;
 
-    --teal:
-        #00b7a5;
+    --teal-bright: #20d7c5;
 
-    --teal-bright:
-        #20d7c5;
+    --ivory: #f7f1e4;
 
-    --ivory:
-        #f7f1e4;
+    --text: #eee9df;
 
-    --text:
-        #eee9df;
+    --text-soft: #b8bfd0;
 
-    --text-soft:
-        #b8bfd0;
+    --text-muted: #7f889e;
 
-    --text-muted:
-        #7f889e;
+    --border: rgba(245, 201, 79, 0.24);
 
-    --border:
-        rgba(245, 201, 79, 0.24);
+    --border-soft: rgba(255,255,255,0.07);
 
-    --border-soft:
-        rgba(255, 255, 255, 0.07);
+    --red: #ef4444;
 
-    --red:
-        #ef4444;
+    --red-soft: rgba(239,68,68,0.16);
 
-    --red-soft:
-        rgba(239, 68, 68, 0.16);
+    --orange: #f59e0b;
 
-    --orange:
-        #f59e0b;
+    --orange-soft: rgba(245,158,11,0.16);
 
-    --orange-soft:
-        rgba(245, 158, 11, 0.16);
+    --green: #22c55e;
 
-    --green:
-        #22c55e;
-
-    --green-soft:
-        rgba(34, 197, 94, 0.16);
+    --green-soft: rgba(34,197,94,0.16);
 
     --shadow:
-        0 20px 60px rgba(0, 0, 0, 0.35);
+        0 20px 60px rgba(0,0,0,0.35);
 
 }
 
@@ -113,15 +80,16 @@ body {
     min-height: 100vh;
 
     background:
+
         radial-gradient(
             circle at 10% 15%,
-            rgba(0, 183, 165, 0.10),
+            rgba(0,183,165,0.10),
             transparent 30%
         ),
 
         radial-gradient(
             circle at 90% 10%,
-            rgba(245, 201, 79, 0.07),
+            rgba(245,201,79,0.07),
             transparent 28%
         ),
 
@@ -158,15 +126,13 @@ body {
 
     width: 100%;
 
-    height: 92px;
+    height: 96px;
 
     display: flex;
 
     align-items: center;
 
-    padding:
-        16px
-        28px;
+    padding: 16px 28px;
 
     z-index: 100;
 
@@ -192,9 +158,9 @@ body {
 
 .brand-logo {
 
-    width: 72px;
+    width: 76px;
 
-    height: 72px;
+    height: 76px;
 
     object-fit: contain;
 
@@ -203,7 +169,7 @@ body {
     filter:
         drop-shadow(
             0 8px 20px
-            rgba(0, 0, 0, 0.45)
+            rgba(0,0,0,0.45)
         );
 
 }
@@ -221,63 +187,12 @@ body {
             calc(100% - 48px)
         );
 
-    margin:
-        0 auto;
+    margin: 0 auto;
 
     padding:
-        105px
+        112px
         48px
         60px;
-
-}
-
-
-/* ============================================================
-   PAGE NAVIGATOR
-   ============================================================ */
-
-.page-navigator {
-
-    width: max-content;
-
-    margin:
-        0 auto
-        34px;
-
-    padding:
-        8px
-        20px;
-
-    border:
-        1px solid
-        rgba(245, 201, 79, 0.55);
-
-    border-radius: 999px;
-
-    color: var(--gold);
-
-    font-size: 15px;
-
-    font-weight: 800;
-
-    letter-spacing: 2px;
-
-    background:
-        rgba(7, 11, 31, 0.72);
-
-    box-shadow:
-        0 8px 30px
-        rgba(0, 0, 0, 0.22);
-
-}
-
-
-.page-divider {
-
-    padding:
-        0 7px;
-
-    opacity: 0.55;
 
 }
 
@@ -291,9 +206,7 @@ body {
     text-align: center;
 
     padding:
-        12px
-        20px
-        40px;
+        12px 20px 40px;
 
 }
 
@@ -306,9 +219,9 @@ body {
 
     font-weight: 800;
 
-    letter-spacing: 3px;
+    letter-spacing: 4px;
 
-    margin-bottom: 14px;
+    margin-bottom: 18px;
 
 }
 
@@ -393,8 +306,7 @@ body {
     max-width: 950px;
 
     margin:
-        26px auto
-        8px;
+        26px auto 8px;
 
 }
 
@@ -417,20 +329,16 @@ body {
 .rating-guide {
 
     margin:
-        10px auto
-        30px;
+        10px auto 30px;
 
     padding:
-        24px
-        26px;
+        24px 26px;
 
     border-top:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 
     border-bottom:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 
 }
 
@@ -492,11 +400,13 @@ body {
 
 
 .scale-high {
-
     color: var(--green);
-
 }
 
+
+/* ============================================================
+   COLOUR LEGEND
+   ============================================================ */
 
 .colour-guide {
 
@@ -538,41 +448,32 @@ body {
 
 
 .legend-red {
-
     color: #ff7b7b;
 }
 
 
 .legend-red .legend-dot {
-
     background: var(--red);
-
 }
 
 
 .legend-orange {
-
     color: #ffbf45;
 }
 
 
 .legend-orange .legend-dot {
-
     background: var(--orange);
-
 }
 
 
 .legend-green {
-
     color: #65e995;
 }
 
 
 .legend-green .legend-dot {
-
     background: var(--green);
-
 }
 
 
@@ -587,7 +488,7 @@ body {
     grid-template-columns:
         repeat(
             2,
-            minmax(0, 1fr)
+            minmax(0,1fr)
         );
 
     gap: 22px;
@@ -606,13 +507,13 @@ body {
     background:
         linear-gradient(
             145deg,
-            rgba(12, 21, 49, 0.96),
-            rgba(6, 13, 35, 0.96)
+            rgba(12,21,49,0.96),
+            rgba(6,13,35,0.96)
         );
 
     border:
         1px solid
-        rgba(0, 183, 165, 0.45);
+        rgba(0,183,165,0.45);
 
     border-radius: 22px;
 
@@ -626,7 +527,7 @@ body {
 
     box-shadow:
         0 15px 40px
-        rgba(0, 0, 0, 0.22);
+        rgba(0,0,0,0.22);
 
     transition:
         transform 0.25s ease,
@@ -642,11 +543,11 @@ body {
         translateY(-3px);
 
     border-color:
-        rgba(0, 183, 165, 0.75);
+        rgba(0,183,165,0.75);
 
     box-shadow:
         0 20px 50px
-        rgba(0, 0, 0, 0.32);
+        rgba(0,0,0,0.32);
 
 }
 
@@ -670,8 +571,7 @@ body {
 
     height: 48px;
 
-    flex:
-        0 0 48px;
+    flex: 0 0 48px;
 
     display: flex;
 
@@ -681,7 +581,7 @@ body {
 
     border:
         1px solid
-        rgba(245, 201, 79, 0.55);
+        rgba(245,201,79,0.55);
 
     border-radius: 50%;
 
@@ -777,10 +677,10 @@ body {
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.06);
+        rgba(255,255,255,0.06);
 
     background:
-        rgba(255, 255, 255, 0.018);
+        rgba(255,255,255,0.018);
 
     color: var(--text-soft);
 
@@ -803,64 +703,47 @@ body {
 }
 
 
-/* RED — 1 TO 3 */
-
 .score-button[data-score="1"],
 .score-button[data-score="2"],
 .score-button[data-score="3"] {
 
-    --score-color:
-        var(--red);
+    --score-color: var(--red);
 
-    --score-bg:
-        var(--red-soft);
+    --score-bg: var(--red-soft);
 
 }
 
-
-/* ORANGE — 4 TO 7 */
 
 .score-button[data-score="4"],
 .score-button[data-score="5"],
 .score-button[data-score="6"],
 .score-button[data-score="7"] {
 
-    --score-color:
-        var(--orange);
+    --score-color: var(--orange);
 
-    --score-bg:
-        var(--orange-soft);
+    --score-bg: var(--orange-soft);
 
 }
 
-
-/* GREEN — 8 TO 10 */
 
 .score-button[data-score="8"],
 .score-button[data-score="9"],
 .score-button[data-score="10"] {
 
-    --score-color:
-        var(--green);
+    --score-color: var(--green);
 
-    --score-bg:
-        var(--green-soft);
+    --score-bg: var(--green-soft);
 
 }
 
 
-/* HOVER */
-
 .score-button:hover {
 
-    color:
-        var(--score-color);
+    color: var(--score-color);
 
-    border-color:
-        var(--score-color);
+    border-color: var(--score-color);
 
-    background:
-        var(--score-bg);
+    background: var(--score-bg);
 
     transform:
         translateY(-2px);
@@ -868,17 +751,13 @@ body {
 }
 
 
-/* SELECTED */
-
 .score-button.selected {
 
     color: #ffffff;
 
-    border-color:
-        var(--score-color);
+    border-color: var(--score-color);
 
-    background:
-        var(--score-color);
+    background: var(--score-color);
 
     box-shadow:
         0 6px 18px
@@ -890,8 +769,6 @@ body {
 
 }
 
-
-/* SCORE READOUT */
 
 .selected-score {
 
@@ -918,7 +795,7 @@ body {
 
 
 /* ============================================================
-   LIFE SCORE SECTION
+   LIFE SCORE
    ============================================================ */
 
 .life-score-section {
@@ -926,20 +803,19 @@ body {
     margin-top: 48px;
 
     padding:
-        42px
-        38px;
+        42px 38px;
 
     border:
         1px solid
-        rgba(245, 201, 79, 0.25);
+        rgba(245,201,79,0.25);
 
     border-radius: 26px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(15, 16, 39, 0.97),
-            rgba(7, 12, 31, 0.97)
+            rgba(15,16,39,0.97),
+            rgba(7,12,31,0.97)
         );
 
     box-shadow:
@@ -975,15 +851,10 @@ body {
         );
 
     margin:
-        8px 0
-        30px;
+        8px 0 30px;
 
 }
 
-
-/* ============================================================
-   SCORE CARDS
-   ============================================================ */
 
 .score-cards {
 
@@ -999,8 +870,7 @@ body {
 
     max-width: 950px;
 
-    margin:
-        0 auto;
+    margin: 0 auto;
 
 }
 
@@ -1008,17 +878,16 @@ body {
 .score-card {
 
     padding:
-        26px
-        18px;
+        26px 18px;
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.05);
+        rgba(255,255,255,0.05);
 
     border-radius: 18px;
 
     background:
-        rgba(255, 255, 255, 0.018);
+        rgba(255,255,255,0.018);
 
 }
 
@@ -1026,10 +895,10 @@ body {
 .score-card-primary {
 
     border-color:
-        rgba(245, 201, 79, 0.35);
+        rgba(245,201,79,0.35);
 
     background:
-        rgba(245, 201, 79, 0.035);
+        rgba(245,201,79,0.035);
 
 }
 
@@ -1133,8 +1002,7 @@ body {
 .score-message {
 
     margin:
-        30px auto
-        20px;
+        30px auto 20px;
 
     color: var(--text-soft);
 
@@ -1146,26 +1014,17 @@ body {
 
 
 .score-message.score-low {
-
-    color:
-        #ff8585;
-
+    color: #ff8585;
 }
 
 
 .score-message.score-mid {
-
-    color:
-        #ffc45a;
-
+    color: #ffc45a;
 }
 
 
 .score-message.score-high {
-
-    color:
-        #62e99a;
-
+    color: #62e99a;
 }
 
 
@@ -1178,19 +1037,17 @@ body {
     max-width: 900px;
 
     margin:
-        24px auto
-        0;
+        24px auto 0;
 
     padding:
-        20px
-        24px;
+        20px 24px;
 
     border-left:
         3px solid
         var(--teal);
 
     background:
-        rgba(0, 183, 165, 0.035);
+        rgba(0,183,165,0.035);
 
     text-align: left;
 
@@ -1241,8 +1098,7 @@ body {
     min-height: 28px;
 
     margin:
-        22px auto
-        0;
+        22px auto 0;
 
     text-align: center;
 
@@ -1254,59 +1110,110 @@ body {
 
 
 .page-status.success {
-
-    color:
-        var(--green);
-
+    color: var(--green);
 }
 
 
 .page-status.error {
-
-    color:
-        #ff8585;
-
+    color: #ff8585;
 }
 
 
 .page-status.loading {
-
-    color:
-        var(--gold);
-
+    color: var(--gold);
 }
 
 
 /* ============================================================
-   CONTINUE
+   JOURNEY NAVIGATION
    ============================================================ */
 
-.continue-section {
+.journey-navigation {
 
-    text-align: center;
+    display: grid;
 
-    margin-top: 25px;
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 20px;
+
+    max-width: 900px;
+
+    margin:
+        35px auto 0;
 
 }
 
 
-.continue-button {
+.journey-nav {
 
-    min-width:
-        min(
-            520px,
-            100%
-        );
+    min-height: 78px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 16px;
 
     padding:
-        17px
-        28px;
+        15px 25px;
+
+    border-radius: 16px;
+
+    text-decoration: none;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease,
+        opacity 0.2s ease;
+
+}
+
+
+/* BACK */
+
+.journey-nav-back {
 
     border:
         1px solid
-        rgba(245, 201, 79, 0.5);
+        rgba(255,255,255,0.12);
 
-    border-radius: 13px;
+    background:
+        rgba(255,255,255,0.025);
+
+    color: var(--text-soft);
+
+}
+
+
+.journey-nav-back:hover {
+
+    transform:
+        translateY(-2px);
+
+    border-color:
+        rgba(0,183,165,0.55);
+
+    background:
+        rgba(0,183,165,0.055);
+
+}
+
+
+/* NEXT */
+
+.journey-nav-next {
+
+    border:
+        1px solid
+        rgba(245,201,79,0.45);
 
     background:
         linear-gradient(
@@ -1318,23 +1225,14 @@ body {
     color:
         #101426;
 
-    cursor: pointer;
-
-    font-weight: 900;
-
     box-shadow:
         0 12px 30px
-        rgba(0, 0, 0, 0.3);
-
-    transition:
-        transform 0.2s ease,
-        opacity 0.2s ease,
-        filter 0.2s ease;
+        rgba(0,0,0,0.25);
 
 }
 
 
-.continue-button:not(:disabled):hover {
+.journey-nav-next:not(:disabled):hover {
 
     transform:
         translateY(-2px);
@@ -1345,7 +1243,7 @@ body {
 }
 
 
-.continue-button:disabled {
+.journey-nav-next:disabled {
 
     cursor:
         not-allowed;
@@ -1359,33 +1257,63 @@ body {
 }
 
 
-.button-ta {
+.nav-icon {
 
-    display: block;
+    font-size: 25px;
+
+    line-height: 1;
+
+    font-weight: 700;
+
+}
+
+
+.nav-copy {
+
+    display: flex;
+
+    flex-direction: column;
+
+    text-align: center;
+
+}
+
+
+.nav-ta {
 
     font-size: 17px;
 
+    font-weight: 900;
+
+    line-height: 1.3;
+
 }
 
 
-.button-en {
+.nav-en {
 
-    display: block;
-
-    margin-top: 2px;
-
-    font-size: 11px;
+    font-size: 10px;
 
     letter-spacing: 2px;
 
+    font-weight: 900;
+
+    margin-top: 3px;
+
 }
 
+
+/* ============================================================
+   CONTINUE NOTE
+   ============================================================ */
 
 .continue-note {
 
     color: var(--text-muted);
 
     font-size: 12px;
+
+    text-align: center;
 
     margin-top: 12px;
 
@@ -1409,13 +1337,12 @@ body {
 
 .footer-line {
 
-    width:
-        100%;
+    width: 100%;
 
     height: 1px;
 
     background:
-        rgba(245, 201, 79, 0.16);
+        rgba(245,201,79,0.16);
 
     margin-bottom: 22px;
 
@@ -1448,19 +1375,6 @@ body {
 }
 
 
-.footer-page {
-
-    color: var(--text-muted);
-
-    font-size: 10px;
-
-    letter-spacing: 2px;
-
-    margin-top: 14px;
-
-}
-
-
 /* ============================================================
    RESPONSIVE
    ============================================================ */
@@ -1473,52 +1387,51 @@ body {
             calc(100% - 28px);
 
         padding:
-            100px
-            18px
-            45px;
+            100px 18px 45px;
 
     }
 
 
     .selvam-grid {
 
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
 
     }
 
 
     .score-cards {
 
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
 
     }
 
 
     .guide-title {
 
-        flex-direction:
-            column;
+        flex-direction: column;
 
-        align-items:
-            flex-start;
+        align-items: flex-start;
 
     }
 
 
     .guide-scale {
 
-        text-align:
-            left;
+        text-align: left;
 
     }
 
 
     .colour-guide {
 
-        justify-content:
-            flex-start;
+        justify-content: flex-start;
+
+    }
+
+
+    .journey-navigation {
+
+        grid-template-columns: 1fr;
 
     }
 
@@ -1530,8 +1443,7 @@ body {
     .brand-header {
 
         padding:
-            12px
-            16px;
+            12px 16px;
 
     }
 
@@ -1547,97 +1459,83 @@ body {
 
     .page-shell {
 
-        padding-top:
-            88px;
+        padding-top: 88px;
 
     }
 
 
     .hero {
 
-        padding-left:
-            4px;
+        padding-left: 4px;
 
-        padding-right:
-            4px;
+        padding-right: 4px;
 
     }
 
 
     .hero h1 {
 
-        font-size:
-            32px;
+        font-size: 32px;
 
     }
 
 
     .hero h2 {
 
-        font-size:
-            17px;
+        font-size: 17px;
 
     }
 
 
     .hero-title-ta {
 
-        font-size:
-            22px;
+        font-size: 22px;
 
     }
 
 
     .hero-message-ta {
 
-        font-size:
-            16px;
+        font-size: 16px;
 
     }
 
 
     .selvam-card {
 
-        min-height:
-            auto;
+        min-height: auto;
 
-        padding:
-            21px;
+        padding: 21px;
 
     }
 
 
     .selvam-title-ta {
 
-        font-size:
-            21px;
+        font-size: 21px;
 
     }
 
 
     .selvam-question-ta {
 
-        font-size:
-            16px;
+        font-size: 16px;
 
     }
 
 
     .score-buttons {
 
-        gap:
-            5px;
+        gap: 5px;
 
     }
 
 
     .score-button {
 
-        height:
-            38px;
+        height: 38px;
 
-        font-size:
-            12px;
+        font-size: 12px;
 
     }
 
@@ -1645,16 +1543,21 @@ body {
     .life-score-section {
 
         padding:
-            30px
-            18px;
+            30px 18px;
 
     }
 
 
     .score-number {
 
-        font-size:
-            56px;
+        font-size: 56px;
+
+    }
+
+
+    .journey-nav {
+
+        min-height: 70px;
 
     }
 
