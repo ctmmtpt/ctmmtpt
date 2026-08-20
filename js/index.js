@@ -28,22 +28,27 @@ const CONFIG = {
      * FIRST ASSESSMENT PAGE
      * ----------------------------------------------------------
      *
-     * All HTML pages are now kept in the ROOT.
+     * All HTML pages are kept in the ROOT.
      *
-     * Therefore:
+     * Clean public route:
      *
-     *     index.html
-     *     01.html
-     *     02.html
-     *     03.html
+     *     /01
+     *
+     * Therefore the browser will navigate to:
+     *
+     *     https://ctmmtpt.pages.dev/01
      *
      * NOT:
      *
-     *     html/page01.html
+     *     /01.html
+     *
+     * and NOT:
+     *
+     *     /html/page01.html
      */
 
     FIRST_PAGE:
-        '01.html'
+        '/01'
 
 };
 
@@ -492,7 +497,7 @@ async function handleRegistration(event) {
 
 
         /* ----------------------------------------------------
-           MOVE TO 01.HTML
+           MOVE TO CLEAN /01 ROUTE
            ---------------------------------------------------- */
 
         setTimeout(
