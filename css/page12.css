@@ -1,1 +1,4004 @@
+/* =========================================================
+   CTM PATH™ MILLIONAIRES™
+   PAGE 12 — CTM™ / CASHFLOW • TRIBE • MACHINE
+   COMPLETE PAGE-SPECIFIC CSS
+   ========================================================= */
 
+
+/* =========================================================
+   PAGE TOKENS
+   ========================================================= */
+
+:root {
+    --p12-bg: #04131f;
+    --p12-bg-deep: #020b13;
+
+    --p12-panel: #071c2b;
+    --p12-panel-2: #092337;
+    --p12-panel-3: #0c2940;
+
+    --p12-ivory: #f5f0e7;
+    --p12-white: #ffffff;
+    --p12-muted: #aebbc3;
+    --p12-muted-dark: #70838e;
+
+    --p12-gold: #f4b321;
+    --p12-gold-light: #ffd86a;
+    --p12-gold-dark: #b77b08;
+
+    --p12-teal: #08c9ce;
+    --p12-teal-light: #6ceceb;
+    --p12-teal-dark: #078e95;
+
+    --p12-c-border: rgba(244, 179, 33, 0.38);
+    --p12-t-border: rgba(8, 201, 206, 0.38);
+    --p12-border: rgba(255, 255, 255, 0.09);
+
+    --p12-shadow:
+        0 30px 90px rgba(0, 0, 0, 0.42);
+
+    --p12-radius: 25px;
+}
+
+
+/* =========================================================
+   FOUNDATION
+   ========================================================= */
+
+html {
+    background: var(--p12-bg-deep);
+    scroll-behavior: smooth;
+}
+
+body.page-12 {
+    margin: 0;
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+    color: var(--p12-ivory);
+
+    background:
+        radial-gradient(
+            circle at 50% 3%,
+            rgba(8, 201, 206, 0.08),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(244, 179, 33, 0.045),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #04131f 0%,
+            #061b2a 45%,
+            #03101a 100%
+        );
+
+    font-family:
+        "Noto Sans Tamil",
+        "Nirmala UI",
+        "Latha",
+        Arial,
+        sans-serif;
+}
+
+.page-12 *,
+.page-12 *::before,
+.page-12 *::after {
+    box-sizing: border-box;
+}
+
+.page-12 img {
+    display: block;
+    max-width: 100%;
+}
+
+.page-12 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   GLOBAL HEADER
+   ========================================================= */
+
+.page-12 .global-header {
+    position: relative;
+    z-index: 10;
+
+    min-height: 250px;
+
+    padding:
+        68px
+        clamp(45px, 6vw, 105px)
+        58px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 40px;
+}
+
+.page-12 .global-brand {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 22px;
+}
+
+.page-12 .global-logo {
+    width: 112px;
+    height: 112px;
+
+    flex: 0 0 auto;
+
+    object-fit: contain;
+}
+
+.page-12 .global-brand-name {
+    display: flex;
+    flex-direction: column;
+
+    padding-top: 8px;
+
+    color: var(--p12-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(25px, 2.05vw, 37px);
+
+    font-weight: 900;
+
+    line-height: 1.05;
+}
+
+.page-12 .global-brand-name span:last-child {
+    margin-top: 7px;
+}
+
+.page-12 .global-page-number {
+    padding-top: 16px;
+
+    color: var(--p12-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(21px, 1.5vw, 30px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.30em;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   HEADER DIVIDER
+   ========================================================= */
+
+.page-12 .global-divider {
+    width: 100%;
+    height: 4px;
+
+    display: grid;
+
+    grid-template-columns:
+        27% 46% 27%;
+}
+
+.page-12 .global-divider span {
+    height: 100%;
+}
+
+.page-12 .global-divider span:nth-child(1),
+.page-12 .global-divider span:nth-child(3) {
+    background: var(--p12-gold);
+}
+
+.page-12 .global-divider span:nth-child(2) {
+    background: var(--p12-teal);
+}
+
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.page-12 .page12-main {
+    width:
+        min(
+            1440px,
+            calc(100% - 96px)
+        );
+
+    margin: 0 auto;
+
+    padding:
+        110px 0 140px;
+}
+
+
+/* =========================================================
+   COMMON
+   ========================================================= */
+
+.page-12 .section-kicker,
+.page-12 .component-kicker,
+.page-12 .flywheel-kicker,
+.page-12 .final-kicker {
+    color: var(--p12-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.25em;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.page-12 .ctm-hero {
+    max-width: 1180px;
+
+    margin:
+        0 auto 150px;
+
+    text-align: center;
+}
+
+.page-12 .ctm-kicker {
+    display: inline-flex;
+
+    padding:
+        8px 24px;
+
+    border:
+        1px solid var(--p12-c-border);
+
+    border-radius: 999px;
+
+    color: var(--p12-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.18em;
+}
+
+.page-12 .ctm-title {
+    margin-top: 45px;
+
+    display: flex;
+
+    align-items: baseline;
+    justify-content: center;
+
+    gap:
+        clamp(18px, 2.5vw, 45px);
+}
+
+.page-12 .ctm-letter {
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(125px, 14vw, 215px);
+
+    font-weight: 900;
+
+    line-height: 0.75;
+
+    text-shadow:
+        0 12px 50px rgba(0, 0, 0, 0.3);
+}
+
+.page-12 .ctm-letter.c {
+    color: var(--p12-gold);
+}
+
+.page-12 .ctm-letter.t {
+    color: var(--p12-teal);
+}
+
+.page-12 .ctm-letter.m {
+    color: var(--p12-gold-light);
+}
+
+.page-12 .ctm-separator {
+    color: var(--p12-muted-dark);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(35px, 4vw, 65px);
+
+    font-weight: 300;
+}
+
+.page-12 .ctm-name {
+    margin-top: 42px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+.page-12 .ctm-name span {
+    color: var(--p12-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(17px, 1.5vw, 25px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.12em;
+}
+
+.page-12 .ctm-name span:nth-child(1) {
+    color: var(--p12-gold);
+}
+
+.page-12 .ctm-name span:nth-child(2) {
+    color: var(--p12-teal);
+}
+
+.page-12 .ctm-name span:nth-child(3) {
+    color: var(--p12-gold-light);
+}
+
+.page-12 .ctm-tamil-name {
+    margin-top: 12px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+
+    color: var(--p12-muted);
+
+    font-size:
+        clamp(15px, 1.25vw, 20px);
+
+    font-weight: 700;
+}
+
+.page-12 .ctm-hero-message {
+    max-width: 920px;
+
+    margin:
+        55px auto 0;
+
+    color: var(--p12-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(21px, 2vw, 33px);
+
+    font-weight: 800;
+
+    line-height: 1.5;
+
+    letter-spacing: 0.035em;
+}
+
+.page-12 .ctm-hero-tamil {
+    max-width: 850px;
+
+    margin:
+        18px auto 0;
+
+    color: var(--p12-muted);
+
+    font-size:
+        clamp(17px, 1.4vw, 23px);
+
+    font-weight: 600;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   CTM COMPONENT SECTIONS
+   ========================================================= */
+
+.page-12 .ctm-component {
+    position: relative;
+
+    max-width: 1200px;
+
+    margin:
+        0 auto 125px;
+
+    padding:
+        78px 70px 85px;
+
+    display: grid;
+
+    grid-template-columns:
+        115px minmax(0, 1fr);
+
+    gap: 45px;
+
+    border:
+        1px solid var(--p12-border);
+
+    border-radius:
+        var(--p12-radius);
+
+    box-shadow:
+        var(--p12-shadow);
+}
+
+.page-12 .cashflow-section {
+    background:
+        radial-gradient(
+            circle at 75% 35%,
+            rgba(244, 179, 33, 0.07),
+            transparent 35%
+        ),
+        var(--p12-panel);
+}
+
+.page-12 .tribe-section {
+    background:
+        radial-gradient(
+            circle at 25% 40%,
+            rgba(8, 201, 206, 0.07),
+            transparent 35%
+        ),
+        var(--p12-panel);
+}
+
+.page-12 .machine-section {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(8,201,206,0.045),
+            rgba(244,179,33,0.035)
+        ),
+        var(--p12-panel);
+}
+
+.page-12 .component-letter {
+    width: 95px;
+    height: 95px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        2px solid var(--p12-gold);
+
+    border-radius: 50%;
+
+    color: var(--p12-gold);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 48px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 0 45px rgba(244,179,33,0.07);
+}
+
+.page-12 .tribe-section .component-letter {
+    border-color: var(--p12-teal);
+    color: var(--p12-teal);
+
+    box-shadow:
+        0 0 45px rgba(8,201,206,0.07);
+}
+
+.page-12 .machine-section .component-letter {
+    border-color: var(--p12-gold-light);
+    color: var(--p12-gold-light);
+}
+
+.page-12 .component-content h2 {
+    margin:
+        8px 0 0;
+
+    color: var(--p12-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(42px, 4vw, 64px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.04em;
+}
+
+.page-12 .component-tamil {
+    margin-top: 8px;
+
+    color: var(--p12-teal);
+
+    font-size:
+        clamp(21px, 1.8vw, 30px);
+
+    font-weight: 800;
+}
+
+.page-12 .component-lead {
+    max-width: 800px;
+
+    margin:
+        25px 0 0;
+
+    color: var(--p12-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(17px, 1.4vw, 23px);
+
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   CASHFLOW CHAIN
+   ========================================================= */
+
+.page-12 .cashflow-chain {
+    margin:
+        45px 0 0;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(9, auto);
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.page-12 .flow-node {
+    min-height: 105px;
+
+    min-width: 105px;
+
+    padding:
+        17px 12px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    border:
+        1px solid var(--p12-border);
+
+    border-radius: 15px;
+
+    background:
+        rgba(255,255,255,0.012);
+}
+
+.page-12 .flow-node strong {
+    color: var(--p12-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    line-height: 1.35;
+
+    letter-spacing: 0.06em;
+}
+
+.page-12 .flow-node small {
+    margin-top: 7px;
+
+    color: var(--p12-muted-dark);
+
+    font-size: 9px;
+
+    line-height: 1.4;
+}
+
+.page-12 .flow-highlight {
+    border:
+        2px solid var(--p12-gold);
+
+    background:
+        rgba(244,179,33,0.06);
+
+    box-shadow:
+        0 0 35px rgba(244,179,33,0.06);
+}
+
+.page-12 .flow-highlight strong {
+    color: var(--p12-gold-light);
+
+    font-size: 12px;
+}
+
+.page-12 .flow-arrow {
+    color: var(--p12-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 25px;
+}
+
+.page-12 .component-punch {
+    margin-top: 42px;
+
+    padding:
+        22px 25px;
+
+    border-top:
+        1px solid var(--p12-c-border);
+
+    border-bottom:
+        1px solid var(--p12-c-border);
+
+    color: var(--p12-gold-light);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(20px, 1.8vw, 29px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.06em;
+}
+
+
+/* =========================================================
+   TRIBE NETWORK
+   ========================================================= */
+
+.page-12 .tribe-network {
+    position: relative;
+
+    width: 100%;
+    max-width: 850px;
+
+    height: 420px;
+
+    margin:
+        45px auto 0;
+}
+
+.page-12 .tribe-center {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 110px;
+    height: 110px;
+
+    transform:
+        translate(-50%, -50%);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        2px solid var(--p12-gold);
+
+    border-radius: 50%;
+
+    color: var(--p12-gold-light);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 16px;
+
+    font-weight: 900;
+
+    background:
+        var(--p12-panel-2);
+
+    z-index: 3;
+}
+
+.page-12 .tribe-line {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 270px;
+    height: 1px;
+
+    transform-origin: left center;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--p12-gold),
+            rgba(8,201,206,0.05)
+        );
+
+    opacity: 0.75;
+}
+
+.page-12 .line-1 {
+    transform: rotate(-150deg);
+}
+
+.page-12 .line-2 {
+    transform: rotate(-105deg);
+}
+
+.page-12 .line-3 {
+    transform: rotate(-35deg);
+}
+
+.page-12 .line-4 {
+    transform: rotate(30deg);
+}
+
+.page-12 .line-5 {
+    transform: rotate(75deg);
+}
+
+.page-12 .line-6 {
+    transform: rotate(145deg);
+}
+
+.page-12 .tribe-person {
+    position: absolute;
+
+    width: 88px;
+    height: 88px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid var(--p12-t-border);
+
+    border-radius: 50%;
+
+    color: var(--p12-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 8px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.06em;
+
+    background:
+        var(--p12-panel-2);
+
+    z-index: 2;
+}
+
+.page-12 .person-1 {
+    left: 10%;
+    top: 15%;
+}
+
+.page-12 .person-2 {
+    left: 43%;
+    top: 2%;
+}
+
+.page-12 .person-3 {
+    right: 10%;
+    top: 15%;
+}
+
+.page-12 .person-4 {
+    right: 10%;
+    bottom: 15%;
+}
+
+.page-12 .person-5 {
+    left: 43%;
+    bottom: 2%;
+}
+
+.page-12 .person-6 {
+    left: 10%;
+    bottom: 15%;
+}
+
+.page-12 .tribe-message {
+    margin:
+        20px 0 0;
+
+    color: var(--p12-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(22px, 2vw, 32px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.06em;
+}
+
+.page-12 .tribe-message-secondary {
+    margin:
+        8px 0 0;
+
+    color: var(--p12-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(22px, 2vw, 32px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.06em;
+}
+
+.page-12 .tribe-definition {
+    max-width: 800px;
+
+    margin:
+        32px auto 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+}
+
+.page-12 .tribe-definition span {
+    padding:
+        11px 16px;
+
+    border:
+        1px solid var(--p12-border);
+
+    border-radius: 999px;
+
+    color: var(--p12-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.10em;
+}
+
+.page-12 .tribe-definition b {
+    color: var(--p12-gold);
+}
+
+
+/* =========================================================
+   MACHINE FLOW
+   ========================================================= */
+
+.page-12 .machine-flow {
+    margin:
+        45px 0 0;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(15, auto);
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+.page-12 .machine-node {
+    min-width: 108px;
+    min-height: 100px;
+
+    padding:
+        17px 10px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    border:
+        1px solid var(--p12-border);
+
+    border-radius: 13px;
+
+    background:
+        rgba(255,255,255,0.012);
+}
+
+.page-12 .machine-node span {
+    color: var(--p12-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 8px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.15em;
+}
+
+.page-12 .machine-node strong {
+    margin-top: 8px;
+
+    color: var(--p12-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    line-height: 1.3;
+}
+
+.page-12 .machine-node small {
+    margin-top: 6px;
+
+    color: var(--p12-muted-dark);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 7px;
+
+    font-weight: 800;
+}
+
+.page-12 .machine-node-highlight {
+    border:
+        2px solid var(--p12-gold);
+
+    background:
+        rgba(244,179,33,0.05);
+}
+
+.page-12 .machine-node-highlight strong {
+    color: var(--p12-gold-light);
+}
+
+.page-12 .machine-node-final {
+    border:
+        2px solid var(--p12-teal);
+
+    background:
+        rgba(8,201,206,0.05);
+}
+
+.page-12 .machine-node-final strong {
+    color: var(--p12-teal-light);
+}
+
+.page-12 .machine-arrow {
+    color: var(--p12-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 20px;
+}
+
+.page-12 .machine-punch {
+    margin-top: 42px;
+
+    padding:
+        23px;
+
+    border-top:
+        1px solid var(--p12-t-border);
+
+    border-bottom:
+        1px solid var(--p12-t-border);
+
+    color: var(--p12-teal-light);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(21px, 1.9vw, 31px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.06em;
+}
+
+
+/* =========================================================
+   CTM FLYWHEEL
+   ========================================================= */
+
+.page-12 .ctm-flywheel-section {
+    max-width: 1250px;
+
+    margin:
+        0 auto 135px;
+
+    padding:
+        90px 45px;
+
+    text-align: center;
+
+    border:
+        1px solid var(--p12-c-border);
+
+    border-radius:
+        var(--p12-radius);
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(244,179,33,0.065),
+            transparent 42%
+        ),
+        var(--p12-panel);
+
+    box-shadow:
+        var(--p12-shadow);
+}
+
+.page-12 .flywheel-kicker {
+    margin-bottom: 17px;
+}
+
+.page-12 .ctm-flywheel-section h2 {
+    margin: 0;
+
+    color: var(--p12-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(37px, 3.6vw, 58px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.06em;
+}
+
+.page-12 .flywheel-tamil {
+    margin:
+        15px 0 0;
+
+    color: var(--p12-muted);
+
+    font-size:
+        clamp(17px, 1.45vw, 24px);
+}
+
+.page-12 .ctm-flywheel {
+    position: relative;
+
+    width: min(700px, 90vw);
+    height: 650px;
+
+    margin:
+        60px auto 0;
+}
+
+.page-12 .flywheel-orbit {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 500px;
+    height: 500px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border:
+        1px dashed rgba(244,179,33,0.35);
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 70px rgba(8,201,206,0.025);
+}
+
+.page-12 .flywheel-node {
+    position: absolute;
+
+    width: 160px;
+    height: 160px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        2px solid var(--p12-gold);
+
+    border-radius: 50%;
+
+    background:
+        var(--p12-panel-2);
+
+    box-shadow:
+        0 20px 55px rgba(0,0,0,0.3);
+
+    z-index: 3;
+}
+
+.page-12 .flywheel-node span {
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 45px;
+
+    font-weight: 900;
+}
+
+.page-12 .flywheel-node strong {
+    margin-top: 5px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.08em;
+}
+
+.page-12 .flywheel-node small {
+    margin-top: 5px;
+
+    color: var(--p12-muted);
+
+    font-size: 9px;
+}
+
+.page-12 .flywheel-c {
+    top: 3%;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    border-color: var(--p12-gold);
+}
+
+.page-12 .flywheel-c span,
+.page-12 .flywheel-c strong {
+    color: var(--p12-gold);
+}
+
+.page-12 .flywheel-t {
+    right: 4%;
+    bottom: 7%;
+
+    border-color: var(--p12-teal);
+}
+
+.page-12 .flywheel-t span,
+.page-12 .flywheel-t strong {
+    color: var(--p12-teal);
+}
+
+.page-12 .flywheel-m {
+    left: 4%;
+    bottom: 7%;
+
+    border-color: var(--p12-gold-light);
+}
+
+.page-12 .flywheel-m span,
+.page-12 .flywheel-m strong {
+    color: var(--p12-gold-light);
+}
+
+.page-12 .flywheel-center {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 180px;
+    height: 180px;
+
+    transform:
+        translate(-50%, -50%);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        2px solid var(--p12-teal);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(8,201,206,0.12),
+            var(--p12-panel-2)
+        );
+
+    box-shadow:
+        0 0 80px rgba(8,201,206,0.08);
+
+    z-index: 5;
+}
+
+.page-12 .flywheel-center strong {
+    color: var(--p12-ivory);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 48px;
+
+    font-weight: 900;
+}
+
+.page-12 .flywheel-center span {
+    margin-top: 7px;
+
+    color: var(--p12-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.25em;
+}
+
+.page-12 .flywheel-arrow {
+    position: absolute;
+
+    color: var(--p12-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 38px;
+
+    font-weight: 700;
+
+    z-index: 7;
+}
+
+.page-12 .arrow-c-t {
+    right: 20%;
+    top: 36%;
+
+    transform:
+        rotate(50deg);
+}
+
+.page-12 .arrow-t-m {
+    left: 20%;
+    bottom: 22%;
+
+    transform:
+        rotate(180deg);
+}
+
+.page-12 .arrow-m-c {
+    left: 30%;
+    top: 36%;
+
+    transform:
+        rotate(-50deg);
+}
+
+.page-12 .loop-message {
+    margin:
+        25px auto 0;
+
+    color: var(--p12-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(15px, 1.4vw, 22px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.08em;
+}
+
+.page-12 .loop-message span {
+    margin: 0 9px;
+
+    color: var(--p12-gold);
+}
+
+.page-12 .infinity-symbol {
+    margin-top: 25px;
+
+    color: var(--p12-teal);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 62px;
+
+    line-height: 0.8;
+}
+
+
+/* =========================================================
+   MONEY FLOW
+   ========================================================= */
+
+.page-12 .money-flow-section {
+    max-width: 1050px;
+
+    margin:
+        0 auto 135px;
+
+    text-align: center;
+}
+
+.page-12 .money-flow-section h2 {
+    margin:
+        10px 0 0;
+
+    color: var(--p12-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(38px, 3.7vw, 59px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.05em;
+}
+
+.page-12 .money-flow-intro {
+    max-width: 800px;
+
+    margin:
+        18px auto 0;
+
+    color: var(--p12-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+}
+
+.page-12 .money-flow {
+    margin:
+        50px auto 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.page-12 .money-step {
+    width:
+        min(
+            800px,
+            100%
+        );
+
+    min-height: 110px;
+
+    padding:
+        23px 30px;
+
+    display: grid;
+
+    grid-template-columns:
+        55px 220px minmax(0, 1fr);
+
+    align-items: center;
+
+    gap: 25px;
+
+    text-align: left;
+
+    border:
+        1px solid var(--p12-border);
+
+    border-radius: 16px;
+
+    background:
+        rgba(255,255,255,0.012);
+}
+
+.page-12 .money-step > span {
+    color: var(--p12-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.10em;
+}
+
+.page-12 .money-step strong {
+    color: var(--p12-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.07em;
+}
+
+.page-12 .money-step small {
+    color: var(--p12-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+.page-12 .money-step-highlight {
+    border:
+        2px solid var(--p12-gold);
+
+    background:
+        rgba(244,179,33,0.045);
+}
+
+.page-12 .money-step-highlight strong {
+    color: var(--p12-gold-light);
+}
+
+.page-12 .money-step-cashflow {
+    border:
+        2px solid var(--p12-teal);
+
+    background:
+        rgba(8,201,206,0.045);
+}
+
+.page-12 .money-step-cashflow strong {
+    color: var(--p12-teal-light);
+}
+
+.page-12 .money-arrow {
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: var(--p12-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 24px;
+}
+
+.page-12 .flow-loop {
+    margin-top: 40px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 20px;
+}
+
+.page-12 .flow-loop strong {
+    color: var(--p12-gold-light);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(19px, 1.7vw, 27px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.08em;
+}
+
+.page-12 .flow-loop span {
+    color: var(--p12-teal);
+
+    font-size: 35px;
+}
+
+
+/* =========================================================
+   ONLINE TRIBE
+   ========================================================= */
+
+.page-12 .online-tribe-section {
+    max-width: 1200px;
+
+    margin:
+        0 auto 135px;
+
+    padding:
+        90px 55px;
+
+    text-align: center;
+
+    border:
+        1px solid var(--p12-t-border);
+
+    border-radius:
+        var(--p12-radius);
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(8,201,206,0.07),
+            transparent 45%
+        ),
+        var(--p12-panel);
+
+    box-shadow:
+        var(--p12-shadow);
+}
+
+.page-12 .online-tribe-section h2 {
+    margin:
+        12px 0 0;
+
+    color: var(--p12-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(38px, 4vw, 63px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.04em;
+}
+
+.page-12 .online-tribe-tamil {
+    margin:
+        18px auto 0;
+
+    color: var(--p12-muted);
+
+    font-size:
+        clamp(18px, 1.5vw, 25px);
+
+    line-height: 1.7;
+}
+
+.page-12 .online-pillars {
+    margin:
+        48px auto 0;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 12px;
+}
+
+.page-12 .online-pillars > div {
+    min-height: 110px;
+
+    padding:
+        22px 12px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid var(--p12-border);
+
+    border-radius: 15px;
+
+    background:
+        rgba(255,255,255,0.012);
+}
+
+.page-12 .online-pillars strong {
+    color: var(--p12-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 16px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.10em;
+}
+
+.page-12 .online-pillars span {
+    margin-top: 8px;
+
+    color: var(--p12-muted);
+
+    font-size: 11px;
+}
+
+.page-12 .online-network {
+    position: relative;
+
+    width:
+        min(
+            850px,
+            100%
+        );
+
+    height: 480px;
+
+    margin:
+        55px auto 0;
+}
+
+.page-12 .online-you {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 115px;
+    height: 115px;
+
+    transform:
+        translate(-50%, -50%);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        2px solid var(--p12-gold);
+
+    border-radius: 50%;
+
+    color: var(--p12-gold-light);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 16px;
+
+    font-weight: 900;
+
+    background:
+        var(--p12-panel-2);
+
+    z-index: 4;
+}
+
+.page-12 .online-branch {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 290px;
+    height: 1px;
+
+    transform-origin: left center;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--p12-gold),
+            rgba(8,201,206,0)
+        );
+}
+
+.page-12 .branch-1 {
+    transform: rotate(-145deg);
+}
+
+.page-12 .branch-2 {
+    transform: rotate(-35deg);
+}
+
+.page-12 .branch-3 {
+    transform: rotate(35deg);
+}
+
+.page-12 .branch-4 {
+    transform: rotate(145deg);
+}
+
+.page-12 .online-person {
+    position: absolute;
+
+    width: 86px;
+    height: 86px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid var(--p12-t-border);
+
+    border-radius: 50%;
+
+    color: var(--p12-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 8px;
+
+    font-weight: 900;
+
+    background:
+        var(--p12-panel-2);
+
+    z-index: 3;
+}
+
+.page-12 .online-person-1 {
+    left: 9%;
+    top: 10%;
+}
+
+.page-12 .online-person-2 {
+    right: 9%;
+    top: 10%;
+}
+
+.page-12 .online-person-3 {
+    left: 9%;
+    bottom: 10%;
+}
+
+.page-12 .online-person-4 {
+    right: 9%;
+    bottom: 10%;
+}
+
+.page-12 .online-growth {
+    position: absolute;
+
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid rgba(244,179,33,0.3);
+
+    border-radius: 50%;
+
+    color: var(--p12-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 7px;
+
+    font-weight: 900;
+
+    background:
+        rgba(244,179,33,0.025);
+}
+
+.page-12 .growth-1 {
+    left: 27%;
+    top: 27%;
+}
+
+.page-12 .growth-2 {
+    right: 27%;
+    top: 27%;
+}
+
+.page-12 .growth-3 {
+    left: 50%;
+    bottom: 4%;
+
+    transform:
+        translateX(-50%);
+}
+
+.page-12 .online-infinity {
+    position: absolute;
+
+    left: 50%;
+    bottom: -5%;
+
+    transform:
+        translateX(-50%);
+
+    color: var(--p12-teal);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 70px;
+}
+
+.page-12 .online-punch {
+    margin-top: 20px;
+
+    color: var(--p12-gold-light);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(22px, 2vw, 32px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.06em;
+}
+
+
+/* =========================================================
+   PEOPLE + MACHINE
+   ========================================================= */
+
+.page-12 .people-machine-section {
+    max-width: 1150px;
+
+    margin:
+        0 auto 135px;
+
+    text-align: center;
+}
+
+.page-12 .people-machine-grid {
+    display: grid;
+
+    grid-template-columns:
+        1fr 100px 1fr;
+
+    align-items: center;
+
+    gap: 25px;
+}
+
+.page-12 .people-side,
+.page-12 .machine-side {
+    min-height: 290px;
+
+    padding:
+        50px 35px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid var(--p12-border);
+
+    border-radius:
+        var(--p12-radius);
+
+    background:
+        var(--p12-panel);
+}
+
+.page-12 .people-side {
+    border-color:
+        var(--p12-t-border);
+}
+
+.page-12 .machine-side {
+    border-color:
+        var(--p12-c-border);
+}
+
+.page-12 .pm-letter {
+    color: var(--p12-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.20em;
+}
+
+.page-12 .machine-side .pm-letter {
+    color: var(--p12-gold);
+}
+
+.page-12 .people-side h3,
+.page-12 .machine-side h3 {
+    max-width: 400px;
+
+    margin:
+        18px 0 0;
+
+    color: var(--p12-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(23px, 2.1vw, 34px);
+
+    font-weight: 900;
+
+    line-height: 1.4;
+}
+
+.page-12 .people-side p,
+.page-12 .machine-side p {
+    max-width: 390px;
+
+    margin:
+        17px 0 0;
+
+    color: var(--p12-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+.page-12 .pm-symbol {
+    color: var(--p12-gold);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 70px;
+}
+
+.page-12 .people-machine-equation {
+    margin:
+        40px auto 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+}
+
+.page-12 .people-machine-equation span,
+.page-12 .people-machine-equation strong {
+    padding:
+        12px 16px;
+
+    border:
+        1px solid var(--p12-border);
+
+    border-radius: 999px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.09em;
+}
+
+.page-12 .people-machine-equation span {
+    color: var(--p12-muted);
+}
+
+.page-12 .people-machine-equation strong {
+    color: var(--p12-gold-light);
+
+    border-color:
+        var(--p12-c-border);
+
+    background:
+        rgba(244,179,33,0.04);
+}
+
+.page-12 .people-machine-equation b {
+    color: var(--p12-teal);
+}
+
+
+/* =========================================================
+   SIMPLE EQUATION
+   ========================================================= */
+
+.page-12 .simple-equation-section {
+    max-width: 1250px;
+
+    margin:
+        0 auto 150px;
+
+    padding:
+        95px 55px;
+
+    text-align: center;
+
+    border:
+        1px solid var(--p12-border);
+
+    border-radius:
+        var(--p12-radius);
+
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(244,179,33,0.055),
+            transparent 40%
+        ),
+        var(--p12-panel);
+}
+
+.page-12 .simple-equation-title {
+    margin-top: 25px;
+
+    color: var(--p12-ivory);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(60px, 7vw, 110px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.03em;
+}
+
+.page-12 .simple-equation-grid {
+    margin:
+        60px auto 0;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        auto
+        minmax(0, 1fr)
+        auto
+        minmax(0, 1fr);
+
+    align-items: stretch;
+
+    gap: 15px;
+}
+
+.page-12 .equation-card {
+    min-height: 270px;
+
+    padding:
+        40px 25px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid var(--p12-border);
+
+    border-radius: 19px;
+
+    background:
+        rgba(255,255,255,0.012);
+}
+
+.page-12 .equation-card > span {
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 57px;
+
+    font-weight: 900;
+}
+
+.page-12 .equation-c > span,
+.page-12 .equation-c strong {
+    color: var(--p12-gold);
+}
+
+.page-12 .equation-t > span,
+.page-12 .equation-t strong {
+    color: var(--p12-teal);
+}
+
+.page-12 .equation-m > span,
+.page-12 .equation-m strong {
+    color: var(--p12-gold-light);
+}
+
+.page-12 .equation-card strong {
+    margin-top: 12px;
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(17px, 1.45vw, 23px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.07em;
+}
+
+.page-12 .equation-card p {
+    margin:
+        18px 0 0;
+
+    color: var(--p12-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+.page-12 .equation-card small {
+    max-width: 220px;
+
+    margin-top: 8px;
+
+    color: var(--p12-muted-dark);
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+.page-12 .equation-symbol {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: var(--p12-muted-dark);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 35px;
+}
+
+.page-12 .equation-punch {
+    max-width: 900px;
+
+    margin:
+        55px auto 0;
+
+    padding:
+        25px;
+
+    border-top:
+        1px solid var(--p12-c-border);
+
+    border-bottom:
+        1px solid var(--p12-c-border);
+
+    color: var(--p12-gold-light);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(19px, 1.8vw, 29px);
+
+    font-weight: 900;
+
+    line-height: 1.5;
+}
+
+.page-12 .equation-brand {
+    margin-top: 35px;
+
+    color: var(--p12-teal);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(55px, 5vw, 80px);
+
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   FINAL QUESTIONS
+   ========================================================= */
+
+.page-12 .ctm-final-section {
+    position: relative;
+
+    max-width: 1150px;
+
+    margin:
+        0 auto;
+
+    padding:
+        100px 45px 120px;
+
+    text-align: center;
+
+    overflow: hidden;
+
+    border:
+        1px solid var(--p12-border-gold);
+
+    border-radius:
+        30px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #061a29,
+            #020c14
+        );
+
+    box-shadow:
+        0 40px 120px rgba(0,0,0,0.5);
+}
+
+.page-12 .final-glow {
+    position: absolute;
+
+    left: 50%;
+    top: 0;
+
+    width: 700px;
+    height: 500px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(244,179,33,0.08),
+            transparent 65%
+        );
+
+    pointer-events: none;
+}
+
+.page-12 .ctm-final-section > *:not(.final-glow) {
+    position: relative;
+    z-index: 2;
+}
+
+.page-12 .final-kicker {
+    color: var(--p12-gold);
+}
+
+.page-12 .final-question {
+    max-width: 900px;
+
+    margin:
+        85px auto 0;
+
+    padding:
+        0 0 55px;
+
+    border-bottom:
+        1px solid var(--p12-border);
+}
+
+.page-12 .question-number {
+    display: inline-flex;
+
+    width: 38px;
+    height: 38px;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid var(--p12-teal);
+
+    border-radius: 50%;
+
+    color: var(--p12-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 900;
+}
+
+.page-12 .final-question h2 {
+    margin:
+        22px auto 0;
+
+    color: var(--p12-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(31px, 3.4vw, 54px);
+
+    font-weight: 900;
+
+    line-height: 1.35;
+
+    letter-spacing: 0.025em;
+}
+
+.page-12 .final-question h2 strong {
+    display: block;
+
+    color: var(--p12-gold-light);
+}
+
+.page-12 .final-question:nth-of-type(2) h2 strong {
+    color: var(--p12-teal-light);
+}
+
+.page-12 .final-question p {
+    margin:
+        18px auto 0;
+
+    color: var(--p12-muted);
+
+    font-size:
+        clamp(17px, 1.45vw, 24px);
+
+    font-weight: 700;
+}
+
+.page-12 .final-question-last {
+    border-bottom: none;
+
+    padding-bottom: 20px;
+}
+
+.page-12 .final-question-last h2 strong {
+    color: var(--p12-gold);
+}
+
+
+/* =========================================================
+   FINAL PUNCH
+   ========================================================= */
+
+.page-12 .final-punch {
+    margin:
+        75px auto 0;
+
+    padding:
+        65px 25px;
+
+    border:
+        1px solid var(--p12-c-border);
+
+    border-radius: 20px;
+
+    background:
+        rgba(244,179,33,0.035);
+}
+
+.page-12 .final-letters {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 20px;
+}
+
+.page-12 .final-letters span {
+    color: var(--p12-gold);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(50px, 5vw, 78px);
+
+    font-weight: 900;
+}
+
+.page-12 .final-letters span:nth-child(2) {
+    color: var(--p12-teal);
+}
+
+.page-12 .final-letters span:nth-child(3) {
+    color: var(--p12-gold-light);
+}
+
+.page-12 .final-punch h3 {
+    margin:
+        35px 0 0;
+
+    color: var(--p12-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(27px, 2.7vw, 43px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.04em;
+}
+
+.page-12 .final-punch h4 {
+    margin:
+        10px 0 0;
+
+    color: var(--p12-gold-light);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(31px, 3.3vw, 53px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.05em;
+}
+
+.page-12 .final-punch p {
+    margin:
+        30px auto 0;
+
+    color: var(--p12-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(15px, 1.35vw, 22px);
+
+    font-weight: 900;
+
+    line-height: 1.7;
+
+    letter-spacing: 0.10em;
+}
+
+
+/* =========================================================
+   CTA
+   ========================================================= */
+
+.page-12 .ctm-cta {
+    position: relative;
+
+    width:
+        min(
+            550px,
+            100%
+        );
+
+    min-height: 105px;
+
+    margin:
+        55px auto 0;
+
+    padding:
+        22px 70px 22px 25px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid var(--p12-gold);
+
+    border-radius: 16px;
+
+    color: var(--p12-bg-deep);
+
+    background:
+        var(--p12-gold);
+
+    box-shadow:
+        0 20px 60px rgba(244,179,33,0.13);
+
+    transition:
+        transform 180ms ease,
+        background 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.page-12 .ctm-cta:hover,
+.page-12 .ctm-cta:focus-visible {
+    transform:
+        translateY(-4px);
+
+    background:
+        var(--p12-gold-light);
+
+    box-shadow:
+        0 25px 75px rgba(244,179,33,0.20);
+
+    outline: none;
+}
+
+.page-12 .ctm-cta span {
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(15px, 1.35vw, 20px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.10em;
+}
+
+.page-12 .ctm-cta small {
+    margin-top: 8px;
+
+    color:
+        rgba(2,11,19,0.72);
+
+    font-size: 11px;
+}
+
+.page-12 .ctm-cta b {
+    position: absolute;
+
+    right: 24px;
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 31px;
+}
+
+
+/* =========================================================
+   GLOBAL FOOTER
+   ========================================================= */
+
+.page-12 .global-footer {
+    margin-top: 35px;
+
+    padding:
+        0
+        clamp(35px, 6vw, 105px)
+        55px;
+
+    background:
+        var(--p12-bg-deep);
+
+    border-top:
+        1px solid rgba(255,255,255,0.07);
+}
+
+.page-12 .page-navigation {
+    min-height: 125px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr auto 1fr;
+
+    align-items: center;
+
+    gap: 25px;
+}
+
+.page-12 .nav-button {
+    width: fit-content;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    padding:
+        14px 17px;
+
+    border:
+        1px solid transparent;
+
+    border-radius: 11px;
+
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease;
+}
+
+.page-12 .nav-button:hover,
+.page-12 .nav-button:focus-visible {
+    transform:
+        translateY(-2px);
+
+    border-color:
+        var(--p12-t-border);
+
+    background:
+        rgba(255,255,255,0.025);
+
+    outline: none;
+}
+
+.page-12 .nav-next {
+    justify-self: end;
+
+    text-align: right;
+}
+
+.page-12 .nav-arrow {
+    color: var(--p12-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 27px;
+}
+
+.page-12 .nav-text {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.page-12 .nav-text strong {
+    color: var(--p12-ivory);
+
+    font-size: 15px;
+
+    font-weight: 800;
+}
+
+.page-12 .nav-text small {
+    color: var(--p12-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.20em;
+}
+
+.page-12 .nav-current {
+    min-width: 90px;
+
+    display: flex;
+
+    align-items: baseline;
+    justify-content: center;
+
+    color: var(--p12-gold);
+
+    font-family: Arial, sans-serif;
+}
+
+.page-12 .nav-current span {
+    font-size: 29px;
+
+    font-weight: 900;
+}
+
+.page-12 .nav-current small {
+    margin-left: 4px;
+
+    color: var(--p12-muted);
+
+    font-size: 12px;
+}
+
+.page-12 .global-footer-brand {
+    padding-top: 24px;
+
+    text-align: center;
+
+    border-top:
+        1px solid rgba(255,255,255,0.07);
+}
+
+.page-12 .footer-tagline {
+    color: var(--p12-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.25em;
+}
+
+.page-12 .footer-brand {
+    margin-top: 9px;
+
+    color:
+        rgba(245,240,231,0.58);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+}
+
+
+/* =========================================================
+   REVEAL SUPPORT
+   ========================================================= */
+
+.page-12 .reveal-ready {
+    opacity: 0;
+
+    transform:
+        translateY(25px);
+
+    transition:
+        opacity 650ms ease,
+        transform 650ms ease;
+}
+
+.page-12 .reveal-ready.is-visible {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1500px) {
+
+    .page-12 .global-header {
+        min-height: 300px;
+
+        padding-top: 78px;
+        padding-bottom: 70px;
+    }
+
+    .page-12 .global-logo {
+        width: 122px;
+        height: 122px;
+    }
+
+    .page-12 .page12-main {
+        width:
+            min(
+                1500px,
+                calc(100% - 120px)
+            );
+
+        padding-top: 130px;
+    }
+
+    .page-12 .ctm-component {
+        max-width: 1300px;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+    .page-12 .global-header {
+        min-height: 190px;
+
+        padding:
+            48px 42px 45px;
+    }
+
+    .page-12 .global-logo {
+        width: 82px;
+        height: 82px;
+    }
+
+    .page-12 .global-brand {
+        gap: 15px;
+    }
+
+    .page-12 .global-brand-name {
+        font-size: 25px;
+    }
+
+    .page-12 .global-page-number {
+        padding-top: 8px;
+
+        font-size: 18px;
+
+        letter-spacing: 0.22em;
+    }
+
+    .page-12 .page12-main {
+        width:
+            min(
+                calc(100% - 60px),
+                1000px
+            );
+
+        padding-top: 80px;
+    }
+
+    .page-12 .ctm-component {
+        grid-template-columns:
+            85px minmax(0, 1fr);
+
+        padding:
+            60px 45px;
+    }
+
+    .page-12 .component-letter {
+        width: 75px;
+        height: 75px;
+
+        font-size: 38px;
+    }
+
+    .page-12 .cashflow-chain {
+        grid-template-columns:
+            repeat(5, 1fr);
+    }
+
+    .page-12 .cashflow-chain .flow-arrow {
+        display: none;
+    }
+
+    .page-12 .machine-flow {
+        grid-template-columns:
+            repeat(4, 1fr);
+    }
+
+    .page-12 .machine-arrow {
+        display: none;
+    }
+
+}
+
+
+/* =========================================================
+   MEDIUM TABLET
+   ========================================================= */
+
+@media (max-width: 950px) {
+
+    .page-12 .ctm-name,
+    .page-12 .ctm-tamil-name {
+        grid-template-columns:
+            1fr;
+    }
+
+    .page-12 .ctm-name {
+        gap: 10px;
+    }
+
+    .page-12 .ctm-tamil-name {
+        gap: 5px;
+    }
+
+    .page-12 .cashflow-chain {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .page-12 .machine-flow {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .page-12 .simple-equation-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .page-12 .equation-symbol {
+        min-height: 35px;
+    }
+
+    .page-12 .online-pillars {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .page-12 .people-machine-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .page-12 .pm-symbol {
+        transform:
+            rotate(90deg);
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    /* -------------------------------------------------------
+       HEADER
+       ------------------------------------------------------- */
+
+    .page-12 .global-header {
+        min-height: auto;
+
+        padding:
+            28px 22px 30px;
+
+        align-items: center;
+
+        gap: 15px;
+    }
+
+    .page-12 .global-brand {
+        gap: 10px;
+    }
+
+    .page-12 .global-logo {
+        width: 58px;
+        height: 58px;
+    }
+
+    .page-12 .global-brand-name {
+        padding-top: 0;
+
+        font-size: 16px;
+    }
+
+    .page-12 .global-brand-name span:last-child {
+        margin-top: 4px;
+    }
+
+    .page-12 .global-page-number {
+        padding-top: 0;
+
+        font-size: 10px;
+
+        letter-spacing: 0.14em;
+    }
+
+    .page-12 .global-divider {
+        height: 3px;
+    }
+
+
+    /* -------------------------------------------------------
+       MAIN
+       ------------------------------------------------------- */
+
+    .page-12 .page12-main {
+        width:
+            calc(100% - 36px);
+
+        padding:
+            60px 0 80px;
+    }
+
+
+    /* -------------------------------------------------------
+       HERO
+       ------------------------------------------------------- */
+
+    .page-12 .ctm-hero {
+        margin-bottom: 75px;
+    }
+
+    .page-12 .ctm-kicker {
+        padding:
+            6px 15px;
+
+        font-size: 8px;
+
+        letter-spacing: 0.10em;
+    }
+
+    .page-12 .ctm-title {
+        margin-top: 32px;
+
+        gap: 11px;
+    }
+
+    .page-12 .ctm-letter {
+        font-size: 78px;
+    }
+
+    .page-12 .ctm-separator {
+        font-size: 24px;
+    }
+
+    .page-12 .ctm-name {
+        margin-top: 30px;
+
+        gap: 7px;
+    }
+
+    .page-12 .ctm-name span {
+        font-size: 11px;
+    }
+
+    .page-12 .ctm-tamil-name {
+        font-size: 12px;
+    }
+
+    .page-12 .ctm-hero-message {
+        margin-top: 38px;
+
+        font-size: 18px;
+
+        line-height: 1.6;
+    }
+
+    .page-12 .ctm-hero-tamil {
+        margin-top: 15px;
+
+        font-size: 14px;
+    }
+
+
+    /* -------------------------------------------------------
+       COMPONENT
+       ------------------------------------------------------- */
+
+    .page-12 .ctm-component {
+        margin-bottom: 70px;
+
+        padding:
+            42px 18px;
+
+        display: block;
+
+        border-radius: 19px;
+    }
+
+    .page-12 .component-letter {
+        width: 62px;
+        height: 62px;
+
+        font-size: 30px;
+
+        margin-bottom: 25px;
+    }
+
+    .page-12 .component-content h2 {
+        font-size: 34px;
+    }
+
+    .page-12 .component-tamil {
+        font-size: 18px;
+    }
+
+    .page-12 .component-lead {
+        margin-top: 18px;
+
+        font-size: 14px;
+    }
+
+
+    /* -------------------------------------------------------
+       CASHFLOW
+       ------------------------------------------------------- */
+
+    .page-12 .cashflow-chain {
+        margin-top: 30px;
+
+        grid-template-columns:
+            1fr;
+
+        gap: 7px;
+    }
+
+    .page-12 .flow-node {
+        min-width: 0;
+        min-height: 82px;
+
+        padding:
+            15px 12px;
+    }
+
+    .page-12 .flow-node strong {
+        font-size: 9px;
+    }
+
+    .page-12 .flow-node small {
+        font-size: 8px;
+    }
+
+    .page-12 .flow-arrow {
+        font-size: 18px;
+    }
+
+    .page-12 .component-punch {
+        margin-top: 30px;
+
+        padding:
+            18px 10px;
+
+        font-size: 17px;
+
+        line-height: 1.5;
+    }
+
+
+    /* -------------------------------------------------------
+       TRIBE
+       ------------------------------------------------------- */
+
+    .page-12 .tribe-network {
+        height: 320px;
+
+        margin-top: 30px;
+    }
+
+    .page-12 .tribe-center {
+        width: 75px;
+        height: 75px;
+
+        font-size: 11px;
+    }
+
+    .page-12 .tribe-line {
+        width: 130px;
+    }
+
+    .page-12 .tribe-person {
+        width: 58px;
+        height: 58px;
+
+        font-size: 6px;
+    }
+
+    .page-12 .tribe-message {
+        font-size: 17px;
+
+        line-height: 1.5;
+    }
+
+    .page-12 .tribe-message-secondary {
+        font-size: 18px;
+    }
+
+    .page-12 .tribe-definition {
+        gap: 6px;
+    }
+
+    .page-12 .tribe-definition span {
+        padding:
+            8px 10px;
+
+        font-size: 6px;
+    }
+
+
+    /* -------------------------------------------------------
+       MACHINE
+       ------------------------------------------------------- */
+
+    .page-12 .machine-flow {
+        margin-top: 30px;
+
+        grid-template-columns:
+            1fr;
+
+        gap: 7px;
+    }
+
+    .page-12 .machine-node {
+        min-width: 0;
+        min-height: 80px;
+    }
+
+    .page-12 .machine-node strong {
+        font-size: 9px;
+    }
+
+    .page-12 .machine-node small {
+        font-size: 7px;
+    }
+
+    .page-12 .machine-arrow {
+        display: flex;
+
+        height: 18px;
+
+        align-items: center;
+        justify-content: center;
+
+        font-size: 17px;
+    }
+
+    .page-12 .machine-punch {
+        margin-top: 30px;
+
+        padding:
+            18px 10px;
+
+        font-size: 17px;
+
+        line-height: 1.5;
+    }
+
+
+    /* -------------------------------------------------------
+       FLYWHEEL
+       ------------------------------------------------------- */
+
+    .page-12 .ctm-flywheel-section {
+        margin-bottom: 75px;
+
+        padding:
+            55px 15px;
+
+        border-radius: 19px;
+    }
+
+    .page-12 .ctm-flywheel-section h2 {
+        font-size: 31px;
+    }
+
+    .page-12 .flywheel-tamil {
+        font-size: 14px;
+    }
+
+    .page-12 .ctm-flywheel {
+        width: 100%;
+
+        height: 420px;
+
+        margin-top: 35px;
+    }
+
+    .page-12 .flywheel-orbit {
+        width: 290px;
+        height: 290px;
+    }
+
+    .page-12 .flywheel-node {
+        width: 100px;
+        height: 100px;
+    }
+
+    .page-12 .flywheel-node span {
+        font-size: 28px;
+    }
+
+    .page-12 .flywheel-node strong {
+        font-size: 7px;
+    }
+
+    .page-12 .flywheel-node small {
+        font-size: 6px;
+    }
+
+    .page-12 .flywheel-c {
+        top: 3%;
+    }
+
+    .page-12 .flywheel-t {
+        right: 1%;
+        bottom: 4%;
+    }
+
+    .page-12 .flywheel-m {
+        left: 1%;
+        bottom: 4%;
+    }
+
+    .page-12 .flywheel-center {
+        width: 115px;
+        height: 115px;
+    }
+
+    .page-12 .flywheel-center strong {
+        font-size: 30px;
+    }
+
+    .page-12 .flywheel-center span {
+        font-size: 6px;
+    }
+
+    .page-12 .flywheel-arrow {
+        font-size: 23px;
+    }
+
+    .page-12 .arrow-c-t {
+        right: 14%;
+        top: 37%;
+    }
+
+    .page-12 .arrow-t-m {
+        left: 13%;
+        bottom: 23%;
+    }
+
+    .page-12 .arrow-m-c {
+        left: 25%;
+        top: 37%;
+    }
+
+    .page-12 .loop-message {
+        font-size: 10px;
+
+        line-height: 1.8;
+    }
+
+    .page-12 .infinity-symbol {
+        font-size: 48px;
+    }
+
+
+    /* -------------------------------------------------------
+       MONEY FLOW
+       ------------------------------------------------------- */
+
+    .page-12 .money-flow-section {
+        margin-bottom: 75px;
+    }
+
+    .page-12 .money-flow-section h2 {
+        font-size: 32px;
+    }
+
+    .page-12 .money-flow-intro {
+        font-size: 11px;
+    }
+
+    .page-12 .money-flow {
+        margin-top: 32px;
+    }
+
+    .page-12 .money-step {
+        min-height: 100px;
+
+        padding:
+            20px 15px;
+
+        grid-template-columns:
+            35px 1fr;
+
+        gap: 10px;
+    }
+
+    .page-12 .money-step > span {
+        font-size: 8px;
+    }
+
+    .page-12 .money-step strong {
+        font-size: 10px;
+    }
+
+    .page-12 .money-step small {
+        grid-column:
+            2;
+
+        font-size: 9px;
+    }
+
+    .page-12 .money-arrow {
+        height: 27px;
+
+        font-size: 19px;
+    }
+
+    .page-12 .flow-loop {
+        margin-top: 28px;
+
+        gap: 10px;
+    }
+
+    .page-12 .flow-loop strong {
+        font-size: 14px;
+    }
+
+    .page-12 .flow-loop span {
+        font-size: 28px;
+    }
+
+
+    /* -------------------------------------------------------
+       ONLINE TRIBE
+       ------------------------------------------------------- */
+
+    .page-12 .online-tribe-section {
+        margin-bottom: 75px;
+
+        padding:
+            55px 18px;
+
+        border-radius: 19px;
+    }
+
+    .page-12 .online-tribe-section h2 {
+        font-size: 31px;
+
+        line-height: 1.4;
+    }
+
+    .page-12 .online-tribe-tamil {
+        font-size: 14px;
+    }
+
+    .page-12 .online-pillars {
+        margin-top: 30px;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 7px;
+    }
+
+    .page-12 .online-pillars > div {
+        min-height: 82px;
+    }
+
+    .page-12 .online-pillars strong {
+        font-size: 11px;
+    }
+
+    .page-12 .online-pillars span {
+        font-size: 8px;
+    }
+
+    .page-12 .online-network {
+        height: 340px;
+
+        margin-top: 35px;
+    }
+
+    .page-12 .online-you {
+        width: 75px;
+        height: 75px;
+
+        font-size: 10px;
+    }
+
+    .page-12 .online-branch {
+        width: 135px;
+    }
+
+    .page-12 .online-person {
+        width: 55px;
+        height: 55px;
+
+        font-size: 5px;
+    }
+
+    .page-12 .online-growth {
+        width: 46px;
+        height: 46px;
+
+        font-size: 5px;
+    }
+
+    .page-12 .online-infinity {
+        font-size: 48px;
+    }
+
+    .page-12 .online-punch {
+        font-size: 18px;
+
+        line-height: 1.5;
+    }
+
+
+    /* -------------------------------------------------------
+       PEOPLE + MACHINE
+       ------------------------------------------------------- */
+
+    .page-12 .people-machine-section {
+        margin-bottom: 75px;
+    }
+
+    .page-12 .people-machine-grid {
+        gap: 8px;
+    }
+
+    .page-12 .people-side,
+    .page-12 .machine-side {
+        min-height: 220px;
+
+        padding:
+            35px 20px;
+
+        border-radius: 19px;
+    }
+
+    .page-12 .people-side h3,
+    .page-12 .machine-side h3 {
+        font-size: 21px;
+    }
+
+    .page-12 .people-side p,
+    .page-12 .machine-side p {
+        font-size: 10px;
+    }
+
+    .page-12 .pm-symbol {
+        font-size: 45px;
+    }
+
+    .page-12 .people-machine-equation {
+        margin-top: 30px;
+
+        gap: 6px;
+    }
+
+    .page-12 .people-machine-equation span,
+    .page-12 .people-machine-equation strong {
+        padding:
+            8px 10px;
+
+        font-size: 6px;
+    }
+
+    .page-12 .people-machine-equation b {
+        font-size: 10px;
+    }
+
+
+    /* -------------------------------------------------------
+       SIMPLE EQUATION
+       ------------------------------------------------------- */
+
+    .page-12 .simple-equation-section {
+        margin-bottom: 75px;
+
+        padding:
+            55px 18px;
+
+        border-radius: 19px;
+    }
+
+    .page-12 .simple-equation-title {
+        margin-top: 20px;
+
+        font-size: 59px;
+    }
+
+    .page-12 .simple-equation-grid {
+        margin-top: 35px;
+
+        gap: 7px;
+    }
+
+    .page-12 .equation-card {
+        min-height: 200px;
+
+        padding:
+            30px 18px;
+    }
+
+    .page-12 .equation-card > span {
+        font-size: 43px;
+    }
+
+    .page-12 .equation-card strong {
+        font-size: 15px;
+    }
+
+    .page-12 .equation-card p {
+        font-size: 10px;
+    }
+
+    .page-12 .equation-card small {
+        font-size: 9px;
+    }
+
+    .page-12 .equation-symbol {
+        min-height: 25px;
+
+        font-size: 27px;
+    }
+
+    .page-12 .equation-punch {
+        margin-top: 35px;
+
+        padding:
+            18px 10px;
+
+        font-size: 16px;
+    }
+
+    .page-12 .equation-brand {
+        margin-top: 25px;
+
+        font-size: 55px;
+    }
+
+
+    /* -------------------------------------------------------
+       FINAL
+       ------------------------------------------------------- */
+
+    .page-12 .ctm-final-section {
+        padding:
+            65px 18px 70px;
+
+        border-radius: 22px;
+    }
+
+    .page-12 .final-kicker {
+        font-size: 8px;
+
+        letter-spacing: 0.16em;
+    }
+
+    .page-12 .final-question {
+        margin-top: 55px;
+
+        padding-bottom: 38px;
+    }
+
+    .page-12 .question-number {
+        width: 31px;
+        height: 31px;
+
+        font-size: 7px;
+    }
+
+    .page-12 .final-question h2 {
+        margin-top: 17px;
+
+        font-size: 25px;
+
+        line-height: 1.45;
+    }
+
+    .page-12 .final-question p {
+        font-size: 14px;
+    }
+
+    .page-12 .final-punch {
+        margin-top: 50px;
+
+        padding:
+            45px 12px;
+    }
+
+    .page-12 .final-letters {
+        gap: 12px;
+    }
+
+    .page-12 .final-letters span {
+        font-size: 50px;
+    }
+
+    .page-12 .final-punch h3 {
+        margin-top: 27px;
+
+        font-size: 23px;
+    }
+
+    .page-12 .final-punch h4 {
+        font-size: 27px;
+    }
+
+    .page-12 .final-punch p {
+        margin-top: 22px;
+
+        font-size: 10px;
+
+        line-height: 1.8;
+    }
+
+    .page-12 .ctm-cta {
+        width: 100%;
+
+        min-height: 85px;
+
+        margin-top: 35px;
+
+        padding:
+            18px 50px 18px 16px;
+    }
+
+    .page-12 .ctm-cta span {
+        font-size: 12px;
+    }
+
+    .page-12 .ctm-cta small {
+        font-size: 8px;
+    }
+
+    .page-12 .ctm-cta b {
+        right: 17px;
+
+        font-size: 25px;
+    }
+
+
+    /* -------------------------------------------------------
+       FOOTER
+       ------------------------------------------------------- */
+
+    .page-12 .global-footer {
+        padding:
+            0 20px 35px;
+    }
+
+    .page-12 .page-navigation {
+        min-height: 105px;
+
+        gap: 8px;
+    }
+
+    .page-12 .nav-button {
+        gap: 7px;
+
+        padding:
+            9px 4px;
+    }
+
+    .page-12 .nav-arrow {
+        font-size: 20px;
+    }
+
+    .page-12 .nav-text strong {
+        font-size: 11px;
+    }
+
+    .page-12 .nav-text small {
+        font-size: 7px;
+    }
+
+    .page-12 .nav-current span {
+        font-size: 22px;
+    }
+
+    .page-12 .nav-current small {
+        font-size: 9px;
+    }
+
+    .page-12 .footer-tagline {
+        font-size: 8px;
+
+        letter-spacing: 0.16em;
+    }
+
+    .page-12 .footer-brand {
+        font-size: 7px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .page-12 .global-header {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .page-12 .global-logo {
+        width: 50px;
+        height: 50px;
+    }
+
+    .page-12 .global-brand-name {
+        font-size: 13px;
+    }
+
+    .page-12 .global-page-number {
+        font-size: 8px;
+    }
+
+    .page-12 .page12-main {
+        width:
+            calc(100% - 28px);
+    }
+
+    .page-12 .ctm-letter {
+        font-size: 65px;
+    }
+
+    .page-12 .ctm-separator {
+        font-size: 20px;
+    }
+
+    .page-12 .ctm-name span {
+        font-size: 9px;
+    }
+
+    .page-12 .ctm-hero-message {
+        font-size: 16px;
+    }
+
+    .page-12 .component-content h2 {
+        font-size: 30px;
+    }
+
+    .page-12 .tribe-network {
+        height: 285px;
+    }
+
+    .page-12 .ctm-flywheel {
+        height: 380px;
+    }
+
+    .page-12 .flywheel-orbit {
+        width: 250px;
+        height: 250px;
+    }
+
+    .page-12 .flywheel-node {
+        width: 88px;
+        height: 88px;
+    }
+
+    .page-12 .flywheel-center {
+        width: 105px;
+        height: 105px;
+    }
+
+    .page-12 .flywheel-center strong {
+        font-size: 26px;
+    }
+
+    .page-12 .online-network {
+        height: 300px;
+    }
+
+    .page-12 .simple-equation-title {
+        font-size: 51px;
+    }
+
+    .page-12 .final-question h2 {
+        font-size: 22px;
+    }
+
+    .page-12 .final-punch h3 {
+        font-size: 21px;
+    }
+
+    .page-12 .final-punch h4 {
+        font-size: 24px;
+    }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY / FOCUS
+   ========================================================= */
+
+.page-12 .ctm-cta:focus-visible,
+.page-12 .nav-button:focus-visible {
+    outline:
+        2px solid var(--p12-teal);
+
+    outline-offset: 4px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    .page-12 .reveal-ready {
+        opacity: 1;
+
+        transform: none;
+
+        transition: none;
+    }
+
+    .page-12 .ctm-cta,
+    .page-12 .nav-button {
+        transition: none;
+    }
+
+}
