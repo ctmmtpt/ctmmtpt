@@ -1,1 +1,2410 @@
+/* =========================================================
+   CTM PATH™ MILLIONAIRES™ — PAGE 08
+   THE MONEY QUESTION™
+   COMPLETE PAGE-SPECIFIC CSS REPLACEMENT
+   ========================================================= */
 
+:root {
+    --p08-bg: #061a2b;
+    --p08-bg-deep: #041321;
+    --p08-panel: #0a2235;
+    --p08-panel-2: #0d2a40;
+
+    --p08-ivory: #f5f0e7;
+    --p08-muted: #b9c5ca;
+
+    --p08-teal: #09c8cf;
+    --p08-teal-soft: #6ce1df;
+
+    --p08-gold: #f4b321;
+    --p08-gold-soft: #ffd166;
+
+    --p08-border: rgba(255, 255, 255, 0.09);
+    --p08-border-gold: rgba(244, 179, 33, 0.38);
+    --p08-border-teal: rgba(9, 200, 207, 0.30);
+
+    --p08-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+}
+
+
+/* =========================================================
+   FOUNDATION
+   ========================================================= */
+
+html {
+    background: var(--p08-bg-deep);
+    scroll-behavior: smooth;
+}
+
+body.page-08 {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 5%,
+            rgba(9, 200, 207, 0.11),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 50% 43%,
+            rgba(244, 179, 33, 0.045),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #061a2b 0%,
+            #071d30 48%,
+            #041522 100%
+        );
+
+    color: var(--p08-ivory);
+
+    font-family:
+        "Noto Sans Tamil",
+        "Nirmala UI",
+        "Latha",
+        Arial,
+        sans-serif;
+}
+
+.page-08 *,
+.page-08 *::before,
+.page-08 *::after {
+    box-sizing: border-box;
+}
+
+.page-08 img {
+    max-width: 100%;
+    display: block;
+}
+
+.page-08 button,
+.page-08 input {
+    font: inherit;
+}
+
+.page-08 button {
+    cursor: pointer;
+}
+
+.page-08 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   GLOBAL HEADER
+   ========================================================= */
+
+.page-08 .global-header {
+    position: relative;
+    z-index: 10;
+
+    min-height: 250px;
+
+    padding:
+        72px
+        clamp(48px, 6vw, 108px)
+        62px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 40px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(3, 15, 27, 0.34),
+            rgba(3, 15, 27, 0)
+        );
+}
+
+.page-08 .global-brand {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 24px;
+
+    min-width: 0;
+}
+
+.page-08 .global-logo {
+    width: 112px;
+    height: 112px;
+
+    flex: 0 0 auto;
+
+    object-fit: contain;
+    object-position: center;
+}
+
+.page-08 .global-brand-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding-top: 8px;
+
+    color: var(--p08-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(25px, 2.05vw, 37px);
+
+    font-weight: 900;
+
+    line-height: 1.05;
+
+    letter-spacing: 0.02em;
+
+    text-transform: uppercase;
+}
+
+.page-08 .global-brand-name span:last-child {
+    margin-top: 7px;
+}
+
+.page-08 .global-page-number {
+    padding-top: 15px;
+
+    color: var(--p08-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(22px, 1.55vw, 31px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.34em;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   GLOBAL DIVIDER
+   ========================================================= */
+
+.page-08 .global-divider {
+    width: 100%;
+    height: 4px;
+
+    display: grid;
+
+    grid-template-columns:
+        27% 46% 27%;
+}
+
+.page-08 .global-divider span {
+    display: block;
+    height: 100%;
+}
+
+.page-08 .global-divider span:nth-child(1),
+.page-08 .global-divider span:nth-child(3) {
+    background: var(--p08-gold);
+}
+
+.page-08 .global-divider span:nth-child(2) {
+    background: var(--p08-teal);
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.page-08 .page08-main {
+    width:
+        min(
+            1440px,
+            calc(100% - 96px)
+        );
+
+    margin: 0 auto;
+
+    padding:
+        112px 0 125px;
+}
+
+
+/* =========================================================
+   MONEY HERO
+   ========================================================= */
+
+.page-08 .money-hero {
+    max-width: 1160px;
+
+    margin:
+        0 auto 135px;
+
+    text-align: center;
+}
+
+.page-08 .money-kicker {
+    margin-bottom: 30px;
+
+    color: var(--p08-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(14px, 1vw, 17px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.36em;
+
+    line-height: 1.4;
+}
+
+.page-08 .money-hero h1 {
+    margin: 0;
+
+    color: var(--p08-ivory);
+
+    font-size:
+        clamp(48px, 5.1vw, 86px);
+
+    font-weight: 900;
+
+    line-height: 1.25;
+
+    letter-spacing: -0.025em;
+}
+
+.page-08 .money-hero-en {
+    margin:
+        32px 0 0;
+
+    color: var(--p08-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(18px, 1.45vw, 25px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.30em;
+
+    line-height: 1.5;
+}
+
+.page-08 .money-hero-lead {
+    max-width: 900px;
+
+    margin:
+        35px auto 0;
+
+    color: var(--p08-ivory);
+
+    font-size:
+        clamp(21px, 1.7vw, 29px);
+
+    font-weight: 600;
+
+    line-height: 1.75;
+}
+
+.page-08 .money-hero-lead-en {
+    max-width: 800px;
+
+    margin:
+        14px auto 0;
+
+    color: var(--p08-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(15px, 1.1vw, 19px);
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   MONEY STEP
+   ========================================================= */
+
+.page-08 .money-step {
+    display: grid;
+
+    grid-template-columns:
+        130px minmax(0, 1fr);
+
+    gap: 50px;
+
+    margin-bottom: 120px;
+
+    padding:
+        65px clamp(34px, 5vw, 78px);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.035),
+            rgba(255,255,255,0.008)
+        ),
+        var(--p08-panel);
+
+    border:
+        1px solid var(--p08-border);
+
+    border-radius: 27px;
+
+    box-shadow: var(--p08-shadow);
+}
+
+
+/* =========================================================
+   STEP MARKER
+   ========================================================= */
+
+.page-08 .step-marker {
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    padding-top: 4px;
+}
+
+.page-08 .step-marker span {
+    color: var(--p08-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(48px, 4vw, 67px);
+
+    font-weight: 900;
+
+    line-height: 1;
+}
+
+.page-08 .step-marker small {
+    margin-top: 13px;
+
+    color: var(--p08-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.22em;
+}
+
+
+/* =========================================================
+   STEP CONTENT
+   ========================================================= */
+
+.page-08 .step-content {
+    min-width: 0;
+}
+
+.page-08 .step-label {
+    margin-bottom: 15px;
+
+    color: var(--p08-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.28em;
+}
+
+.page-08 .step-content h2 {
+    margin: 0;
+
+    color: var(--p08-ivory);
+
+    font-size:
+        clamp(34px, 3.2vw, 52px);
+
+    font-weight: 900;
+
+    line-height: 1.4;
+}
+
+.page-08 .step-question-en {
+    margin:
+        15px 0 0;
+
+    color: var(--p08-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   INCOME OPTIONS
+   ========================================================= */
+
+.page-08 .income-options {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 14px;
+
+    margin-top: 42px;
+}
+
+.page-08 .income-option {
+    min-height: 78px;
+
+    padding:
+        16px 18px;
+
+    color: var(--p08-ivory);
+
+    background:
+        rgba(255,255,255,0.018);
+
+    border:
+        1px solid var(--p08-border);
+
+    border-radius: 14px;
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(18px, 1.35vw, 23px);
+
+    font-weight: 900;
+
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease,
+        color 180ms ease;
+}
+
+.page-08 .income-option:hover,
+.page-08 .income-option:focus-visible {
+    transform: translateY(-2px);
+
+    border-color:
+        var(--p08-border-gold);
+
+    background:
+        rgba(244,179,33,0.06);
+
+    color: var(--p08-gold-soft);
+
+    outline: none;
+}
+
+.page-08 .income-option.is-selected {
+    border-color:
+        var(--p08-gold);
+
+    background:
+        rgba(244,179,33,0.10);
+
+    color:
+        var(--p08-gold-soft);
+
+    box-shadow:
+        0 0 0 1px rgba(244,179,33,0.12);
+}
+
+
+/* =========================================================
+   CUSTOM INCOME BOX
+   ========================================================= */
+
+.page-08 .custom-income-box {
+    display: none;
+
+    margin-top: 24px;
+
+    padding:
+        26px;
+
+    border:
+        1px solid var(--p08-border-teal);
+
+    border-radius: 16px;
+
+    background:
+        rgba(9,200,207,0.035);
+}
+
+.page-08 .custom-income-box.is-visible {
+    display: block;
+}
+
+.page-08 .custom-income-box label,
+.page-08 .investment-input-box label {
+    display: block;
+
+    margin-bottom: 12px;
+
+    color: var(--p08-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.22em;
+}
+
+
+/* =========================================================
+   MONEY INPUT
+   ========================================================= */
+
+.page-08 .money-input-wrap {
+    min-height: 78px;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+
+    background:
+        rgba(0,0,0,0.17);
+
+    border:
+        1px solid rgba(255,255,255,0.12);
+
+    border-radius: 13px;
+}
+
+.page-08 .money-input-wrap > span:first-child {
+    padding-left: 22px;
+
+    color: var(--p08-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 25px;
+
+    font-weight: 900;
+}
+
+.page-08 .money-input-wrap input {
+    width: 100%;
+
+    min-width: 0;
+
+    padding:
+        17px 14px;
+
+    border: 0;
+    outline: 0;
+
+    background: transparent;
+
+    color: var(--p08-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 29px;
+
+    font-weight: 900;
+}
+
+.page-08 .money-input-wrap input::placeholder {
+    color:
+        rgba(245,240,231,0.24);
+}
+
+.page-08 .money-input-wrap input::-webkit-outer-spin-button,
+.page-08 .money-input-wrap input::-webkit-inner-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+}
+
+.page-08 .money-input-wrap input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+.page-08 .money-input-wrap .per-month {
+    padding-right: 20px;
+
+    color: var(--p08-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   INVESTMENT CONTEXT
+   ========================================================= */
+
+.page-08 .investment-context {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 10px;
+
+    margin-top: 40px;
+}
+
+.page-08 .context-item {
+    min-height: 92px;
+
+    padding:
+        18px 12px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    border:
+        1px solid var(--p08-border);
+
+    border-radius: 13px;
+
+    background:
+        rgba(255,255,255,0.014);
+}
+
+.page-08 .context-item span {
+    color: var(--p08-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.13em;
+}
+
+.page-08 .context-item small {
+    margin-top: 8px;
+
+    color: var(--p08-muted);
+
+    font-size: 12px;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   INVESTMENT INPUT
+   ========================================================= */
+
+.page-08 .investment-input-box {
+    max-width: 760px;
+
+    margin:
+        38px auto 0;
+
+    padding:
+        30px;
+
+    border:
+        1px solid var(--p08-border-gold);
+
+    border-radius: 18px;
+
+    background:
+        rgba(244,179,33,0.035);
+}
+
+.page-08 .money-input-wrap.large {
+    min-height: 92px;
+}
+
+.page-08 .money-input-wrap.large > span:first-child {
+    padding-left: 27px;
+
+    font-size: 31px;
+}
+
+.page-08 .money-input-wrap.large input {
+    font-size: 38px;
+}
+
+.page-08 .investment-input-box > p {
+    margin:
+        20px 0 0;
+
+    color: var(--p08-ivory);
+
+    font-size: 16px;
+
+    line-height: 1.7;
+}
+
+.page-08 .investment-input-box > p.english {
+    margin-top: 9px;
+
+    color: var(--p08-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   10% POSSIBILITY
+   ========================================================= */
+
+.page-08 .ten-percent-section {
+    position: relative;
+
+    margin:
+        0 auto 135px;
+
+    padding:
+        95px clamp(30px, 6vw, 95px);
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at 50% 42%,
+            rgba(244,179,33,0.09),
+            transparent 45%
+        ),
+        linear-gradient(
+            145deg,
+            rgba(9,200,207,0.045),
+            rgba(244,179,33,0.045)
+        ),
+        #071c2e;
+
+    border:
+        1px solid var(--p08-border-gold);
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 30px 90px rgba(0,0,0,0.38);
+}
+
+.page-08 .possibility-kicker {
+    margin-bottom: 22px;
+
+    color: var(--p08-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.34em;
+}
+
+.page-08 .ten-percent-section h2 {
+    margin: 0;
+
+    color: var(--p08-ivory);
+
+    font-size:
+        clamp(34px, 3.7vw, 58px);
+
+    font-weight: 900;
+
+    line-height: 1.45;
+}
+
+.page-08 .ten-percent-section h2 span {
+    color: var(--p08-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(58px, 6vw, 96px);
+
+    line-height: 1;
+}
+
+.page-08 .possibility-en {
+    margin:
+        22px 0 0;
+
+    color: var(--p08-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(15px, 1.15vw, 19px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.28em;
+}
+
+
+/* =========================================================
+   10% VISUAL
+   ========================================================= */
+
+.page-08 .ten-percent-visual {
+    max-width: 1050px;
+
+    margin:
+        65px auto 0;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        auto
+        minmax(0, 0.52fr);
+
+    align-items: center;
+
+    gap: 30px;
+}
+
+.page-08 .investment-full,
+.page-08 .investment-ten {
+    min-height: 210px;
+
+    padding:
+        30px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 20px;
+}
+
+.page-08 .investment-full {
+    background:
+        rgba(255,255,255,0.025);
+
+    border:
+        1px solid var(--p08-border);
+}
+
+.page-08 .investment-ten {
+    background:
+        rgba(244,179,33,0.09);
+
+    border:
+        2px solid var(--p08-gold);
+
+    box-shadow:
+        0 0 45px rgba(244,179,33,0.08);
+}
+
+.page-08 .visual-label {
+    color: var(--p08-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.2em;
+}
+
+.page-08 .investment-full strong {
+    margin:
+        18px 0 6px;
+
+    color: var(--p08-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(29px, 3vw, 48px);
+
+    font-weight: 900;
+}
+
+.page-08 .investment-ten strong {
+    margin:
+        18px 0 6px;
+
+    color: var(--p08-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(34px, 3.5vw, 58px);
+
+    font-weight: 900;
+}
+
+.page-08 .investment-full small,
+.page-08 .investment-ten small {
+    color: var(--p08-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.18em;
+}
+
+.page-08 .investment-ten small {
+    color: var(--p08-gold-soft);
+}
+
+.page-08 .visual-arrow {
+    color: var(--p08-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 42px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   POSSIBILITY MESSAGE
+   ========================================================= */
+
+.page-08 .possibility-message {
+    margin:
+        48px 0 0;
+
+    color: var(--p08-ivory);
+
+    font-size:
+        clamp(21px, 1.7vw, 29px);
+
+    font-weight: 800;
+
+    line-height: 1.55;
+}
+
+.page-08 .possibility-message-en {
+    margin:
+        10px 0 0;
+
+    color: var(--p08-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   DECISION SECTION
+   ========================================================= */
+
+.page-08 .decision-section {
+    max-width: 1120px;
+
+    margin:
+        0 auto 135px;
+
+    text-align: center;
+}
+
+.page-08 .decision-kicker {
+    margin-bottom: 22px;
+
+    color: var(--p08-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.34em;
+}
+
+.page-08 .decision-section h2 {
+    margin: 0;
+
+    color: var(--p08-ivory);
+
+    font-size:
+        clamp(34px, 3.3vw, 52px);
+
+    font-weight: 900;
+
+    line-height: 1.45;
+}
+
+.page-08 .decision-highlight {
+    margin:
+        30px auto 0;
+
+    color: var(--p08-muted);
+
+    font-size:
+        clamp(21px, 1.7vw, 29px);
+
+    line-height: 1.65;
+}
+
+.page-08 .decision-highlight strong {
+    color: var(--p08-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(45px, 4.7vw, 72px);
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   BIG QUESTION
+   ========================================================= */
+
+.page-08 .decision-question {
+    margin:
+        58px auto 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 24px;
+}
+
+.page-08 .question-line {
+    width: 100px;
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--p08-gold)
+        );
+}
+
+.page-08 .question-line:last-child {
+    background:
+        linear-gradient(
+            90deg,
+            var(--p08-gold),
+            transparent
+        );
+}
+
+.page-08 .decision-question span {
+    color: var(--p08-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(24px, 2.4vw, 38px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.14em;
+
+    white-space: nowrap;
+}
+
+.page-08 .decision-tamil {
+    margin:
+        27px 0 0;
+
+    color: var(--p08-ivory);
+
+    font-size:
+        clamp(21px, 1.65vw, 27px);
+
+    line-height: 1.6;
+}
+
+.page-08 .decision-support {
+    margin:
+        25px 0 0;
+
+    color: var(--p08-muted);
+
+    font-size:
+        clamp(17px, 1.35vw, 22px);
+
+    line-height: 1.7;
+}
+
+.page-08 .decision-support strong {
+    color: var(--p08-teal);
+
+    font-size:
+        clamp(22px, 1.7vw, 29px);
+}
+
+
+/* =========================================================
+   DECISION BUTTONS
+   ========================================================= */
+
+.page-08 .decision-buttons {
+    max-width: 650px;
+
+    margin:
+        45px auto 0;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+.page-08 .decision-button {
+    min-height: 100px;
+
+    padding:
+        20px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 17px;
+
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease;
+}
+
+.page-08 .decision-button:hover,
+.page-08 .decision-button:focus-visible {
+    transform: translateY(-3px);
+
+    outline: none;
+}
+
+.page-08 .decision-button span {
+    font-family: Arial, sans-serif;
+
+    font-size: 22px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.14em;
+}
+
+.page-08 .decision-button small {
+    margin-top: 8px;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+.page-08 .decision-yes {
+    color: var(--p08-bg-deep);
+
+    background:
+        var(--p08-gold);
+
+    border:
+        1px solid var(--p08-gold);
+}
+
+.page-08 .decision-yes span {
+    color: var(--p08-bg-deep);
+}
+
+.page-08 .decision-yes small {
+    color:
+        rgba(4,19,33,0.75);
+}
+
+.page-08 .decision-yes:hover,
+.page-08 .decision-yes:focus-visible {
+    background:
+        var(--p08-gold-soft);
+}
+
+.page-08 .decision-not-yet {
+    color: var(--p08-ivory);
+
+    background:
+        rgba(255,255,255,0.025);
+
+    border:
+        1px solid var(--p08-border);
+}
+
+.page-08 .decision-not-yet span {
+    color: var(--p08-ivory);
+}
+
+.page-08 .decision-not-yet small {
+    color: var(--p08-muted);
+}
+
+.page-08 .decision-not-yet:hover,
+.page-08 .decision-not-yet:focus-visible {
+    border-color:
+        var(--p08-border-teal);
+
+    background:
+        rgba(9,200,207,0.045);
+}
+
+
+/* =========================================================
+   SELECTED DECISION
+   ========================================================= */
+
+.page-08 .decision-button.is-selected {
+    box-shadow:
+        0 0 0 3px rgba(9,200,207,0.18);
+}
+
+.page-08 .decision-not-yet.is-selected {
+    border-color:
+        var(--p08-teal);
+
+    background:
+        rgba(9,200,207,0.08);
+}
+
+
+/* =========================================================
+   CORE MESSAGE
+   ========================================================= */
+
+.page-08 .core-message {
+    max-width: 1080px;
+
+    margin:
+        0 auto 130px;
+
+    padding:
+        70px 50px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(9,200,207,0.035),
+            rgba(244,179,33,0.025)
+        );
+
+    border-top:
+        1px solid var(--p08-border);
+
+    border-bottom:
+        1px solid var(--p08-border);
+}
+
+.page-08 .core-line {
+    width: 110px;
+    height: 3px;
+
+    margin:
+        0 auto 35px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--p08-gold),
+            var(--p08-teal)
+        );
+}
+
+.page-08 .core-message > p:first-of-type {
+    margin: 0;
+
+    color: var(--p08-muted);
+
+    font-size:
+        clamp(18px, 1.45vw, 23px);
+
+    line-height: 1.7;
+}
+
+.page-08 .core-message > p:first-of-type strong {
+    color: var(--p08-ivory);
+}
+
+.page-08 .core-large {
+    margin:
+        30px 0 0;
+
+    color: var(--p08-ivory);
+
+    font-size:
+        clamp(30px, 3vw, 49px);
+
+    font-weight: 900;
+
+    line-height: 1.45;
+}
+
+.page-08 .core-large strong {
+    color: var(--p08-gold);
+}
+
+.page-08 .core-en {
+    margin:
+        27px auto 0;
+
+    color: var(--p08-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FINAL MONEY CLOSING
+   ========================================================= */
+
+.page-08 .money-closing {
+    max-width: 1120px;
+
+    margin:
+        0 auto;
+
+    text-align: center;
+}
+
+.page-08 .closing-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 0;
+
+    border-top:
+        1px solid var(--p08-border);
+
+    border-bottom:
+        1px solid var(--p08-border);
+}
+
+.page-08 .closing-grid > div {
+    min-height: 160px;
+
+    padding:
+        30px 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.page-08 .closing-grid > div + div {
+    border-left:
+        1px solid var(--p08-border);
+}
+
+.page-08 .closing-grid span {
+    margin-bottom: 12px;
+
+    color: var(--p08-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.18em;
+}
+
+.page-08 .closing-grid strong {
+    color: var(--p08-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 15px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.13em;
+}
+
+.page-08 .closing-grid small {
+    margin-top: 8px;
+
+    color: var(--p08-muted);
+
+    font-size: 13px;
+}
+
+.page-08 .money-closing h2 {
+    margin:
+        55px 0 0;
+
+    color: var(--p08-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(30px, 3.3vw, 54px);
+
+    font-weight: 900;
+
+    line-height: 1.4;
+
+    letter-spacing: 0.08em;
+}
+
+
+/* =========================================================
+   GLOBAL FOOTER
+   ========================================================= */
+
+.page-08 .global-footer {
+    position: relative;
+
+    margin-top: 30px;
+
+    padding:
+        0
+        clamp(36px, 6vw, 108px)
+        58px;
+
+    background:
+        #041321;
+
+    border-top:
+        1px solid rgba(255,255,255,0.07);
+}
+
+.page-08 .page-navigation {
+    min-height: 126px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr auto 1fr;
+
+    align-items: center;
+
+    gap: 30px;
+}
+
+.page-08 .nav-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    width: fit-content;
+
+    padding:
+        15px 18px;
+
+    border:
+        1px solid transparent;
+
+    border-radius: 12px;
+
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease;
+}
+
+.page-08 .nav-button:hover {
+    transform: translateY(-2px);
+
+    border-color:
+        var(--p08-border-teal);
+
+    background:
+        rgba(255,255,255,0.025);
+}
+
+.page-08 .nav-next {
+    justify-self: end;
+
+    text-align: right;
+}
+
+.page-08 .nav-arrow {
+    color: var(--p08-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 28px;
+
+    line-height: 1;
+}
+
+.page-08 .nav-text {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.page-08 .nav-text strong {
+    color: var(--p08-ivory);
+
+    font-size: 16px;
+
+    font-weight: 800;
+}
+
+.page-08 .nav-text small {
+    color: var(--p08-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.2em;
+}
+
+.page-08 .nav-current {
+    min-width: 90px;
+
+    display: flex;
+
+    align-items: baseline;
+
+    justify-content: center;
+
+    color: var(--p08-gold);
+
+    font-family: Arial, sans-serif;
+}
+
+.page-08 .nav-current span {
+    font-size: 30px;
+
+    font-weight: 900;
+}
+
+.page-08 .nav-current small {
+    margin-left: 4px;
+
+    color: var(--p08-muted);
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+.page-08 .global-footer-brand {
+    padding-top: 24px;
+
+    border-top:
+        1px solid rgba(255,255,255,0.07);
+
+    text-align: center;
+}
+
+.page-08 .footer-tagline {
+    color: var(--p08-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.26em;
+}
+
+.page-08 .footer-brand {
+    margin-top: 9px;
+
+    color:
+        rgba(245,240,231,0.65);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1500px) {
+
+    .page-08 .global-header {
+        min-height: 310px;
+
+        padding-top: 78px;
+        padding-bottom: 72px;
+    }
+
+    .page-08 .global-logo {
+        width: 122px;
+        height: 122px;
+    }
+
+    .page-08 .page08-main {
+        width:
+            min(
+                1500px,
+                calc(100% - 120px)
+            );
+
+        padding-top: 125px;
+    }
+
+    .page-08 .money-hero {
+        margin-bottom: 150px;
+    }
+
+    .page-08 .money-step {
+        padding:
+            75px 90px;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .page-08 .global-header {
+        min-height: 190px;
+
+        padding:
+            48px 42px 45px;
+    }
+
+    .page-08 .global-logo {
+        width: 82px;
+        height: 82px;
+    }
+
+    .page-08 .global-brand {
+        gap: 16px;
+    }
+
+    .page-08 .global-brand-name {
+        font-size: 25px;
+    }
+
+    .page-08 .global-page-number {
+        font-size: 18px;
+
+        letter-spacing: 0.24em;
+    }
+
+    .page-08 .page08-main {
+        width:
+            min(
+                calc(100% - 60px),
+                950px
+            );
+
+        padding-top: 82px;
+    }
+
+    .page-08 .money-step {
+        grid-template-columns:
+            90px minmax(0, 1fr);
+
+        gap: 35px;
+    }
+
+    .page-08 .investment-context {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+    .page-08 .investment-context .context-item:nth-child(4),
+    .page-08 .investment-context .context-item:nth-child(5) {
+        grid-column: span 1;
+    }
+
+    .page-08 .ten-percent-visual {
+        grid-template-columns:
+            minmax(0, 1fr)
+            auto
+            minmax(0, 0.65fr);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .page-08 .global-header {
+        min-height: auto;
+
+        padding:
+            28px 22px 30px;
+
+        align-items: center;
+
+        gap: 18px;
+    }
+
+    .page-08 .global-brand {
+        gap: 10px;
+    }
+
+    .page-08 .global-logo {
+        width: 58px;
+        height: 58px;
+    }
+
+    .page-08 .global-brand-name {
+        padding-top: 0;
+
+        font-size: 16px;
+    }
+
+    .page-08 .global-brand-name span:last-child {
+        margin-top: 4px;
+    }
+
+    .page-08 .global-page-number {
+        padding-top: 0;
+
+        font-size: 11px;
+
+        letter-spacing: 0.16em;
+    }
+
+    .page-08 .global-divider {
+        height: 3px;
+    }
+
+    .page-08 .page08-main {
+        width:
+            calc(100% - 36px);
+
+        padding:
+            62px 0 80px;
+    }
+
+    .page-08 .money-hero {
+        margin-bottom: 78px;
+    }
+
+    .page-08 .money-kicker {
+        margin-bottom: 20px;
+
+        font-size: 10px;
+
+        letter-spacing: 0.23em;
+    }
+
+    .page-08 .money-hero h1 {
+        font-size:
+            clamp(
+                34px,
+                9.3vw,
+                50px
+            );
+
+        line-height: 1.32;
+    }
+
+    .page-08 .money-hero-en {
+        margin-top: 20px;
+
+        font-size: 10px;
+
+        letter-spacing: 0.17em;
+    }
+
+    .page-08 .money-hero-lead {
+        margin-top: 23px;
+
+        font-size: 17px;
+
+        line-height: 1.75;
+    }
+
+    .page-08 .money-hero-lead-en {
+        font-size: 13px;
+    }
+
+
+    /* ---------------------------------------------------------
+       STEPS
+       --------------------------------------------------------- */
+
+    .page-08 .money-step {
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+
+        margin-bottom: 70px;
+
+        padding:
+            32px 22px;
+
+        border-radius: 19px;
+    }
+
+    .page-08 .step-marker {
+        flex-direction: row;
+
+        align-items: baseline;
+
+        gap: 13px;
+
+        padding: 0;
+    }
+
+    .page-08 .step-marker span {
+        font-size: 42px;
+    }
+
+    .page-08 .step-marker small {
+        margin-top: 0;
+
+        font-size: 9px;
+    }
+
+    .page-08 .step-label {
+        font-size: 10px;
+
+        letter-spacing: 0.22em;
+    }
+
+    .page-08 .step-content h2 {
+        font-size: 29px;
+
+        line-height: 1.45;
+    }
+
+    .page-08 .step-question-en {
+        font-size: 13px;
+    }
+
+
+    /* ---------------------------------------------------------
+       INCOME OPTIONS
+       --------------------------------------------------------- */
+
+    .page-08 .income-options {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+
+        margin-top: 28px;
+    }
+
+    .page-08 .income-option {
+        min-height: 62px;
+
+        padding:
+            12px 10px;
+
+        font-size: 16px;
+    }
+
+    .page-08 .custom-income-box {
+        padding: 20px;
+    }
+
+    .page-08 .money-input-wrap {
+        min-height: 65px;
+    }
+
+    .page-08 .money-input-wrap input {
+        font-size: 24px;
+    }
+
+    .page-08 .money-input-wrap > span:first-child {
+        padding-left: 15px;
+
+        font-size: 21px;
+    }
+
+    .page-08 .money-input-wrap .per-month {
+        padding-right: 13px;
+
+        font-size: 8px;
+    }
+
+
+    /* ---------------------------------------------------------
+       INVESTMENT CONTEXT
+       --------------------------------------------------------- */
+
+    .page-08 .investment-context {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 8px;
+
+        margin-top: 28px;
+    }
+
+    .page-08 .context-item {
+        min-height: 76px;
+    }
+
+    .page-08 .context-item span {
+        font-size: 9px;
+    }
+
+    .page-08 .context-item small {
+        font-size: 10px;
+    }
+
+    .page-08 .investment-input-box {
+        padding: 20px;
+
+        margin-top: 28px;
+    }
+
+    .page-08 .money-input-wrap.large {
+        min-height: 76px;
+    }
+
+    .page-08 .money-input-wrap.large input {
+        font-size: 29px;
+    }
+
+    .page-08 .money-input-wrap.large > span:first-child {
+        padding-left: 17px;
+
+        font-size: 25px;
+    }
+
+    .page-08 .investment-input-box > p {
+        font-size: 14px;
+    }
+
+    .page-08 .investment-input-box > p.english {
+        font-size: 11px;
+    }
+
+
+    /* ---------------------------------------------------------
+       10% SECTION
+       --------------------------------------------------------- */
+
+    .page-08 .ten-percent-section {
+        margin-bottom: 80px;
+
+        padding:
+            55px 20px;
+
+        border-radius: 21px;
+    }
+
+    .page-08 .possibility-kicker {
+        font-size: 10px;
+
+        letter-spacing: 0.22em;
+    }
+
+    .page-08 .ten-percent-section h2 {
+        font-size: 28px;
+
+        line-height: 1.5;
+    }
+
+    .page-08 .ten-percent-section h2 span {
+        font-size: 54px;
+    }
+
+    .page-08 .possibility-en {
+        font-size: 10px;
+
+        letter-spacing: 0.18em;
+    }
+
+    .page-08 .ten-percent-visual {
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+
+        margin-top: 38px;
+    }
+
+    .page-08 .investment-full,
+    .page-08 .investment-ten {
+        min-height: 145px;
+
+        padding: 22px;
+    }
+
+    .page-08 .visual-arrow {
+        transform: rotate(90deg);
+
+        font-size: 28px;
+    }
+
+    .page-08 .investment-full strong {
+        font-size: 30px;
+    }
+
+    .page-08 .investment-ten strong {
+        font-size: 38px;
+    }
+
+    .page-08 .visual-label {
+        font-size: 9px;
+    }
+
+    .page-08 .possibility-message {
+        margin-top: 32px;
+
+        font-size: 18px;
+    }
+
+    .page-08 .possibility-message-en {
+        font-size: 12px;
+    }
+
+
+    /* ---------------------------------------------------------
+       DECISION
+       --------------------------------------------------------- */
+
+    .page-08 .decision-section {
+        margin-bottom: 80px;
+    }
+
+    .page-08 .decision-kicker {
+        font-size: 10px;
+
+        letter-spacing: 0.22em;
+    }
+
+    .page-08 .decision-section h2 {
+        font-size: 28px;
+    }
+
+    .page-08 .decision-highlight {
+        margin-top: 22px;
+
+        font-size: 18px;
+    }
+
+    .page-08 .decision-highlight strong {
+        font-size: 48px;
+    }
+
+    .page-08 .decision-question {
+        margin-top: 40px;
+
+        gap: 12px;
+    }
+
+    .page-08 .question-line {
+        width: 35px;
+    }
+
+    .page-08 .decision-question span {
+        font-size: 17px;
+
+        letter-spacing: 0.08em;
+    }
+
+    .page-08 .decision-tamil {
+        font-size: 18px;
+    }
+
+    .page-08 .decision-support {
+        font-size: 15px;
+    }
+
+    .page-08 .decision-support strong {
+        font-size: 21px;
+    }
+
+    .page-08 .decision-buttons {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+
+        margin-top: 30px;
+    }
+
+    .page-08 .decision-button {
+        min-height: 82px;
+    }
+
+
+    /* ---------------------------------------------------------
+       CORE MESSAGE
+       --------------------------------------------------------- */
+
+    .page-08 .core-message {
+        margin-bottom: 80px;
+
+        padding:
+            45px 20px;
+    }
+
+    .page-08 .core-message > p:first-of-type {
+        font-size: 16px;
+    }
+
+    .page-08 .core-large {
+        margin-top: 23px;
+
+        font-size: 27px;
+    }
+
+    .page-08 .core-en {
+        font-size: 12px;
+    }
+
+
+    /* ---------------------------------------------------------
+       CLOSING
+       --------------------------------------------------------- */
+
+    .page-08 .closing-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-08 .closing-grid > div {
+        min-height: 115px;
+    }
+
+    .page-08 .closing-grid > div + div {
+        border-left: 0;
+
+        border-top:
+            1px solid var(--p08-border);
+    }
+
+    .page-08 .closing-grid strong {
+        font-size: 13px;
+    }
+
+    .page-08 .closing-grid small {
+        font-size: 11px;
+    }
+
+    .page-08 .money-closing h2 {
+        margin-top: 40px;
+
+        font-size: 27px;
+
+        letter-spacing: 0.05em;
+    }
+
+
+    /* ---------------------------------------------------------
+       FOOTER
+       --------------------------------------------------------- */
+
+    .page-08 .global-footer {
+        padding:
+            0 22px 36px;
+    }
+
+    .page-08 .page-navigation {
+        min-height: 105px;
+
+        grid-template-columns:
+            1fr auto 1fr;
+
+        gap: 8px;
+    }
+
+    .page-08 .nav-button {
+        gap: 8px;
+
+        padding:
+            10px 5px;
+    }
+
+    .page-08 .nav-arrow {
+        font-size: 21px;
+    }
+
+    .page-08 .nav-text strong {
+        font-size: 12px;
+    }
+
+    .page-08 .nav-text small {
+        font-size: 8px;
+    }
+
+    .page-08 .nav-current span {
+        font-size: 22px;
+    }
+
+    .page-08 .nav-current small {
+        font-size: 10px;
+    }
+
+    .page-08 .footer-tagline {
+        font-size: 9px;
+
+        letter-spacing: 0.18em;
+    }
+
+    .page-08 .footer-brand {
+        font-size: 8px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .page-08 .global-header {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .page-08 .global-logo {
+        width: 50px;
+        height: 50px;
+    }
+
+    .page-08 .global-brand-name {
+        font-size: 14px;
+    }
+
+    .page-08 .global-page-number {
+        font-size: 9px;
+    }
+
+    .page-08 .page08-main {
+        width:
+            calc(100% - 28px);
+    }
+
+    .page-08 .money-hero h1 {
+        font-size: 31px;
+    }
+
+    .page-08 .money-hero-en {
+        font-size: 8px;
+    }
+
+    .page-08 .income-option {
+        font-size: 14px;
+    }
+
+    .page-08 .step-content h2 {
+        font-size: 26px;
+    }
+
+    .page-08 .ten-percent-section h2 {
+        font-size: 25px;
+    }
+
+    .page-08 .decision-section h2 {
+        font-size: 25px;
+    }
+
+    .page-08 .decision-question span {
+        font-size: 14px;
+    }
+
+    .page-08 .core-large {
+        font-size: 24px;
+    }
+
+    .page-08 .money-closing h2 {
+        font-size: 24px;
+    }
+}
+
+
+/* =========================================================
+   FOCUS / ACCESSIBILITY
+   ========================================================= */
+
+.page-08 .income-option:focus-visible,
+.page-08 .decision-button:focus-visible,
+.page-08 input:focus-visible,
+.page-08 .nav-button:focus-visible {
+    outline:
+        2px solid var(--p08-teal);
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    .page-08 .income-option,
+    .page-08 .decision-button,
+    .page-08 .nav-button {
+        transition: none;
+    }
+}
