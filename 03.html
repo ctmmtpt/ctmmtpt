@@ -27,10 +27,249 @@
         href="css/page03.css"
     >
 
+    <!-- =========================================================
+         FROZEN GLOBAL CTM PATH™ PAGE SHELL
+         IDENTICAL TO PAGE 01 / PAGE 02
+         ========================================================= -->
+    <style>
+        .page03 {
+            max-width: 1540px;
+            margin: 34px auto 0;
+            padding: 0 28px 70px;
+        }
+
+        .page-header {
+            min-height: 250px;
+            padding: 52px 5.5vw 30px;
+            position: relative;
+            display: block;
+            border-bottom: 0;
+        }
+
+        .page-header::after {
+            content: "";
+            position: absolute;
+            left: 2.7vw;
+            right: 2.7vw;
+            bottom: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #f4c542 20%, #19c8c2 50%, #f4c542 80%, transparent 100%);
+        }
+
+        .header-brand {
+            position: absolute;
+            left: 5.5vw;
+            top: 52px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+        }
+
+        .header-brand-mark {
+            width: 72px;
+            height: 72px;
+            flex: 0 0 72px;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 18px rgba(0,0,0,.35));
+        }
+
+        .header-brand-name {
+            color: #f5f1e8;
+            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+            font-size: 17px;
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: .04em;
+        }
+
+        .header-brand-name strong {
+            display: block;
+            font-size: 20px;
+            line-height: 1.05;
+        }
+
+        .page-top {
+            position: absolute;
+            top: 104px;
+            right: 5.5vw;
+            margin: 0;
+            color: #f4c542;
+            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+            font-size: 17px;
+            font-weight: 900;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+        }
+
+        .page-navigation {
+            display: grid;
+            grid-template-columns: minmax(0,1fr) auto minmax(0,1fr);
+            align-items: center;
+            gap: 24px;
+            margin-top: 70px;
+            padding-top: 0;
+            border-top: 0;
+        }
+
+        .nav-button {
+            width: 100%;
+            min-height: 82px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 16px 28px;
+            border: 1px solid transparent;
+            border-radius: 24px;
+            color: #fff;
+            font-family: "Noto Sans Tamil", "Nirmala UI", "Latha", sans-serif;
+            font-size: 1rem;
+            font-weight: 800;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 16px 38px rgba(0,0,0,.30);
+            transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 22px 45px rgba(0,0,0,.36);
+            filter: brightness(1.06);
+        }
+
+        .nav-button:focus-visible {
+            outline: 3px solid rgba(255,255,255,.82);
+            outline-offset: 3px;
+        }
+
+        .nav-back {
+            justify-self: stretch;
+            border-color: rgba(255,151,55,.70);
+            background: linear-gradient(135deg,#e88724,#d65a45);
+        }
+
+        .nav-forward {
+            justify-self: stretch;
+            border-color: rgba(41,196,125,.72);
+            background: linear-gradient(135deg,#08784a,#29c47d);
+        }
+
+        .nav-arrow {
+            flex: 0 0 auto;
+            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .nav-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .nav-ta {
+            font-family: "Noto Sans Tamil", "Nirmala UI", "Latha", sans-serif;
+            font-size: 1.05rem;
+            font-weight: 800;
+            line-height: 1.45;
+        }
+
+        .nav-en {
+            margin-top: 2px;
+            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+            font-size: .68rem;
+            font-weight: 800;
+            letter-spacing: .12em;
+            line-height: 1.35;
+        }
+
+        .navigation-progress {
+            min-width: 96px;
+            color: #f4c542;
+            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+            font-size: 1.45rem;
+            font-weight: 900;
+            letter-spacing: .12em;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .page-footer {
+            margin-top: 52px;
+            padding: 28px 20px 42px;
+            text-align: center;
+            border-top: 0;
+        }
+
+        .footer-tagline {
+            color: #f4c542;
+            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: .25em;
+        }
+
+        .footer-brand {
+            margin-top: 6px;
+            color: #8491aa;
+            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+            font-size: .68rem;
+            font-weight: 600;
+            letter-spacing: .14em;
+        }
+
+        @media (max-width:900px) {
+            .page-header { min-height:180px; padding:28px 24px 24px; }
+            .header-brand { left:24px; top:28px; }
+            .header-brand-mark { width:58px; height:58px; flex-basis:58px; }
+            .header-brand-name { font-size:14px; }
+            .header-brand-name strong { font-size:16px; }
+            .page-top { top:82px; right:24px; font-size:13px; }
+            .page-navigation { grid-template-columns:1fr; gap:14px; }
+            .navigation-progress { order:-1; }
+            .nav-button { min-height:72px; }
+        }
+
+        @media (max-width:560px) {
+            .page-header { min-height:150px; padding:20px 18px; }
+            .header-brand { left:18px; top:20px; gap:9px; }
+            .header-brand-mark { width:50px; height:50px; flex-basis:50px; }
+            .header-brand-name { font-size:12px; }
+            .header-brand-name strong { font-size:14px; }
+            .page-top { top:72px; right:18px; font-size:10px; letter-spacing:.20em; }
+            .nav-button { min-height:68px; border-radius:18px; padding:12px 16px; }
+            .nav-ta { font-size:.92rem; }
+            .navigation-progress { font-size:1.15rem; }
+        }
+    </style>
+
 </head>
 
 
 <body>
+
+<header class="page-header" aria-label="CTM PATH™ Millionaires™ global header">
+
+    <a href="/" class="header-brand" aria-label="Return to CTM PATH™ Millionaires™">
+        <img
+            src="assets/CTMMTPTLogo.svg"
+            alt="CTM PATH™ MILLIONAIRES™"
+            class="header-brand-mark"
+        >
+
+        <span class="header-brand-name">
+            <strong>PATH™</strong>
+            MILLIONAIRES™
+        </span>
+    </a>
+
+    <div class="page-top">PAGE 03 / 16</div>
+
+</header>
 
     <!-- =====================================================
          PAGE WRAPPER
@@ -47,11 +286,6 @@
              ================================================= -->
 
         <section class="hero-section">
-
-            <div class="page-marker">
-                PAGE 03 / 16
-            </div>
-
 
             <div class="hero-icon">
 
@@ -1085,70 +1319,49 @@
 
 
 
-        <!-- =================================================
-             NAVIGATION
-             ================================================= -->
+        <!-- =====================================================
+             FROZEN GLOBAL NAVIGATION
+             BACK → PAGE 02 | NEXT → PAGE 04
+             ===================================================== -->
 
-        <section class="navigation-section">
+        <nav class="page-navigation" aria-label="Journey navigation">
 
-            <div class="navigation-label">
-                NAVIGATION
-            </div>
+            <a
+                class="nav-button nav-back"
+                href="02.html"
+                id="previousButton"
+            >
+                <span class="nav-arrow">←</span>
+                <span class="nav-text">
+                    <span class="nav-ta">முந்தைய பக்கம்</span>
+                    <span class="nav-en">PREVIOUS</span>
+                </span>
+            </a>
 
+            <div class="navigation-progress">03 / 16</div>
 
-            <div class="navigation-buttons">
+            <a
+                class="nav-button nav-forward"
+                href="04.html"
+                id="nextButton"
+            >
+                <span class="nav-text">
+                    <span class="nav-ta">அடுத்த பக்கம்</span>
+                    <span class="nav-en">NEXT</span>
+                </span>
+                <span class="nav-arrow">→</span>
+            </a>
 
-                <button
-                    type="button"
-                    id="previousButton"
-                    class="nav-button previous-button"
-                >
-                    ← PREVIOUS
-                    <span>
-                        முந்தைய பக்கம்
-                    </span>
-                </button>
-
-
-                <div class="page-counter">
-                    03 / 16
-                </div>
-
-
-                <button
-                    type="button"
-                    id="saveButton"
-                    class="nav-button save-button"
-                >
-                    SAVE &amp; CONTINUE →
-                </button>
-
-
-                <button
-                    type="button"
-                    id="nextButton"
-                    class="nav-button next-button"
-                >
-                    NEXT →
-                    <span>
-                        அடுத்த பக்கம்
-                    </span>
-                </button>
-
-            </div>
-
-
-            <p class="journey-footer">
-
-                Your journey moves from
-                self-respect → self-identity → self-leadership.
-
-            </p>
-
-        </section>
+        </nav>
 
 
     </main>
+
+
+<footer class="page-footer">
+    <div class="footer-tagline">EVERY DREAM HAS A PATH™</div>
+    <div class="footer-brand">CTM PATH™ MILLIONAIRES™ CLUB</div>
+</footer>
 
 
     <!-- PAGE JAVASCRIPT -->
@@ -1156,6 +1369,29 @@
     <script
         src="js/page03.js"
     ></script>
+
+    <script>
+        (function () {
+            const previous = document.getElementById('previousButton');
+            const next = document.getElementById('nextButton');
+
+            if (previous) {
+                previous.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    window.location.href = '02.html';
+                }, true);
+            }
+
+            if (next) {
+                next.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    window.location.href = '04.html';
+                }, true);
+            }
+        })();
+    </script>
 
 </body>
 
