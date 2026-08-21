@@ -1,1 +1,2154 @@
+/* =========================================================
+   CTM PATH™ MILLIONAIRES™
+   PAGE 13 — THE FOUNDATION™
+   COMPLETE REPLACEMENT
+   css/page13.css
+   ========================================================= */
 
+
+/* =========================================================
+   PAGE VARIABLES
+   ========================================================= */
+
+:root {
+    --p13-bg: #06131d;
+    --p13-bg-deep: #020b12;
+
+    --p13-panel: #091d2b;
+    --p13-panel-soft: #0c2637;
+    --p13-panel-light: #103149;
+
+    --p13-ivory: #f5f0e7;
+    --p13-white: #ffffff;
+
+    --p13-muted: #aab9c2;
+    --p13-muted-dark: #71838e;
+
+    --p13-gold: #f2b52b;
+    --p13-gold-light: #ffd96b;
+    --p13-gold-dark: #b97b0a;
+
+    --p13-teal: #08c8ce;
+    --p13-teal-light: #72ecec;
+    --p13-teal-dark: #078f96;
+
+    --p13-border: rgba(255, 255, 255, 0.09);
+    --p13-border-gold: rgba(242, 181, 43, 0.36);
+    --p13-border-teal: rgba(8, 200, 206, 0.34);
+
+    --p13-radius: 24px;
+
+    --p13-shadow:
+        0 30px 90px rgba(0, 0, 0, 0.42);
+}
+
+
+/* =========================================================
+   RESET / FOUNDATION
+   ========================================================= */
+
+html {
+    background: var(--p13-bg-deep);
+    scroll-behavior: smooth;
+}
+
+body.page-13 {
+    margin: 0;
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+    color: var(--p13-ivory);
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(8, 200, 206, 0.065),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 50% 42%,
+            rgba(242, 181, 43, 0.035),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #06131d 0%,
+            #071c2a 48%,
+            #030d15 100%
+        );
+
+    font-family:
+        "Noto Sans Tamil",
+        "Nirmala UI",
+        "Latha",
+        Arial,
+        sans-serif;
+}
+
+.page-13 *,
+.page-13 *::before,
+.page-13 *::after {
+    box-sizing: border-box;
+}
+
+.page-13 img {
+    display: block;
+    max-width: 100%;
+}
+
+.page-13 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   GLOBAL HEADER
+   ========================================================= */
+
+.page-13 .global-header {
+    position: relative;
+    z-index: 10;
+
+    min-height: 235px;
+
+    padding:
+        62px
+        clamp(42px, 6vw, 105px)
+        52px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 35px;
+}
+
+.page-13 .global-brand {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 20px;
+}
+
+.page-13 .global-logo {
+    width: 108px;
+    height: 108px;
+
+    flex: 0 0 auto;
+
+    object-fit: contain;
+}
+
+.page-13 .global-brand-name {
+    display: flex;
+    flex-direction: column;
+
+    padding-top: 8px;
+
+    color: var(--p13-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(24px, 2vw, 36px);
+
+    font-weight: 900;
+
+    line-height: 1.05;
+}
+
+.page-13 .global-brand-name span:last-child {
+    margin-top: 7px;
+}
+
+.page-13 .global-page-number {
+    padding-top: 15px;
+
+    color: var(--p13-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(18px, 1.45vw, 28px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.24em;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   HEADER DIVIDER
+   ========================================================= */
+
+.page-13 .global-divider {
+    width: 100%;
+    height: 4px;
+
+    display: grid;
+
+    grid-template-columns:
+        27% 46% 27%;
+}
+
+.page-13 .global-divider span {
+    height: 100%;
+}
+
+.page-13 .global-divider span:nth-child(1),
+.page-13 .global-divider span:nth-child(3) {
+    background: var(--p13-gold);
+}
+
+.page-13 .global-divider span:nth-child(2) {
+    background: var(--p13-teal);
+}
+
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.page-13 .page13-main {
+    width:
+        min(
+            1420px,
+            calc(100% - 96px)
+        );
+
+    margin: 0 auto;
+
+    padding:
+        105px 0 135px;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.page-13 .foundation-hero {
+    max-width: 1080px;
+
+    margin:
+        0 auto 125px;
+
+    text-align: center;
+}
+
+.page-13 .hero-kicker {
+    display: inline-flex;
+
+    padding:
+        9px 23px;
+
+    border:
+        1px solid var(--p13-border-gold);
+
+    border-radius: 999px;
+
+    color: var(--p13-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.22em;
+}
+
+.page-13 .foundation-hero h1 {
+    margin:
+        42px auto 0;
+
+    color: var(--p13-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(55px, 6.2vw, 92px);
+
+    font-weight: 900;
+
+    line-height: 1.02;
+
+    letter-spacing: 0.015em;
+}
+
+.page-13 .foundation-hero h1 strong {
+    display: block;
+
+    margin-top: 8px;
+
+    color: var(--p13-gold-light);
+}
+
+.page-13 .hero-tamil {
+    margin:
+        22px auto 0;
+
+    color: var(--p13-teal);
+
+    font-size:
+        clamp(18px, 1.6vw, 27px);
+
+    font-weight: 800;
+}
+
+.page-13 .hero-message {
+    max-width: 860px;
+
+    margin:
+        42px auto 0;
+
+    color: var(--p13-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(21px, 1.9vw, 31px);
+
+    font-weight: 800;
+
+    line-height: 1.55;
+}
+
+.page-13 .hero-message-secondary {
+    max-width: 800px;
+
+    margin:
+        20px auto 0;
+
+    color: var(--p13-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(15px, 1.25vw, 20px);
+
+    line-height: 1.75;
+}
+
+.page-13 .hero-principle {
+    max-width: 650px;
+
+    margin:
+        42px auto 0;
+
+    padding:
+        18px 25px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 18px;
+
+    border-top:
+        1px solid var(--p13-border);
+
+    border-bottom:
+        1px solid var(--p13-border);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.15em;
+}
+
+.page-13 .hero-principle span:nth-child(1) {
+    color: var(--p13-gold);
+}
+
+.page-13 .hero-principle span:nth-child(3) {
+    color: var(--p13-teal);
+}
+
+.page-13 .hero-principle span:nth-child(5) {
+    color: var(--p13-gold-light);
+}
+
+.page-13 .hero-principle b {
+    color: var(--p13-muted-dark);
+
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   MILESTONE INTRO
+   ========================================================= */
+
+.page-13 .milestone-intro {
+    max-width: 900px;
+
+    margin:
+        0 auto 60px;
+
+    text-align: center;
+}
+
+.page-13 .milestone-count {
+    color: var(--p13-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.25em;
+}
+
+.page-13 .milestone-intro h2 {
+    margin:
+        17px 0 0;
+
+    color: var(--p13-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(36px, 3.8vw, 58px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.06em;
+}
+
+.page-13 .milestone-intro p {
+    max-width: 650px;
+
+    margin:
+        15px auto 0;
+
+    color: var(--p13-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(14px, 1.2vw, 18px);
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   FOUNDATION ROAD
+   ========================================================= */
+
+.page-13 .foundation-road {
+    position: relative;
+
+    max-width: 1120px;
+
+    margin:
+        0 auto 125px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+.page-13 .road-line {
+    position: absolute;
+
+    left: 47px;
+    top: 42px;
+    bottom: 42px;
+
+    width: 2px;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--p13-gold),
+            var(--p13-teal),
+            var(--p13-gold)
+        );
+
+    opacity: 0.32;
+}
+
+
+/* =========================================================
+   MILESTONE CARD
+   ========================================================= */
+
+.page-13 .milestone-card {
+    position: relative;
+    z-index: 2;
+
+    min-height: 145px;
+
+    padding:
+        28px 32px 28px 28px;
+
+    display: grid;
+
+    grid-template-columns:
+        68px minmax(0, 1fr) 115px;
+
+    align-items: center;
+
+    gap: 25px;
+
+    border:
+        1px solid var(--p13-border);
+
+    border-radius:
+        20px;
+
+    background:
+        linear-gradient(
+            105deg,
+            rgba(9, 29, 43, 0.97),
+            rgba(7, 23, 35, 0.94)
+        );
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,0.20);
+
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        background 180ms ease;
+}
+
+.page-13 .milestone-card:hover,
+.page-13 .milestone-card.is-active {
+    transform:
+        translateX(7px);
+
+    border-color:
+        var(--p13-border-gold);
+
+    background:
+        linear-gradient(
+            105deg,
+            rgba(14, 38, 54, 0.98),
+            rgba(8, 28, 42, 0.98)
+        );
+
+    box-shadow:
+        0 20px 55px rgba(0,0,0,0.28);
+}
+
+
+/* =========================================================
+   MILESTONE NUMBER
+   ========================================================= */
+
+.page-13 .milestone-number {
+    width: 68px;
+    height: 68px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        2px solid var(--p13-gold);
+
+    border-radius: 50%;
+
+    color: var(--p13-gold-light);
+
+    background:
+        var(--p13-panel);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 25px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 0 35px rgba(242,181,43,0.06);
+}
+
+
+/* =========================================================
+   MILESTONE CONTENT
+   ========================================================= */
+
+.page-13 .milestone-label {
+    color: var(--p13-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.18em;
+}
+
+.page-13 .milestone-content h3 {
+    margin:
+        7px 0 0;
+
+    color: var(--p13-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(18px, 1.45vw, 24px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.035em;
+}
+
+.page-13 .milestone-tamil {
+    margin:
+        5px 0 0;
+
+    color: var(--p13-teal-light);
+
+    font-size:
+        clamp(13px, 1.05vw, 17px);
+
+    font-weight: 700;
+}
+
+.page-13 .milestone-content > p:last-child {
+    max-width: 720px;
+
+    margin:
+        10px 0 0;
+
+    color: var(--p13-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(12px, 1vw, 15px);
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   MILESTONE STATUS
+   ========================================================= */
+
+.page-13 .milestone-status {
+    justify-self: end;
+
+    min-width: 95px;
+
+    padding:
+        10px 12px;
+
+    text-align: center;
+
+    border:
+        1px solid var(--p13-border-gold);
+
+    border-radius: 999px;
+
+    color: var(--p13-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 8px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.14em;
+}
+
+
+/* =========================================================
+   SPECIAL MILESTONES
+   ========================================================= */
+
+.page-13 .milestone-02 .milestone-number,
+.page-13 .milestone-05 .milestone-number {
+    border-color:
+        var(--p13-teal);
+
+    color:
+        var(--p13-teal-light);
+}
+
+.page-13 .milestone-02 .milestone-status,
+.page-13 .milestone-05 .milestone-status {
+    border-color:
+        var(--p13-border-teal);
+
+    color:
+        var(--p13-teal);
+}
+
+.page-13 .milestone-08 {
+    border-color:
+        var(--p13-border-teal);
+
+    background:
+        linear-gradient(
+            105deg,
+            rgba(7, 36, 47, 0.98),
+            rgba(7, 27, 39, 0.96)
+        );
+}
+
+.page-13 .milestone-08 .milestone-number {
+    border-color:
+        var(--p13-teal);
+
+    color:
+        var(--p13-teal-light);
+}
+
+.page-13 .milestone-08 .milestone-status {
+    border-color:
+        var(--p13-border-teal);
+
+    color:
+        var(--p13-teal);
+}
+
+
+/* =========================================================
+   FOUNDATION SUMMARY
+   ========================================================= */
+
+.page-13 .foundation-summary {
+    max-width: 1180px;
+
+    margin:
+        0 auto 135px;
+
+    padding:
+        26px 28px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    border:
+        1px solid var(--p13-border);
+
+    border-radius: 18px;
+
+    background:
+        rgba(255,255,255,0.012);
+}
+
+.page-13 .summary-line {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+.page-13 .summary-line span {
+    color: var(--p13-muted-dark);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 8px;
+
+    font-weight: 900;
+}
+
+.page-13 .summary-line strong {
+    color: var(--p13-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 8px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.08em;
+}
+
+.page-13 .summary-final strong {
+    color: var(--p13-teal);
+}
+
+.page-13 .summary-arrow {
+    color: var(--p13-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   SIMPLE BUSINESS SECTION
+   ========================================================= */
+
+.page-13 .simple-business-section {
+    max-width: 1180px;
+
+    margin:
+        0 auto 135px;
+
+    padding:
+        90px 55px;
+
+    text-align: center;
+
+    border:
+        1px solid var(--p13-border-teal);
+
+    border-radius:
+        var(--p13-radius);
+
+    background:
+        radial-gradient(
+            circle at 50% 30%,
+            rgba(8,200,206,0.06),
+            transparent 42%
+        ),
+        var(--p13-panel);
+
+    box-shadow:
+        var(--p13-shadow);
+}
+
+.page-13 .section-kicker {
+    color: var(--p13-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.24em;
+}
+
+.page-13 .simple-business-section > h2 {
+    margin:
+        17px 0 0;
+
+    color: var(--p13-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(42px, 4.5vw, 68px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.04em;
+}
+
+.page-13 .section-tamil {
+    margin:
+        13px 0 0;
+
+    color: var(--p13-gold-light);
+
+    font-size:
+        clamp(16px, 1.35vw, 22px);
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   SIMPLE BUSINESS GRID
+   ========================================================= */
+
+.page-13 .simple-business-grid {
+    margin:
+        55px auto 0;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.page-13 .simple-business-card {
+    min-height: 245px;
+
+    padding:
+        35px 25px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid var(--p13-border);
+
+    border-radius: 18px;
+
+    background:
+        rgba(255,255,255,0.012);
+
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease;
+}
+
+.page-13 .simple-business-card:hover {
+    transform:
+        translateY(-5px);
+
+    border-color:
+        var(--p13-border-gold);
+}
+
+.page-13 .simple-icon {
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid var(--p13-border-gold);
+
+    border-radius: 50%;
+
+    color: var(--p13-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 900;
+}
+
+.page-13 .simple-business-card h3 {
+    margin:
+        20px 0 0;
+
+    color: var(--p13-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(14px, 1.2vw, 18px);
+
+    font-weight: 900;
+
+    line-height: 1.4;
+
+    letter-spacing: 0.05em;
+}
+
+.page-13 .simple-business-card p {
+    max-width: 260px;
+
+    margin:
+        13px 0 0;
+
+    color: var(--p13-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   SIMPLE BUSINESS PUNCH
+   ========================================================= */
+
+.page-13 .simple-business-punch {
+    margin:
+        55px auto 0;
+
+    padding:
+        25px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    border-top:
+        1px solid var(--p13-border-gold);
+
+    border-bottom:
+        1px solid var(--p13-border-gold);
+}
+
+.page-13 .simple-business-punch span {
+    color: var(--p13-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(15px, 1.3vw, 20px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.12em;
+}
+
+.page-13 .simple-business-punch strong {
+    color: var(--p13-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(23px, 2.2vw, 34px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.04em;
+}
+
+
+/* =========================================================
+   NEXT PHASE
+   ========================================================= */
+
+.page-13 .next-phase {
+    max-width: 1180px;
+
+    margin:
+        0 auto;
+
+    padding:
+        70px 60px;
+
+    display: grid;
+
+    grid-template-columns:
+        120px minmax(0, 1fr) auto;
+
+    align-items: center;
+
+    gap: 40px;
+
+    border:
+        1px solid var(--p13-border-gold);
+
+    border-radius:
+        var(--p13-radius);
+
+    background:
+        linear-gradient(
+            105deg,
+            rgba(242,181,43,0.045),
+            rgba(8,200,206,0.035)
+        );
+
+    box-shadow:
+        var(--p13-shadow);
+}
+
+.page-13 .next-phase-number {
+    color: var(--p13-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.18em;
+}
+
+.page-13 .next-phase-kicker {
+    color: var(--p13-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.20em;
+}
+
+.page-13 .next-phase-content h2 {
+    margin:
+        10px 0 0;
+
+    color: var(--p13-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(27px, 2.6vw, 42px);
+
+    font-weight: 900;
+
+    line-height: 1.25;
+}
+
+.page-13 .next-phase-content h2 strong {
+    color: var(--p13-gold-light);
+}
+
+.page-13 .next-phase-content p {
+    max-width: 650px;
+
+    margin:
+        12px 0 0;
+
+    color: var(--p13-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+    line-height: 1.65;
+}
+
+.page-13 .next-phase-button {
+    min-width: 175px;
+
+    min-height: 60px;
+
+    padding:
+        14px 19px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 18px;
+
+    border:
+        1px solid var(--p13-gold);
+
+    border-radius: 12px;
+
+    color: var(--p13-bg-deep);
+
+    background:
+        var(--p13-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.12em;
+
+    box-shadow:
+        0 15px 45px rgba(242,181,43,0.10);
+
+    transition:
+        transform 180ms ease,
+        background 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.page-13 .next-phase-button b {
+    font-size: 23px;
+}
+
+.page-13 .next-phase-button:hover,
+.page-13 .next-phase-button:focus-visible {
+    transform:
+        translateY(-3px);
+
+    background:
+        var(--p13-gold-light);
+
+    box-shadow:
+        0 20px 60px rgba(242,181,43,0.18);
+
+    outline: none;
+}
+
+
+/* =========================================================
+   GLOBAL FOOTER
+   ========================================================= */
+
+.page-13 .global-footer {
+    margin-top: 35px;
+
+    padding:
+        0
+        clamp(35px, 6vw, 105px)
+        55px;
+
+    background:
+        var(--p13-bg-deep);
+
+    border-top:
+        1px solid rgba(255,255,255,0.07);
+}
+
+.page-13 .page-navigation {
+    min-height: 125px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr auto 1fr;
+
+    align-items: center;
+
+    gap: 25px;
+}
+
+.page-13 .nav-button {
+    width: fit-content;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    padding:
+        14px 17px;
+
+    border:
+        1px solid transparent;
+
+    border-radius: 11px;
+
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease;
+}
+
+.page-13 .nav-button:hover,
+.page-13 .nav-button:focus-visible {
+    transform:
+        translateY(-2px);
+
+    border-color:
+        var(--p13-border-teal);
+
+    background:
+        rgba(255,255,255,0.025);
+
+    outline: none;
+}
+
+.page-13 .nav-next {
+    justify-self: end;
+
+    text-align: right;
+}
+
+.page-13 .nav-arrow {
+    color: var(--p13-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 27px;
+}
+
+.page-13 .nav-text {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.page-13 .nav-text strong {
+    color: var(--p13-ivory);
+
+    font-size: 15px;
+
+    font-weight: 800;
+}
+
+.page-13 .nav-text small {
+    color: var(--p13-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.20em;
+}
+
+.page-13 .nav-current {
+    min-width: 90px;
+
+    display: flex;
+
+    align-items: baseline;
+    justify-content: center;
+
+    color: var(--p13-gold);
+
+    font-family: Arial, sans-serif;
+}
+
+.page-13 .nav-current span {
+    font-size: 29px;
+
+    font-weight: 900;
+}
+
+.page-13 .nav-current small {
+    margin-left: 4px;
+
+    color: var(--p13-muted);
+
+    font-size: 12px;
+}
+
+.page-13 .global-footer-brand {
+    padding-top: 24px;
+
+    text-align: center;
+
+    border-top:
+        1px solid rgba(255,255,255,0.07);
+}
+
+.page-13 .footer-tagline {
+    color: var(--p13-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.25em;
+}
+
+.page-13 .footer-brand {
+    margin-top: 9px;
+
+    color:
+        rgba(245,240,231,0.58);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+}
+
+
+/* =========================================================
+   JAVASCRIPT REVEAL SUPPORT
+   ========================================================= */
+
+.page-13 .reveal-ready {
+    opacity: 0;
+
+    transform:
+        translateY(25px);
+
+    transition:
+        opacity 650ms ease,
+        transform 650ms ease;
+}
+
+.page-13 .reveal-ready.is-visible {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1500px) {
+
+    .page-13 .global-header {
+        min-height: 285px;
+
+        padding-top: 76px;
+        padding-bottom: 65px;
+    }
+
+    .page-13 .global-logo {
+        width: 120px;
+        height: 120px;
+    }
+
+    .page-13 .page13-main {
+        width:
+            min(
+                1500px,
+                calc(100% - 120px)
+            );
+
+        padding-top: 125px;
+    }
+
+    .page-13 .foundation-road {
+        max-width: 1250px;
+    }
+
+    .page-13 .milestone-card {
+        min-height: 160px;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+    .page-13 .global-header {
+        min-height: 190px;
+
+        padding:
+            48px 42px 45px;
+    }
+
+    .page-13 .global-logo {
+        width: 82px;
+        height: 82px;
+    }
+
+    .page-13 .global-brand {
+        gap: 15px;
+    }
+
+    .page-13 .global-brand-name {
+        font-size: 25px;
+    }
+
+    .page-13 .global-page-number {
+        padding-top: 8px;
+
+        font-size: 17px;
+    }
+
+    .page-13 .page13-main {
+        width:
+            min(
+                calc(100% - 60px),
+                1000px
+            );
+
+        padding-top: 80px;
+    }
+
+    .page-13 .foundation-road {
+        max-width: 900px;
+    }
+
+    .page-13 .milestone-card {
+        grid-template-columns:
+            65px minmax(0, 1fr) 100px;
+    }
+
+    .page-13 .next-phase {
+        grid-template-columns:
+            90px minmax(0, 1fr) auto;
+
+        padding:
+            55px 40px;
+
+        gap: 25px;
+    }
+
+}
+
+
+/* =========================================================
+   MEDIUM TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .page-13 .foundation-hero h1 {
+        font-size:
+            clamp(45px, 7vw, 65px);
+    }
+
+    .page-13 .milestone-card {
+        grid-template-columns:
+            60px minmax(0, 1fr);
+
+        padding:
+            24px;
+
+        gap: 20px;
+    }
+
+    .page-13 .milestone-status {
+        grid-column: 2;
+
+        justify-self: start;
+    }
+
+    .page-13 .road-line {
+        left: 54px;
+    }
+
+    .page-13 .simple-business-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .page-13 .simple-business-card {
+        min-height: 190px;
+    }
+
+    .page-13 .next-phase {
+        grid-template-columns:
+            1fr;
+
+        text-align: center;
+    }
+
+    .page-13 .next-phase-number {
+        justify-self: center;
+    }
+
+    .page-13 .next-phase-content p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .page-13 .next-phase-button {
+        justify-self: center;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    /* -----------------------------------------------------
+       HEADER
+       ----------------------------------------------------- */
+
+    .page-13 .global-header {
+        min-height: auto;
+
+        padding:
+            28px 20px 30px;
+
+        align-items: center;
+
+        gap: 15px;
+    }
+
+    .page-13 .global-brand {
+        gap: 10px;
+    }
+
+    .page-13 .global-logo {
+        width: 58px;
+        height: 58px;
+    }
+
+    .page-13 .global-brand-name {
+        padding-top: 0;
+
+        font-size: 15px;
+    }
+
+    .page-13 .global-brand-name span:last-child {
+        margin-top: 4px;
+    }
+
+    .page-13 .global-page-number {
+        padding-top: 0;
+
+        font-size: 9px;
+
+        letter-spacing: 0.13em;
+    }
+
+    .page-13 .global-divider {
+        height: 3px;
+    }
+
+
+    /* -----------------------------------------------------
+       MAIN
+       ----------------------------------------------------- */
+
+    .page-13 .page13-main {
+        width:
+            calc(100% - 34px);
+
+        padding:
+            58px 0 80px;
+    }
+
+
+    /* -----------------------------------------------------
+       HERO
+       ----------------------------------------------------- */
+
+    .page-13 .foundation-hero {
+        margin-bottom: 75px;
+    }
+
+    .page-13 .hero-kicker {
+        padding:
+            7px 14px;
+
+        font-size: 8px;
+
+        letter-spacing: 0.12em;
+    }
+
+    .page-13 .foundation-hero h1 {
+        margin-top: 30px;
+
+        font-size:
+            clamp(37px, 11vw, 54px);
+
+        line-height: 1.08;
+    }
+
+    .page-13 .hero-tamil {
+        margin-top: 17px;
+
+        font-size: 15px;
+    }
+
+    .page-13 .hero-message {
+        margin-top: 32px;
+
+        font-size: 17px;
+
+        line-height: 1.6;
+    }
+
+    .page-13 .hero-message-secondary {
+        margin-top: 15px;
+
+        font-size: 12px;
+
+        line-height: 1.7;
+    }
+
+    .page-13 .hero-principle {
+        margin-top: 30px;
+
+        padding:
+            14px 8px;
+
+        gap: 8px;
+
+        font-size: 7px;
+
+        letter-spacing: 0.08em;
+    }
+
+
+    /* -----------------------------------------------------
+       MILESTONE INTRO
+       ----------------------------------------------------- */
+
+    .page-13 .milestone-intro {
+        margin-bottom: 35px;
+    }
+
+    .page-13 .milestone-count {
+        font-size: 8px;
+    }
+
+    .page-13 .milestone-intro h2 {
+        margin-top: 12px;
+
+        font-size: 29px;
+    }
+
+    .page-13 .milestone-intro p {
+        margin-top: 10px;
+
+        font-size: 11px;
+    }
+
+
+    /* -----------------------------------------------------
+       FOUNDATION ROAD
+       ----------------------------------------------------- */
+
+    .page-13 .foundation-road {
+        margin-bottom: 75px;
+
+        gap: 11px;
+    }
+
+    .page-13 .road-line {
+        left: 34px;
+
+        top: 35px;
+        bottom: 35px;
+    }
+
+
+    /* -----------------------------------------------------
+       MILESTONE CARD
+       ----------------------------------------------------- */
+
+    .page-13 .milestone-card {
+        min-height: 0;
+
+        padding:
+            19px 15px;
+
+        grid-template-columns:
+            42px minmax(0, 1fr);
+
+        gap: 13px;
+
+        border-radius: 15px;
+    }
+
+    .page-13 .milestone-card:hover,
+    .page-13 .milestone-card.is-active {
+        transform:
+            translateX(3px);
+    }
+
+    .page-13 .milestone-number {
+        width: 42px;
+        height: 42px;
+
+        font-size: 16px;
+    }
+
+    .page-13 .milestone-label {
+        font-size: 6px;
+
+        letter-spacing: 0.12em;
+    }
+
+    .page-13 .milestone-content h3 {
+        margin-top: 5px;
+
+        font-size: 13px;
+
+        line-height: 1.35;
+    }
+
+    .page-13 .milestone-tamil {
+        margin-top: 4px;
+
+        font-size: 10px;
+    }
+
+    .page-13 .milestone-content > p:last-child {
+        margin-top: 8px;
+
+        font-size: 9px;
+
+        line-height: 1.55;
+    }
+
+    .page-13 .milestone-status {
+        grid-column: 2;
+
+        min-width: 70px;
+
+        justify-self: start;
+
+        padding:
+            7px 9px;
+
+        font-size: 6px;
+
+        letter-spacing: 0.10em;
+    }
+
+
+    /* -----------------------------------------------------
+       SUMMARY
+       ----------------------------------------------------- */
+
+    .page-13 .foundation-summary {
+        margin-bottom: 75px;
+
+        padding:
+            18px 12px;
+
+        gap: 7px;
+
+        border-radius: 14px;
+    }
+
+    .page-13 .summary-line {
+        gap: 5px;
+    }
+
+    .page-13 .summary-line span {
+        font-size: 6px;
+    }
+
+    .page-13 .summary-line strong {
+        font-size: 6px;
+    }
+
+    .page-13 .summary-arrow {
+        font-size: 9px;
+    }
+
+
+    /* -----------------------------------------------------
+       SIMPLE BUSINESS
+       ----------------------------------------------------- */
+
+    .page-13 .simple-business-section {
+        margin-bottom: 75px;
+
+        padding:
+            55px 18px;
+
+        border-radius: 19px;
+    }
+
+    .page-13 .section-kicker {
+        font-size: 8px;
+    }
+
+    .page-13 .simple-business-section > h2 {
+        margin-top: 14px;
+
+        font-size: 34px;
+    }
+
+    .page-13 .section-tamil {
+        margin-top: 10px;
+
+        font-size: 14px;
+    }
+
+    .page-13 .simple-business-grid {
+        margin-top: 32px;
+
+        gap: 9px;
+    }
+
+    .page-13 .simple-business-card {
+        min-height: 175px;
+
+        padding:
+            25px 18px;
+
+        border-radius: 15px;
+    }
+
+    .page-13 .simple-icon {
+        width: 38px;
+        height: 38px;
+
+        font-size: 7px;
+    }
+
+    .page-13 .simple-business-card h3 {
+        margin-top: 15px;
+
+        font-size: 12px;
+    }
+
+    .page-13 .simple-business-card p {
+        margin-top: 9px;
+
+        font-size: 9px;
+    }
+
+    .page-13 .simple-business-punch {
+        margin-top: 35px;
+
+        padding:
+            19px 8px;
+    }
+
+    .page-13 .simple-business-punch span {
+        font-size: 11px;
+    }
+
+    .page-13 .simple-business-punch strong {
+        font-size: 18px;
+
+        line-height: 1.4;
+    }
+
+
+    /* -----------------------------------------------------
+       NEXT PHASE
+       ----------------------------------------------------- */
+
+    .page-13 .next-phase {
+        padding:
+            45px 18px;
+
+        gap: 18px;
+
+        border-radius: 19px;
+    }
+
+    .page-13 .next-phase-number {
+        font-size: 8px;
+    }
+
+    .page-13 .next-phase-kicker {
+        font-size: 7px;
+    }
+
+    .page-13 .next-phase-content h2 {
+        margin-top: 8px;
+
+        font-size: 24px;
+    }
+
+    .page-13 .next-phase-content p {
+        margin-top: 10px;
+
+        font-size: 10px;
+
+        line-height: 1.65;
+    }
+
+    .page-13 .next-phase-button {
+        min-width: 145px;
+
+        min-height: 50px;
+
+        padding:
+            12px 14px;
+
+        font-size: 8px;
+    }
+
+    .page-13 .next-phase-button b {
+        font-size: 20px;
+    }
+
+
+    /* -----------------------------------------------------
+       FOOTER
+       ----------------------------------------------------- */
+
+    .page-13 .global-footer {
+        padding:
+            0 18px 35px;
+    }
+
+    .page-13 .page-navigation {
+        min-height: 105px;
+
+        gap: 7px;
+    }
+
+    .page-13 .nav-button {
+        gap: 7px;
+
+        padding:
+            8px 3px;
+    }
+
+    .page-13 .nav-arrow {
+        font-size: 20px;
+    }
+
+    .page-13 .nav-text strong {
+        font-size: 10px;
+    }
+
+    .page-13 .nav-text small {
+        font-size: 6px;
+    }
+
+    .page-13 .nav-current span {
+        font-size: 22px;
+    }
+
+    .page-13 .nav-current small {
+        font-size: 8px;
+    }
+
+    .page-13 .footer-tagline {
+        font-size: 7px;
+
+        letter-spacing: 0.15em;
+    }
+
+    .page-13 .footer-brand {
+        font-size: 7px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .page-13 .global-header {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .page-13 .global-logo {
+        width: 48px;
+        height: 48px;
+    }
+
+    .page-13 .global-brand-name {
+        font-size: 12px;
+    }
+
+    .page-13 .global-page-number {
+        font-size: 7px;
+    }
+
+    .page-13 .page13-main {
+        width:
+            calc(100% - 26px);
+    }
+
+    .page-13 .foundation-hero h1 {
+        font-size: 34px;
+    }
+
+    .page-13 .hero-message {
+        font-size: 15px;
+    }
+
+    .page-13 .milestone-card {
+        padding:
+            17px 12px;
+
+        grid-template-columns:
+            38px minmax(0, 1fr);
+
+        gap: 10px;
+    }
+
+    .page-13 .road-line {
+        left: 31px;
+    }
+
+    .page-13 .milestone-number {
+        width: 38px;
+        height: 38px;
+
+        font-size: 14px;
+    }
+
+    .page-13 .milestone-content h3 {
+        font-size: 11px;
+    }
+
+    .page-13 .milestone-content > p:last-child {
+        font-size: 8px;
+    }
+
+    .page-13 .milestone-status {
+        font-size: 5px;
+    }
+
+    .page-13 .simple-business-section > h2 {
+        font-size: 30px;
+    }
+
+    .page-13 .simple-business-punch strong {
+        font-size: 16px;
+    }
+
+    .page-13 .next-phase-content h2 {
+        font-size: 21px;
+    }
+
+}
+
+
+/* =========================================================
+   FOCUS / ACCESSIBILITY
+   ========================================================= */
+
+.page-13 .milestone-card:focus-visible {
+    outline:
+        2px solid var(--p13-teal);
+
+    outline-offset: 4px;
+}
+
+.page-13 .next-phase-button:focus-visible,
+.page-13 .nav-button:focus-visible {
+    outline:
+        2px solid var(--p13-teal);
+
+    outline-offset: 4px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    .page-13 .reveal-ready {
+        opacity: 1;
+
+        transform: none;
+
+        transition: none;
+    }
+
+    .page-13 .milestone-card,
+    .page-13 .simple-business-card,
+    .page-13 .next-phase-button,
+    .page-13 .nav-button {
+        transition: none;
+    }
+
+}
