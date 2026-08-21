@@ -1,198 +1,2047 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ta">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CTM PATH™ MILLIONAIRES™ — Page 02</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;600;700;800&display=swap');
 
-:root{
-  --bg:#061a2f;
-  --panel:#0a2038;
-  --panel2:#0b263f;
-  --line:#173a55;
-  --ivory:#f6f2e9;
-  --muted:#91a7c0;
-  --gold:#ffb51b;
-  --teal:#00a59a;
-  --red:#ef3340;
-  --green:#20c878;
-  --orange:#ffb51b;
-}
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--ivory);font-family:"Noto Sans Tamil","Noto Sans",Arial,sans-serif}
-body{min-height:100vh}
-.top{
-  min-height:250px;
-  padding:52px 5.5vw 30px;
-  border-bottom:1px solid rgba(255,181,27,.16);
-  position:relative;
-}
-.logo{
-  width:190px;height:76px;
-  display:flex;align-items:center;gap:14px;
-}
-.logo-mark{
-  width:52px;height:52px;border:2px solid var(--teal);
-  border-radius:14px;display:grid;place-items:center;
-  color:var(--teal);font-weight:800;font-size:20px;
-  box-shadow:0 0 24px rgba(0,165,154,.16);
-}
-.logo-text{line-height:1.05;font-size:16px;letter-spacing:.04em}
-.logo-text b{display:block;font-size:17px}
-.page-top{position:absolute;right:5.5vw;top:116px;color:var(--gold);font-size:17px;font-weight:800;letter-spacing:.28em}
-.top-line{position:absolute;left:2.7vw;right:2.7vw;bottom:-1px;height:2px;background:linear-gradient(90deg,transparent,#ffb51b 20%,#00a59a 50%,#ffb51b 80%,transparent)}
-.wrap{max-width:1540px;margin:34px auto 0;padding:0 28px 70px}
-.hero{
-  background:linear-gradient(135deg,#0a2038,#071a30);
-  border:1px solid rgba(0,165,154,.17);
-  border-radius:34px;padding:62px 55px 48px;
-  box-shadow:0 20px 70px rgba(0,0,0,.18);
-}
-.hero-label{text-align:center;color:var(--gold);font-size:18px;font-weight:800;letter-spacing:.35em;margin-bottom:35px}
-h1{font-size:clamp(38px,4.1vw,70px);line-height:1.2;text-align:center;margin:0 auto 24px;max-width:1150px;font-weight:800}
-.lead{text-align:center;color:var(--muted);font-size:18px;line-height:1.8;max-width:1000px;margin:0 auto 45px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
-.card{
-  background:linear-gradient(145deg,#0b243d,#081b31);
-  border:1px solid rgba(48,100,132,.35);
-  border-radius:28px;padding:30px 32px 28px;
-  min-height:350px;position:relative;
-}
-.card-number{position:absolute;top:28px;left:30px;color:var(--gold);font-weight:800;font-size:16px;border:1px solid rgba(255,181,27,.45);border-radius:50%;width:44px;height:44px;display:grid;place-items:center}
-.card h2{margin:4px 0 2px 62px;font-size:28px}
-.en{color:var(--teal);font-weight:800;letter-spacing:.15em;font-size:14px;margin-left:62px}
-.q-ta{font-size:19px;font-weight:700;line-height:1.65;margin-top:30px}
-.q-en{color:var(--muted);font-size:16px;line-height:1.55;margin-top:9px}
-.options{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:25px}
-button.option{
-  appearance:none;border:1px solid rgba(73,108,136,.28);
-  background:#0c1e32;color:var(--ivory);border-radius:18px;
-  padding:17px 8px;cursor:pointer;font:inherit;transition:.18s;
-}
-button.option:hover{transform:translateY(-2px);border-color:#527b97}
-button.option.full.selected{background:rgba(32,200,120,.16);border-color:var(--green);color:var(--green)}
-button.option.partial.selected{background:rgba(255,181,27,.13);border-color:var(--orange);color:var(--orange)}
-button.option.none.selected{background:rgba(239,51,64,.13);border-color:var(--red);color:#ff5360}
-.option-ta{display:block;font-weight:800;font-size:15px}
-.option-en{display:block;font-size:11px;font-weight:800;letter-spacing:.06em;margin-top:5px;opacity:.9}
-.snapshot{margin-top:34px;background:linear-gradient(145deg,#0b243d,#081b31);border:1px solid rgba(0,165,154,.2);border-radius:28px;padding:34px}
-.snapshot h2{text-align:center;font-size:28px;margin:0 0 28px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.stat{border:1px solid rgba(73,108,136,.25);border-radius:22px;padding:28px;text-align:center}
-.stat strong{font-size:58px;display:block}
-.stat span{display:block;font-size:17px;font-weight:800}
-.stat small{display:block;color:var(--muted);margin-top:7px;letter-spacing:.08em}
-.stat.full strong{color:var(--green)}
-.stat.partial strong{color:var(--orange)}
-.stat.none strong{color:#d93455}
-.progress-label{display:flex;justify-content:space-between;margin:34px 0 10px;font-weight:700}
-.progress-label span:last-child{color:var(--gold)}
-.progress{height:10px;background:#091728;border-radius:20px;overflow:hidden}
-.progress > div{height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--gold));border-radius:20px}
-.priority{margin-top:28px;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-select{background:#091b2e;color:var(--ivory);border:1px solid #294863;border-radius:12px;padding:14px 18px;font:inherit;min-width:360px}
-.nav{display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:center;margin-top:38px}
-.nav a,.nav button{min-height:80px;border-radius:22px;background:#081a2e;border:1px solid #1b3449;color:var(--ivory);padding:18px 30px;font:inherit;font-weight:800;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:14px}
-.prev{color:var(--red)!important;border-color:rgba(239,51,64,.42)!important}
-.next{color:var(--green)!important;border-color:rgba(32,200,120,.42)!important}
-.current{color:var(--orange);font-weight:900;font-size:22px;letter-spacing:.16em}
-@media(max-width:900px){
- .grid,.stats{grid-template-columns:1fr}
- .nav{grid-template-columns:1fr}
- .current{order:-1;text-align:center}
- .page-top{top:62px}
- .top{min-height:175px}
- .hero{padding:40px 22px}
- select{min-width:100%;width:100%}
-}
-</style>
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        CTM PATH™ MILLIONAIRES™ — Page 02
+    </title>
+
+    <meta
+        name="description"
+        content="CTM PATH™ MILLIONAIRES™ — Your 12 Basic Life Needs"
+    >
+
+    <!-- PAGE 02 CSS -->
+    <link
+        rel="stylesheet"
+        href="css/page02.css"
+    >
+
+    <!--
+        PAGE 01 / UNIVERSAL SHELL OVERRIDES
+
+        Page 01 is frozen.
+        The header and bottom navigation below intentionally
+        reproduce the frozen Page 01 visual language:
+        • deep navy background
+        • logo at upper-left
+        • PAGE XX / 16 at upper-right
+        • gold / teal / gold line
+        • large orange-red previous button
+        • orange current-page marker
+        • large green next button
+        • fixed footer language
+    -->
+    <style>
+
+        /* =========================================================
+           FROZEN CTM PATH™ PAGE SHELL
+           ========================================================= */
+
+        .page02 {
+            max-width: 1540px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            min-height: 250px;
+            padding: 52px 5.5vw 30px;
+            position: relative;
+            display: block;
+            border-bottom: 0;
+        }
+
+        .page-header::after {
+            content: "";
+            position: absolute;
+            left: 2.7vw;
+            right: 2.7vw;
+            bottom: 0;
+            height: 2px;
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    #f4c542 20%,
+                    #19c8c2 50%,
+                    #f4c542 80%,
+                    transparent 100%
+                );
+        }
+
+        .header-brand {
+            position: absolute;
+            left: 5.5vw;
+            top: 52px;
+
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            text-decoration: none;
+        }
+
+        .header-brand-mark {
+            width: 72px;
+            height: 72px;
+            flex: 0 0 72px;
+
+            object-fit: contain;
+
+            filter:
+                drop-shadow(
+                    0 8px 18px
+                    rgba(0, 0, 0, 0.35)
+                );
+        }
+
+        .header-brand-name {
+            color: #f5f1e8;
+            font-family:
+                "Inter",
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            font-size: 17px;
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: 0.04em;
+        }
+
+        .header-brand-name strong {
+            display: block;
+            font-size: 20px;
+            line-height: 1.05;
+        }
+
+        .page-marker {
+            position: absolute;
+            top: 104px;
+            right: 5.5vw;
+
+            margin: 0;
+
+            color: #f4c542;
+            font-family:
+                "Inter",
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            font-size: 17px;
+            font-weight: 900;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+        }
+
+        /* =========================================================
+           FROZEN BOTTOM NAVIGATION
+           ========================================================= */
+
+        .page-navigation {
+            display: grid;
+            grid-template-columns:
+                minmax(0, 1fr)
+                auto
+                minmax(0, 1fr);
+
+            align-items: center;
+            gap: 24px;
+
+            margin-top: 70px;
+            padding-top: 0;
+
+            border-top: 0;
+        }
+
+        .nav-button {
+            width: 100%;
+            min-height: 82px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+
+            padding: 16px 28px;
+
+            border: 1px solid transparent;
+            border-radius: 24px;
+
+            color: #ffffff;
+            font-family:
+                "Noto Sans Tamil",
+                "Nirmala UI",
+                "Latha",
+                sans-serif;
+
+            font-size: 1rem;
+            font-weight: 800;
+
+            text-align: center;
+            text-decoration: none;
+
+            box-shadow:
+                0 16px 38px
+                rgba(0, 0, 0, 0.30);
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                filter 0.2s ease;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 22px 45px
+                rgba(0, 0, 0, 0.36);
+
+            filter: brightness(1.06);
+        }
+
+        .nav-button:active {
+            transform: translateY(0);
+        }
+
+        .nav-button:focus-visible {
+            outline:
+                3px solid
+                rgba(255, 255, 255, 0.82);
+
+            outline-offset: 3px;
+        }
+
+        .nav-back {
+            justify-self: stretch;
+
+            border-color:
+                rgba(255, 151, 55, 0.70);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e88724,
+                    #d65a45
+                );
+        }
+
+        .nav-forward {
+            justify-self: stretch;
+
+            border-color:
+                rgba(41, 196, 125, 0.72);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #08784a,
+                    #29c47d
+                );
+        }
+
+        .nav-arrow {
+            flex: 0 0 auto;
+
+            font-family:
+                "Inter",
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            font-size: 1.75rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .nav-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+        }
+
+        .nav-ta {
+            font-family:
+                "Noto Sans Tamil",
+                "Nirmala UI",
+                "Latha",
+                sans-serif;
+
+            font-size: 1.05rem;
+            font-weight: 800;
+            line-height: 1.45;
+        }
+
+        .nav-en {
+            margin-top: 2px;
+
+            font-family:
+                "Inter",
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            font-size: 0.68rem;
+            font-weight: 800;
+
+            letter-spacing: 0.12em;
+            line-height: 1.35;
+        }
+
+        .navigation-progress {
+            min-width: 96px;
+
+            color: #f4c542;
+
+            font-family:
+                "Inter",
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            font-size: 1.45rem;
+            font-weight: 900;
+
+            letter-spacing: 0.12em;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .navigation-progress span {
+            color: #f4c542;
+        }
+
+        /* =========================================================
+           FROZEN FOOTER
+           ========================================================= */
+
+        .page-footer {
+            margin-top: 52px;
+            padding:
+                28px
+                20px
+                42px;
+
+            text-align: center;
+            border-top: 0;
+        }
+
+        .footer-tagline {
+            color: #f4c542;
+
+            font-family:
+                "Inter",
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            font-size: 0.72rem;
+            font-weight: 800;
+
+            letter-spacing: 0.25em;
+        }
+
+        .footer-brand {
+            margin-top: 6px;
+
+            color: #8491aa;
+
+            font-family:
+                "Inter",
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            font-size: 0.68rem;
+            font-weight: 600;
+
+            letter-spacing: 0.14em;
+        }
+
+        /* =========================================================
+           PAGE STATUS
+           ========================================================= */
+
+        #pageStatus {
+            min-height: 28px;
+            margin: 22px auto 0;
+
+            text-align: center;
+            font-family:
+                "Noto Sans Tamil",
+                "Nirmala UI",
+                "Latha",
+                sans-serif;
+
+            font-size: 0.90rem;
+            line-height: 1.6;
+        }
+
+        /* =========================================================
+           RESPONSIVE SHELL
+           ========================================================= */
+
+        @media (max-width: 900px) {
+
+            .page-header {
+                min-height: 180px;
+                padding: 28px 24px 24px;
+            }
+
+            .header-brand {
+                left: 24px;
+                top: 28px;
+            }
+
+            .header-brand-mark {
+                width: 58px;
+                height: 58px;
+                flex-basis: 58px;
+            }
+
+            .header-brand-name {
+                font-size: 14px;
+            }
+
+            .header-brand-name strong {
+                font-size: 16px;
+            }
+
+            .page-marker {
+                top: 82px;
+                right: 24px;
+                font-size: 13px;
+            }
+
+            .page-navigation {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .navigation-progress {
+                order: -1;
+            }
+
+            .nav-button {
+                min-height: 72px;
+            }
+
+        }
+
+        @media (max-width: 560px) {
+
+            .page-header {
+                min-height: 150px;
+                padding: 20px 18px;
+            }
+
+            .header-brand {
+                left: 18px;
+                top: 20px;
+                gap: 9px;
+            }
+
+            .header-brand-mark {
+                width: 50px;
+                height: 50px;
+                flex-basis: 50px;
+            }
+
+            .header-brand-name {
+                font-size: 12px;
+            }
+
+            .header-brand-name strong {
+                font-size: 14px;
+            }
+
+            .page-marker {
+                top: 72px;
+                right: 18px;
+                font-size: 10px;
+                letter-spacing: 0.20em;
+            }
+
+            .nav-button {
+                min-height: 68px;
+                border-radius: 18px;
+                padding: 12px 16px;
+            }
+
+            .nav-ta {
+                font-size: 0.92rem;
+            }
+
+            .navigation-progress {
+                font-size: 1.15rem;
+            }
+
+        }
+
+    </style>
+
 </head>
+
+
 <body>
-<header class="top">
-  <div class="logo">
-    <div class="logo-mark">CTM</div>
-    <div class="logo-text"><b>PATH™</b>MILLIONAIRES™</div>
-  </div>
-  <div class="page-top">PAGE 02 / 16</div>
-  <div class="top-line"></div>
+
+
+<!-- =========================================================
+     FROZEN UNIVERSAL TOP
+     ========================================================= -->
+
+<header class="page-header">
+
+    <a
+        href="/"
+        class="header-brand"
+        aria-label="Return to CTM PATH™ Millionaires™"
+    >
+
+        <img
+            src="assets/CTMMTPTLogo.svg"
+            alt="CTM PATH™ MILLIONAIRES™"
+            class="header-brand-mark"
+        >
+
+        <div class="header-brand-name">
+            <strong>PATH™</strong>
+            MILLIONAIRES™
+        </div>
+
+    </a>
+
+
+    <div class="page-marker">
+        PAGE 02 / 16
+    </div>
+
 </header>
 
-<main class="wrap">
-<section class="hero">
-  <div class="hero-label">YOUR LIFE NEEDS SNAPSHOT</div>
-  <h1>உங்கள் வாழ்க்கையில் இந்த 12 அடிப்படை தேவைகளில்...<br>எத்தனை முழுமையாக நிறைவேறியுள்ளன?</h1>
-  <p class="lead">உங்கள் வாழ்க்கையின் 16 செல்வங்களை மதிப்பிட்டீர்கள். இப்போது, உங்கள் அன்றாட வாழ்க்கையில் நீங்கள் உண்மையாக விரும்பும் 12 முக்கிய தேவைகளில் எத்தனை ஏற்கனவே நிறைவேறியுள்ளன என்பதைப் பார்ப்போம்.<br><br><b style="color:#f6f2e9">Be honest. Don't choose what you wish were true. Choose what is actually true today.</b></p>
 
-  <div class="grid" id="needs"></div>
 
-  <section class="snapshot">
-    <h2>உங்கள் வாழ்க்கையின் தேவைகளின் நிலவரம்</h2>
-    <div class="stats">
-      <div class="stat full"><strong id="fullCount">0</strong><span>முழுமையாக நிறைவேறியது</span><small>FULLY FULFILLED</small></div>
-      <div class="stat partial"><strong id="partialCount">0</strong><span>ஓரளவு நிறைவேறியது</span><small>PARTIALLY FULFILLED</small></div>
-      <div class="stat none"><strong id="noneCount">0</strong><span>இன்னும் நிறைவேறவில்லை</span><small>NOT YET FULFILLED</small></div>
-    </div>
-    <div class="progress-label"><span>நிறைவு முன்னேற்றம்</span><span id="pct">0%</span></div>
-    <div class="progress"><div id="bar"></div></div>
-    <div class="priority">
-      <b>இப்போது உங்களுக்கு மிகவும் முக்கியமான தேவை:</b>
-      <select id="priority"><option value="">— தேர்வு செய்யுங்கள் —</option></select>
-    </div>
-  </section>
+<!-- =========================================================
+     MAIN PAGE
+     ========================================================= -->
 
-  <nav class="nav">
-    <a class="prev" href="01.html">← &nbsp;முந்தைய பக்கம்&nbsp; PREVIOUS</a>
-    <div class="current">02 / 16</div>
-    <a class="next" href="03.html">அடுத்த பக்கம்&nbsp; NEXT&nbsp; →</a>
-  </nav>
-</section>
+<main class="page02">
+
+
+    <form
+        id="assessmentForm"
+        novalidate
+    >
+
+
+        <!-- =====================================================
+             HERO
+             ===================================================== -->
+
+        <section class="hero-section">
+
+
+            <div class="hero-eyebrow">
+                YOUR LIFE NEEDS SNAPSHOT
+            </div>
+
+
+            <h1>
+
+                <span class="ta">
+                    உங்கள் வாழ்க்கையில் இந்த 12 அடிப்படை தேவைகளில்...
+                </span>
+
+                <span class="ta">
+                    எத்தனை முழுமையாக நிறைவேறியுள்ளன?
+                </span>
+
+            </h1>
+
+
+            <div class="hero-title-en">
+                YOUR 12 BASIC LIFE NEEDS
+            </div>
+
+
+            <div class="hero-copy">
+
+                <p class="ta">
+                    உங்கள் வாழ்க்கையின் 16 செல்வங்களை மதிப்பிட்டீர்கள்.
+                    இப்போது, உங்கள் அன்றாட வாழ்க்கையில் நீங்கள் உண்மையாக
+                    விரும்பும் 12 முக்கிய தேவைகளில் எத்தனை ஏற்கனவே
+                    நிறைவேறியுள்ளன என்பதைப் பார்ப்போம்.
+                </p>
+
+
+                <p class="en">
+                    Be honest. Don't choose what you wish were true.
+                    Choose what is actually true today.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             INTRODUCTION TO THE 12 NEEDS
+             ===================================================== -->
+
+        <section class="needs-introduction">
+
+
+            <div class="section-number">
+                12
+            </div>
+
+
+            <div class="section-heading">
+
+                <h2>
+                    உங்கள் வாழ்க்கையின் 12 அடிப்படை தேவைகள்
+                </h2>
+
+                <p>
+                    THE 12 BASIC LIFE NEEDS
+                </p>
+
+            </div>
+
+
+            <div class="status-legend">
+
+
+                <div class="legend-item legend-full">
+
+                    <span class="legend-dot"></span>
+
+                    <span class="ta">
+                        முழுமையாக
+                    </span>
+
+                    <span class="en">
+                        FULLY FULFILLED
+                    </span>
+
+                </div>
+
+
+                <div class="legend-item legend-partial">
+
+                    <span class="legend-dot"></span>
+
+                    <span class="ta">
+                        ஓரளவு
+                    </span>
+
+                    <span class="en">
+                        PARTIALLY FULFILLED
+                    </span>
+
+                </div>
+
+
+                <div class="legend-item legend-none">
+
+                    <span class="legend-dot"></span>
+
+                    <span class="ta">
+                        இன்னும் இல்லை
+                    </span>
+
+                    <span class="en">
+                        NOT YET FULFILLED
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <p class="instruction">
+                ஒவ்வொரு தேவைக்கும் இன்று உண்மையாக இருக்கும் நிலையை மட்டும் தேர்வு செய்யுங்கள்
+            </p>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             12 BASIC LIFE NEEDS
+             ===================================================== -->
+
+        <section
+            class="needs-grid"
+            aria-label="The 12 Basic Life Needs"
+        >
+
+
+            <!-- =================================================
+                 01 — HOME
+                 ================================================= -->
+
+            <article
+                class="need-card"
+                data-need="NEED01"
+            >
+
+                <div class="need-card-top">
+
+                    <div class="need-number">
+                        01
+                    </div>
+
+                    <div class="need-icon" aria-hidden="true">
+                        <svg viewBox="0 0 80 80">
+                            <path d="M12 37 40 14l28 23"/>
+                            <path d="M20 34v32h40V34"/>
+                            <path d="M32 66V46h16v20"/>
+                        </svg>
+                    </div>
+
+                </div>
+
+
+                <div class="need-content">
+
+                    <h3>
+                        வீடு
+                    </h3>
+
+                    <div class="need-title-en">
+                        HOME
+                    </div>
+
+
+                    <p class="need-question-ta">
+                        உங்கள் குடும்பத்தின் தேவைகளுக்கும் கனவுகளுக்கும்
+                        ஏற்ற ஒரு நல்ல வீடு உங்களிடம் உள்ளதா?
+                    </p>
+
+                    <p class="need-question-en">
+                        Do you have the home you truly want for yourself
+                        and your family?
+                    </p>
+
+
+                    <div class="status-options">
+
+                        <button
+                            type="button"
+                            class="status-option status-full"
+                            data-status="full"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol">✓</span>
+                            <span class="status-ta">முழுமையாக</span>
+                            <span class="status-en">FULLY FULFILLED</span>
+                        </button>
+
+                        <button
+                            type="button"
+                            class="status-option status-partial"
+                            data-status="partial"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol">◐</span>
+                            <span class="status-ta">ஓரளவு</span>
+                            <span class="status-en">PARTIALLY FULFILLED</span>
+                        </button>
+
+                        <button
+                            type="button"
+                            class="status-option status-none"
+                            data-status="none"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol">○</span>
+                            <span class="status-ta">இன்னும் இல்லை</span>
+                            <span class="status-en">NOT YET FULFILLED</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 02 — CAR
+                 ================================================= -->
+
+            <article
+                class="need-card"
+                data-need="NEED02"
+            >
+
+                <div class="need-card-top">
+
+                    <div class="need-number">
+                        02
+                    </div>
+
+                    <div class="need-icon" aria-hidden="true">
+                        <svg viewBox="0 0 80 80">
+                            <path d="M15 49h50v12H15z"/>
+                            <path d="m22 49 7-18h22l7 18"/>
+                            <circle cx="25" cy="61" r="5"/>
+                            <circle cx="55" cy="61" r="5"/>
+                            <path d="M31 39h18"/>
+                        </svg>
+                    </div>
+
+                </div>
+
+
+                <div class="need-content">
+
+                    <h3>
+                        கார்
+                    </h3>
+
+                    <div class="need-title-en">
+                        CAR
+                    </div>
+
+
+                    <p class="need-question-ta">
+                        உங்கள் குடும்பத்தின் தேவைக்கும் உங்கள் வாழ்க்கை
+                        முறைக்கும் ஏற்ற கார் உங்களிடம் உள்ளதா?
+                    </p>
+
+                    <p class="need-question-en">
+                        Do you have the car that suits your family's
+                        needs and lifestyle?
+                    </p>
+
+
+                    <div class="status-options">
+
+                        <button type="button" class="status-option status-full" data-status="full" aria-pressed="false">
+                            <span class="status-symbol">✓</span>
+                            <span class="status-ta">முழுமையாக</span>
+                            <span class="status-en">FULLY FULFILLED</span>
+                        </button>
+
+                        <button type="button" class="status-option status-partial" data-status="partial" aria-pressed="false">
+                            <span class="status-symbol">◐</span>
+                            <span class="status-ta">ஓரளவு</span>
+                            <span class="status-en">PARTIALLY FULFILLED</span>
+                        </button>
+
+                        <button type="button" class="status-option status-none" data-status="none" aria-pressed="false">
+                            <span class="status-symbol">○</span>
+                            <span class="status-ta">இன்னும் இல்லை</span>
+                            <span class="status-en">NOT YET FULFILLED</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 03 — BIKE
+                 ================================================= -->
+
+            <article
+                class="need-card"
+                data-need="NEED03"
+            >
+
+                <div class="need-card-top">
+
+                    <div class="need-number">
+                        03
+                    </div>
+
+                    <div class="need-icon" aria-hidden="true">
+                        <svg viewBox="0 0 80 80">
+                            <circle cx="24" cy="57" r="12"/>
+                            <circle cx="57" cy="57" r="12"/>
+                            <path d="M24 57 37 37l10 20"/>
+                            <path d="M37 37h12l8 20"/>
+                            <path d="M37 37l-5-8"/>
+                            <path d="M32 29h10"/>
+                        </svg>
+                    </div>
+
+                </div>
+
+
+                <div class="need-content">
+
+                    <h3>
+                        பைக்
+                    </h3>
+
+                    <div class="need-title-en">
+                        BIKE
+                    </div>
+
+
+                    <p class="need-question-ta">
+                        உங்கள் தனிப்பட்ட பயணம் மற்றும் அன்றாட தேவைகளுக்கு
+                        ஏற்ற இருசக்கர வாகனம் உங்களிடம் உள்ளதா?
+                    </p>
+
+                    <p class="need-question-en">
+                        Do you have the two-wheeler you need for your daily life?
+                    </p>
+
+
+                    <div class="status-options">
+
+                        <button type="button" class="status-option status-full" data-status="full" aria-pressed="false">
+                            <span class="status-symbol">✓</span>
+                            <span class="status-ta">முழுமையாக</span>
+                            <span class="status-en">FULLY FULFILLED</span>
+                        </button>
+
+                        <button type="button" class="status-option status-partial" data-status="partial" aria-pressed="false">
+                            <span class="status-symbol">◐</span>
+                            <span class="status-ta">ஓரளவு</span>
+                            <span class="status-en">PARTIALLY FULFILLED</span>
+                        </button>
+
+                        <button type="button" class="status-option status-none" data-status="none" aria-pressed="false">
+                            <span class="status-symbol">○</span>
+                            <span class="status-ta">இன்னும் இல்லை</span>
+                            <span class="status-en">NOT YET FULFILLED</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 04 — CHILDREN'S EDUCATION
+                 ================================================= -->
+
+            <article
+                class="need-card"
+                data-need="NEED04"
+            >
+
+                <div class="need-card-top">
+
+                    <div class="need-number">
+                        04
+                    </div>
+
+                    <div class="need-icon" aria-hidden="true">
+                        <svg viewBox="0 0 80 80">
+                            <path d="m12 31 28-14 28 14-28 14z"/>
+                            <path d="M22 37v14c10 8 26 8 36 0V37"/>
+                            <path d="M68 31v19"/>
+                            <circle cx="68" cy="54" r="3"/>
+                        </svg>
+                    </div>
+
+                </div>
+
+
+                <div class="need-content">
+
+                    <h3>
+                        குழந்தைகளின் கல்வி
+                    </h3>
+
+                    <div class="need-title-en">
+                        CHILDREN'S EDUCATION
+                    </div>
+
+
+                    <p class="need-question-ta">
+                        உங்கள் குழந்தைகளின் கல்வி மற்றும் எதிர்காலத்திற்கான
+                        தேவைகளை நீங்கள் நம்பிக்கையுடன் நிறைவேற்றி வருகிறீர்களா?
+                    </p>
+
+                    <p class="need-question-en">
+                        Are you confident that you can provide the education
+                        and future opportunities your children deserve?
+                    </p>
+
+
+                    <div class="status-options">
+
+                        <button type="button" class="status-option status-full" data-status="full" aria-pressed="false">
+                            <span class="status-symbol">✓</span>
+                            <span class="status-ta">முழுமையாக</span>
+                            <span class="status-en">FULLY FULFILLED</span>
+                        </button>
+
+                        <button type="button" class="status-option status-partial" data-status="partial" aria-pressed="false">
+                            <span class="status-symbol">◐</span>
+                            <span class="status-ta">ஓரளவு</span>
+                            <span class="status-en">PARTIALLY FULFILLED</span>
+                        </button>
+
+                        <button type="button" class="status-option status-none" data-status="none" aria-pressed="false">
+                            <span class="status-symbol">○</span>
+                            <span class="status-ta">இன்னும் இல்லை</span>
+                            <span class="status-en">NOT YET FULFILLED</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 05 — JEWELLERY
+                 ================================================= -->
+
+            <article
+                class="need-card"
+                data-need="NEED05"
+            >
+
+                <div class="need-card-top">
+
+                    <div class="need-number">
+                        05
+                    </div>
+
+                    <div class="need-icon" aria-hidden="true">
+                        <svg viewBox="0 0 80 80">
+                            <path d="m24 18 16 9 16-9"/>
+                            <path d="m24 18 16 42 16-42"/>
+                            <path d="m24 18h32"/>
+                            <path d="m32 31h16"/>
+                            <path d="m29 43h22"/>
+                        </svg>
+                    </div>
+
+                </div>
+
+
+                <div class="need-content">
+
+                    <h3>
+                        நகை
+                    </h3>
+
+                    <div class="need-title-en">
+                        JEWELLERY
+                    </div>
+
+
+                    <p class="need-question-ta">
+                        உங்கள் குடும்பத்தின் முக்கியமான நகை மற்றும்
+                        மதிப்புமிக்க பொருட்கள் தொடர்பான தேவைகள் நிறைவேறியுள்ளனவா?
+                    </p>
+
+                    <p class="need-question-en">
+                        Have your family's important jewellery and
+                        valuables needs been fulfilled?
+                    </p>
+
+
+                    <div class="status-options">
+
+                        <button type="button" class="status-option status-full" data-status="full" aria-pressed="false">
+                            <span class="status-symbol">✓</span>
+                            <span class="status-ta">முழுமையாக</span>
+                            <span class="status-en">FULLY FULFILLED</span>
+                        </button>
+
+                        <button type="button" class="status-option status-partial" data-status="partial" aria-pressed="false">
+                            <span class="status-symbol">◐</span>
+                            <span class="status-ta">ஓரளவு</span>
+                            <span class="status-en">PARTIALLY FULFILLED</span>
+                        </button>
+
+                        <button type="button" class="status-option status-none" data-status="none" aria-pressed="false">
+                            <span class="status-symbol">○</span>
+                            <span class="status-ta">இன்னும் இல்லை</span>
+                            <span class="status-en">NOT YET FULFILLED</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 06 — DEBT-FREE LIFE
+                 ================================================= -->
+
+            <article
+                class="need-card"
+                data-need="NEED06"
+            >
+
+                <div class="need-card-top">
+
+                    <div class="need-number">
+                        06
+                    </div>
+
+                    <div class="need-icon" aria-hidden="true">
+                        <svg viewBox="0 0 80 80">
+                            <circle cx="40" cy="40" r="27"/>
+                            <path d="M31 32c2-5 15-6 18 0 2 5-2 8-9 9-7 1-11 4-9 9 3 7 16 7 19 0"/>
+                            <path d="M40 22v36"/>
+                            <path d="M18 60 62 20"/>
+                        </svg>
+                    </div>
+
+                </div>
+
+
+                <div class="need-content">
+
+                    <h3>
+                        கடனில்லா வாழ்க்கை
+                    </h3>
+
+                    <div class="need-title-en">
+                        DEBT-FREE LIFE
+                    </div>
+
+
+                    <p class="need-question-ta">
+                        உங்கள் தற்போதைய வாழ்க்கை தேவையற்ற கடன் சுமையிலிருந்து
+                        விடுபட்டுள்ளதா?
+                    </p>
+
+                    <p class="need-question-en">
+                        Are you living with the level of financial freedom
+                        you want, without burdensome debt?
+                    </p>
+
+
+                    <div class="status-options">
+
+                        <button type="button" class="status-option status-full" data-status="full" aria-pressed="false">
+                            <span class="status-symbol">✓</span>
+                            <span class="status-ta">முழுமையாக</span>
+                            <span class="status-en">FULLY FULFILLED</span>
+                        </button>
+
+                        <button type="button" class="status-option status-partial" data-status="partial" aria-pressed="false">
+                            <span class="status-symbol">◐</span>
+                            <span class="status-ta">ஓரளவு</span>
+                            <span class="status-en">PARTIALLY FULFILLED</span>
+                        </button>
+
+                        <button type="button" class="status-option status-none" data-status="none" aria-pressed="false">
+                            <span class="status-symbol">○</span>
+                            <span class="status-ta">இன்னும் இல்லை</span>
+                            <span class="status-en">NOT YET FULFILLED</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 07 — SAVINGS
+                 ================================================= -->
+
+            <article
+                class="need-card"
+                data-need="NEED07"
+            >
+
+                <div class="need-card-top">
+
+                    <div class="need-number">
+                        07
+                    </div>
+
+                    <div class="need-icon" aria-hidden="true">
+                        <svg viewBox="0 0 80 80">
+                            <path d="M15 31h50v31H15z"/>
+                            <path d="M24 31v-7h32v7"/>
+                            <path d="M27 43h26"/>
+                            <path d="M34 51h12"/>
+                        </svg>
+                    </div>
+
+                </div>
+
+
+                <div class="need-content">
+
+                    <h3>
+                        சேமிப்பு
+                    </h3>
+
+                    <div class="need-title-en">
+                        SAVINGS
+                    </div>
+
+
+                    <p class="need-question-ta">
+                        எதிர்பாராத சூழ்நிலைகளுக்கும் எதிர்கால இலக்குகளுக்கும்
+                        போதுமான சேமிப்பு உங்களிடம் உள்ளதா?
+                    </p>
+
+                    <p class="need-question-en">
+                        Do you have sufficient savings for emergencies
+                        and future goals?
+                    </p>
+
+
+                    <div class="status-options">
+
+                        <button type="button" class="status-option status-full" data-status="full" aria-pressed="false">
+                            <span class="status-symbol">✓</span>
+                            <span class="status-ta">முழுமையாக</span>
+                            <span class="status-en">FULLY FULFILLED</span>
+                        </button>
+
+                        <button type="button" class="status-option status-partial" data-status="partial" aria-pressed="false">
+                            <span class="status-symbol">◐</span>
+                            <span class="status-ta">ஓரளவு</span>
+                            <span class="status-en">PARTIALLY FULFILLED</span>
+                        </button>
+
+                        <button type="button" class="status-option status-none" data-status="none" aria-pressed="false">
+                            <span class="status-symbol">○</span>
+                            <span class="status-ta">இன்னும் இல்லை</span>
+                            <span class="status-en">NOT YET FULFILLED</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 08 — CARING FOR PARENTS
+                 ================================================= -->
+
+            <article
+                class="need-card"
+                data-need="NEED08"
+            >
+
+                <div class="need-card-top">
+
+                    <div class="need-number">
+                        08
+                    </div>
+
+                    <div class="need-icon" aria-hidden="true">
+                        <svg viewBox="0 0 80 80">
+                            <circle cx="30" cy="29" r="9"/>
+                            <circle cx="50" cy="29" r="9"/>
+                            <path d="M16 57c2-12 10-18 18-18s16 6 18 18"/>
+                            <path d="M28 48h24"/>
+                            <path d="M40 39v18"/>
+                        </svg>
+                    </div>
+
+                </div>
+
+
+                <div class="need-content">
+
+                    <h3>
+                        பெற்றோரை கவனித்தல்
+                    </h3>
+
+                    <div class="need-title-en">
+                        CARING FOR PARENTS
+                    </div>
+
+
+                    <p class="need-question-ta">
+                        உங்கள் பெற்றோருக்கு அவர்கள் தகுதியான பாதுகாப்பு,
+                        ஆதரவு மற்றும் கவனிப்பை வழங்க முடிகிறதா?
+                    </p>
+
+                    <p class="need-question-en">
+                        Are you able to provide your parents with the care,
+                        support and security they deserve?
+                    </p>
+
+
+                    <div class="status-options">
+
+                        <button type="button" class="status-option status-full" data-status="full" aria-pressed="false">
+                            <span class="status-symbol">✓</span>
+                            <span class="status-ta">முழுமையாக</span>
+                            <span class="status-en">FULLY FULFILLED</span>
+                        </button>
+
+                        <button type="button" class="status-option status-partial" data-status="partial" aria-pressed="false">
+                            <span class="status-symbol">◐</span>
+                            <span class="status-ta">ஓரளவு</span>
+                            <span class="status-en">PARTIALLY FULFILLED</span>
+                        </button>
+
+                        <button type="button" class="status-option status-none" data-status="none" aria-pressed="false">
+                            <span class="status-symbol">○</span>
+                            <span class="status-ta">இன்னும் இல்லை</span>
+                            <span class="status-en">NOT YET FULFILLED</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 09 — TRAVEL
+                 ================================================= -->
+
+            <article
+                class="need-card"
+                data-need="NEED09"
+            >
+
+                <div class="need-card-top">
+
+                    <div class="need-number">
+                        09
+                    </div>
+
+                    <div class="need-icon" aria-hidden="true">
+                        <svg viewBox="0 0 80 80">
+                            <circle cx="40" cy="40" r="27"/>
+                            <path d="M13 40h54"/>
+                            <path d="M40 13c8 8 12 17 12 27s-4 19-12 27"/>
+                            <path d="M40 13c-8 8-12 17-12 27s4 19 12 27"/>
+                            <path d="M18 28h44"/>
+                            <path d="M18 52h44"/>
+                        </svg>
+                    </div>
+
+                </div>
+
+
+                <div class="need-content">
+
+                    <h3>
+                        சுற்றுலா
+                    </h3>
+
+                    <div class="need-title-en">
+                        TRAVEL
+                    </div>
+
+
+                    <p class="need-question-ta">
+                        உங்களுக்கும் உங்கள் குடும்பத்திற்கும் விருப்பமான
+                        இடங்களுக்குச் சென்று அனுபவித்து மகிழும் சுதந்திரம் உங்களிடம் உள்ளதா?
+                    </p>
+
+                    <p class="need-question-en">
+                        Do you have the freedom to travel and create
+                        experiences with your family?
+                    </p>
+
+
+                    <div class="status-options">
+
+                        <button type="button" class="status-option status-full" data-status="full" aria-pressed="false">
+                            <span class="status-symbol">✓</span>
+                            <span class="status-ta">முழுமையாக</span>
+                            <span class="status-en">FULLY FULFILLED</span>
+                        </button>
+
+                        <button type="button" class="status-option status-partial" data-status="partial" aria-pressed="false">
+                            <span class="status-symbol">◐</span>
+                            <span class="status-ta">ஓரளவு</span>
+                            <span class="status-en">PARTIALLY FULFILLED</span>
+                        </button>
+
+                        <button type="button" class="status-option status-none" data-status="none" aria-pressed="false">
+                            <span class="status-symbol">○</span>
+                            <span class="status-ta">இன்னும் இல்லை</span>
+                            <span class="status-en">NOT YET FULFILLED</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 10 — HEALTHCARE
+                 ================================================= -->
+
+            <article
+                class="need-card"
+                data-need="NEED10"
+            >
+
+                <div class="need-card-top">
+
+                    <div class="need-number">
+                        10
+                    </div>
+
+                    <div class="need-icon" aria-hidden="true">
+                        <svg viewBox="0 0 80 80">
+                            <path d="M40 64S17 49 17 32c0-9 6-15 14-15 5 0 8 3 9 7 1-4 4-7 9-7 8 0 14 6 14 15 0 17-23 32-23 32Z"/>
+                            <path d="M30 38h7l3-8 5 17 3-9h7"/>
+                        </svg>
+                    </div>
+
+                </div>
+
+
+                <div class="need-content">
+
+                    <h3>
+                        மருத்துவம்
+                    </h3>
+
+                    <div class="need-title-en">
+                        HEALTHCARE
+                    </div>
+
+
+                    <p class="need-question-ta">
+                        உங்களுக்கும் உங்கள் குடும்பத்திற்கும் தேவையான தரமான
+                        மருத்துவப் பாதுகாப்பை நீங்கள் எளிதாகப் பெற முடிகிறதா?
+                    </p>
+
+                    <p class="need-question-en">
+                        Can you access the quality healthcare your family
+                        needs without financial stress?
+                    </p>
+
+
+                    <div class="status-options">
+
+                        <button type="button" class="status-option status-full" data-status="full" aria-pressed="false">
+                            <span class="status-symbol">✓</span>
+                            <span class="status-ta">முழுமையாக</span>
+                            <span class="status-en">FULLY FULFILLED</span>
+                        </button>
+
+                        <button type="button" class="status-option status-partial" data-status="partial" aria-pressed="false">
+                            <span class="status-symbol">◐</span>
+                            <span class="status-ta">ஓரளவு</span>
+                            <span class="status-en">PARTIALLY FULFILLED</span>
+                        </button>
+
+                        <button type="button" class="status-option status-none" data-status="none" aria-pressed="false">
+                            <span class="status-symbol">○</span>
+                            <span class="status-ta">இன்னும் இல்லை</span>
+                            <span class="status-en">NOT YET FULFILLED</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 11 — SOCIAL SERVICE
+                 ================================================= -->
+
+            <article
+                class="need-card"
+                data-need="NEED11"
+            >
+
+                <div class="need-card-top">
+
+                    <div class="need-number">
+                        11
+                    </div>
+
+                    <div class="need-icon" aria-hidden="true">
+                        <svg viewBox="0 0 80 80">
+                            <circle cx="40" cy="40" r="27"/>
+                            <path d="M40 24v32"/>
+                            <path d="M24 40h32"/>
+                            <path d="m28 28 24 24"/>
+                            <path d="m52 28-24 24"/>
+                        </svg>
+                    </div>
+
+                </div>
+
+
+                <div class="need-content">
+
+                    <h3>
+                        சமூக சேவை
+                    </h3>
+
+                    <div class="need-title-en">
+                        SOCIAL SERVICE
+                    </div>
+
+
+                    <p class="need-question-ta">
+                        மற்றவர்களின் வாழ்க்கையில் மாற்றத்தை ஏற்படுத்தவும்,
+                        சமூகத்திற்கு பங்களிக்கவும் உங்களிடம் வளமும் நேரமும் உள்ளதா?
+                    </p>
+
+                    <p class="need-question-en">
+                        Do you have the time and resources to contribute
+                        meaningfully to society?
+                    </p>
+
+
+                    <div class="status-options">
+
+                        <button type="button" class="status-option status-full" data-status="full" aria-pressed="false">
+                            <span class="status-symbol">✓</span>
+                            <span class="status-ta">முழுமையாக</span>
+                            <span class="status-en">FULLY FULFILLED</span>
+                        </button>
+
+                        <button type="button" class="status-option status-partial" data-status="partial" aria-pressed="false">
+                            <span class="status-symbol">◐</span>
+                            <span class="status-ta">ஓரளவு</span>
+                            <span class="status-en">PARTIALLY FULFILLED</span>
+                        </button>
+
+                        <button type="button" class="status-option status-none" data-status="none" aria-pressed="false">
+                            <span class="status-symbol">○</span>
+                            <span class="status-ta">இன்னும் இல்லை</span>
+                            <span class="status-en">NOT YET FULFILLED</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 12 — RECREATION
+                 ================================================= -->
+
+            <article
+                class="need-card"
+                data-need="NEED12"
+            >
+
+                <div class="need-card-top">
+
+                    <div class="need-number">
+                        12
+                    </div>
+
+                    <div class="need-icon" aria-hidden="true">
+                        <svg viewBox="0 0 80 80">
+                            <path d="M25 30h30v26H25z"/>
+                            <path d="M31 24h18"/>
+                            <path d="M40 30v26"/>
+                            <path d="M25 43h30"/>
+                            <circle cx="31" cy="37" r="2"/>
+                            <circle cx="49" cy="49" r="2"/>
+                        </svg>
+                    </div>
+
+                </div>
+
+
+                <div class="need-content">
+
+                    <h3>
+                        பொழுதுபோக்கு
+                    </h3>
+
+                    <div class="need-title-en">
+                        RECREATION
+                    </div>
+
+
+                    <p class="need-question-ta">
+                        வேலை மற்றும் பொறுப்புகளுக்கு அப்பால், உங்களுக்காகவும்
+                        குடும்பத்திற்காகவும் மகிழ்ச்சியான நேரத்தை செலவிடுகிறீர்களா?
+                    </p>
+
+                    <p class="need-question-en">
+                        Do you have enough time and freedom for recreation,
+                        joy and meaningful experiences?
+                    </p>
+
+
+                    <div class="status-options">
+
+                        <button type="button" class="status-option status-full" data-status="full" aria-pressed="false">
+                            <span class="status-symbol">✓</span>
+                            <span class="status-ta">முழுமையாக</span>
+                            <span class="status-en">FULLY FULFILLED</span>
+                        </button>
+
+                        <button type="button" class="status-option status-partial" data-status="partial" aria-pressed="false">
+                            <span class="status-symbol">◐</span>
+                            <span class="status-ta">ஓரளவு</span>
+                            <span class="status-en">PARTIALLY FULFILLED</span>
+                        </button>
+
+                        <button type="button" class="status-option status-none" data-status="none" aria-pressed="false">
+                            <span class="status-symbol">○</span>
+                            <span class="status-ta">இன்னும் இல்லை</span>
+                            <span class="status-en">NOT YET FULFILLED</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             LIFE NEEDS SNAPSHOT
+             ===================================================== -->
+
+        <section class="needs-snapshot">
+
+
+            <div class="snapshot-heading">
+
+                <div class="snapshot-eyebrow">
+                    YOUR LIFE NEEDS SNAPSHOT
+                </div>
+
+                <h2>
+                    உங்கள் வாழ்க்கையின் தேவைகளின் நிலவரம்
+                </h2>
+
+            </div>
+
+
+            <div class="snapshot-grid">
+
+
+                <div class="snapshot-card snapshot-full">
+
+                    <div
+                        id="fullCount"
+                        class="snapshot-count"
+                    >
+                        0
+                    </div>
+
+                    <div class="snapshot-denominator">
+                        / 12
+                    </div>
+
+                    <div class="snapshot-label-ta">
+                        முழுமையாக நிறைவேறியது
+                    </div>
+
+                    <div class="snapshot-label-en">
+                        FULLY FULFILLED
+                    </div>
+
+                </div>
+
+
+                <div class="snapshot-card snapshot-partial">
+
+                    <div
+                        id="partialCount"
+                        class="snapshot-count"
+                    >
+                        0
+                    </div>
+
+                    <div class="snapshot-denominator">
+                        / 12
+                    </div>
+
+                    <div class="snapshot-label-ta">
+                        ஓரளவு நிறைவேறியது
+                    </div>
+
+                    <div class="snapshot-label-en">
+                        PARTIALLY FULFILLED
+                    </div>
+
+                </div>
+
+
+                <div class="snapshot-card snapshot-none">
+
+                    <div
+                        id="noneCount"
+                        class="snapshot-count"
+                    >
+                        0
+                    </div>
+
+                    <div class="snapshot-denominator">
+                        / 12
+                    </div>
+
+                    <div class="snapshot-label-ta">
+                        இன்னும் நிறைவேறவில்லை
+                    </div>
+
+                    <div class="snapshot-label-en">
+                        NOT YET FULFILLED
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 COMPLETION PROGRESS
+                 ================================================= -->
+
+            <div class="completion-section">
+
+
+                <div class="completion-header">
+
+                    <span>
+                        நிறைவு முன்னேற்றம்
+                    </span>
+
+                    <strong id="completionPercent">
+                        0%
+                    </strong>
+
+                </div>
+
+
+                <div class="completion-track">
+
+                    <div
+                        id="completionBar"
+                        class="completion-bar"
+                    ></div>
+
+                </div>
+
+
+                <p id="completion-message">
+                    உங்கள் 12 தேவைகளில் ஒவ்வொன்றையும் மதிப்பிடுங்கள்.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             PRIORITY
+             ===================================================== -->
+
+        <section class="priority-section">
+
+
+            <div class="priority-eyebrow">
+                YOUR NEXT FOCUS
+            </div>
+
+
+            <h2>
+                இப்போது உங்களுக்கு மிகவும் முக்கியமான தேவை எது?
+            </h2>
+
+
+            <p class="priority-question-ta">
+                இந்த 12 தேவைகளில், இன்று உங்கள் வாழ்க்கையில்
+                முதலில் கவனம் செலுத்த வேண்டிய ஒன்று எது?
+            </p>
+
+
+            <p class="priority-question-en">
+                Which one of these 12 needs matters most to you right now?
+            </p>
+
+
+            <div class="priority-select-wrapper">
+
+                <label
+                    for="prioritySelect"
+                    class="priority-label"
+                >
+                    உங்கள் முதன்மை தேவையைத் தேர்வு செய்யுங்கள்
+                </label>
+
+
+                <select
+                    id="prioritySelect"
+                    class="priority-select"
+                    name="priority"
+                >
+
+                    <option value="">
+                        — தேர்வு செய்யுங்கள் —
+                    </option>
+
+                    <option value="NEED01">
+                        வீடு — HOME
+                    </option>
+
+                    <option value="NEED02">
+                        கார் — CAR
+                    </option>
+
+                    <option value="NEED03">
+                        பைக் — BIKE
+                    </option>
+
+                    <option value="NEED04">
+                        குழந்தைகளின் கல்வி — CHILDREN'S EDUCATION
+                    </option>
+
+                    <option value="NEED05">
+                        நகை — JEWELLERY
+                    </option>
+
+                    <option value="NEED06">
+                        கடனில்லா வாழ்க்கை — DEBT-FREE LIFE
+                    </option>
+
+                    <option value="NEED07">
+                        சேமிப்பு — SAVINGS
+                    </option>
+
+                    <option value="NEED08">
+                        பெற்றோரை கவனித்தல் — CARING FOR PARENTS
+                    </option>
+
+                    <option value="NEED09">
+                        சுற்றுலா — TRAVEL
+                    </option>
+
+                    <option value="NEED10">
+                        மருத்துவம் — HEALTHCARE
+                    </option>
+
+                    <option value="NEED11">
+                        சமூக சேவை — SOCIAL SERVICE
+                    </option>
+
+                    <option value="NEED12">
+                        பொழுதுபோக்கு — RECREATION
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div
+                id="priorityConfirmation"
+                class="priority-confirmation"
+            >
+
+                <span class="confirmation-icon">
+                    ✓
+                </span>
+
+                <span
+                    data-priority-ta
+                    class="ta"
+                ></span>
+
+                <span
+                    data-priority-en
+                    class="en"
+                ></span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             CLOSING
+             ===================================================== -->
+
+        <section class="closing-section">
+
+            <p class="closing-ta">
+                நீங்கள் எதை விரும்புகிறீர்கள் என்பது முக்கியம்.
+                ஆனால் இன்று உங்கள் வாழ்க்கையில் உண்மையாக எது உள்ளது
+                என்பதைக் காண்பதே மாற்றத்தின் முதல் படி.
+            </p>
+
+            <p class="closing-en">
+                Awareness comes before change.
+                Know where you are — then decide where you want to go.
+            </p>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             STATUS MESSAGE
+             ===================================================== -->
+
+        <div
+            id="pageStatus"
+            class="page-status"
+            role="status"
+            aria-live="polite"
+        ></div>
+
+
+
+        <!-- =====================================================
+             FROZEN UNIVERSAL BOTTOM NAVIGATION
+             ===================================================== -->
+
+        <section
+            class="page-navigation"
+            aria-label="Page navigation"
+        >
+
+
+            <button
+                type="button"
+                id="previousButton"
+                class="nav-button nav-back"
+                data-navigation="previous"
+            >
+
+                <span class="nav-arrow">
+                    ←
+                </span>
+
+                <span class="nav-text">
+
+                    <span class="nav-ta">
+                        முந்தைய பக்கம்
+                    </span>
+
+                    <span class="nav-en">
+                        PREVIOUS
+                    </span>
+
+                </span>
+
+            </button>
+
+
+            <div
+                class="navigation-progress"
+                aria-current="page"
+            >
+                <span>02</span> / 16
+            </div>
+
+
+            <button
+                type="button"
+                id="nextButton"
+                class="nav-button nav-forward"
+                data-navigation="next"
+            >
+
+                <span class="nav-text">
+
+                    <span class="nav-ta">
+                        அடுத்த பக்கம்
+                    </span>
+
+                    <span class="nav-en">
+                        NEXT
+                    </span>
+
+                </span>
+
+                <span class="nav-arrow">
+                    →
+                </span>
+
+            </button>
+
+
+        </section>
+
+
+    </form>
+
 </main>
 
-<script>
-const needs=[
-['01','வீடு','HOME','உங்கள் குடும்பத்தின் தேவைகளுக்கும் கனவுகளுக்கும் ஏற்ற ஒரு நல்ல வீடு உங்களிடம் உள்ளதா?','Do you have the home you truly want for yourself and your family?'],
-['02','கார்','CAR','உங்கள் குடும்பத்தின் தேவைக்கும் உங்கள் வாழ்க்கை முறைக்கும் ஏற்ற கார் உங்களிடம் உள்ளதா?',"Do you have the car that suits your family's needs and lifestyle?"],
-['03','பைக்','BIKE','உங்கள் தனிப்பட்ட பயணம் மற்றும் அன்றாட தேவைகளுக்கு ஏற்ற இருசக்கர வாகனம் உங்களிடம் உள்ளதா?','Do you have the two-wheeler you need for your daily life?'],
-['04','குழந்தைகளின் கல்வி',"CHILDREN'S EDUCATION",'உங்கள் குழந்தைகளின் கல்வி மற்றும் எதிர்காலத்திற்கான தேவைகளை நீங்கள் நம்பிக்கையுடன் நிறைவேற்றி வருகிறீர்களா?','Are you confident that you can provide the education and future opportunities your children deserve?'],
-['05','நகை','JEWELLERY','உங்கள் குடும்பத்தின் முக்கியமான நகை மற்றும் மதிப்புமிக்க பொருட்கள் தொடர்பான தேவைகள் நிறைவேறியுள்ளனவா?',"Have your family's important jewellery and valuables needs been fulfilled?"],
-['06','கடனில்லா வாழ்க்கை','DEBT-FREE LIFE','உங்கள் தற்போதைய வாழ்க்கை தேவையற்ற கடன் சுமையிலிருந்து விடுபட்டுள்ளதா?','Are you living with the level of financial freedom you want, without burdensome debt?'],
-['07','சேமிப்பு','SAVINGS','எதிர்பாராத சூழ்நிலைகளுக்கும் எதிர்கால இலக்குகளுக்கும் போதுமான சேமிப்பு உங்களிடம் உள்ளதா?','Do you have sufficient savings for emergencies and future goals?'],
-['08','பெற்றோரை கவனித்தல்','CARING FOR PARENTS','உங்கள் பெற்றோருக்கு அவர்கள் தகுதியான பாதுகாப்பு, ஆதரவு மற்றும் கவனிப்பை வழங்க முடிகிறதா?','Are you able to provide your parents with the care, support and security they deserve?'],
-['09','சுற்றுலா','TRAVEL','உங்களுக்கும் உங்கள் குடும்பத்திற்கும் விருப்பமான இடங்களுக்குச் சென்று அனுபவித்து மகிழும் சுதந்திரம் உங்களிடம் உள்ளதா?','Do you have the freedom to travel and create experiences with your family?'],
-['10','மருத்துவம்','HEALTHCARE','உங்களுக்கும் உங்கள் குடும்பத்திற்கும் தேவையான தரமான மருத்துவப் பாதுகாப்பை நீங்கள் எளிதாகப் பெற முடிகிறதா?','Can you access the quality healthcare your family needs without financial stress?'],
-['11','சமூக சேவை','SOCIAL SERVICE','மற்றவர்களின் வாழ்க்கையில் மாற்றத்தை ஏற்படுத்தவும், சமூகத்திற்கு பங்களிக்கவும் உங்களிடம் வளமும் நேரமும் உள்ளதா?','Do you have the time and resources to contribute meaningfully to society?'],
-['12','பொழுதுபோக்கு','RECREATION','வேலை மற்றும் பொறுப்புகளுக்கு அப்பால், உங்களுக்காகவும் குடும்பத்திற்காகவும் மகிழ்ச்சியான நேரத்தை செலவிடுகிறீர்களா?','Do you have enough time and freedom for recreation, joy and meaningful experiences?']
-];
-const state={};
-const grid=document.getElementById('needs');
-needs.forEach(n=>{
- const c=document.createElement('article'); c.className='card'; c.dataset.id=n[0];
- c.innerHTML=`<div class="card-number">${n[0]}</div><h2>${n[1]}</h2><div class="en">${n[2]}</div><div class="q-ta">${n[3]}</div><div class="q-en">${n[4]}</div><div class="options">
- <button class="option full" data-status="full"><span class="option-ta">முழுமையாக</span><span class="option-en">FULLY FULFILLED</span></button>
- <button class="option partial" data-status="partial"><span class="option-ta">ஓரளவு</span><span class="option-en">PARTIALLY FULFILLED</span></button>
- <button class="option none" data-status="none"><span class="option-ta">இன்னும் இல்லை</span><span class="option-en">NOT YET FULFILLED</span></button>
- </div>`;
- grid.appendChild(c);
- const o=document.createElement('option'); o.value=n[0]; o.textContent=n[1]+' — '+n[2]; document.getElementById('priority').appendChild(o);
-});
-grid.addEventListener('click',e=>{
- const b=e.target.closest('button.option'); if(!b)return;
- const c=b.closest('.card'); state[c.dataset.id]=b.dataset.status;
- c.querySelectorAll('.option').forEach(x=>x.classList.remove('selected')); b.classList.add('selected'); update();
-});
-function update(){
- let full=0,partial=0,none=0;
- Object.values(state).forEach(v=>v==='full'?full++:v==='partial'?partial++:none++);
- document.getElementById('fullCount').textContent=full;
- document.getElementById('partialCount').textContent=partial;
- document.getElementById('noneCount').textContent=none;
- const answered=full+partial+none, pct=Math.round(answered/12*100);
- document.getElementById('pct').textContent=pct+'%'; document.getElementById('bar').style.width=pct+'%';
-}
-</script>
+
+
+<!-- =========================================================
+     FROZEN FOOTER
+     ========================================================= -->
+
+<footer class="page-footer">
+
+    <div class="footer-tagline">
+        EVERY DREAM HAS A PATH™
+    </div>
+
+    <div class="footer-brand">
+        CTM PATH™ MILLIONAIRES™ CLUB
+    </div>
+
+</footer>
+
+
+
+<!-- =========================================================
+     PAGE 02 JAVASCRIPT
+     ========================================================= -->
+
+<script
+    src="js/page02.js"
+    defer
+></script>
+
+
 </body>
 </html>
-
