@@ -1,1 +1,2982 @@
+/* =========================================================
+   CTM PATH™ MILLIONAIRES™
+   PAGE 14 — ACTIVATE THE DIGITAL BUSINESS™
+   Complete replacement
+   css/page14.css
+   ========================================================= */
 
+
+/* =========================================================
+   PAGE VARIABLES
+   ========================================================= */
+
+:root {
+    --p14-bg: #06131d;
+    --p14-bg-deep: #020b12;
+
+    --p14-panel: #091d2b;
+    --p14-panel-soft: #0c2637;
+    --p14-panel-light: #103149;
+
+    --p14-ivory: #f5f0e7;
+    --p14-white: #ffffff;
+
+    --p14-muted: #aab9c2;
+    --p14-muted-dark: #71838e;
+
+    --p14-gold: #f2b52b;
+    --p14-gold-light: #ffd96b;
+    --p14-gold-dark: #b97b0a;
+
+    --p14-teal: #08c8ce;
+    --p14-teal-light: #72ecec;
+    --p14-teal-dark: #078f96;
+
+    --p14-border: rgba(255, 255, 255, 0.09);
+    --p14-border-gold: rgba(242, 181, 43, 0.36);
+    --p14-border-teal: rgba(8, 200, 206, 0.34);
+
+    --p14-radius: 24px;
+
+    --p14-shadow:
+        0 30px 90px rgba(0, 0, 0, 0.42);
+}
+
+
+/* =========================================================
+   RESET / FOUNDATION
+   ========================================================= */
+
+html {
+    background: var(--p14-bg-deep);
+    scroll-behavior: smooth;
+}
+
+body.page-14 {
+    margin: 0;
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+    color: var(--p14-ivory);
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(8, 200, 206, 0.065),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(242, 181, 43, 0.035),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #06131d 0%,
+            #071c2a 48%,
+            #030d15 100%
+        );
+
+    font-family:
+        "Noto Sans Tamil",
+        "Nirmala UI",
+        "Latha",
+        Arial,
+        sans-serif;
+}
+
+.page-14 *,
+.page-14 *::before,
+.page-14 *::after {
+    box-sizing: border-box;
+}
+
+.page-14 img {
+    display: block;
+    max-width: 100%;
+}
+
+.page-14 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   GLOBAL HEADER
+   ========================================================= */
+
+.page-14 .global-header {
+    position: relative;
+    z-index: 10;
+
+    min-height: 235px;
+
+    padding:
+        62px
+        clamp(42px, 6vw, 105px)
+        52px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 35px;
+}
+
+.page-14 .global-brand {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 20px;
+}
+
+.page-14 .global-logo {
+    width: 108px;
+    height: 108px;
+
+    flex: 0 0 auto;
+
+    object-fit: contain;
+}
+
+.page-14 .global-brand-name {
+    display: flex;
+    flex-direction: column;
+
+    padding-top: 8px;
+
+    color: var(--p14-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(24px, 2vw, 36px);
+
+    font-weight: 900;
+
+    line-height: 1.05;
+}
+
+.page-14 .global-brand-name span:last-child {
+    margin-top: 7px;
+}
+
+.page-14 .global-page-number {
+    padding-top: 15px;
+
+    color: var(--p14-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(18px, 1.45vw, 28px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.24em;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   HEADER DIVIDER
+   ========================================================= */
+
+.page-14 .global-divider {
+    width: 100%;
+    height: 4px;
+
+    display: grid;
+
+    grid-template-columns:
+        27% 46% 27%;
+}
+
+.page-14 .global-divider span {
+    height: 100%;
+}
+
+.page-14 .global-divider span:nth-child(1),
+.page-14 .global-divider span:nth-child(3) {
+    background: var(--p14-gold);
+}
+
+.page-14 .global-divider span:nth-child(2) {
+    background: var(--p14-teal);
+}
+
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.page-14 .page14-main {
+    width:
+        min(
+            1420px,
+            calc(100% - 96px)
+        );
+
+    margin: 0 auto;
+
+    padding:
+        105px 0 135px;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.page-14 .activation-hero {
+    max-width: 1120px;
+
+    margin:
+        0 auto 120px;
+
+    text-align: center;
+}
+
+.page-14 .hero-kicker {
+    display: inline-flex;
+
+    padding:
+        9px 23px;
+
+    border:
+        1px solid var(--p14-border-gold);
+
+    border-radius: 999px;
+
+    color: var(--p14-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.22em;
+}
+
+.page-14 .activation-hero h1 {
+    margin:
+        42px auto 0;
+
+    color: var(--p14-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(53px, 6.2vw, 92px);
+
+    font-weight: 900;
+
+    line-height: 1.02;
+
+    letter-spacing: 0.015em;
+}
+
+.page-14 .activation-hero h1 strong {
+    display: block;
+
+    margin-top: 8px;
+
+    color: var(--p14-gold-light);
+}
+
+.page-14 .hero-tamil {
+    margin:
+        22px auto 0;
+
+    color: var(--p14-teal);
+
+    font-size:
+        clamp(18px, 1.6vw, 27px);
+
+    font-weight: 800;
+}
+
+.page-14 .hero-message {
+    max-width: 900px;
+
+    margin:
+        40px auto 0;
+
+    color: var(--p14-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(20px, 1.8vw, 29px);
+
+    font-weight: 800;
+
+    line-height: 1.55;
+}
+
+.page-14 .hero-secondary {
+    max-width: 800px;
+
+    margin:
+        18px auto 0;
+
+    color: var(--p14-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(14px, 1.2vw, 19px);
+
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   ACTIVATION PRINCIPLE
+   ========================================================= */
+
+.page-14 .activation-principle {
+    max-width: 900px;
+
+    margin:
+        45px auto 0;
+
+    padding:
+        22px 25px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr auto 1fr auto 1fr auto 1fr;
+
+    align-items: center;
+
+    gap: 17px;
+
+    border-top:
+        1px solid var(--p14-border);
+
+    border-bottom:
+        1px solid var(--p14-border);
+
+    background:
+        rgba(255,255,255,0.008);
+}
+
+.page-14 .principle-item {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+.page-14 .principle-item span {
+    color: var(--p14-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.13em;
+}
+
+.page-14 .principle-item small {
+    color: var(--p14-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 9px;
+}
+
+.page-14 .activation-principle > b {
+    color: var(--p14-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 18px;
+
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   MILESTONE INTRO
+   ========================================================= */
+
+.page-14 .milestone-intro {
+    max-width: 900px;
+
+    margin:
+        0 auto 65px;
+
+    text-align: center;
+}
+
+.page-14 .milestone-count {
+    color: var(--p14-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.25em;
+}
+
+.page-14 .milestone-intro h2 {
+    margin:
+        17px 0 0;
+
+    color: var(--p14-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(36px, 3.8vw, 58px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.05em;
+}
+
+.page-14 .milestone-intro p {
+    max-width: 680px;
+
+    margin:
+        15px auto 0;
+
+    color: var(--p14-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(14px, 1.2vw, 18px);
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   DIGITAL PIPELINE
+   ========================================================= */
+
+.page-14 .digital-pipeline {
+    max-width: 1260px;
+
+    margin:
+        0 auto 120px;
+
+    padding:
+        45px 40px;
+
+    border:
+        1px solid var(--p14-border-teal);
+
+    border-radius:
+        var(--p14-radius);
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(8,200,206,0.045),
+            transparent 65%
+        ),
+        rgba(5, 18, 27, 0.72);
+
+    box-shadow:
+        var(--p14-shadow);
+}
+
+.page-14 .pipeline-label {
+    margin-bottom: 32px;
+
+    color: var(--p14-gold);
+
+    text-align: center;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.22em;
+}
+
+.page-14 .pipeline {
+    display: flex;
+
+    align-items: stretch;
+
+    justify-content: center;
+
+    gap: 8px;
+}
+
+.page-14 .pipeline-stage {
+    flex: 1;
+
+    min-width: 0;
+
+    min-height: 130px;
+
+    padding:
+        18px 10px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    border:
+        1px solid var(--p14-border);
+
+    border-radius: 14px;
+
+    background:
+        rgba(255,255,255,0.015);
+
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease;
+}
+
+.page-14 .pipeline-stage:hover,
+.page-14 .pipeline-stage.is-active {
+    transform:
+        translateY(-5px);
+
+    border-color:
+        var(--p14-border-gold);
+
+    background:
+        rgba(242,181,43,0.035);
+}
+
+.page-14 .pipeline-stage span {
+    width: 31px;
+    height: 31px;
+
+    margin-bottom: 11px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid var(--p14-border-gold);
+
+    border-radius: 50%;
+
+    color: var(--p14-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 8px;
+
+    font-weight: 900;
+}
+
+.page-14 .pipeline-stage strong {
+    color: var(--p14-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.06em;
+}
+
+.page-14 .pipeline-stage small {
+    margin-top: 7px;
+
+    color: var(--p14-muted-dark);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 8px;
+
+    line-height: 1.35;
+}
+
+.page-14 .pipeline-arrow {
+    align-self: center;
+
+    flex: 0 0 auto;
+
+    color: var(--p14-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 17px;
+}
+
+.page-14 .pipeline-final {
+    border-color:
+        var(--p14-border-gold);
+
+    background:
+        rgba(242,181,43,0.035);
+}
+
+.page-14 .pipeline-final span {
+    border-color:
+        var(--p14-teal);
+
+    color:
+        var(--p14-teal-light);
+}
+
+.page-14 .pipeline-final strong {
+    color:
+        var(--p14-gold-light);
+}
+
+.page-14 .pipeline-repeat {
+    margin-top: 30px;
+
+    padding-top: 25px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 17px;
+
+    border-top:
+        1px solid var(--p14-border);
+}
+
+.page-14 .pipeline-repeat span {
+    color: var(--p14-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.15em;
+}
+
+.page-14 .pipeline-repeat b {
+    color: var(--p14-gold);
+
+    font-size: 16px;
+
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   MILESTONE GROUP
+   ========================================================= */
+
+.page-14 .milestone-group {
+    max-width: 1200px;
+
+    margin:
+        0 auto 120px;
+}
+
+.page-14 .group-heading {
+    margin-bottom: 42px;
+
+    text-align: center;
+}
+
+.page-14 .group-heading > span {
+    color: var(--p14-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.22em;
+}
+
+.page-14 .group-heading h2 {
+    margin:
+        15px 0 0;
+
+    color: var(--p14-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(28px, 3vw, 46px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.045em;
+}
+
+
+/* =========================================================
+   MILESTONE GRID
+   ========================================================= */
+
+.page-14 .milestone-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   MILESTONE CARD
+   ========================================================= */
+
+.page-14 .milestone-card {
+    min-height: 230px;
+
+    padding:
+        28px;
+
+    display: grid;
+
+    grid-template-columns:
+        58px minmax(0, 1fr);
+
+    align-items: start;
+
+    gap: 20px;
+
+    position: relative;
+
+    border:
+        1px solid var(--p14-border);
+
+    border-radius:
+        20px;
+
+    background:
+        linear-gradient(
+            125deg,
+            rgba(9,29,43,0.98),
+            rgba(6,20,31,0.95)
+        );
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,0.22);
+
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.page-14 .milestone-card:hover,
+.page-14 .milestone-card.is-active {
+    transform:
+        translateY(-5px);
+
+    border-color:
+        var(--p14-border-gold);
+
+    box-shadow:
+        0 24px 60px rgba(0,0,0,0.30);
+}
+
+.page-14 .milestone-number {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        2px solid var(--p14-gold);
+
+    border-radius: 50%;
+
+    color: var(--p14-gold-light);
+
+    background:
+        var(--p14-panel);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 22px;
+
+    font-weight: 900;
+}
+
+.page-14 .milestone-label {
+    color: var(--p14-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 8px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.15em;
+}
+
+.page-14 .milestone-content h3 {
+    margin:
+        7px 0 0;
+
+    color: var(--p14-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(16px, 1.25vw, 21px);
+
+    font-weight: 900;
+
+    line-height: 1.35;
+
+    letter-spacing: 0.035em;
+}
+
+.page-14 .milestone-tamil {
+    margin:
+        5px 0 0;
+
+    color: var(--p14-teal-light);
+
+    font-size:
+        clamp(12px, 1vw, 16px);
+
+    font-weight: 700;
+}
+
+.page-14 .milestone-content > p:last-child {
+    margin:
+        12px 0 0;
+
+    color: var(--p14-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    line-height: 1.65;
+}
+
+.page-14 .milestone-status {
+    position: absolute;
+
+    right: 24px;
+    bottom: 22px;
+
+    padding:
+        7px 11px;
+
+    border:
+        1px solid var(--p14-border-gold);
+
+    border-radius: 999px;
+
+    color: var(--p14-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 7px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.12em;
+}
+
+
+/* =========================================================
+   TOOL-SPECIFIC ACCENTS
+   ========================================================= */
+
+.page-14 .milestone-09 .milestone-number,
+.page-14 .milestone-10 .milestone-number {
+    border-color:
+        var(--p14-teal);
+
+    color:
+        var(--p14-teal-light);
+}
+
+.page-14 .milestone-09 .milestone-status,
+.page-14 .milestone-10 .milestone-status {
+    border-color:
+        var(--p14-border-teal);
+
+    color:
+        var(--p14-teal);
+}
+
+.page-14 .milestone-12 {
+    border-color:
+        var(--p14-border-teal);
+}
+
+.page-14 .milestone-12 .milestone-number {
+    border-color:
+        var(--p14-teal);
+
+    color:
+        var(--p14-teal-light);
+}
+
+.page-14 .milestone-12 .milestone-status {
+    border-color:
+        var(--p14-border-teal);
+
+    color:
+        var(--p14-teal);
+}
+
+
+/* =========================================================
+   MID STATEMENT
+   ========================================================= */
+
+.page-14 .mid-statement {
+    max-width: 950px;
+
+    margin:
+        0 auto 125px;
+
+    text-align: center;
+}
+
+.page-14 .statement-line {
+    width: 100%;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--p14-border-gold),
+            transparent
+        );
+}
+
+.page-14 .mid-statement > p {
+    margin:
+        38px 0 0;
+
+    color: var(--p14-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(16px, 1.4vw, 22px);
+
+    line-height: 1.6;
+}
+
+.page-14 .mid-statement h2 {
+    margin:
+        15px 0 0;
+
+    color: var(--p14-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(32px, 3.7vw, 54px);
+
+    font-weight: 900;
+
+    line-height: 1.15;
+}
+
+.page-14 .mid-statement h2 strong {
+    display: block;
+
+    color: var(--p14-gold-light);
+}
+
+.page-14 .mid-statement .statement-tamil {
+    margin-top: 16px;
+
+    color: var(--p14-teal);
+
+    font-size:
+        clamp(14px, 1.2vw, 19px);
+
+    font-weight: 700;
+}
+
+.page-14 .mid-statement .statement-line:last-child {
+    margin-top: 40px;
+}
+
+
+/* =========================================================
+   ACTIVATION GROUP
+   ========================================================= */
+
+.page-14 .activation-group {
+    margin-bottom: 125px;
+}
+
+.page-14 .activation-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+.page-14 .activation-card {
+    min-height: 330px;
+
+    padding:
+        30px 22px;
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    border:
+        1px solid var(--p14-border);
+
+    border-radius:
+        20px;
+
+    background:
+        linear-gradient(
+            160deg,
+            rgba(9,29,43,0.98),
+            rgba(4,16,25,0.98)
+        );
+
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.page-14 .activation-card:hover,
+.page-14 .activation-card.is-active {
+    transform:
+        translateY(-7px);
+
+    border-color:
+        var(--p14-border-gold);
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,0.32);
+}
+
+.page-14 .activation-number {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        2px solid var(--p14-gold);
+
+    border-radius: 50%;
+
+    color: var(--p14-gold-light);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 22px;
+
+    font-weight: 900;
+}
+
+.page-14 .activation-content {
+    margin-top: 30px;
+}
+
+.page-14 .activation-content h3 {
+    margin:
+        8px 0 0;
+
+    color: var(--p14-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(16px, 1.25vw, 20px);
+
+    font-weight: 900;
+
+    line-height: 1.35;
+}
+
+.page-14 .activation-content .milestone-tamil {
+    margin-top: 6px;
+
+    color: var(--p14-teal-light);
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+.page-14 .activation-content > p:last-child {
+    margin:
+        15px 0 0;
+
+    color: var(--p14-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    line-height: 1.65;
+}
+
+.page-14 .activation-status {
+    margin-top: auto;
+
+    align-self: flex-start;
+
+    padding:
+        8px 12px;
+
+    border:
+        1px solid var(--p14-border-gold);
+
+    border-radius: 999px;
+
+    color: var(--p14-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 7px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.14em;
+}
+
+
+/* =========================================================
+   FINAL ACTIVATION CARD
+   ========================================================= */
+
+.page-14 .milestone-16 {
+    border-color:
+        var(--p14-border-teal);
+
+    background:
+        radial-gradient(
+            circle at 50% 30%,
+            rgba(8,200,206,0.075),
+            transparent 65%
+        ),
+        var(--p14-panel);
+}
+
+.page-14 .milestone-16 .activation-number {
+    border-color:
+        var(--p14-teal);
+
+    color:
+        var(--p14-teal-light);
+}
+
+.page-14 .milestone-16 .activation-status {
+    border-color:
+        var(--p14-border-teal);
+
+    color:
+        var(--p14-teal);
+}
+
+.page-14 .milestone-16 .activation-content h3 {
+    color:
+        var(--p14-gold-light);
+}
+
+
+/* =========================================================
+   SYSTEM PRINCIPLES
+   ========================================================= */
+
+.page-14 .system-principles {
+    max-width: 1200px;
+
+    margin:
+        0 auto 125px;
+
+    padding:
+        90px 55px;
+
+    text-align: center;
+
+    border:
+        1px solid var(--p14-border-teal);
+
+    border-radius:
+        var(--p14-radius);
+
+    background:
+        radial-gradient(
+            circle at 50% 25%,
+            rgba(8,200,206,0.055),
+            transparent 48%
+        ),
+        var(--p14-panel);
+
+    box-shadow:
+        var(--p14-shadow);
+}
+
+.page-14 .principles-kicker {
+    color: var(--p14-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.24em;
+}
+
+.page-14 .system-principles h2 {
+    max-width: 900px;
+
+    margin:
+        20px auto 0;
+
+    color: var(--p14-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(34px, 4vw, 58px);
+
+    font-weight: 900;
+
+    line-height: 1.15;
+}
+
+.page-14 .system-principles h2 strong {
+    display: block;
+
+    color: var(--p14-gold-light);
+}
+
+.page-14 .principles-tamil {
+    margin:
+        15px 0 0;
+
+    color: var(--p14-teal);
+
+    font-size:
+        clamp(15px, 1.3vw, 21px);
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   PRINCIPLES GRID
+   ========================================================= */
+
+.page-14 .principles-grid {
+    margin:
+        55px auto 0;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.page-14 .principle-card {
+    min-height: 220px;
+
+    padding:
+        35px 25px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid var(--p14-border);
+
+    border-radius: 17px;
+
+    background:
+        rgba(255,255,255,0.012);
+
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease;
+}
+
+.page-14 .principle-card:hover {
+    transform:
+        translateY(-5px);
+
+    border-color:
+        var(--p14-border-gold);
+}
+
+.page-14 .principle-card > span {
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid var(--p14-border-gold);
+
+    border-radius: 50%;
+
+    color: var(--p14-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 8px;
+
+    font-weight: 900;
+}
+
+.page-14 .principle-card h3 {
+    margin:
+        18px 0 0;
+
+    color: var(--p14-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(13px, 1.1vw, 17px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.05em;
+}
+
+.page-14 .principle-card p {
+    max-width: 250px;
+
+    margin:
+        11px 0 0;
+
+    color: var(--p14-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   PROCESS PUNCH
+   ========================================================= */
+
+.page-14 .process-punch {
+    margin:
+        60px auto 0;
+
+    padding:
+        25px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    border-top:
+        1px solid var(--p14-border-gold);
+
+    border-bottom:
+        1px solid var(--p14-border-gold);
+}
+
+.page-14 .process-punch span {
+    color: var(--p14-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(14px, 1.2vw, 19px);
+
+    font-weight: 800;
+
+    letter-spacing: 0.10em;
+}
+
+.page-14 .process-punch b {
+    color: var(--p14-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(18px, 1.6vw, 25px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.08em;
+}
+
+.page-14 .process-punch strong {
+    color: var(--p14-gold-light);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(24px, 2.2vw, 35px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.06em;
+}
+
+
+/* =========================================================
+   SYSTEM LIVE
+   ========================================================= */
+
+.page-14 .system-live {
+    max-width: 1200px;
+
+    margin:
+        0 auto 125px;
+
+    padding:
+        80px 50px;
+
+    text-align: center;
+
+    border:
+        1px solid var(--p14-border-gold);
+
+    border-radius:
+        var(--p14-radius);
+
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(242,181,43,0.06),
+            transparent 55%
+        ),
+        rgba(5,17,26,0.85);
+
+    box-shadow:
+        var(--p14-shadow);
+}
+
+.page-14 .live-kicker {
+    color: var(--p14-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.20em;
+}
+
+.page-14 .live-number {
+    width: 78px;
+    height: 78px;
+
+    margin:
+        25px auto 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        2px solid var(--p14-gold);
+
+    border-radius: 50%;
+
+    color: var(--p14-gold-light);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 28px;
+
+    font-weight: 900;
+}
+
+.page-14 .system-live h2 {
+    margin:
+        25px 0 0;
+
+    color: var(--p14-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(35px, 4vw, 58px);
+
+    font-weight: 900;
+
+    line-height: 1.15;
+}
+
+.page-14 .system-live h2 strong {
+    color: var(--p14-gold-light);
+}
+
+.page-14 .system-live > p {
+    max-width: 720px;
+
+    margin:
+        22px auto 0;
+
+    color: var(--p14-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(14px, 1.25vw, 19px);
+
+    line-height: 1.75;
+}
+
+.page-14 .live-flow {
+    margin:
+        45px auto 0;
+
+    padding:
+        18px 20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 13px;
+
+    border:
+        1px solid var(--p14-border);
+
+    border-radius: 14px;
+
+    background:
+        rgba(255,255,255,0.012);
+}
+
+.page-14 .live-flow span {
+    color: var(--p14-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 8px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.13em;
+}
+
+.page-14 .live-flow b {
+    color: var(--p14-gold);
+
+    font-size: 15px;
+
+    font-weight: 400;
+}
+
+.page-14 .live-flow .live-final {
+    color: var(--p14-gold-light);
+}
+
+
+/* =========================================================
+   NEXT PHASE
+   ========================================================= */
+
+.page-14 .next-phase {
+    max-width: 1180px;
+
+    margin:
+        0 auto;
+
+    padding:
+        70px 60px;
+
+    display: grid;
+
+    grid-template-columns:
+        120px minmax(0, 1fr) auto;
+
+    align-items: center;
+
+    gap: 40px;
+
+    border:
+        1px solid var(--p14-border-gold);
+
+    border-radius:
+        var(--p14-radius);
+
+    background:
+        linear-gradient(
+            105deg,
+            rgba(242,181,43,0.045),
+            rgba(8,200,206,0.035)
+        );
+
+    box-shadow:
+        var(--p14-shadow);
+}
+
+.page-14 .next-phase-number {
+    color: var(--p14-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.18em;
+}
+
+.page-14 .next-phase-kicker {
+    color: var(--p14-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.20em;
+}
+
+.page-14 .next-phase-content h2 {
+    margin:
+        10px 0 0;
+
+    color: var(--p14-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(27px, 2.6vw, 42px);
+
+    font-weight: 900;
+
+    line-height: 1.25;
+}
+
+.page-14 .next-phase-content h2 strong {
+    color: var(--p14-gold-light);
+}
+
+.page-14 .next-phase-content p {
+    max-width: 650px;
+
+    margin:
+        12px 0 0;
+
+    color: var(--p14-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+    line-height: 1.65;
+}
+
+.page-14 .next-phase-button {
+    min-width: 175px;
+
+    min-height: 60px;
+
+    padding:
+        14px 19px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 18px;
+
+    border:
+        1px solid var(--p14-gold);
+
+    border-radius: 12px;
+
+    color: var(--p14-bg-deep);
+
+    background:
+        var(--p14-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.12em;
+
+    box-shadow:
+        0 15px 45px rgba(242,181,43,0.10);
+
+    transition:
+        transform 180ms ease,
+        background 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.page-14 .next-phase-button b {
+    font-size: 23px;
+}
+
+.page-14 .next-phase-button:hover,
+.page-14 .next-phase-button:focus-visible {
+    transform:
+        translateY(-3px);
+
+    background:
+        var(--p14-gold-light);
+
+    box-shadow:
+        0 20px 60px rgba(242,181,43,0.18);
+
+    outline: none;
+}
+
+
+/* =========================================================
+   GLOBAL FOOTER
+   ========================================================= */
+
+.page-14 .global-footer {
+    margin-top: 35px;
+
+    padding:
+        0
+        clamp(35px, 6vw, 105px)
+        55px;
+
+    background:
+        var(--p14-bg-deep);
+
+    border-top:
+        1px solid rgba(255,255,255,0.07);
+}
+
+.page-14 .page-navigation {
+    min-height: 125px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr auto 1fr;
+
+    align-items: center;
+
+    gap: 25px;
+}
+
+.page-14 .nav-button {
+    width: fit-content;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    padding:
+        14px 17px;
+
+    border:
+        1px solid transparent;
+
+    border-radius: 11px;
+
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease;
+}
+
+.page-14 .nav-button:hover,
+.page-14 .nav-button:focus-visible {
+    transform:
+        translateY(-2px);
+
+    border-color:
+        var(--p14-border-teal);
+
+    background:
+        rgba(255,255,255,0.025);
+
+    outline: none;
+}
+
+.page-14 .nav-next {
+    justify-self: end;
+
+    text-align: right;
+}
+
+.page-14 .nav-arrow {
+    color: var(--p14-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 27px;
+}
+
+.page-14 .nav-text {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.page-14 .nav-text strong {
+    color: var(--p14-ivory);
+
+    font-size: 15px;
+
+    font-weight: 800;
+}
+
+.page-14 .nav-text small {
+    color: var(--p14-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.20em;
+}
+
+.page-14 .nav-current {
+    min-width: 90px;
+
+    display: flex;
+
+    align-items: baseline;
+    justify-content: center;
+
+    color: var(--p14-gold);
+
+    font-family: Arial, sans-serif;
+}
+
+.page-14 .nav-current span {
+    font-size: 29px;
+
+    font-weight: 900;
+}
+
+.page-14 .nav-current small {
+    margin-left: 4px;
+
+    color: var(--p14-muted);
+
+    font-size: 12px;
+}
+
+.page-14 .global-footer-brand {
+    padding-top: 24px;
+
+    text-align: center;
+
+    border-top:
+        1px solid rgba(255,255,255,0.07);
+}
+
+.page-14 .footer-tagline {
+    color: var(--p14-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.25em;
+}
+
+.page-14 .footer-brand {
+    margin-top: 9px;
+
+    color:
+        rgba(245,240,231,0.58);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+}
+
+
+/* =========================================================
+   JAVASCRIPT REVEAL SUPPORT
+   ========================================================= */
+
+.page-14 .reveal-ready {
+    opacity: 0;
+
+    transform:
+        translateY(25px);
+
+    transition:
+        opacity 650ms ease,
+        transform 650ms ease;
+}
+
+.page-14 .reveal-ready.is-visible {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1500px) {
+
+    .page-14 .global-header {
+        min-height: 285px;
+
+        padding-top: 76px;
+        padding-bottom: 65px;
+    }
+
+    .page-14 .global-logo {
+        width: 120px;
+        height: 120px;
+    }
+
+    .page-14 .page14-main {
+        width:
+            min(
+                1500px,
+                calc(100% - 120px)
+            );
+
+        padding-top: 125px;
+    }
+
+    .page-14 .pipeline-stage {
+        min-height: 150px;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+    .page-14 .global-header {
+        min-height: 190px;
+
+        padding:
+            48px 42px 45px;
+    }
+
+    .page-14 .global-logo {
+        width: 82px;
+        height: 82px;
+    }
+
+    .page-14 .global-brand {
+        gap: 15px;
+    }
+
+    .page-14 .global-brand-name {
+        font-size: 25px;
+    }
+
+    .page-14 .global-page-number {
+        padding-top: 8px;
+
+        font-size: 17px;
+    }
+
+    .page-14 .page14-main {
+        width:
+            min(
+                calc(100% - 60px),
+                1000px
+            );
+
+        padding-top: 80px;
+    }
+
+    .page-14 .pipeline {
+        flex-wrap: wrap;
+    }
+
+    .page-14 .pipeline-stage {
+        flex:
+            1 1 135px;
+    }
+
+    .page-14 .pipeline-arrow {
+        display: none;
+    }
+
+    .page-14 .activation-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .page-14 .next-phase {
+        grid-template-columns:
+            90px minmax(0, 1fr) auto;
+
+        padding:
+            55px 40px;
+
+        gap: 25px;
+    }
+
+}
+
+
+/* =========================================================
+   MEDIUM TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .page-14 .activation-hero h1 {
+        font-size:
+            clamp(45px, 7vw, 65px);
+    }
+
+    .page-14 .activation-principle {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 20px;
+    }
+
+    .page-14 .activation-principle > b {
+        display: none;
+    }
+
+    .page-14 .milestone-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .page-14 .activation-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .page-14 .principles-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .page-14 .principle-card {
+        min-height: 180px;
+    }
+
+    .page-14 .next-phase {
+        grid-template-columns:
+            1fr;
+
+        text-align: center;
+    }
+
+    .page-14 .next-phase-number {
+        justify-self: center;
+    }
+
+    .page-14 .next-phase-content p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .page-14 .next-phase-button {
+        justify-self: center;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    /* -----------------------------------------------------
+       HEADER
+       ----------------------------------------------------- */
+
+    .page-14 .global-header {
+        min-height: auto;
+
+        padding:
+            28px 20px 30px;
+
+        align-items: center;
+
+        gap: 15px;
+    }
+
+    .page-14 .global-brand {
+        gap: 10px;
+    }
+
+    .page-14 .global-logo {
+        width: 58px;
+        height: 58px;
+    }
+
+    .page-14 .global-brand-name {
+        padding-top: 0;
+
+        font-size: 15px;
+    }
+
+    .page-14 .global-brand-name span:last-child {
+        margin-top: 4px;
+    }
+
+    .page-14 .global-page-number {
+        padding-top: 0;
+
+        font-size: 9px;
+
+        letter-spacing: 0.13em;
+    }
+
+    .page-14 .global-divider {
+        height: 3px;
+    }
+
+
+    /* -----------------------------------------------------
+       MAIN
+       ----------------------------------------------------- */
+
+    .page-14 .page14-main {
+        width:
+            calc(100% - 34px);
+
+        padding:
+            58px 0 80px;
+    }
+
+
+    /* -----------------------------------------------------
+       HERO
+       ----------------------------------------------------- */
+
+    .page-14 .activation-hero {
+        margin-bottom: 75px;
+    }
+
+    .page-14 .hero-kicker {
+        padding:
+            7px 14px;
+
+        font-size: 8px;
+
+        letter-spacing: 0.12em;
+    }
+
+    .page-14 .activation-hero h1 {
+        margin-top: 30px;
+
+        font-size:
+            clamp(36px, 10.5vw, 53px);
+
+        line-height: 1.08;
+    }
+
+    .page-14 .hero-tamil {
+        margin-top: 17px;
+
+        font-size: 15px;
+    }
+
+    .page-14 .hero-message {
+        margin-top: 31px;
+
+        font-size: 17px;
+
+        line-height: 1.6;
+    }
+
+    .page-14 .hero-secondary {
+        margin-top: 15px;
+
+        font-size: 12px;
+
+        line-height: 1.7;
+    }
+
+
+    /* -----------------------------------------------------
+       PRINCIPLE
+       ----------------------------------------------------- */
+
+    .page-14 .activation-principle {
+        margin-top: 30px;
+
+        padding:
+            17px 10px;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 15px;
+    }
+
+    .page-14 .principle-item span {
+        font-size: 7px;
+    }
+
+    .page-14 .principle-item small {
+        font-size: 7px;
+    }
+
+
+    /* -----------------------------------------------------
+       MILESTONE INTRO
+       ----------------------------------------------------- */
+
+    .page-14 .milestone-intro {
+        margin-bottom: 35px;
+    }
+
+    .page-14 .milestone-count {
+        font-size: 8px;
+    }
+
+    .page-14 .milestone-intro h2 {
+        margin-top: 12px;
+
+        font-size: 28px;
+    }
+
+    .page-14 .milestone-intro p {
+        margin-top: 10px;
+
+        font-size: 11px;
+    }
+
+
+    /* -----------------------------------------------------
+       PIPELINE
+       ----------------------------------------------------- */
+
+    .page-14 .digital-pipeline {
+        margin-bottom: 75px;
+
+        padding:
+            27px 14px;
+
+        border-radius: 18px;
+    }
+
+    .page-14 .pipeline-label {
+        margin-bottom: 22px;
+
+        font-size: 8px;
+    }
+
+    .page-14 .pipeline {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 7px;
+    }
+
+    .page-14 .pipeline-stage {
+        min-height: 105px;
+
+        padding:
+            13px 7px;
+
+        border-radius: 11px;
+    }
+
+    .page-14 .pipeline-stage span {
+        width: 25px;
+        height: 25px;
+
+        margin-bottom: 7px;
+
+        font-size: 7px;
+    }
+
+    .page-14 .pipeline-stage strong {
+        font-size: 7px;
+    }
+
+    .page-14 .pipeline-stage small {
+        margin-top: 5px;
+
+        font-size: 6px;
+    }
+
+    .page-14 .pipeline-repeat {
+        margin-top: 17px;
+
+        padding-top: 16px;
+
+        gap: 8px;
+    }
+
+    .page-14 .pipeline-repeat span {
+        font-size: 6px;
+    }
+
+    .page-14 .pipeline-repeat b {
+        font-size: 10px;
+    }
+
+
+    /* -----------------------------------------------------
+       GROUPS
+       ----------------------------------------------------- */
+
+    .page-14 .milestone-group {
+        margin-bottom: 75px;
+    }
+
+    .page-14 .group-heading {
+        margin-bottom: 28px;
+    }
+
+    .page-14 .group-heading > span {
+        font-size: 8px;
+    }
+
+    .page-14 .group-heading h2 {
+        margin-top: 11px;
+
+        font-size: 25px;
+    }
+
+
+    /* -----------------------------------------------------
+       MILESTONE CARDS
+       ----------------------------------------------------- */
+
+    .page-14 .milestone-grid {
+        gap: 10px;
+    }
+
+    .page-14 .milestone-card {
+        min-height: 185px;
+
+        padding:
+            19px 15px;
+
+        grid-template-columns:
+            45px minmax(0, 1fr);
+
+        gap: 13px;
+
+        border-radius: 15px;
+    }
+
+    .page-14 .milestone-number {
+        width: 45px;
+        height: 45px;
+
+        font-size: 16px;
+    }
+
+    .page-14 .milestone-label {
+        font-size: 6px;
+
+        letter-spacing: 0.10em;
+    }
+
+    .page-14 .milestone-content h3 {
+        margin-top: 5px;
+
+        font-size: 12px;
+    }
+
+    .page-14 .milestone-tamil {
+        margin-top: 4px;
+
+        font-size: 9px;
+    }
+
+    .page-14 .milestone-content > p:last-child {
+        margin-top: 8px;
+
+        font-size: 8px;
+
+        line-height: 1.55;
+    }
+
+    .page-14 .milestone-status {
+        right: 14px;
+        bottom: 13px;
+
+        padding:
+            6px 8px;
+
+        font-size: 5px;
+    }
+
+
+    /* -----------------------------------------------------
+       MID STATEMENT
+       ----------------------------------------------------- */
+
+    .page-14 .mid-statement {
+        margin-bottom: 75px;
+    }
+
+    .page-14 .mid-statement > p {
+        margin-top: 27px;
+
+        font-size: 13px;
+    }
+
+    .page-14 .mid-statement h2 {
+        margin-top: 11px;
+
+        font-size: 29px;
+    }
+
+    .page-14 .mid-statement .statement-tamil {
+        margin-top: 11px;
+
+        font-size: 11px;
+    }
+
+    .page-14 .mid-statement .statement-line:last-child {
+        margin-top: 27px;
+    }
+
+
+    /* -----------------------------------------------------
+       ACTIVATION GRID
+       ----------------------------------------------------- */
+
+    .page-14 .activation-grid {
+        grid-template-columns:
+            1fr;
+
+        gap: 10px;
+    }
+
+    .page-14 .activation-card {
+        min-height: 245px;
+
+        padding:
+            22px 18px;
+
+        border-radius: 15px;
+    }
+
+    .page-14 .activation-number {
+        width: 45px;
+        height: 45px;
+
+        font-size: 17px;
+    }
+
+    .page-14 .activation-content {
+        margin-top: 22px;
+    }
+
+    .page-14 .activation-content h3 {
+        font-size: 13px;
+    }
+
+    .page-14 .activation-content .milestone-tamil {
+        font-size: 10px;
+    }
+
+    .page-14 .activation-content > p:last-child {
+        margin-top: 10px;
+
+        font-size: 9px;
+    }
+
+    .page-14 .activation-status {
+        padding:
+            6px 9px;
+
+        font-size: 5px;
+    }
+
+
+    /* -----------------------------------------------------
+       SYSTEM PRINCIPLES
+       ----------------------------------------------------- */
+
+    .page-14 .system-principles {
+        margin-bottom: 75px;
+
+        padding:
+            55px 18px;
+
+        border-radius: 19px;
+    }
+
+    .page-14 .principles-kicker {
+        font-size: 8px;
+    }
+
+    .page-14 .system-principles h2 {
+        margin-top: 14px;
+
+        font-size: 31px;
+    }
+
+    .page-14 .principles-tamil {
+        margin-top: 10px;
+
+        font-size: 13px;
+    }
+
+    .page-14 .principles-grid {
+        margin-top: 32px;
+
+        gap: 9px;
+    }
+
+    .page-14 .principle-card {
+        min-height: 160px;
+
+        padding:
+            25px 18px;
+
+        border-radius: 15px;
+    }
+
+    .page-14 .principle-card > span {
+        width: 37px;
+        height: 37px;
+
+        font-size: 7px;
+    }
+
+    .page-14 .principle-card h3 {
+        margin-top: 14px;
+
+        font-size: 11px;
+    }
+
+    .page-14 .principle-card p {
+        margin-top: 8px;
+
+        font-size: 8px;
+    }
+
+
+    /* -----------------------------------------------------
+       PROCESS PUNCH
+       ----------------------------------------------------- */
+
+    .page-14 .process-punch {
+        margin-top: 35px;
+
+        padding:
+            19px 8px;
+    }
+
+    .page-14 .process-punch span {
+        font-size: 10px;
+    }
+
+    .page-14 .process-punch b {
+        font-size: 13px;
+    }
+
+    .page-14 .process-punch strong {
+        font-size: 18px;
+
+        line-height: 1.4;
+    }
+
+
+    /* -----------------------------------------------------
+       SYSTEM LIVE
+       ----------------------------------------------------- */
+
+    .page-14 .system-live {
+        margin-bottom: 75px;
+
+        padding:
+            55px 17px;
+
+        border-radius: 19px;
+    }
+
+    .page-14 .live-kicker {
+        font-size: 7px;
+    }
+
+    .page-14 .live-number {
+        width: 57px;
+        height: 57px;
+
+        margin-top: 18px;
+
+        font-size: 20px;
+    }
+
+    .page-14 .system-live h2 {
+        margin-top: 20px;
+
+        font-size: 30px;
+    }
+
+    .page-14 .system-live > p {
+        margin-top: 15px;
+
+        font-size: 11px;
+
+        line-height: 1.7;
+    }
+
+    .page-14 .live-flow {
+        margin-top: 30px;
+
+        padding:
+            14px 8px;
+
+        gap: 8px;
+    }
+
+    .page-14 .live-flow span {
+        font-size: 6px;
+    }
+
+    .page-14 .live-flow b {
+        font-size: 10px;
+    }
+
+
+    /* -----------------------------------------------------
+       NEXT PHASE
+       ----------------------------------------------------- */
+
+    .page-14 .next-phase {
+        padding:
+            45px 18px;
+
+        gap: 18px;
+
+        border-radius: 19px;
+    }
+
+    .page-14 .next-phase-number {
+        font-size: 8px;
+    }
+
+    .page-14 .next-phase-kicker {
+        font-size: 7px;
+    }
+
+    .page-14 .next-phase-content h2 {
+        margin-top: 8px;
+
+        font-size: 23px;
+    }
+
+    .page-14 .next-phase-content p {
+        margin-top: 10px;
+
+        font-size: 10px;
+
+        line-height: 1.65;
+    }
+
+    .page-14 .next-phase-button {
+        min-width: 145px;
+
+        min-height: 50px;
+
+        padding:
+            12px 14px;
+
+        font-size: 8px;
+    }
+
+    .page-14 .next-phase-button b {
+        font-size: 20px;
+    }
+
+
+    /* -----------------------------------------------------
+       FOOTER
+       ----------------------------------------------------- */
+
+    .page-14 .global-footer {
+        padding:
+            0 18px 35px;
+    }
+
+    .page-14 .page-navigation {
+        min-height: 105px;
+
+        gap: 7px;
+    }
+
+    .page-14 .nav-button {
+        gap: 7px;
+
+        padding:
+            8px 3px;
+    }
+
+    .page-14 .nav-arrow {
+        font-size: 20px;
+    }
+
+    .page-14 .nav-text strong {
+        font-size: 10px;
+    }
+
+    .page-14 .nav-text small {
+        font-size: 6px;
+    }
+
+    .page-14 .nav-current span {
+        font-size: 22px;
+    }
+
+    .page-14 .nav-current small {
+        font-size: 8px;
+    }
+
+    .page-14 .footer-tagline {
+        font-size: 7px;
+
+        letter-spacing: 0.15em;
+    }
+
+    .page-14 .footer-brand {
+        font-size: 7px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .page-14 .global-header {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .page-14 .global-logo {
+        width: 48px;
+        height: 48px;
+    }
+
+    .page-14 .global-brand-name {
+        font-size: 12px;
+    }
+
+    .page-14 .global-page-number {
+        font-size: 7px;
+    }
+
+    .page-14 .page14-main {
+        width:
+            calc(100% - 26px);
+    }
+
+    .page-14 .activation-hero h1 {
+        font-size: 33px;
+    }
+
+    .page-14 .hero-message {
+        font-size: 15px;
+    }
+
+    .page-14 .pipeline {
+        grid-template-columns:
+            1fr;
+    }
+
+    .page-14 .pipeline-stage {
+        min-height: 85px;
+    }
+
+    .page-14 .milestone-card {
+        min-height: 170px;
+
+        padding:
+            17px 12px;
+
+        grid-template-columns:
+            38px minmax(0, 1fr);
+
+        gap: 10px;
+    }
+
+    .page-14 .milestone-number,
+    .page-14 .activation-number {
+        width: 38px;
+        height: 38px;
+
+        font-size: 14px;
+    }
+
+    .page-14 .milestone-content h3,
+    .page-14 .activation-content h3 {
+        font-size: 10px;
+    }
+
+    .page-14 .milestone-content > p:last-child,
+    .page-14 .activation-content > p:last-child {
+        font-size: 8px;
+    }
+
+    .page-14 .system-principles h2 {
+        font-size: 27px;
+    }
+
+    .page-14 .system-live h2 {
+        font-size: 27px;
+    }
+
+    .page-14 .next-phase-content h2 {
+        font-size: 20px;
+    }
+
+}
+
+
+/* =========================================================
+   FOCUS / ACCESSIBILITY
+   ========================================================= */
+
+.page-14 .milestone-card:focus-visible,
+.page-14 .activation-card:focus-visible {
+    outline:
+        2px solid var(--p14-teal);
+
+    outline-offset: 4px;
+}
+
+.page-14 .pipeline-stage:focus-visible,
+.page-14 .principle-card:focus-visible {
+    outline:
+        2px solid var(--p14-teal);
+
+    outline-offset: 3px;
+}
+
+.page-14 .next-phase-button:focus-visible,
+.page-14 .nav-button:focus-visible {
+    outline:
+        2px solid var(--p14-teal);
+
+    outline-offset: 4px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    .page-14 .reveal-ready {
+        opacity: 1;
+
+        transform: none;
+
+        transition: none;
+    }
+
+    .page-14 .pipeline-stage,
+    .page-14 .milestone-card,
+    .page-14 .activation-card,
+    .page-14 .principle-card,
+    .page-14 .next-phase-button,
+    .page-14 .nav-button {
+        transition: none;
+    }
+
+}
