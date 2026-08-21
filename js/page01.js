@@ -1,4 +1,3 @@
-
 /* ================================================================
    CTM PATH™ MILLIONAIRES™
    PAGE 01 — JAVASCRIPT
@@ -6,14 +5,16 @@
 
    PURPOSE
    -------
-   This file is written specifically for the existing 01.html DOM.
+   Controls the existing Page 01 assessment.
 
    IMPORTANT
    ---------
-   Do NOT add another assessment renderer.
-   Do NOT generate the Selvam cards from JavaScript.
-
-   The HTML already contains all 16 cards and all 10 score buttons.
+   • Does NOT generate the assessment cards.
+   • Does NOT generate score buttons.
+   • HTML remains responsible for page content.
+   • CSS remains responsible for visual styling.
+   • JavaScript manages interaction, state, calculation,
+     persistence and navigation.
 
    SCORE MODEL
    -----------
@@ -21,7 +22,7 @@
    Each Selvam = 1–10
 
    Raw Total:
-       maximum = 160
+       Maximum = 160
 
    Life Score:
        Raw Total / 160 × 100
@@ -34,9 +35,11 @@
    1–3   = RED
    4–7   = ORANGE
    8–10  = GREEN
+
    ================================================================ */
 
 'use strict';
+
 
 
 /* ================================================================
@@ -45,55 +48,72 @@
 
 const PAGE01_CONFIG = Object.freeze({
 
-    STORAGE_KEY: 'ctm_path_page01_scores',
+    STORAGE_KEY:
+        'ctm_path_page01_scores',
 
-    PAGE_NUMBER: '01',
+    FINAL_STORAGE_KEY:
+        'ctm_path_page01_final',
 
-    TOTAL_SELVAMS: 16,
+    PAGE_NUMBER:
+        '01',
 
-    MIN_SCORE: 1,
+    NEXT_PAGE:
+        '/02',
 
-    MAX_SCORE: 10,
+    INDEX_PAGE:
+        '/',
 
-    RAW_MAX: 160,
+    TOTAL_SELVAMS:
+        16,
 
-    LIFE_SCORE_MAX: 100,
+    MIN_SCORE:
+        1,
 
-    AVERAGE_MAX: 10,
+    MAX_SCORE:
+        10,
+
+    RAW_MAX:
+        160,
+
+    LIFE_SCORE_MAX:
+        100,
+
+    AVERAGE_MAX:
+        10,
 
     SCORE_RANGES: Object.freeze({
 
-        LOW: {
+        LOW: Object.freeze({
             min: 1,
             max: 3,
             className: 'score-low',
-            colour: 'red'
-        },
+            colourClass: 'score-red'
+        }),
 
-        MID: {
+        MID: Object.freeze({
             min: 4,
             max: 7,
             className: 'score-medium',
-            colour: 'orange'
-        },
+            colourClass: 'score-orange'
+        }),
 
-        HIGH: {
+        HIGH: Object.freeze({
             min: 8,
             max: 10,
             className: 'score-high',
-            colour: 'green'
-        }
+            colourClass: 'score-green'
+        })
 
     })
 
 });
 
 
+
 /* ================================================================
    SELVAM DEFINITIONS
-   ================================================================
-
-   These keys MUST match the data-field values in 01.html.
+   ---------------------------------------------------------------
+   These field names MUST match data-field values in 01.html.
    ================================================================ */
 
 const SELVAMS = Object.freeze([
@@ -213,6 +233,7 @@ const SELVAMS = Object.freeze([
 ]);
 
 
+
 /* ================================================================
    APPLICATION STATE
    ================================================================ */
@@ -221,17 +242,23 @@ const state = {
 
     scores: {},
 
-    totalAnswered: 0,
+    totalAnswered:
+        0,
 
-    rawTotal: 0,
+    rawTotal:
+        0,
 
-    lifeScore: null,
+    lifeScore:
+        null,
 
-    averageScore: null,
+    averageScore:
+        null,
 
-    initialized: false
+    initialized:
+        false
 
 };
+
 
 
 /* ================================================================
@@ -240,32 +267,40 @@ const state = {
 
 const DOM = {
 
-    form: null,
+    form:
+        null,
 
-    cards: [],
+    cards:
+        [],
 
-    scoreGroups: [],
+    scoreGroups:
+        [],
 
-    totalScore: null,
+    totalScore:
+        null,
 
-    averageScore: null,
+    averageScore:
+        null,
 
-    backButton: null,
+    backButton:
+        null,
 
-    continueButton: null
+    continueButton:
+        null
 
 };
+
 
 
 /* ================================================================
    INITIALIZATION
    ================================================================ */
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener(
+    'DOMContentLoaded',
+    initializePage01
+);
 
-    initializePage01();
-
-});
 
 
 function initializePage01() {
@@ -274,27 +309,37 @@ function initializePage01() {
         return;
     }
 
+
     cacheDOM();
+
 
     validateDOM();
 
+
     initializeScoreState();
+
 
     bindScoreButtons();
 
+
     bindNavigation();
+
 
     restoreSavedScores();
 
+
     calculateAndRender();
 
+
     state.initialized = true;
+
 
     console.log(
         '[CTM PATH™] Page 01 initialized successfully.'
     );
 
 }
+
 
 
 /* ================================================================
@@ -304,31 +349,52 @@ function initializePage01() {
 function cacheDOM() {
 
     DOM.form =
-        document.getElementById('assessmentForm');
+        document.getElementById(
+            'assessmentForm'
+        );
+
 
     DOM.cards =
         Array.from(
-            document.querySelectorAll('.selvam-card')
+            document.querySelectorAll(
+                '.selvam-card'
+            )
         );
+
 
     DOM.scoreGroups =
         Array.from(
-            document.querySelectorAll('.score-options')
+            document.querySelectorAll(
+                '.score-options'
+            )
         );
 
+
     DOM.totalScore =
-        document.getElementById('totalScore100');
+        document.getElementById(
+            'totalScore100'
+        );
+
 
     DOM.averageScore =
-        document.getElementById('averageScore');
+        document.getElementById(
+            'averageScore'
+        );
+
 
     DOM.backButton =
-        document.getElementById('backToIndex');
+        document.getElementById(
+            'backToIndex'
+        );
+
 
     DOM.continueButton =
-        document.getElementById('continueToPage02');
+        document.getElementById(
+            'continueToPage02'
+        );
 
 }
+
 
 
 /* ================================================================
@@ -339,34 +405,66 @@ function validateDOM() {
 
     const errors = [];
 
+
     if (!DOM.form) {
-        errors.push('#assessmentForm');
+
+        errors.push(
+            '#assessmentForm'
+        );
+
     }
 
-    if (DOM.cards.length !== PAGE01_CONFIG.TOTAL_SELVAMS) {
+
+    if (
+        DOM.cards.length !==
+        PAGE01_CONFIG.TOTAL_SELVAMS
+    ) {
 
         console.warn(
-            '[CTM PATH™] Expected 16 Selvam cards but found:',
+            '[CTM PATH™] Expected ' +
+            PAGE01_CONFIG.TOTAL_SELVAMS +
+            ' Selvam cards but found:',
             DOM.cards.length
         );
 
     }
 
+
     if (!DOM.totalScore) {
-        errors.push('#totalScore100');
+
+        errors.push(
+            '#totalScore100'
+        );
+
     }
+
 
     if (!DOM.averageScore) {
-        errors.push('#averageScore');
+
+        errors.push(
+            '#averageScore'
+        );
+
     }
+
 
     if (!DOM.backButton) {
-        errors.push('#backToIndex');
+
+        errors.push(
+            '#backToIndex'
+        );
+
     }
 
+
     if (!DOM.continueButton) {
-        errors.push('#continueToPage02');
+
+        errors.push(
+            '#continueToPage02'
+        );
+
     }
+
 
     if (errors.length > 0) {
 
@@ -380,19 +478,25 @@ function validateDOM() {
 }
 
 
+
 /* ================================================================
    INITIALIZE SCORE STATE
    ================================================================ */
 
 function initializeScoreState() {
 
-    SELVAMS.forEach(function (selvam) {
+    SELVAMS.forEach(
+        function (selvam) {
 
-        state.scores[selvam.field] = null;
+            state.scores[
+                selvam.field
+            ] = null;
 
-    });
+        }
+    );
 
 }
+
 
 
 /* ================================================================
@@ -401,48 +505,58 @@ function initializeScoreState() {
 
 function bindScoreButtons() {
 
-    DOM.scoreGroups.forEach(function (group) {
+    DOM.scoreGroups.forEach(
+        function (group) {
 
-        const field =
-            group.getAttribute('data-field');
+            const field =
+                group.getAttribute(
+                    'data-field'
+                );
 
-        if (!field) {
 
-            console.warn(
-                '[CTM PATH™] Score group has no data-field:',
-                group
-            );
+            if (!field) {
 
-            return;
+                console.warn(
+                    '[CTM PATH™] Score group has no data-field:',
+                    group
+                );
 
-        }
+                return;
 
-        const buttons =
-            Array.from(
-                group.querySelectorAll(
-                    'button[data-score]'
-                )
-            );
+            }
 
-        buttons.forEach(function (button) {
 
-            button.addEventListener(
-                'click',
-                function () {
+            const buttons =
+                Array.from(
+                    group.querySelectorAll(
+                        'button[data-score]'
+                    )
+                );
 
-                    handleScoreSelection(
-                        field,
-                        button
+
+            buttons.forEach(
+                function (button) {
+
+                    button.addEventListener(
+                        'click',
+                        function () {
+
+                            handleScoreSelection(
+                                field,
+                                button
+                            );
+
+                        }
                     );
 
                 }
             );
 
-        });
-
-    });
+        }
+    );
 
 }
+
 
 
 /* ================================================================
@@ -458,10 +572,14 @@ function handleScoreSelection(
         return;
     }
 
+
     const score =
         Number(
-            button.getAttribute('data-score')
+            button.getAttribute(
+                'data-score'
+            )
         );
+
 
     if (!isValidScore(score)) {
 
@@ -476,27 +594,34 @@ function handleScoreSelection(
 
     }
 
-    state.scores[field] = score;
+
+    state.scores[field] =
+        score;
+
 
     updateScoreButtons(
         field,
         score
     );
 
+
     updateSelectedScoreDisplay(
         field,
         score
     );
 
+
     calculateAndRender();
+
 
     saveScores();
 
 }
 
 
+
 /* ================================================================
-   VALIDATE SCORE
+   SCORE VALIDATION
    ================================================================ */
 
 function isValidScore(score) {
@@ -510,8 +635,54 @@ function isValidScore(score) {
 }
 
 
+
+/* ================================================================
+   GET SCORE RANGE
+   ================================================================ */
+
+function getScoreRange(score) {
+
+    if (
+        score >= PAGE01_CONFIG.SCORE_RANGES.LOW.min &&
+        score <= PAGE01_CONFIG.SCORE_RANGES.LOW.max
+    ) {
+
+        return PAGE01_CONFIG.SCORE_RANGES.LOW;
+
+    }
+
+
+    if (
+        score >= PAGE01_CONFIG.SCORE_RANGES.MID.min &&
+        score <= PAGE01_CONFIG.SCORE_RANGES.MID.max
+    ) {
+
+        return PAGE01_CONFIG.SCORE_RANGES.MID;
+
+    }
+
+
+    if (
+        score >= PAGE01_CONFIG.SCORE_RANGES.HIGH.min &&
+        score <= PAGE01_CONFIG.SCORE_RANGES.HIGH.max
+    ) {
+
+        return PAGE01_CONFIG.SCORE_RANGES.HIGH;
+
+    }
+
+
+    return null;
+
+}
+
+
+
 /* ================================================================
    UPDATE SCORE BUTTONS
+   ---------------------------------------------------------------
+   JavaScript manages STATE only.
+   CSS controls the actual colours.
    ================================================================ */
 
 function updateScoreButtons(
@@ -526,9 +697,11 @@ function updateScoreButtons(
             '"]'
         );
 
+
     if (!group) {
         return;
     }
+
 
     const buttons =
         Array.from(
@@ -537,185 +710,101 @@ function updateScoreButtons(
             )
         );
 
-    buttons.forEach(function (button) {
 
-        const buttonScore =
-            Number(
-                button.getAttribute('data-score')
+    buttons.forEach(
+        function (button) {
+
+            const buttonScore =
+                Number(
+                    button.getAttribute(
+                        'data-score'
+                    )
+                );
+
+
+            /*
+             * Remove all previous state classes.
+             */
+
+            button.classList.remove(
+                'selected',
+                'score-low',
+                'score-medium',
+                'score-high',
+                'score-red',
+                'score-orange',
+                'score-green'
             );
 
-        /*
-         * Remove ALL state classes first.
-         */
-        button.classList.remove(
-            'selected',
-            'score-low',
-            'score-medium',
-            'score-high',
-            'score-red',
-            'score-orange',
-            'score-green'
-        );
-
-        button.removeAttribute(
-            'aria-pressed'
-        );
-
-        /*
-         * Reset inline colour properties that
-         * may have been introduced by an older
-         * version of the JavaScript.
-         */
-        button.style.removeProperty(
-            'background-color'
-        );
-
-        button.style.removeProperty(
-            'border-color'
-        );
-
-        button.style.removeProperty(
-            'color'
-        );
-
-        /*
-         * Only the selected button gets
-         * the score colour.
-         */
-        if (
-            buttonScore === selectedScore
-        ) {
-
-            button.classList.add('selected');
-
-            applyScoreColour(
-                button,
-                selectedScore
-            );
-
-            button.setAttribute(
-                'aria-pressed',
-                'true'
-            );
-
-        } else {
 
             button.setAttribute(
                 'aria-pressed',
                 'false'
             );
 
+
+            /*
+             * IMPORTANT:
+             * Remove old inline colour styles.
+             *
+             * The new page01.css is the single
+             * visual authority.
+             */
+
+            button.style.removeProperty(
+                'background-color'
+            );
+
+            button.style.removeProperty(
+                'border-color'
+            );
+
+            button.style.removeProperty(
+                'color'
+            );
+
+
+            /*
+             * Apply state to selected button.
+             */
+
+            if (
+                buttonScore === selectedScore
+            ) {
+
+                button.classList.add(
+                    'selected'
+                );
+
+
+                const range =
+                    getScoreRange(
+                        selectedScore
+                    );
+
+
+                if (range) {
+
+                    button.classList.add(
+                        range.className,
+                        range.colourClass
+                    );
+
+                }
+
+
+                button.setAttribute(
+                    'aria-pressed',
+                    'true'
+                );
+
+            }
+
         }
-
-    });
-
-}
-
-
-/* ================================================================
-   APPLY SCORE COLOUR
-   ================================================================ */
-
-function applyScoreColour(
-    element,
-    score
-) {
-
-    if (!element || !isValidScore(score)) {
-        return;
-    }
-
-    /*
-     * 1–3 = RED
-     */
-    if (
-        score >= PAGE01_CONFIG.SCORE_RANGES.LOW.min &&
-        score <= PAGE01_CONFIG.SCORE_RANGES.LOW.max
-    ) {
-
-        element.classList.add(
-            PAGE01_CONFIG.SCORE_RANGES.LOW.className
-        );
-
-        element.classList.add(
-            'score-red'
-        );
-
-        /*
-         * Inline fallback guarantees the
-         * requested colour even if the CSS
-         * does not yet contain the classes.
-         */
-        element.style.backgroundColor =
-            'rgba(190, 45, 45, 0.18)';
-
-        element.style.borderColor =
-            '#ef5350';
-
-        element.style.color =
-            '#ff6b6b';
-
-        return;
-    }
-
-
-    /*
-     * 4–7 = ORANGE
-     */
-    if (
-        score >= PAGE01_CONFIG.SCORE_RANGES.MID.min &&
-        score <= PAGE01_CONFIG.SCORE_RANGES.MID.max
-    ) {
-
-        element.classList.add(
-            PAGE01_CONFIG.SCORE_RANGES.MID.className
-        );
-
-        element.classList.add(
-            'score-orange'
-        );
-
-        element.style.backgroundColor =
-            'rgba(230, 126, 34, 0.18)';
-
-        element.style.borderColor =
-            '#f39c12';
-
-        element.style.color =
-            '#ffb347';
-
-        return;
-    }
-
-
-    /*
-     * 8–10 = GREEN
-     */
-    if (
-        score >= PAGE01_CONFIG.SCORE_RANGES.HIGH.min &&
-        score <= PAGE01_CONFIG.SCORE_RANGES.HIGH.max
-    ) {
-
-        element.classList.add(
-            PAGE01_CONFIG.SCORE_RANGES.HIGH.className
-        );
-
-        element.classList.add(
-            'score-green'
-        );
-
-        element.style.backgroundColor =
-            'rgba(39, 174, 96, 0.18)';
-
-        element.style.borderColor =
-            '#2ecc71';
-
-        element.style.color =
-            '#4ade80';
-
-    }
+    );
 
 }
+
 
 
 /* ================================================================
@@ -734,6 +823,7 @@ function updateSelectedScoreDisplay(
             '"]'
         );
 
+
     if (!target) {
 
         console.warn(
@@ -745,13 +835,11 @@ function updateSelectedScoreDisplay(
 
     }
 
+
     target.textContent =
         String(score);
 
-    /*
-     * Give the displayed score the same
-     * semantic colour as the selected button.
-     */
+
     target.classList.remove(
         'score-low',
         'score-medium',
@@ -761,52 +849,28 @@ function updateSelectedScoreDisplay(
         'score-green'
     );
 
+
     target.style.removeProperty(
         'color'
     );
 
-    if (
-        score >= PAGE01_CONFIG.SCORE_RANGES.LOW.min &&
-        score <= PAGE01_CONFIG.SCORE_RANGES.LOW.max
-    ) {
 
-        target.classList.add(
-            'score-low',
-            'score-red'
-        );
+    const range =
+        getScoreRange(score);
 
-        target.style.color =
-            '#ff6b6b';
 
-    } else if (
-        score >= PAGE01_CONFIG.SCORE_RANGES.MID.min &&
-        score <= PAGE01_CONFIG.SCORE_RANGES.MID.max
-    ) {
-
-        target.classList.add(
-            'score-medium',
-            'score-orange'
-        );
-
-        target.style.color =
-            '#ffb347';
-
-    } else if (
-        score >= PAGE01_CONFIG.SCORE_RANGES.HIGH.min &&
-        score <= PAGE01_CONFIG.SCORE_RANGES.HIGH.max
-    ) {
-
-        target.classList.add(
-            'score-high',
-            'score-green'
-        );
-
-        target.style.color =
-            '#4ade80';
-
+    if (!range) {
+        return;
     }
 
+
+    target.classList.add(
+        range.className,
+        range.colourClass
+    );
+
 }
+
 
 
 /* ================================================================
@@ -816,40 +880,39 @@ function updateSelectedScoreDisplay(
 function calculateAndRender() {
 
     const scores =
-        SELVAMS.map(function (selvam) {
+        SELVAMS.map(
+            function (selvam) {
 
-            return state.scores[
-                selvam.field
-            ];
+                return state.scores[
+                    selvam.field
+                ];
 
-        });
+            }
+        );
 
 
-    /*
-     * Only valid numerical scores count.
-     */
     const answeredScores =
-        scores.filter(function (score) {
+        scores.filter(
+            function (score) {
 
-            return isValidScore(score);
+                return isValidScore(
+                    score
+                );
 
-        });
+            }
+        );
 
 
     state.totalAnswered =
         answeredScores.length;
 
 
-    /*
-     * RAW TOTAL
-     *
-     * Example:
-     * 16 answers of 10
-     * = 160
-     */
     state.rawTotal =
         answeredScores.reduce(
-            function (total, score) {
+            function (
+                total,
+                score
+            ) {
 
                 return total + score;
 
@@ -859,13 +922,10 @@ function calculateAndRender() {
 
 
     /*
-     * LIFE SCORE / 100
-     *
-     * We calculate from all 16 Selvams.
-     *
-     * If the assessment is incomplete,
-     * the score remains provisional.
+     * Only calculate the FINAL Life Score
+     * when all 16 Selvams are answered.
      */
+
     if (
         state.totalAnswered ===
         PAGE01_CONFIG.TOTAL_SELVAMS
@@ -889,22 +949,22 @@ function calculateAndRender() {
 
     } else {
 
-        /*
-         * Do not falsely calculate a final
-         * score from an incomplete assessment.
-         */
-        state.lifeScore = null;
+        state.lifeScore =
+            null;
 
-        state.averageScore = null;
+        state.averageScore =
+            null;
 
     }
 
 
     renderSummary();
 
+
     updateContinueState();
 
 }
+
 
 
 /* ================================================================
@@ -916,21 +976,15 @@ function renderSummary() {
     /*
      * LIFE SCORE /100
      */
+
     if (DOM.totalScore) {
 
-        if (state.lifeScore === null) {
-
-            DOM.totalScore.textContent =
-                '—';
-
-        } else {
-
-            DOM.totalScore.textContent =
-                formatScore(
+        DOM.totalScore.textContent =
+            state.lifeScore === null
+                ? '—'
+                : formatScore(
                     state.lifeScore
                 );
-
-        }
 
     }
 
@@ -938,25 +992,20 @@ function renderSummary() {
     /*
      * AVERAGE /10
      */
+
     if (DOM.averageScore) {
 
-        if (state.averageScore === null) {
-
-            DOM.averageScore.textContent =
-                '—';
-
-        } else {
-
-            DOM.averageScore.textContent =
-                formatScore(
+        DOM.averageScore.textContent =
+            state.averageScore === null
+                ? '—'
+                : formatScore(
                     state.averageScore
                 );
-
-        }
 
     }
 
 }
+
 
 
 /* ================================================================
@@ -969,36 +1018,27 @@ function updateContinueState() {
         return;
     }
 
+
     const complete =
         state.totalAnswered ===
         PAGE01_CONFIG.TOTAL_SELVAMS;
 
 
-    /*
-     * We deliberately do NOT use disabled=true
-     * because the existing design may depend on
-     * the button remaining visually present.
-     */
     DOM.continueButton.setAttribute(
         'aria-disabled',
-        complete ? 'false' : 'true'
+        complete
+            ? 'false'
+            : 'true'
     );
 
-    if (complete) {
 
-        DOM.continueButton.classList.remove(
-            'navigation-disabled'
-        );
-
-    } else {
-
-        DOM.continueButton.classList.add(
-            'navigation-disabled'
-        );
-
-    }
+    DOM.continueButton.classList.toggle(
+        'navigation-disabled',
+        !complete
+    );
 
 }
+
 
 
 /* ================================================================
@@ -1010,6 +1050,7 @@ function bindNavigation() {
     /*
      * BACK TO INDEX
      */
+
     if (DOM.backButton) {
 
         DOM.backButton.addEventListener(
@@ -1018,7 +1059,12 @@ function bindNavigation() {
 
                 event.preventDefault();
 
-                window.location.href = '/';
+
+                saveScores();
+
+
+                window.location.href =
+                    PAGE01_CONFIG.INDEX_PAGE;
 
             }
         );
@@ -1029,6 +1075,7 @@ function bindNavigation() {
     /*
      * CONTINUE TO PAGE 02
      */
+
     if (DOM.continueButton) {
 
         DOM.continueButton.addEventListener(
@@ -1037,6 +1084,12 @@ function bindNavigation() {
 
                 event.preventDefault();
 
+
+                /*
+                 * Do not allow an incomplete
+                 * assessment to proceed.
+                 */
+
                 if (
                     state.totalAnswered !==
                     PAGE01_CONFIG.TOTAL_SELVAMS
@@ -1044,7 +1097,9 @@ function bindNavigation() {
 
                     showIncompleteMessage();
 
+
                     scrollToFirstUnanswered();
+
 
                     return;
 
@@ -1052,25 +1107,25 @@ function bindNavigation() {
 
 
                 /*
-                 * Save one final time before
-                 * leaving Page 01.
+                 * Save current state.
                  */
+
                 saveScores();
 
 
                 /*
-                 * Make the final assessment
-                 * object available to Page 02
-                 * through sessionStorage.
+                 * Save final Page 01 payload.
                  */
+
                 saveFinalAssessment();
 
 
                 /*
                  * Navigate to Page 02.
                  */
+
                 window.location.href =
-                    '/02';
+                    PAGE01_CONFIG.NEXT_PAGE;
 
             }
         );
@@ -1078,6 +1133,7 @@ function bindNavigation() {
     }
 
 }
+
 
 
 /* ================================================================
@@ -1093,17 +1149,18 @@ function showIncompleteMessage() {
 
     const message =
         remaining === 1
+
             ? 'Please complete the remaining Selvam before continuing.'
+
             : 'Please complete all 16 Selvams before continuing.';
 
 
-    /*
-     * Use a simple browser alert rather than
-     * creating another UI dependency.
-     */
-    window.alert(message);
+    window.alert(
+        message
+    );
 
 }
+
 
 
 /* ================================================================
@@ -1113,13 +1170,17 @@ function showIncompleteMessage() {
 function scrollToFirstUnanswered() {
 
     const firstUnanswered =
-        SELVAMS.find(function (selvam) {
+        SELVAMS.find(
+            function (selvam) {
 
-            return !isValidScore(
-                state.scores[selvam.field]
-            );
+                return !isValidScore(
+                    state.scores[
+                        selvam.field
+                    ]
+                );
 
-        });
+            }
+        );
 
 
     if (!firstUnanswered) {
@@ -1127,38 +1188,50 @@ function scrollToFirstUnanswered() {
     }
 
 
-    const card =
+    /*
+     * First attempt:
+     * card carries data-field.
+     */
+
+    let target =
         document.querySelector(
             '.selvam-card[data-field="' +
-            escapeAttribute(firstUnanswered.field) +
+            escapeAttribute(
+                firstUnanswered.field
+            ) +
             '"]'
         );
 
 
     /*
-     * Some versions of the HTML place
-     * data-field only on the article,
-     * while others place it on the
-     * score-options container.
-     *
-     * Therefore use a second lookup.
+     * Second attempt:
+     * find the card containing the
+     * correct score group.
      */
-    const fallbackCard =
-        card ||
-        document.querySelector(
-            '.selvam-card:has(.score-options[data-field="' +
-            escapeAttribute(firstUnanswered.field) +
-            '"])'
-        );
+
+    if (!target) {
+
+        const scoreGroup =
+            document.querySelector(
+                '.score-options[data-field="' +
+                escapeAttribute(
+                    firstUnanswered.field
+                ) +
+                '"]'
+            );
 
 
-    const target =
-        fallbackCard ||
-        document.querySelector(
-            '.score-options[data-field="' +
-            escapeAttribute(firstUnanswered.field) +
-            '"]'
-        );
+        if (scoreGroup) {
+
+            target =
+                scoreGroup.closest(
+                    '.selvam-card'
+                ) ||
+                scoreGroup;
+
+        }
+
+    }
 
 
     if (!target) {
@@ -1174,8 +1247,9 @@ function scrollToFirstUnanswered() {
 }
 
 
+
 /* ================================================================
-   SAVE SCORES
+   SAVE CURRENT SCORES
    ================================================================ */
 
 function saveScores() {
@@ -1183,6 +1257,10 @@ function saveScores() {
     const payload =
         buildAssessmentPayload();
 
+
+    /*
+     * Local Storage
+     */
 
     try {
 
@@ -1194,7 +1272,7 @@ function saveScores() {
     } catch (error) {
 
         console.error(
-            '[CTM PATH™] Unable to save Page 01 scores:',
+            '[CTM PATH™] Unable to save Page 01 local data:',
             error
         );
 
@@ -1202,10 +1280,9 @@ function saveScores() {
 
 
     /*
-     * Also keep the current assessment in
-     * sessionStorage so the next page can
-     * access it during the current journey.
+     * Session Storage
      */
+
     try {
 
         sessionStorage.setItem(
@@ -1224,14 +1301,18 @@ function saveScores() {
 
 
     /*
-     * Expose the latest payload globally.
-     * This gives later scripts a clean interface
-     * without forcing them to inspect the DOM.
+     * Global reference for subsequent
+     * page scripts during the journey.
      */
+
     window.CTMPathPage01 =
         payload;
 
+
+    return payload;
+
 }
+
 
 
 /* ================================================================
@@ -1253,32 +1334,60 @@ function saveFinalAssessment() {
         new Date().toISOString();
 
 
+    /*
+     * Session Storage
+     */
+
     try {
 
         sessionStorage.setItem(
-            'ctm_path_page01_final',
-            JSON.stringify(payload)
-        );
-
-        localStorage.setItem(
-            'ctm_path_page01_final',
+            PAGE01_CONFIG.FINAL_STORAGE_KEY,
             JSON.stringify(payload)
         );
 
     } catch (error) {
 
         console.error(
-            '[CTM PATH™] Unable to save final Page 01 assessment:',
+            '[CTM PATH™] Unable to save final Page 01 session assessment:',
             error
         );
 
     }
 
 
+    /*
+     * Local Storage
+     */
+
+    try {
+
+        localStorage.setItem(
+            PAGE01_CONFIG.FINAL_STORAGE_KEY,
+            JSON.stringify(payload)
+        );
+
+    } catch (error) {
+
+        console.error(
+            '[CTM PATH™] Unable to save final Page 01 local assessment:',
+            error
+        );
+
+    }
+
+
+    /*
+     * Global reference.
+     */
+
     window.CTMPathPage01Final =
         payload;
 
+
+    return payload;
+
 }
+
 
 
 /* ================================================================
@@ -1290,25 +1399,33 @@ function buildAssessmentPayload() {
     const individualScores = {};
 
 
-    SELVAMS.forEach(function (selvam) {
+    SELVAMS.forEach(
+        function (selvam) {
 
-        individualScores[
-            selvam.field
-        ] =
-            isValidScore(
-                state.scores[selvam.field]
-            )
-                ? state.scores[selvam.field]
-                : null;
+            individualScores[
+                selvam.field
+            ] =
+                isValidScore(
+                    state.scores[
+                        selvam.field
+                    ]
+                )
+                    ? state.scores[
+                        selvam.field
+                    ]
+                    : null;
 
-    });
+        }
+    );
 
 
     return {
 
-        page: PAGE01_CONFIG.PAGE_NUMBER,
+        page:
+            PAGE01_CONFIG.PAGE_NUMBER,
 
-        assessment: '16 Selwams of a Fulfilled Life',
+        assessment:
+            '16 Selwams of a Fulfilled Life',
 
         totalSelvams:
             PAGE01_CONFIG.TOTAL_SELVAMS,
@@ -1349,24 +1466,30 @@ function buildAssessmentPayload() {
 }
 
 
+
 /* ================================================================
    RESTORE SAVED SCORES
    ================================================================ */
 
 function restoreSavedScores() {
 
-    let savedData = null;
+    let savedData =
+        null;
 
 
     /*
-     * Try localStorage first.
+     * ------------------------------------------------------------
+     * 1. Try localStorage
+     * ------------------------------------------------------------
      */
+
     try {
 
         const raw =
             localStorage.getItem(
                 PAGE01_CONFIG.STORAGE_KEY
             );
+
 
         if (raw) {
 
@@ -1378,7 +1501,7 @@ function restoreSavedScores() {
     } catch (error) {
 
         console.warn(
-            '[CTM PATH™] Could not read saved Page 01 scores:',
+            '[CTM PATH™] Could not read Page 01 local data:',
             error
         );
 
@@ -1386,9 +1509,12 @@ function restoreSavedScores() {
 
 
     /*
-     * If localStorage has nothing useful,
-     * try sessionStorage.
+     * ------------------------------------------------------------
+     * 2. Try sessionStorage if localStorage
+     *    did not contain valid data.
+     * ------------------------------------------------------------
      */
+
     if (
         !savedData ||
         !savedData.scores
@@ -1401,6 +1527,7 @@ function restoreSavedScores() {
                     PAGE01_CONFIG.STORAGE_KEY
                 );
 
+
             if (raw) {
 
                 savedData =
@@ -1411,7 +1538,7 @@ function restoreSavedScores() {
         } catch (error) {
 
             console.warn(
-                '[CTM PATH™] Could not read Page 01 session scores:',
+                '[CTM PATH™] Could not read Page 01 session data:',
                 error
             );
 
@@ -1419,6 +1546,10 @@ function restoreSavedScores() {
 
     }
 
+
+    /*
+     * Nothing to restore.
+     */
 
     if (
         !savedData ||
@@ -1430,40 +1561,48 @@ function restoreSavedScores() {
     }
 
 
-    SELVAMS.forEach(function (selvam) {
+    /*
+     * Restore each Selvam.
+     */
 
-        const savedScore =
-            Number(
-                savedData.scores[
+    SELVAMS.forEach(
+        function (selvam) {
+
+            const savedScore =
+                Number(
+                    savedData.scores[
+                        selvam.field
+                    ]
+                );
+
+
+            if (
+                isValidScore(
+                    savedScore
+                )
+            ) {
+
+                state.scores[
                     selvam.field
-                ]
-            );
+                ] =
+                    savedScore;
 
 
-        if (
-            isValidScore(savedScore)
-        ) {
-
-            state.scores[
-                selvam.field
-            ] =
-                savedScore;
+                updateScoreButtons(
+                    selvam.field,
+                    savedScore
+                );
 
 
-            updateScoreButtons(
-                selvam.field,
-                savedScore
-            );
+                updateSelectedScoreDisplay(
+                    selvam.field,
+                    savedScore
+                );
 
-
-            updateSelectedScoreDisplay(
-                selvam.field,
-                savedScore
-            );
+            }
 
         }
-
-    });
+    );
 
 
     console.log(
@@ -1473,6 +1612,7 @@ function restoreSavedScores() {
 }
 
 
+
 /* ================================================================
    PUBLIC API
    ================================================================ */
@@ -1480,80 +1620,101 @@ function restoreSavedScores() {
 window.CTMPathPage01API = {
 
     /*
-     * Get the current scores.
+     * ------------------------------------------------------------
+     * Get individual scores.
+     * ------------------------------------------------------------
      */
-    getScores: function () {
 
-        return {
-            ...state.scores
-        };
+    getScores:
+        function () {
 
-    },
+            return {
+                ...state.scores
+            };
+
+        },
 
 
     /*
-     * Get the current calculations.
+     * ------------------------------------------------------------
+     * Get calculated results.
+     * ------------------------------------------------------------
      */
-    getResults: function () {
 
-        return {
+    getResults:
+        function () {
 
-            answered:
-                state.totalAnswered,
+            return {
 
-            rawTotal:
-                state.rawTotal,
+                answered:
+                    state.totalAnswered,
 
-            rawMaximum:
-                PAGE01_CONFIG.RAW_MAX,
+                rawTotal:
+                    state.rawTotal,
 
-            lifeScore:
-                state.lifeScore,
+                rawMaximum:
+                    PAGE01_CONFIG.RAW_MAX,
 
-            averageScore:
-                state.averageScore,
+                lifeScore:
+                    state.lifeScore,
 
-            complete:
-                state.totalAnswered ===
-                PAGE01_CONFIG.TOTAL_SELVAMS
+                averageScore:
+                    state.averageScore,
 
-        };
+                complete:
+                    state.totalAnswered ===
+                    PAGE01_CONFIG.TOTAL_SELVAMS
 
-    },
+            };
+
+        },
 
 
     /*
-     * Get the complete assessment object.
+     * ------------------------------------------------------------
+     * Get complete assessment object.
+     * ------------------------------------------------------------
      */
-    getAssessment: function () {
 
-        return buildAssessmentPayload();
+    getAssessment:
+        function () {
 
-    },
+            return buildAssessmentPayload();
+
+        },
 
 
     /*
-     * Force a save.
+     * ------------------------------------------------------------
+     * Force save.
+     * ------------------------------------------------------------
      */
-    save: function () {
 
-        saveScores();
+    save:
+        function () {
 
-        return buildAssessmentPayload();
+            saveScores();
 
-    },
+            return buildAssessmentPayload();
+
+        },
 
 
     /*
+     * ------------------------------------------------------------
      * Clear Page 01.
+     * ------------------------------------------------------------
      */
-    clear: function () {
 
-        clearAssessment();
+    clear:
+        function () {
 
-    }
+            clearAssessment();
+
+        }
 
 };
+
 
 
 /* ================================================================
@@ -1562,60 +1723,79 @@ window.CTMPathPage01API = {
 
 function clearAssessment() {
 
-    SELVAMS.forEach(function (selvam) {
+    /*
+     * Reset state.
+     */
 
-        state.scores[
-            selvam.field
-        ] = null;
+    SELVAMS.forEach(
+        function (selvam) {
+
+            state.scores[
+                selvam.field
+            ] = null;
 
 
-        updateScoreButtons(
-            selvam.field,
-            null
-        );
-
-
-        const target =
-            document.querySelector(
-                '[data-selected-score="' +
-                escapeAttribute(
-                    selvam.field
-                ) +
-                '"]'
+            updateScoreButtons(
+                selvam.field,
+                null
             );
 
 
-        if (target) {
+            const target =
+                document.querySelector(
+                    '[data-selected-score="' +
+                    escapeAttribute(
+                        selvam.field
+                    ) +
+                    '"]'
+                );
 
-            target.textContent =
-                '—';
 
-            target.classList.remove(
-                'score-low',
-                'score-medium',
-                'score-high',
-                'score-red',
-                'score-orange',
-                'score-green'
-            );
+            if (target) {
 
-            target.style.removeProperty(
-                'color'
-            );
+                target.textContent =
+                    '—';
+
+
+                target.classList.remove(
+                    'score-low',
+                    'score-medium',
+                    'score-high',
+                    'score-red',
+                    'score-orange',
+                    'score-green'
+                );
+
+
+                target.style.removeProperty(
+                    'color'
+                );
+
+            }
 
         }
+    );
 
-    });
+
+    state.totalAnswered =
+        0;
 
 
-    state.totalAnswered = 0;
+    state.rawTotal =
+        0;
 
-    state.rawTotal = 0;
 
-    state.lifeScore = null;
+    state.lifeScore =
+        null;
 
-    state.averageScore = null;
 
+    state.averageScore =
+        null;
+
+
+    /*
+     * Clear localStorage.
+     */
 
     try {
 
@@ -1624,7 +1804,7 @@ function clearAssessment() {
         );
 
         localStorage.removeItem(
-            'ctm_path_page01_final'
+            PAGE01_CONFIG.FINAL_STORAGE_KEY
         );
 
     } catch (error) {
@@ -1637,6 +1817,10 @@ function clearAssessment() {
     }
 
 
+    /*
+     * Clear sessionStorage.
+     */
+
     try {
 
         sessionStorage.removeItem(
@@ -1644,7 +1828,7 @@ function clearAssessment() {
         );
 
         sessionStorage.removeItem(
-            'ctm_path_page01_final'
+            PAGE01_CONFIG.FINAL_STORAGE_KEY
         );
 
     } catch (error) {
@@ -1657,9 +1841,35 @@ function clearAssessment() {
     }
 
 
+    /*
+     * Clear global references.
+     */
+
+    try {
+
+        delete window.CTMPathPage01;
+
+        delete window.CTMPathPage01Final;
+
+    } catch (error) {
+
+        window.CTMPathPage01 =
+            null;
+
+        window.CTMPathPage01Final =
+            null;
+
+    }
+
+
+    /*
+     * Re-render.
+     */
+
     calculateAndRender();
 
 }
+
 
 
 /* ================================================================
@@ -1668,15 +1878,25 @@ function clearAssessment() {
 
 function roundToOneDecimal(value) {
 
-    if (!Number.isFinite(value)) {
+    if (
+        !Number.isFinite(value)
+    ) {
+
         return null;
+
     }
 
+
     return Math.round(
-        (value + Number.EPSILON) * 10
+        (
+            value +
+            Number.EPSILON
+        ) *
+        10
     ) / 10;
 
 }
+
 
 
 /* ================================================================
@@ -1685,22 +1905,22 @@ function roundToOneDecimal(value) {
 
 function formatScore(value) {
 
-    if (!Number.isFinite(value)) {
+    if (
+        !Number.isFinite(value)
+    ) {
+
         return '—';
+
     }
 
 
     /*
-     * Keep whole numbers clean:
+     * Whole numbers remain clean.
      *
-     * 80 → "80"
-     * 8  → "8"
-     *
-     * Decimal values:
-     *
-     * 81.3 → "81.3"
-     * 7.6  → "7.6"
+     * 80  → 80
+     * 8   → 8
      */
+
     if (
         Number.isInteger(value)
     ) {
@@ -1710,9 +1930,17 @@ function formatScore(value) {
     }
 
 
+    /*
+     * Decimal values use one decimal place.
+     *
+     * 81.3 → 81.3
+     * 7.6  → 7.6
+     */
+
     return value.toFixed(1);
 
 }
+
 
 
 /* ================================================================
@@ -1723,7 +1951,8 @@ function escapeAttribute(value) {
 
     if (
         window.CSS &&
-        typeof window.CSS.escape === 'function'
+        typeof window.CSS.escape ===
+            'function'
     ) {
 
         return window.CSS.escape(
@@ -1734,9 +1963,10 @@ function escapeAttribute(value) {
 
 
     /*
-     * Safe fallback for the known field
-     * names used by this page.
+     * Safe fallback for the known
+     * field names used by Page 01.
      */
+
     return String(value)
         .replace(
             /\\/g,
@@ -1750,47 +1980,59 @@ function escapeAttribute(value) {
 }
 
 
+
 /* ================================================================
-   DEBUG INFORMATION
+   ERROR MONITORING
    ================================================================ */
 
 window.addEventListener(
     'error',
     function (event) {
 
-        /*
-         * Keep unexpected JavaScript errors
-         * visible in the console so debugging
-         * Page 01 does not become guesswork.
-         */
         console.error(
             '[CTM PATH™] Page 01 JavaScript error:',
-            event.error || event.message
+            event.error ||
+            event.message
         );
 
     }
 );
 
 
+
 /* ================================================================
-   DEVELOPMENT CONSOLE HELPER
+   DEVELOPMENT CONSOLE
    ================================================================ */
 
 console.log(
     '[CTM PATH™] Page 01 scoring engine loaded.'
 );
 
+
 console.log(
     '[CTM PATH™] Scoring:',
     '1–3 RED | 4–7 ORANGE | 8–10 GREEN'
 );
+
 
 console.log(
     '[CTM PATH™] Calculation:',
     'Raw Total / 160 × 100 = Life Score / 100'
 );
 
+
 console.log(
     '[CTM PATH™] Calculation:',
     'Raw Total / 16 = Average / 10'
 );
+
+
+console.log(
+    '[CTM PATH™] Visual styling:',
+    'controlled by css/page01.css'
+);
+
+
+/* ================================================================
+   END OF PAGE 01 JAVASCRIPT
+   ================================================================ */
