@@ -1,1 +1,541 @@
+from pathlib import Path
+
+html = r'''<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CTM PATH™ MILLIONAIRES™ — Page 08</title>
+
+    <!-- GLOBAL PAGE STYLE -->
+    <link rel="stylesheet" href="css/index.css">
+
+    <!-- PAGE 08 STYLE -->
+    <link rel="stylesheet" href="css/page08.css">
+</head>
+
+<body class="page page-08">
+
+    <!-- =========================================================
+         GLOBAL TOP SECTION
+         ========================================================= -->
+    <header class="global-header">
+
+        <div class="global-brand">
+
+            <img
+                src="assets/ctmmtptlogo.svg"
+                alt="CTM PATH™ MILLIONAIRES™"
+                class="global-logo"
+            >
+
+            <div class="global-brand-name">
+                <span>PATH™</span>
+                <span>MILLIONAIRES™</span>
+            </div>
+
+        </div>
+
+        <div class="global-page-number">
+            PAGE 08 / 16
+        </div>
+
+    </header>
+
+    <div class="global-divider">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+
+    <!-- =========================================================
+         PAGE 08 MAIN CONTENT
+         ========================================================= -->
+    <main class="page08-main">
+
+        <!-- =====================================================
+             OPENING — THE MONEY QUESTION
+             ===================================================== -->
+        <section class="money-hero">
+
+            <div class="money-kicker">
+                THE MONEY QUESTION™
+            </div>
+
+            <h1>
+                உங்கள் வாழ்க்கைக்கு<br>
+                எவ்வளவு வருமானம் வேண்டும்?
+            </h1>
+
+            <p class="money-hero-en">
+                WHAT MONTHLY INCOME DO YOU REALLY WANT?
+            </p>
+
+            <p class="money-hero-lead">
+                ஒரு எண்ணைத் தேர்வு செய்யுங்கள்.<br>
+                அது உங்கள் வாழ்க்கையை மாற்றக்கூடிய எண்ணாக இருக்கட்டும்.
+            </p>
+
+            <p class="money-hero-lead-en">
+                Choose a number that could genuinely change your life.
+            </p>
+
+        </section>
+
+
+        <!-- =====================================================
+             STEP 01 — DESIRED INCOME
+             ===================================================== -->
+        <section class="money-step money-step-income">
+
+            <div class="step-marker">
+                <span>01</span>
+                <small>DESIRE</small>
+            </div>
+
+            <div class="step-content">
+
+                <div class="step-label">
+                    YOUR NUMBER
+                </div>
+
+                <h2>
+                    உங்கள் எதிர்பார்க்கும்<br>
+                    மாத வருமானம் என்ன?
+                </h2>
+
+                <p class="step-question-en">
+                    What monthly income do you really want?
+                </p>
+
+                <div class="income-options">
+
+                    <button type="button" class="income-option">
+                        ₹50,000
+                    </button>
+
+                    <button type="button" class="income-option">
+                        ₹1,00,000
+                    </button>
+
+                    <button type="button" class="income-option">
+                        ₹2,00,000
+                    </button>
+
+                    <button type="button" class="income-option">
+                        ₹5,00,000
+                    </button>
+
+                    <button type="button" class="income-option">
+                        ₹10,00,000+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="income-option income-custom"
+                    >
+                        என் சொந்த எண்
+                    </button>
+
+                </div>
+
+                <div class="custom-income-box">
+
+                    <label for="customIncome">
+                        ENTER YOUR NUMBER
+                    </label>
+
+                    <div class="money-input-wrap">
+                        <span>₹</span>
+
+                        <input
+                            type="number"
+                            id="customIncome"
+                            name="customIncome"
+                            min="0"
+                            step="1000"
+                            placeholder="0"
+                            inputmode="numeric"
+                        >
+
+                        <span class="per-month">
+                            / MONTH
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             STEP 02 — NORMAL INVESTMENT
+             ===================================================== -->
+        <section class="money-step money-step-investment">
+
+            <div class="step-marker">
+                <span>02</span>
+                <small>REALITY</small>
+            </div>
+
+            <div class="step-content">
+
+                <div class="step-label">
+                    THE NORMAL QUESTION
+                </div>
+
+                <h2>
+                    அந்த வருமானத்தை உருவாக்க<br>
+                    நீங்கள் எவ்வளவு முதலீடு செய்ய வேண்டும்?
+                </h2>
+
+                <p class="step-question-en">
+                    What would you normally need to invest
+                    to create that income?
+                </p>
+
+                <div class="investment-context">
+
+                    <div class="context-item">
+                        <span>CAPITAL</span>
+                        <small>மூலதனம்</small>
+                    </div>
+
+                    <div class="context-item">
+                        <span>BUSINESS</span>
+                        <small>வணிகம்</small>
+                    </div>
+
+                    <div class="context-item">
+                        <span>MARKETING</span>
+                        <small>சந்தைப்படுத்தல்</small>
+                    </div>
+
+                    <div class="context-item">
+                        <span>PEOPLE</span>
+                        <small>மனித வளம்</small>
+                    </div>
+
+                    <div class="context-item">
+                        <span>TIME</span>
+                        <small>நேரம்</small>
+                    </div>
+
+                </div>
+
+                <div class="investment-input-box">
+
+                    <label for="requiredInvestment">
+                        YOUR ESTIMATE
+                    </label>
+
+                    <div class="money-input-wrap large">
+
+                        <span>₹</span>
+
+                        <input
+                            type="number"
+                            id="requiredInvestment"
+                            name="requiredInvestment"
+                            min="0"
+                            step="10000"
+                            placeholder="0"
+                            inputmode="numeric"
+                        >
+
+                    </div>
+
+                    <p>
+                        அந்த மாத வருமானத்தை உருவாக்க
+                        ஒரு வழக்கமான வணிகத்தில் நீங்கள்
+                        முதலீடு செய்ய வேண்டியதாக நினைக்கும் தொகை.
+                    </p>
+
+                    <p class="english">
+                        Enter what you believe you would normally
+                        need to invest in a business to create
+                        your desired monthly income.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             STEP 03 — THE 10% POSSIBILITY
+             ===================================================== -->
+        <section class="ten-percent-section">
+
+            <div class="possibility-kicker">
+                NOW IMAGINE...
+            </div>
+
+            <h2>
+                நீங்கள் நினைத்த முதலீட்டின்<br>
+                <span>10%</span> மட்டும் போதுமானதாக இருந்தால்?
+            </h2>
+
+            <p class="possibility-en">
+                WHAT IF YOU NEEDED ONLY 10%?
+            </p>
+
+            <div class="ten-percent-visual">
+
+                <div class="investment-full">
+
+                    <span class="visual-label">
+                        NORMAL INVESTMENT
+                    </span>
+
+                    <strong id="fullInvestmentDisplay">
+                        ₹0
+                    </strong>
+
+                    <small>
+                        100%
+                    </small>
+
+                </div>
+
+                <div class="visual-arrow">
+                    →
+                </div>
+
+                <div class="investment-ten">
+
+                    <span class="visual-label">
+                        10% INVESTMENT
+                    </span>
+
+                    <strong id="tenPercentDisplay">
+                        ₹0
+                    </strong>
+
+                    <small>
+                        10%
+                    </small>
+
+                </div>
+
+            </div>
+
+            <p class="possibility-message">
+                அதே வருமான இலக்கு.<br>
+                radically different entry point.
+            </p>
+
+            <p class="possibility-message-en">
+                The same income goal.<br>
+                A radically different entry point.
+            </p>
+
+        </section>
+
+
+        <!-- =====================================================
+             STEP 04 — THE DECISION
+             ===================================================== -->
+        <section class="decision-section">
+
+            <div class="decision-kicker">
+                THE DECISION™
+            </div>
+
+            <h2>
+                ஒரு அமைப்பு உங்கள்<br>
+                எதிர்பார்க்கும் வருமானத்தை உருவாக்க,
+            </h2>
+
+            <p class="decision-highlight">
+                நீங்கள் நினைத்த முதலீட்டின்<br>
+                <strong>10%</strong> மட்டும் போதுமானதாக இருந்தால்...
+            </p>
+
+            <div class="decision-question">
+
+                <div class="question-line"></div>
+
+                <span>
+                    WOULD YOU BUILD IT?
+                </span>
+
+                <div class="question-line"></div>
+
+            </div>
+
+            <p class="decision-tamil">
+                <strong>அந்த அமைப்பை நீங்கள் கட்டமைக்கத் தொடங்குவீர்களா?</strong>
+            </p>
+
+            <p class="decision-support">
+                வாங்குவது அல்ல.<br>
+                இணைவது அல்ல.<br>
+                <strong>கட்டமைப்பது.</strong>
+            </p>
+
+            <div class="decision-buttons">
+
+                <button
+                    type="button"
+                    class="decision-button decision-yes"
+                    data-decision="yes"
+                >
+                    <span>YES</span>
+                    <small>நான் கட்டமைப்பேன்</small>
+                </button>
+
+                <button
+                    type="button"
+                    class="decision-button decision-not-yet"
+                    data-decision="not-yet"
+                >
+                    <span>NOT YET</span>
+                    <small>இன்னும் சிந்திக்கிறேன்</small>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CORE MESSAGE
+             ===================================================== -->
+        <section class="core-message">
+
+            <div class="core-line"></div>
+
+            <p>
+                கேள்வி இனி
+                <strong>“எனக்கு அதிக வருமானம் வேண்டுமா?”</strong>
+                என்பதல்ல.
+            </p>
+
+            <p class="core-large">
+                அந்த வருமானத்தை உருவாக்கக்கூடிய<br>
+                <strong>அமைப்பை கட்டமைக்க<br>
+                நான் தயாரா?</strong>
+            </p>
+
+            <p class="core-en">
+                The question is no longer whether you want more income.
+                <br>
+                The question is whether you are willing to build
+                the system that can create it.
+            </p>
+
+        </section>
+
+
+        <!-- =====================================================
+             FINAL STATEMENT
+             ===================================================== -->
+        <section class="money-closing">
+
+            <div class="closing-grid">
+
+                <div>
+                    <span>01</span>
+                    <strong>YOUR NUMBER</strong>
+                    <small>உங்கள் எண்</small>
+                </div>
+
+                <div>
+                    <span>02</span>
+                    <strong>YOUR DECISION</strong>
+                    <small>உங்கள் முடிவு</small>
+                </div>
+
+                <div>
+                    <span>03</span>
+                    <strong>YOUR SYSTEM</strong>
+                    <small>உங்கள் அமைப்பு</small>
+                </div>
+
+            </div>
+
+            <h2>
+                YOUR NUMBER.<br>
+                YOUR DECISION.<br>
+                YOUR SYSTEM.
+            </h2>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================================
+         GLOBAL BOTTOM NAVIGATION
+         ========================================================= -->
+    <footer class="global-footer">
+
+        <div class="page-navigation">
+
+            <a
+                href="07.html"
+                class="nav-button nav-previous"
+                aria-label="Go to Page 07"
+            >
+                <span class="nav-arrow">←</span>
+
+                <span class="nav-text">
+                    <strong>முந்தைய பக்கம்</strong>
+                    <small>PREVIOUS</small>
+                </span>
+            </a>
+
+
+            <div class="nav-current">
+                <span>08</span>
+                <small>/ 16</small>
+            </div>
+
+
+            <a
+                href="09.html"
+                class="nav-button nav-next"
+                aria-label="Go to Page 09"
+            >
+                <span class="nav-text">
+                    <strong>அடுத்த பக்கம்</strong>
+                    <small>NEXT</small>
+                </span>
+
+                <span class="nav-arrow">→</span>
+            </a>
+
+        </div>
+
+
+        <div class="global-footer-brand">
+
+            <div class="footer-tagline">
+                EVERY DREAM HAS A PATH™
+            </div>
+
+            <div class="footer-brand">
+                CTM PATH™ MILLIONAIRES™ CLUB
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- PAGE 08 JAVASCRIPT -->
+    <script src="js/page08.js"></script>
+
+</body>
+</html>
+'''
+
+print(html)
 
