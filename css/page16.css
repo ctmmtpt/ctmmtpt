@@ -1,1 +1,2923 @@
+/* =========================================================
+   CTM PATH™ MILLIONAIRES™
+   PAGE 16 — THE DECISION™
+   Complete replacement
+   css/page16.css
+   ========================================================= */
 
+
+/* =========================================================
+   PAGE VARIABLES
+   ========================================================= */
+
+:root {
+
+    --p16-bg:
+        #06131d;
+
+    --p16-bg-deep:
+        #020b12;
+
+    --p16-panel:
+        #091d2b;
+
+    --p16-panel-soft:
+        #0c2637;
+
+    --p16-ivory:
+        #f5f0e7;
+
+    --p16-white:
+        #ffffff;
+
+    --p16-muted:
+        #aab9c2;
+
+    --p16-muted-dark:
+        #71838e;
+
+    --p16-gold:
+        #f2b52b;
+
+    --p16-gold-light:
+        #ffd96b;
+
+    --p16-teal:
+        #08c8ce;
+
+    --p16-teal-light:
+        #72ecec;
+
+    --p16-green:
+        #20c76a;
+
+    --p16-green-light:
+        #4be889;
+
+    --p16-green-dark:
+        #11934a;
+
+    --p16-border:
+        rgba(255,255,255,0.09);
+
+    --p16-border-gold:
+        rgba(242,181,43,0.34);
+
+    --p16-border-teal:
+        rgba(8,200,206,0.30);
+
+    --p16-border-green:
+        rgba(32,199,106,0.40);
+
+    --p16-radius:
+        24px;
+
+    --p16-shadow:
+        0 30px 90px rgba(0,0,0,0.42);
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+html {
+    background:
+        var(--p16-bg-deep);
+
+    scroll-behavior:
+        smooth;
+}
+
+body.page-16 {
+
+    margin: 0;
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+    color:
+        var(--p16-ivory);
+
+    background:
+
+        radial-gradient(
+            circle at 50% 8%,
+            rgba(8,200,206,0.055),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 50% 48%,
+            rgba(242,181,43,0.035),
+            transparent 32%
+        ),
+
+        linear-gradient(
+            180deg,
+            #06131d 0%,
+            #071c2a 45%,
+            #030d15 100%
+        );
+
+    font-family:
+        "Noto Sans Tamil",
+        "Nirmala UI",
+        "Latha",
+        Arial,
+        sans-serif;
+}
+
+.page-16 *,
+.page-16 *::before,
+.page-16 *::after {
+    box-sizing:
+        border-box;
+}
+
+.page-16 img {
+    display:
+        block;
+
+    max-width:
+        100%;
+}
+
+.page-16 a {
+    color:
+        inherit;
+
+    text-decoration:
+        none;
+}
+
+
+/* =========================================================
+   GLOBAL HEADER
+   ========================================================= */
+
+.page-16 .global-header {
+
+    position:
+        relative;
+
+    z-index:
+        10;
+
+    min-height:
+        225px;
+
+    padding:
+        58px
+        clamp(40px, 6vw, 105px)
+        48px;
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    justify-content:
+        space-between;
+
+    gap:
+        30px;
+}
+
+.page-16 .global-brand {
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    gap:
+        18px;
+}
+
+.page-16 .global-logo {
+
+    width:
+        105px;
+
+    height:
+        105px;
+
+    flex:
+        0 0 auto;
+
+    object-fit:
+        contain;
+}
+
+.page-16 .global-brand-name {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    padding-top:
+        8px;
+
+    color:
+        var(--p16-ivory);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        clamp(23px, 2vw, 35px);
+
+    font-weight:
+        900;
+
+    line-height:
+        1.04;
+}
+
+.page-16 .global-brand-name span:last-child {
+    margin-top:
+        6px;
+}
+
+.page-16 .global-page-number {
+
+    padding-top:
+        14px;
+
+    color:
+        var(--p16-gold);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        clamp(17px, 1.35vw, 25px);
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        0.23em;
+
+    white-space:
+        nowrap;
+}
+
+
+/* =========================================================
+   HEADER DIVIDER
+   ========================================================= */
+
+.page-16 .global-divider {
+
+    width:
+        100%;
+
+    height:
+        4px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        27% 46% 27%;
+}
+
+.page-16 .global-divider span {
+    height:
+        100%;
+}
+
+.page-16 .global-divider span:nth-child(1),
+.page-16 .global-divider span:nth-child(3) {
+    background:
+        var(--p16-gold);
+}
+
+.page-16 .global-divider span:nth-child(2) {
+    background:
+        var(--p16-teal);
+}
+
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.page-16 .page16-main {
+
+    width:
+        min(
+            1280px,
+            calc(100% - 80px)
+        );
+
+    margin:
+        0 auto;
+
+    padding:
+        95px 0 110px;
+}
+
+
+/* =========================================================
+   FINAL ARRIVAL
+   ========================================================= */
+
+.page-16 .final-arrival {
+
+    width:
+        100%;
+
+    text-align:
+        center;
+}
+
+
+/* =========================================================
+   ARRIVAL KICKER
+   ========================================================= */
+
+.page-16 .arrival-kicker {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+}
+
+.page-16 .arrival-kicker .tamil {
+
+    color:
+        var(--p16-teal);
+
+    font-size:
+        clamp(15px, 1.35vw, 21px);
+
+    font-weight:
+        800;
+}
+
+.page-16 .arrival-kicker .english {
+
+    color:
+        var(--p16-muted);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        9px;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        0.22em;
+}
+
+
+/* =========================================================
+   WELCOME BLOCK
+   ========================================================= */
+
+.page-16 .welcome-block {
+
+    max-width:
+        1050px;
+
+    margin:
+        52px auto 0;
+}
+
+.page-16 .welcome-block h1 {
+
+    margin:
+        0;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        20px;
+}
+
+.page-16 .welcome-tamil {
+
+    color:
+        var(--p16-ivory);
+
+    font-size:
+        clamp(36px, 4.6vw, 67px);
+
+    font-weight:
+        900;
+
+    line-height:
+        1.18;
+}
+
+.page-16 .welcome-english {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    color:
+        var(--p16-muted);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        clamp(17px, 1.55vw, 25px);
+
+    font-weight:
+        800;
+
+    line-height:
+        1.3;
+
+    letter-spacing:
+        0.06em;
+}
+
+.page-16 .welcome-english strong {
+
+    margin-top:
+        4px;
+
+    color:
+        var(--p16-gold-light);
+
+    font-size:
+        1.16em;
+
+    letter-spacing:
+        0.045em;
+}
+
+
+/* =========================================================
+   DECISION DIVIDER
+   ========================================================= */
+
+.page-16 .decision-divider {
+
+    max-width:
+        380px;
+
+    margin:
+        65px auto 70px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr auto 1fr;
+
+    align-items:
+        center;
+
+    gap:
+        17px;
+}
+
+.page-16 .decision-divider span {
+
+    height:
+        1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--p16-border-gold)
+        );
+}
+
+.page-16 .decision-divider span:last-child {
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--p16-border-gold),
+            transparent
+        );
+}
+
+.page-16 .decision-divider b {
+
+    color:
+        var(--p16-gold);
+
+    font-size:
+        9px;
+}
+
+
+/* =========================================================
+   LEGACY MESSAGE
+   ========================================================= */
+
+.page-16 .legacy-message {
+
+    max-width:
+        1100px;
+
+    margin:
+        0 auto;
+}
+
+.page-16 .legacy-kicker {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        5px;
+}
+
+.page-16 .legacy-kicker .tamil {
+
+    color:
+        var(--p16-teal);
+
+    font-size:
+        17px;
+
+    font-weight:
+        800;
+}
+
+.page-16 .legacy-kicker .english {
+
+    color:
+        var(--p16-muted-dark);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        8px;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        0.23em;
+}
+
+.page-16 .legacy-message h2 {
+
+    margin:
+        28px 0 0;
+}
+
+.page-16 .legacy-tamil {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        10px;
+
+    color:
+        var(--p16-ivory);
+
+    font-size:
+        clamp(30px, 3.6vw, 54px);
+
+    font-weight:
+        900;
+
+    line-height:
+        1.25;
+}
+
+.page-16 .legacy-tamil strong {
+
+    color:
+        var(--p16-gold-light);
+}
+
+.page-16 .legacy-english {
+
+    margin-top:
+        27px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        4px;
+
+    color:
+        var(--p16-muted);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        clamp(17px, 1.55vw, 25px);
+
+    font-weight:
+        800;
+
+    line-height:
+        1.4;
+
+    letter-spacing:
+        0.035em;
+}
+
+.page-16 .legacy-english strong {
+
+    color:
+        var(--p16-gold);
+
+    font-size:
+        1.13em;
+}
+
+
+/* =========================================================
+   FUTURE TRUTH
+   ========================================================= */
+
+.page-16 .future-truth {
+
+    max-width:
+        760px;
+
+    margin:
+        42px auto 0;
+
+    padding:
+        24px 25px;
+
+    border-top:
+        1px solid var(--p16-border);
+
+    border-bottom:
+        1px solid var(--p16-border);
+}
+
+.page-16 .future-truth p {
+
+    margin:
+        0;
+}
+
+.page-16 .future-truth-tamil {
+
+    color:
+        var(--p16-muted);
+
+    font-size:
+        clamp(14px, 1.2vw, 18px);
+
+    line-height:
+        1.65;
+}
+
+.page-16 .future-truth-tamil strong {
+
+    display:
+        block;
+
+    margin-top:
+        4px;
+
+    color:
+        var(--p16-ivory);
+}
+
+.page-16 .future-truth-english {
+
+    margin-top:
+        13px !important;
+
+    color:
+        var(--p16-muted-dark);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.6;
+}
+
+.page-16 .future-truth-english strong {
+
+    color:
+        var(--p16-teal-light);
+}
+
+
+/* =========================================================
+   DECISION QUESTION
+   ========================================================= */
+
+.page-16 .decision-question {
+
+    max-width:
+        1000px;
+
+    margin:
+        105px auto 0;
+
+    padding:
+        0 20px;
+}
+
+.page-16 .question-kicker {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        7px;
+}
+
+.page-16 .question-kicker .tamil {
+
+    color:
+        var(--p16-teal);
+
+    font-size:
+        clamp(17px, 1.4vw, 22px);
+
+    font-weight:
+        800;
+}
+
+.page-16 .question-kicker .english {
+
+    color:
+        var(--p16-muted-dark);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        8px;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        0.24em;
+}
+
+.page-16 .decision-question h2 {
+
+    margin:
+        27px 0 0;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        15px;
+}
+
+.page-16 .question-tamil {
+
+    color:
+        var(--p16-ivory);
+
+    font-size:
+        clamp(31px, 4vw, 59px);
+
+    font-weight:
+        900;
+
+    line-height:
+        1.2;
+}
+
+.page-16 .question-english {
+
+    color:
+        var(--p16-gold-light);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        clamp(20px, 2vw, 31px);
+
+    font-weight:
+        900;
+
+    line-height:
+        1.25;
+
+    letter-spacing:
+        0.045em;
+}
+
+
+/* =========================================================
+   FINAL ACTION
+   ========================================================= */
+
+.page-16 .final-action {
+
+    margin:
+        62px auto 0;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+}
+
+
+/* =========================================================
+   WHATSAPP CTA
+   ========================================================= */
+
+.page-16 .future-cta {
+
+    position:
+        relative;
+
+    width:
+        min(
+            650px,
+            100%
+        );
+
+    min-height:
+        105px;
+
+    padding:
+        19px 28px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        48px minmax(0, 1fr) 35px;
+
+    align-items:
+        center;
+
+    gap:
+        18px;
+
+    border:
+        1px solid var(--p16-green-light);
+
+    border-radius:
+        16px;
+
+    color:
+        #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--p16-green),
+            var(--p16-green-dark)
+        );
+
+    box-shadow:
+        0 20px 60px rgba(32,199,106,0.18);
+
+    transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        filter 180ms ease;
+}
+
+.page-16 .future-cta:hover {
+
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+        0 28px 75px rgba(32,199,106,0.28);
+
+    filter:
+        brightness(1.05);
+}
+
+.page-16 .future-cta:focus-visible {
+
+    outline:
+        3px solid var(--p16-teal-light);
+
+    outline-offset:
+        5px;
+}
+
+
+/* =========================================================
+   CTA ICON
+   ========================================================= */
+
+.page-16 .cta-icon {
+
+    width:
+        44px;
+
+    height:
+        44px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border:
+        2px solid rgba(255,255,255,0.7);
+
+    border-radius:
+        50%;
+
+    color:
+        #ffffff;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        20px;
+
+    font-weight:
+        900;
+}
+
+
+/* =========================================================
+   CTA COPY
+   ========================================================= */
+
+.page-16 .cta-copy {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        flex-start;
+
+    gap:
+        5px;
+
+    text-align:
+        left;
+}
+
+.page-16 .cta-tamil {
+
+    color:
+        #ffffff;
+
+    font-size:
+        clamp(16px, 1.35vw, 21px);
+
+    font-weight:
+        900;
+
+    line-height:
+        1.3;
+}
+
+.page-16 .cta-english {
+
+    color:
+        rgba(255,255,255,0.84);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        8px;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        0.10em;
+}
+
+.page-16 .cta-arrow {
+
+    color:
+        #ffffff;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        30px;
+
+    font-weight:
+        300;
+
+    transition:
+        transform 180ms ease;
+}
+
+.page-16 .future-cta:hover .cta-arrow {
+
+    transform:
+        translateX(5px);
+}
+
+
+/* =========================================================
+   WHATSAPP NOTE
+   ========================================================= */
+
+.page-16 .whatsapp-note {
+
+    margin-top:
+        15px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        4px;
+}
+
+.page-16 .whatsapp-note .tamil {
+
+    color:
+        var(--p16-muted);
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+}
+
+.page-16 .whatsapp-note .english {
+
+    color:
+        var(--p16-muted-dark);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        7px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.16em;
+}
+
+
+/* =========================================================
+   COMMITMENT CARD
+   ========================================================= */
+
+.page-16 .commitment-card {
+
+    max-width:
+        850px;
+
+    margin:
+        80px auto 0;
+
+    padding:
+        38px 42px;
+
+    border:
+        1px solid var(--p16-border);
+
+    border-radius:
+        19px;
+
+    background:
+        rgba(255,255,255,0.015);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.18);
+}
+
+.page-16 .commitment-heading {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    gap:
+        5px;
+
+    text-align:
+        center;
+}
+
+.page-16 .commitment-heading .tamil {
+
+    color:
+        var(--p16-gold);
+
+    font-size:
+        16px;
+
+    font-weight:
+        900;
+}
+
+.page-16 .commitment-heading .english {
+
+    color:
+        var(--p16-muted-dark);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        7px;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        0.22em;
+}
+
+.page-16 .commitment-tamil {
+
+    margin:
+        24px auto 0;
+
+    max-width:
+        650px;
+
+    color:
+        var(--p16-muted);
+
+    font-size:
+        14px;
+
+    line-height:
+        1.8;
+
+    text-align:
+        center;
+}
+
+.page-16 .commitment-tamil strong {
+
+    color:
+        var(--p16-ivory);
+
+    white-space:
+        nowrap;
+}
+
+.page-16 .commitment-english {
+
+    max-width:
+        650px;
+
+    margin:
+        14px auto 0;
+
+    color:
+        var(--p16-muted-dark);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.7;
+
+    text-align:
+        center;
+}
+
+.page-16 .commitment-english strong {
+
+    color:
+        var(--p16-teal-light);
+}
+
+
+/* =========================================================
+   COMMITMENT PILLARS
+   ========================================================= */
+
+.page-16 .commitment-pillars {
+
+    margin:
+        28px auto 0;
+
+    padding:
+        13px 17px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        15px;
+
+    width:
+        fit-content;
+
+    max-width:
+        100%;
+
+    border:
+        1px solid var(--p16-border-teal);
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(8,200,206,0.025);
+}
+
+.page-16 .commitment-pillar {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    gap:
+        3px;
+}
+
+.page-16 .commitment-pillar span {
+
+    color:
+        var(--p16-teal);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        8px;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        0.10em;
+}
+
+.page-16 .commitment-pillar small {
+
+    color:
+        var(--p16-muted-dark);
+
+    font-size:
+        8px;
+
+    font-weight:
+        600;
+}
+
+.page-16 .commitment-pillars > b {
+
+    color:
+        var(--p16-gold);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        12px;
+}
+
+
+/* =========================================================
+   LEGACY SIGNATURE
+   ========================================================= */
+
+.page-16 .legacy-signature {
+
+    max-width:
+        900px;
+
+    margin:
+        110px auto 0;
+
+    text-align:
+        center;
+}
+
+.page-16 .signature-line {
+
+    width:
+        100%;
+
+    height:
+        1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--p16-border-gold),
+            transparent
+        );
+}
+
+.page-16 .signature-tamil {
+
+    margin-top:
+        42px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        4px;
+
+    color:
+        var(--p16-muted);
+
+    font-size:
+        clamp(17px, 1.5vw, 23px);
+
+    font-weight:
+        800;
+}
+
+.page-16 .signature-tamil strong {
+
+    color:
+        var(--p16-gold-light);
+
+    font-size:
+        1.18em;
+}
+
+.page-16 .signature-english {
+
+    margin-top:
+        17px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        4px;
+
+    color:
+        var(--p16-muted-dark);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.19em;
+}
+
+.page-16 .signature-english strong {
+
+    color:
+        var(--p16-gold);
+
+}
+
+
+/* =========================================================
+   FINAL BRAND
+   ========================================================= */
+
+.page-16 .final-brand {
+
+    margin:
+        55px auto 0;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        15px;
+}
+
+.page-16 .final-brand-mark {
+
+    width:
+        52px;
+
+    height:
+        52px;
+}
+
+.page-16 .final-logo {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        contain;
+}
+
+.page-16 .final-brand-copy {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        flex-start;
+
+    gap:
+        5px;
+
+    text-align:
+        left;
+}
+
+.page-16 .final-brand-copy strong {
+
+    color:
+        var(--p16-ivory);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        12px;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        0.07em;
+}
+
+.page-16 .final-brand-copy span {
+
+    color:
+        var(--p16-teal);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        7px;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        0.16em;
+}
+
+
+/* =========================================================
+   FINAL FOOTER
+   ========================================================= */
+
+.page-16 .final-footer {
+
+    min-height:
+        115px;
+
+    padding:
+        0
+        clamp(22px, 6vw, 105px)
+        42px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr auto 1fr;
+
+    align-items:
+        center;
+
+    gap:
+        20px;
+
+    border-top:
+        1px solid rgba(255,255,255,0.07);
+
+    background:
+        var(--p16-bg-deep);
+}
+
+.page-16 .final-previous {
+
+    width:
+        fit-content;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        12px;
+
+    padding:
+        10px 13px;
+
+    border:
+        1px solid transparent;
+
+    border-radius:
+        10px;
+
+    transition:
+        border-color 180ms ease,
+        background 180ms ease,
+        transform 180ms ease;
+}
+
+.page-16 .final-previous:hover,
+.page-16 .final-previous:focus-visible {
+
+    transform:
+        translateY(-2px);
+
+    border-color:
+        var(--p16-border-teal);
+
+    background:
+        rgba(255,255,255,0.02);
+
+    outline:
+        none;
+}
+
+.page-16 .previous-arrow {
+
+    color:
+        var(--p16-gold);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        25px;
+}
+
+.page-16 .previous-copy {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        3px;
+}
+
+.page-16 .previous-copy strong {
+
+    color:
+        var(--p16-ivory);
+
+    font-size:
+        12px;
+
+    font-weight:
+        800;
+}
+
+.page-16 .previous-copy small {
+
+    color:
+        var(--p16-muted-dark);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        7px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.18em;
+}
+
+
+/* =========================================================
+   FINAL PAGE MARKER
+   ========================================================= */
+
+.page-16 .final-page-marker {
+
+    display:
+        flex;
+
+    align-items:
+        baseline;
+
+    justify-content:
+        center;
+
+    color:
+        var(--p16-gold);
+}
+
+.page-16 .final-page-marker strong {
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        27px;
+
+    font-weight:
+        900;
+}
+
+.page-16 .final-page-marker span {
+
+    margin-left:
+        4px;
+
+    color:
+        var(--p16-muted-dark);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        10px;
+}
+
+
+/* =========================================================
+   JOURNEY COMPLETE
+   ========================================================= */
+
+.page-16 .journey-complete {
+
+    justify-self:
+        end;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        flex-end;
+
+    gap:
+        4px;
+
+    text-align:
+        right;
+}
+
+.page-16 .journey-complete strong {
+
+    color:
+        var(--p16-teal);
+
+    font-size:
+        12px;
+
+    font-weight:
+        800;
+}
+
+.page-16 .journey-complete small {
+
+    color:
+        var(--p16-muted-dark);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        7px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.17em;
+}
+
+
+/* =========================================================
+   REVEAL ANIMATION SUPPORT
+   ========================================================= */
+
+.page-16 .reveal-ready {
+
+    opacity:
+        0;
+
+    transform:
+        translateY(25px);
+
+    transition:
+        opacity 700ms ease,
+        transform 700ms ease;
+}
+
+.page-16 .reveal-ready.is-visible {
+
+    opacity:
+        1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* =========================================================
+   CTA ACTIVE STATE
+   ========================================================= */
+
+.page-16 .future-cta.is-ready {
+
+    animation:
+        ctaPulse 2.8s ease-in-out infinite;
+}
+
+@keyframes ctaPulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 20px 60px rgba(32,199,106,0.16);
+    }
+
+    50% {
+        box-shadow:
+            0 25px 75px rgba(32,199,106,0.30);
+    }
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1500px) {
+
+    .page-16 .global-header {
+
+        min-height:
+            275px;
+
+        padding-top:
+            72px;
+
+        padding-bottom:
+            60px;
+    }
+
+    .page-16 .global-logo {
+
+        width:
+            120px;
+
+        height:
+            120px;
+    }
+
+    .page-16 .page16-main {
+
+        width:
+            min(
+                1380px,
+                calc(100% - 120px)
+            );
+
+        padding-top:
+            120px;
+    }
+
+    .page-16 .welcome-block {
+
+        max-width:
+            1150px;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .page-16 .global-header {
+
+        min-height:
+            190px;
+
+        padding:
+            45px 40px;
+    }
+
+    .page-16 .global-logo {
+
+        width:
+            80px;
+
+        height:
+            80px;
+    }
+
+    .page-16 .global-brand {
+
+        gap:
+            14px;
+    }
+
+    .page-16 .global-brand-name {
+
+        font-size:
+            24px;
+    }
+
+    .page-16 .global-page-number {
+
+        padding-top:
+            8px;
+
+        font-size:
+            16px;
+    }
+
+    .page-16 .page16-main {
+
+        width:
+            min(
+                calc(100% - 60px),
+                900px
+            );
+
+        padding-top:
+            80px;
+    }
+
+    .page-16 .welcome-tamil {
+
+        font-size:
+            clamp(34px, 5vw, 55px);
+    }
+
+    .page-16 .legacy-tamil {
+
+        font-size:
+            clamp(28px, 4.5vw, 48px);
+    }
+
+    .page-16 .decision-question {
+
+        margin-top:
+            80px;
+    }
+
+}
+
+
+/* =========================================================
+   MEDIUM TABLET
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .page-16 .global-header {
+
+        min-height:
+            auto;
+
+        padding:
+            32px 25px;
+
+        align-items:
+            center;
+    }
+
+    .page-16 .global-logo {
+
+        width:
+            65px;
+
+        height:
+            65px;
+    }
+
+    .page-16 .global-brand-name {
+
+        font-size:
+            18px;
+
+        padding-top:
+            2px;
+    }
+
+    .page-16 .global-page-number {
+
+        padding-top:
+            0;
+
+        font-size:
+            11px;
+    }
+
+    .page-16 .page16-main {
+
+        width:
+            calc(100% - 42px);
+
+        padding-top:
+            65px;
+    }
+
+    .page-16 .future-cta {
+
+        min-height:
+            95px;
+    }
+
+    .page-16 .commitment-card {
+
+        padding:
+            32px 25px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* -----------------------------------------------------
+       HEADER
+       ----------------------------------------------------- */
+
+    .page-16 .global-header {
+
+        padding:
+            25px 16px 28px;
+
+        gap:
+            10px;
+    }
+
+    .page-16 .global-brand {
+
+        gap:
+            9px;
+    }
+
+    .page-16 .global-logo {
+
+        width:
+            50px;
+
+        height:
+            50px;
+    }
+
+    .page-16 .global-brand-name {
+
+        font-size:
+            12px;
+    }
+
+    .page-16 .global-brand-name span:last-child {
+
+        margin-top:
+            3px;
+    }
+
+    .page-16 .global-page-number {
+
+        font-size:
+            7px;
+
+        letter-spacing:
+            0.12em;
+    }
+
+    .page-16 .global-divider {
+
+        height:
+            3px;
+    }
+
+
+    /* -----------------------------------------------------
+       MAIN
+       ----------------------------------------------------- */
+
+    .page-16 .page16-main {
+
+        width:
+            calc(100% - 28px);
+
+        padding:
+            55px 0 70px;
+    }
+
+
+    /* -----------------------------------------------------
+       ARRIVAL
+       ----------------------------------------------------- */
+
+    .page-16 .arrival-kicker {
+
+        gap:
+            5px;
+    }
+
+    .page-16 .arrival-kicker .tamil {
+
+        font-size:
+            13px;
+
+        line-height:
+            1.5;
+    }
+
+    .page-16 .arrival-kicker .english {
+
+        font-size:
+            6px;
+
+        letter-spacing:
+            0.13em;
+    }
+
+
+    /* -----------------------------------------------------
+       WELCOME
+       ----------------------------------------------------- */
+
+    .page-16 .welcome-block {
+
+        margin-top:
+            34px;
+    }
+
+    .page-16 .welcome-block h1 {
+
+        gap:
+            13px;
+    }
+
+    .page-16 .welcome-tamil {
+
+        font-size:
+            clamp(29px, 9vw, 43px);
+
+        line-height:
+            1.25;
+    }
+
+    .page-16 .welcome-english {
+
+        font-size:
+            13px;
+
+        line-height:
+            1.4;
+
+        letter-spacing:
+            0.035em;
+    }
+
+    .page-16 .welcome-english strong {
+
+        margin-top:
+            3px;
+    }
+
+
+    /* -----------------------------------------------------
+       DIVIDER
+       ----------------------------------------------------- */
+
+    .page-16 .decision-divider {
+
+        max-width:
+            220px;
+
+        margin:
+            43px auto 48px;
+
+        gap:
+            11px;
+    }
+
+    .page-16 .decision-divider b {
+
+        font-size:
+            7px;
+    }
+
+
+    /* -----------------------------------------------------
+       LEGACY
+       ----------------------------------------------------- */
+
+    .page-16 .legacy-kicker .tamil {
+
+        font-size:
+            14px;
+    }
+
+    .page-16 .legacy-kicker .english {
+
+        font-size:
+            6px;
+
+        letter-spacing:
+            0.13em;
+    }
+
+    .page-16 .legacy-message h2 {
+
+        margin-top:
+            19px;
+    }
+
+    .page-16 .legacy-tamil {
+
+        gap:
+            6px;
+
+        font-size:
+            clamp(24px, 7.2vw, 34px);
+
+        line-height:
+            1.35;
+    }
+
+    .page-16 .legacy-english {
+
+        margin-top:
+            18px;
+
+        gap:
+            3px;
+
+        font-size:
+            12px;
+
+        line-height:
+            1.5;
+
+        letter-spacing:
+            0.02em;
+    }
+
+
+    /* -----------------------------------------------------
+       FUTURE TRUTH
+       ----------------------------------------------------- */
+
+    .page-16 .future-truth {
+
+        margin-top:
+            29px;
+
+        padding:
+            18px 12px;
+    }
+
+    .page-16 .future-truth-tamil {
+
+        font-size:
+            11px;
+
+        line-height:
+            1.7;
+    }
+
+    .page-16 .future-truth-english {
+
+        margin-top:
+            9px !important;
+
+        font-size:
+            9px;
+
+        line-height:
+            1.6;
+    }
+
+
+    /* -----------------------------------------------------
+       QUESTION
+       ----------------------------------------------------- */
+
+    .page-16 .decision-question {
+
+        margin-top:
+            65px;
+
+        padding:
+            0 5px;
+    }
+
+    .page-16 .question-kicker {
+
+        gap:
+            4px;
+    }
+
+    .page-16 .question-kicker .tamil {
+
+        font-size:
+            14px;
+    }
+
+    .page-16 .question-kicker .english {
+
+        font-size:
+            6px;
+
+        letter-spacing:
+            0.14em;
+    }
+
+    .page-16 .decision-question h2 {
+
+        margin-top:
+            18px;
+
+        gap:
+            9px;
+    }
+
+    .page-16 .question-tamil {
+
+        font-size:
+            clamp(24px, 7vw, 34px);
+
+        line-height:
+            1.35;
+    }
+
+    .page-16 .question-english {
+
+        font-size:
+            13px;
+
+        line-height:
+            1.45;
+
+        letter-spacing:
+            0.02em;
+    }
+
+
+    /* -----------------------------------------------------
+       CTA
+       ----------------------------------------------------- */
+
+    .page-16 .final-action {
+
+        margin-top:
+            40px;
+    }
+
+    .page-16 .future-cta {
+
+        width:
+            100%;
+
+        min-height:
+            88px;
+
+        padding:
+            15px 13px;
+
+        grid-template-columns:
+            38px minmax(0,1fr) 24px;
+
+        gap:
+            10px;
+
+        border-radius:
+            13px;
+    }
+
+    .page-16 .cta-icon {
+
+        width:
+            36px;
+
+        height:
+            36px;
+
+        font-size:
+            16px;
+    }
+
+    .page-16 .cta-copy {
+
+        gap:
+            4px;
+    }
+
+    .page-16 .cta-tamil {
+
+        font-size:
+            12px;
+
+        line-height:
+            1.4;
+    }
+
+    .page-16 .cta-english {
+
+        font-size:
+            6px;
+
+        letter-spacing:
+            0.055em;
+    }
+
+    .page-16 .cta-arrow {
+
+        font-size:
+            23px;
+    }
+
+    .page-16 .whatsapp-note {
+
+        margin-top:
+            11px;
+
+        gap:
+            3px;
+    }
+
+    .page-16 .whatsapp-note .tamil {
+
+        font-size:
+            9px;
+    }
+
+    .page-16 .whatsapp-note .english {
+
+        font-size:
+            5px;
+
+        letter-spacing:
+            0.09em;
+    }
+
+
+    /* -----------------------------------------------------
+       COMMITMENT
+       ----------------------------------------------------- */
+
+    .page-16 .commitment-card {
+
+        margin-top:
+            55px;
+
+        padding:
+            28px 14px;
+
+        border-radius:
+            15px;
+    }
+
+    .page-16 .commitment-heading .tamil {
+
+        font-size:
+            13px;
+    }
+
+    .page-16 .commitment-heading .english {
+
+        font-size:
+            6px;
+
+        letter-spacing:
+            0.14em;
+    }
+
+    .page-16 .commitment-tamil {
+
+        margin-top:
+            18px;
+
+        font-size:
+            10px;
+
+        line-height:
+            1.8;
+    }
+
+    .page-16 .commitment-tamil strong {
+
+        white-space:
+            normal;
+    }
+
+    .page-16 .commitment-english {
+
+        margin-top:
+            10px;
+
+        font-size:
+            8px;
+
+        line-height:
+            1.7;
+    }
+
+    .page-16 .commitment-pillars {
+
+        width:
+            100%;
+
+        margin-top:
+            22px;
+
+        padding:
+            10px 7px;
+
+        gap:
+            7px;
+
+        border-radius:
+            12px;
+    }
+
+    .page-16 .commitment-pillar span {
+
+        font-size:
+            6px;
+
+        letter-spacing:
+            0.05em;
+    }
+
+    .page-16 .commitment-pillar small {
+
+        font-size:
+            6px;
+    }
+
+    .page-16 .commitment-pillars > b {
+
+        font-size:
+            8px;
+    }
+
+
+    /* -----------------------------------------------------
+       SIGNATURE
+       ----------------------------------------------------- */
+
+    .page-16 .legacy-signature {
+
+        margin-top:
+            75px;
+    }
+
+    .page-16 .signature-tamil {
+
+        margin-top:
+            29px;
+
+        gap:
+            3px;
+
+        font-size:
+            14px;
+    }
+
+    .page-16 .signature-english {
+
+        margin-top:
+            12px;
+
+        gap:
+            3px;
+
+        font-size:
+            6px;
+
+        letter-spacing:
+            0.12em;
+    }
+
+    .page-16 .final-brand {
+
+        margin-top:
+            38px;
+
+        gap:
+            9px;
+    }
+
+    .page-16 .final-brand-mark {
+
+        width:
+            38px;
+
+        height:
+            38px;
+    }
+
+    .page-16 .final-brand-copy {
+
+        gap:
+            3px;
+    }
+
+    .page-16 .final-brand-copy strong {
+
+        font-size:
+            8px;
+    }
+
+    .page-16 .final-brand-copy span {
+
+        font-size:
+            5px;
+
+        letter-spacing:
+            0.10em;
+    }
+
+
+    /* -----------------------------------------------------
+       FOOTER
+       ----------------------------------------------------- */
+
+    .page-16 .final-footer {
+
+        min-height:
+            95px;
+
+        padding:
+            0 14px 28px;
+
+        gap:
+            8px;
+    }
+
+    .page-16 .final-previous {
+
+        gap:
+            6px;
+
+        padding:
+            7px 2px;
+    }
+
+    .page-16 .previous-arrow {
+
+        font-size:
+            18px;
+    }
+
+    .page-16 .previous-copy {
+
+        gap:
+            2px;
+    }
+
+    .page-16 .previous-copy strong {
+
+        font-size:
+            8px;
+    }
+
+    .page-16 .previous-copy small {
+
+        font-size:
+            5px;
+
+        letter-spacing:
+            0.10em;
+    }
+
+    .page-16 .final-page-marker strong {
+
+        font-size:
+            20px;
+    }
+
+    .page-16 .final-page-marker span {
+
+        font-size:
+            7px;
+    }
+
+    .page-16 .journey-complete strong {
+
+        font-size:
+            8px;
+    }
+
+    .page-16 .journey-complete small {
+
+        font-size:
+            5px;
+
+        letter-spacing:
+            0.08em;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .page-16 .global-header {
+
+        padding-left:
+            11px;
+
+        padding-right:
+            11px;
+    }
+
+    .page-16 .global-logo {
+
+        width:
+            43px;
+
+        height:
+            43px;
+    }
+
+    .page-16 .global-brand-name {
+
+        font-size:
+            10px;
+    }
+
+    .page-16 .global-page-number {
+
+        font-size:
+            6px;
+    }
+
+    .page-16 .page16-main {
+
+        width:
+            calc(100% - 20px);
+    }
+
+    .page-16 .welcome-tamil {
+
+        font-size:
+            27px;
+    }
+
+    .page-16 .legacy-tamil {
+
+        font-size:
+            22px;
+    }
+
+    .page-16 .question-tamil {
+
+        font-size:
+            22px;
+    }
+
+    .page-16 .future-cta {
+
+        grid-template-columns:
+            33px minmax(0,1fr) 20px;
+
+        gap:
+            7px;
+
+        padding:
+            13px 9px;
+    }
+
+    .page-16 .cta-icon {
+
+        width:
+            31px;
+
+        height:
+            31px;
+
+        font-size:
+            13px;
+    }
+
+    .page-16 .cta-tamil {
+
+        font-size:
+            10px;
+    }
+
+    .page-16 .cta-english {
+
+        font-size:
+            5px;
+    }
+
+    .page-16 .commitment-pillars {
+
+        gap:
+            4px;
+    }
+
+    .page-16 .commitment-pillar span {
+
+        font-size:
+            5px;
+    }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.page-16 .future-cta:focus-visible,
+.page-16 .final-previous:focus-visible {
+
+    outline:
+        2px solid var(--p16-teal-light);
+
+    outline-offset:
+        4px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior:
+            auto;
+    }
+
+    .page-16 .reveal-ready {
+
+        opacity:
+            1;
+
+        transform:
+            none;
+
+        transition:
+            none;
+    }
+
+    .page-16 .future-cta,
+    .page-16 .cta-arrow,
+    .page-16 .final-previous {
+
+        transition:
+            none;
+    }
+
+    .page-16 .future-cta.is-ready {
+
+        animation:
+            none;
+    }
+
+}
