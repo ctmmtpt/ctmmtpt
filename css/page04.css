@@ -1,1 +1,3517 @@
+/* ============================================================
+   CTM PATH™ MILLIONAIRES™
+   PAGE 04 — MONEY MINDSET
+   ============================================================
 
+   FILE:
+   css/page04.css
+
+   PAGE:
+   04 / 16
+
+   CORE MESSAGE:
+   மனமே உங்கள் வெற்றியை தீர்மானிக்கிறது.
+   YOUR MINDSET DETERMINES YOUR SUCCESS.
+
+   DESIGN:
+   Premium dark • Tamil-first • Professional
+   Global header/footer aligned with Pages 01–03
+   ============================================================ */
+
+
+/* ============================================================
+   01. ROOT / RESET
+   ============================================================ */
+
+:root {
+
+    --bg:
+        #07131d;
+
+    --bg-deep:
+        #041019;
+
+    --surface:
+        #0d202c;
+
+    --surface-2:
+        #102936;
+
+    --surface-3:
+        #142f3d;
+
+    --text:
+        #f7f4ec;
+
+    --text-soft:
+        #c7d0d4;
+
+    --text-muted:
+        #8798a2;
+
+    --gold:
+        #f5c43d;
+
+    --gold-soft:
+        #d9ae36;
+
+    --teal:
+        #08b7ad;
+
+    --teal-dark:
+        #087f7a;
+
+    --green:
+        #18b878;
+
+    --green-dark:
+        #08784f;
+
+    --orange:
+        #f09a32;
+
+    --orange-dark:
+        #c8751e;
+
+    --red:
+        #d95542;
+
+    --red-dark:
+        #a83c32;
+
+    --line:
+        rgba(245, 196, 61, 0.18);
+
+    --line-soft:
+        rgba(255, 255, 255, 0.08);
+
+    --shadow:
+        0 24px 70px rgba(0, 0, 0, 0.32);
+
+    --radius:
+        24px;
+
+    --radius-large:
+        34px;
+
+}
+
+
+* {
+
+    box-sizing:
+        border-box;
+
+}
+
+
+html {
+
+    scroll-behavior:
+        smooth;
+
+}
+
+
+body {
+
+    margin:
+        0;
+
+    padding:
+        0;
+
+    min-height:
+        100vh;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(8, 183, 173, 0.08),
+            transparent 35%
+        ),
+        var(--bg);
+
+    color:
+        var(--text);
+
+    font-family:
+        "Noto Sans Tamil",
+        "Nirmala UI",
+        Arial,
+        sans-serif;
+
+    line-height:
+        1.65;
+
+}
+
+
+button,
+a,
+input {
+
+    font:
+        inherit;
+
+}
+
+
+button {
+
+    cursor:
+        pointer;
+
+}
+
+
+a {
+
+    color:
+        inherit;
+
+    text-decoration:
+        none;
+
+}
+
+
+/* ============================================================
+   02. GLOBAL HEADER
+   ============================================================ */
+
+.global-header {
+
+    width:
+        100%;
+
+    min-height:
+        250px;
+
+    padding:
+        54px 6vw 46px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    background:
+        linear-gradient(
+            180deg,
+            #071a27 0%,
+            #06131f 100%
+        );
+
+}
+
+
+.global-brand {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+}
+
+
+.global-brand img {
+
+    display:
+        block;
+
+    width:
+        220px;
+
+    max-width:
+        42vw;
+
+    height:
+        auto;
+
+}
+
+
+.global-page-number {
+
+    color:
+        var(--gold);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        17px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.26em;
+
+    white-space:
+        nowrap;
+
+}
+
+
+/* ============================================================
+   03. GLOBAL GOLD / TEAL / GOLD RULE
+   ============================================================ */
+
+.global-rule {
+
+    width:
+        100%;
+
+    height:
+        4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--gold) 0%,
+            var(--gold) 26%,
+            var(--teal) 26%,
+            var(--teal) 74%,
+            var(--gold) 74%,
+            var(--gold) 100%
+        );
+
+}
+
+
+/* ============================================================
+   04. PAGE CONTAINER
+   ============================================================ */
+
+.page04 {
+
+    width:
+        min(1180px, 92%);
+
+    margin:
+        0 auto;
+
+    padding:
+        0 0 70px;
+
+}
+
+
+/* ============================================================
+   05. HERO
+   ============================================================ */
+
+.hero-section {
+
+    padding:
+        86px 20px 74px;
+
+    text-align:
+        center;
+
+}
+
+
+.hero-kicker {
+
+    margin-bottom:
+        24px;
+
+    color:
+        var(--gold);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        13px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.28em;
+
+}
+
+
+.hero-section h1 {
+
+    max-width:
+        900px;
+
+    margin:
+        0 auto;
+
+    color:
+        var(--text);
+
+    font-size:
+        clamp(36px, 5vw, 64px);
+
+    line-height:
+        1.25;
+
+    font-weight:
+        900;
+
+}
+
+
+.hero-section h2 {
+
+    margin:
+        20px 0 42px;
+
+    color:
+        var(--gold);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        clamp(18px, 2vw, 25px);
+
+    line-height:
+        1.4;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.05em;
+
+}
+
+
+.hero-introduction {
+
+    max-width:
+        800px;
+
+    margin:
+        0 auto;
+
+    color:
+        var(--text-soft);
+
+    font-size:
+        18px;
+
+}
+
+
+.hero-introduction.english {
+
+    margin-top:
+        24px;
+
+    color:
+        var(--text-muted);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        15px;
+
+    line-height:
+        1.7;
+
+}
+
+
+/* ============================================================
+   06. 80 / 20 LESSON
+   ============================================================ */
+
+.mindset-lesson {
+
+    margin:
+        0 0 90px;
+
+    padding:
+        60px 54px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(16, 41, 54, 0.96),
+            rgba(7, 24, 34, 0.98)
+        );
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius:
+        var(--radius-large);
+
+    box-shadow:
+        var(--shadow);
+
+}
+
+
+.lesson-title {
+
+    text-align:
+        center;
+
+}
+
+
+.lesson-title > span {
+
+    display:
+        block;
+
+    margin-bottom:
+        15px;
+
+    color:
+        var(--text-muted);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        12px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.25em;
+
+}
+
+
+.lesson-title h2 {
+
+    margin:
+        0;
+
+    color:
+        var(--text);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        clamp(34px, 5vw, 58px);
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        0.03em;
+
+}
+
+
+.lesson-title h2 em {
+
+    margin:
+        0 12px;
+
+    color:
+        var(--gold);
+
+    font-style:
+        normal;
+
+}
+
+
+.equation-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1.5fr 0.8fr;
+
+    gap:
+        28px;
+
+    max-width:
+        900px;
+
+    margin:
+        48px auto 0;
+
+}
+
+
+.equation-card {
+
+    padding:
+        42px;
+
+    border:
+        1px solid
+        var(--line-soft);
+
+    border-radius:
+        26px;
+
+}
+
+
+.mindset-card {
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(8, 127, 122, 0.24),
+            rgba(8, 183, 173, 0.06)
+        );
+
+    border-color:
+        rgba(8, 183, 173, 0.35);
+
+}
+
+
+.skill-card {
+
+    background:
+        rgba(255, 255, 255, 0.035);
+
+}
+
+
+.equation-number {
+
+    color:
+        var(--gold);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        54px;
+
+    line-height:
+        1;
+
+    font-weight:
+        900;
+
+}
+
+
+.equation-card h3 {
+
+    margin:
+        14px 0 0;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        22px;
+
+    letter-spacing:
+        0.08em;
+
+}
+
+
+.equation-card p {
+
+    margin:
+        3px 0 24px;
+
+    color:
+        var(--teal);
+
+    font-weight:
+        700;
+
+}
+
+
+.equation-card ul {
+
+    margin:
+        0;
+
+    padding:
+        0;
+
+    list-style:
+        none;
+
+}
+
+
+.equation-card li {
+
+    position:
+        relative;
+
+    margin:
+        12px 0;
+
+    padding-left:
+        23px;
+
+    color:
+        var(--text-soft);
+
+}
+
+
+.equation-card li::before {
+
+    content:
+        "◆";
+
+    position:
+        absolute;
+
+    left:
+        0;
+
+    top:
+        1px;
+
+    color:
+        var(--gold);
+
+    font-size:
+        8px;
+
+}
+
+
+.lesson-statement {
+
+    max-width:
+        850px;
+
+    margin:
+        50px auto 0;
+
+    padding-top:
+        42px;
+
+    border-top:
+        1px solid
+        var(--line-soft);
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    text-align:
+        center;
+
+}
+
+
+.lesson-statement strong {
+
+    margin-top:
+        14px;
+
+    color:
+        var(--text);
+
+    font-size:
+        20px;
+
+}
+
+
+.lesson-statement span {
+
+    color:
+        var(--text-muted);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        14px;
+
+}
+
+
+/* ============================================================
+   07. ABUNDANCE VS SCARCITY
+   ============================================================ */
+
+.mindset-choice-section {
+
+    margin-bottom:
+        90px;
+
+}
+
+
+.section-kicker {
+
+    margin-bottom:
+        15px;
+
+    color:
+        var(--gold);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        12px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.25em;
+
+    text-align:
+        center;
+
+}
+
+
+.mindset-choice-section > h2 {
+
+    margin:
+        0 auto;
+
+    max-width:
+        900px;
+
+    color:
+        var(--text);
+
+    font-size:
+        clamp(27px, 4vw, 42px);
+
+    line-height:
+        1.4;
+
+    text-align:
+        center;
+
+}
+
+
+.section-subtitle {
+
+    max-width:
+        900px;
+
+    margin:
+        18px auto 50px;
+
+    color:
+        var(--text-muted);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.8;
+
+    text-align:
+        center;
+
+    letter-spacing:
+        0.04em;
+
+}
+
+
+.mindset-contrast {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        28px;
+
+}
+
+
+.mindset-panel {
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    min-height:
+        580px;
+
+    padding:
+        48px 42px;
+
+    border-radius:
+        var(--radius-large);
+
+    border:
+        1px solid
+        var(--line-soft);
+
+}
+
+
+.mindset-panel::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        0;
+
+    width:
+        100%;
+
+    height:
+        5px;
+
+}
+
+
+.scarcity-panel {
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(168, 60, 50, 0.19),
+            rgba(62, 26, 27, 0.45)
+        );
+
+    border-color:
+        rgba(217, 85, 66, 0.35);
+
+}
+
+
+.scarcity-panel::before {
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--red),
+            var(--orange)
+        );
+
+}
+
+
+.abundance-panel {
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(8, 127, 80, 0.23),
+            rgba(5, 48, 37, 0.48)
+        );
+
+    border-color:
+        rgba(24, 184, 120, 0.35);
+
+}
+
+
+.abundance-panel::before {
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--green-dark),
+            var(--green)
+        );
+
+}
+
+
+.mindset-icon {
+
+    width:
+        64px;
+
+    height:
+        64px;
+
+    margin-bottom:
+        22px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        50%;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        38px;
+
+    font-weight:
+        900;
+
+}
+
+
+.scarcity-panel .mindset-icon {
+
+    color:
+        var(--red);
+
+    background:
+        rgba(217, 85, 66, 0.12);
+
+}
+
+
+.abundance-panel .mindset-icon {
+
+    color:
+        var(--green);
+
+    background:
+        rgba(24, 184, 120, 0.12);
+
+}
+
+
+.mindset-panel h3 {
+
+    margin:
+        0;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        28px;
+
+    letter-spacing:
+        0.1em;
+
+}
+
+
+.scarcity-panel h3 {
+
+    color:
+        #ef7968;
+
+}
+
+
+.abundance-panel h3 {
+
+    color:
+        #39d895;
+
+}
+
+
+.mindset-panel > p {
+
+    margin:
+        5px 0 32px;
+
+    color:
+        var(--text-muted);
+
+}
+
+
+.mindset-question {
+
+    margin:
+        0 0 28px;
+
+    padding:
+        20px;
+
+    border-radius:
+        16px;
+
+    background:
+        rgba(0, 0, 0, 0.22);
+
+    color:
+        var(--text);
+
+    font-size:
+        21px;
+
+    font-weight:
+        800;
+
+}
+
+
+.mindset-panel ul {
+
+    margin:
+        0;
+
+    padding:
+        0;
+
+    list-style:
+        none;
+
+}
+
+
+.mindset-panel li {
+
+    position:
+        relative;
+
+    margin:
+        17px 0;
+
+    padding-left:
+        26px;
+
+    color:
+        var(--text-soft);
+
+}
+
+
+.mindset-panel li::before {
+
+    position:
+        absolute;
+
+    left:
+        0;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-weight:
+        900;
+
+}
+
+
+.scarcity-panel li::before {
+
+    content:
+        "×";
+
+    color:
+        var(--red);
+
+}
+
+
+.abundance-panel li::before {
+
+    content:
+        "✓";
+
+    color:
+        var(--green);
+
+}
+
+
+.mindset-direction {
+
+    margin-top:
+        38px;
+
+    padding-top:
+        22px;
+
+    border-top:
+        1px solid
+        var(--line-soft);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        13px;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        0.2em;
+
+}
+
+
+.scarcity-panel .mindset-direction {
+
+    color:
+        #ef7968;
+
+}
+
+
+.abundance-panel .mindset-direction {
+
+    color:
+        #39d895;
+
+}
+
+
+/* ============================================================
+   08. ASSESSMENT INTRODUCTION
+   ============================================================ */
+
+.assessment-introduction {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        120px 1fr;
+
+    gap:
+        32px;
+
+    align-items:
+        center;
+
+    margin-bottom:
+        38px;
+
+    padding:
+        36px 40px;
+
+    background:
+        var(--surface);
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius:
+        var(--radius);
+
+}
+
+
+.assessment-introduction .section-number {
+
+    color:
+        var(--gold);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        28px;
+
+    font-weight:
+        900;
+
+}
+
+
+.assessment-introduction h2 {
+
+    margin:
+        0;
+
+    color:
+        var(--text);
+
+    font-size:
+        28px;
+
+}
+
+
+.assessment-introduction p {
+
+    margin:
+        4px 0 14px;
+
+    color:
+        var(--teal);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        13px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.14em;
+
+}
+
+
+.assessment-introduction span {
+
+    color:
+        var(--text-muted);
+
+    font-size:
+        14px;
+
+}
+
+
+/* ============================================================
+   09. SCORING SCALE
+   ============================================================ */
+
+.scoring-scale {
+
+    margin-bottom:
+        42px;
+
+    padding:
+        28px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    border:
+        1px solid
+        var(--line-soft);
+
+    border-radius:
+        var(--radius);
+
+    text-align:
+        center;
+
+}
+
+
+.scoring-scale > span {
+
+    display:
+        block;
+
+    margin-bottom:
+        20px;
+
+    color:
+        var(--text-muted);
+
+    font-size:
+        14px;
+
+}
+
+
+.scale-options {
+
+    max-width:
+        700px;
+
+    margin:
+        0 auto;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap:
+        14px;
+
+}
+
+
+.scale-option {
+
+    padding:
+        16px;
+
+    border-radius:
+        15px;
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-weight:
+        800;
+
+}
+
+
+.scale-option strong {
+
+    font-size:
+        16px;
+
+}
+
+
+.scale-option span {
+
+    font-size:
+        20px;
+
+}
+
+
+.scale-low {
+
+    background:
+        rgba(217, 85, 66, 0.16);
+
+    color:
+        #ef7968;
+
+}
+
+
+.scale-mid {
+
+    background:
+        rgba(240, 154, 50, 0.16);
+
+    color:
+        #ffb45b;
+
+}
+
+
+.scale-builder {
+
+    background:
+        rgba(8, 183, 173, 0.15);
+
+    color:
+        #38d8d1;
+
+}
+
+
+.scale-wealth {
+
+    background:
+        rgba(24, 184, 120, 0.16);
+
+    color:
+        #39d895;
+
+}
+
+
+.scoring-scale > p {
+
+    margin:
+        18px 0 0;
+
+    color:
+        var(--text-muted);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        12px;
+
+    letter-spacing:
+        0.06em;
+
+}
+
+
+.scoring-scale > p + p {
+
+    margin-top:
+        5px;
+
+}
+
+
+.scoring-scale > p strong {
+
+    color:
+        var(--gold);
+
+}
+
+
+/* ============================================================
+   10. QUESTIONS
+   ============================================================ */
+
+.mindset-form {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        34px;
+
+}
+
+
+.mindset-question-card {
+
+    position:
+        relative;
+
+    padding:
+        42px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(13, 32, 44, 0.98),
+            rgba(7, 22, 31, 0.98)
+        );
+
+    border:
+        1px solid
+        var(--line-soft);
+
+    border-radius:
+        var(--radius-large);
+
+    box-shadow:
+        0 18px 55px
+        rgba(0, 0, 0, 0.18);
+
+}
+
+
+.question-number {
+
+    position:
+        absolute;
+
+    top:
+        34px;
+
+    right:
+        38px;
+
+    color:
+        rgba(245, 196, 61, 0.25);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        56px;
+
+    font-weight:
+        900;
+
+    line-height:
+        1;
+
+}
+
+
+.question-heading {
+
+    max-width:
+        850px;
+
+    padding-right:
+        80px;
+
+    margin-bottom:
+        30px;
+
+}
+
+
+.question-heading h3 {
+
+    margin:
+        0;
+
+    color:
+        var(--text);
+
+    font-size:
+        25px;
+
+    line-height:
+        1.45;
+
+}
+
+
+.question-heading p {
+
+    margin:
+        10px 0 0;
+
+    color:
+        var(--text-muted);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.6;
+
+    letter-spacing:
+        0.06em;
+
+}
+
+
+.answer-options {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        11px;
+
+}
+
+
+.answer-option {
+
+    width:
+        100%;
+
+    min-height:
+        78px;
+
+    padding:
+        13px 18px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        44px 55px 1fr;
+
+    align-items:
+        center;
+
+    gap:
+        13px;
+
+    text-align:
+        left;
+
+    color:
+        var(--text-soft);
+
+    background:
+        rgba(255, 255, 255, 0.035);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
+    border-radius:
+        17px;
+
+    transition:
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        background 0.18s ease,
+        box-shadow 0.18s ease;
+
+}
+
+
+.answer-option:hover {
+
+    transform:
+        translateY(-2px);
+
+    border-color:
+        rgba(245, 196, 61, 0.42);
+
+    background:
+        rgba(255, 255, 255, 0.055);
+
+}
+
+
+.option-letter {
+
+    width:
+        38px;
+
+    height:
+        38px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        50%;
+
+    color:
+        var(--text);
+
+    background:
+        rgba(255, 255, 255, 0.07);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        14px;
+
+    font-weight:
+        900;
+
+}
+
+
+.option-score {
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        18px;
+
+    font-weight:
+        900;
+
+}
+
+
+.option-text {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+}
+
+
+.option-text strong {
+
+    color:
+        var(--text);
+
+    font-size:
+        15px;
+
+    line-height:
+        1.5;
+
+}
+
+
+.option-text small {
+
+    margin-top:
+        3px;
+
+    color:
+        var(--text-muted);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.5;
+
+}
+
+
+.option-a {
+
+    border-left:
+        4px solid
+        var(--red);
+
+}
+
+
+.option-b {
+
+    border-left:
+        4px solid
+        var(--orange);
+
+}
+
+
+.option-c {
+
+    border-left:
+        4px solid
+        var(--teal);
+
+}
+
+
+.option-d {
+
+    border-left:
+        4px solid
+        var(--green);
+
+}
+
+
+.answer-option.selected {
+
+    transform:
+        translateX(5px);
+
+    box-shadow:
+        0 8px 28px
+        rgba(0, 0, 0, 0.25);
+
+}
+
+
+.answer-option.selected.option-a {
+
+    background:
+        rgba(217, 85, 66, 0.17);
+
+    border-color:
+        rgba(217, 85, 66, 0.62);
+
+}
+
+
+.answer-option.selected.option-b {
+
+    background:
+        rgba(240, 154, 50, 0.17);
+
+    border-color:
+        rgba(240, 154, 50, 0.62);
+
+}
+
+
+.answer-option.selected.option-c {
+
+    background:
+        rgba(8, 183, 173, 0.17);
+
+    border-color:
+        rgba(8, 183, 173, 0.62);
+
+}
+
+
+.answer-option.selected.option-d {
+
+    background:
+        rgba(24, 184, 120, 0.17);
+
+    border-color:
+        rgba(24, 184, 120, 0.62);
+
+}
+
+
+.question-score {
+
+    margin-top:
+        22px;
+
+    color:
+        var(--text-muted);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        11px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.1em;
+
+    text-align:
+        right;
+
+}
+
+
+.question-score strong {
+
+    color:
+        var(--gold);
+
+    font-size:
+        17px;
+
+}
+
+
+/* ============================================================
+   11. SCORE REVEAL
+   ============================================================ */
+
+.score-reveal {
+
+    margin-top:
+        90px;
+
+    padding:
+        70px 50px;
+
+    text-align:
+        center;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(8, 183, 173, 0.13),
+            transparent 48%
+        ),
+        var(--surface);
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius:
+        var(--radius-large);
+
+    box-shadow:
+        var(--shadow);
+
+}
+
+
+.score-reveal h2 {
+
+    margin:
+        0 0 28px;
+
+    font-size:
+        30px;
+
+}
+
+
+.score-display {
+
+    display:
+        flex;
+
+    align-items:
+        baseline;
+
+    justify-content:
+        center;
+
+}
+
+
+.score-display strong {
+
+    color:
+        var(--gold);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        clamp(72px, 10vw, 120px);
+
+    line-height:
+        1;
+
+    font-weight:
+        900;
+
+}
+
+
+.score-display span {
+
+    margin-left:
+        10px;
+
+    color:
+        var(--text-muted);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        20px;
+
+}
+
+
+.average-display {
+
+    margin:
+        18px 0 52px;
+
+    color:
+        var(--text-muted);
+
+}
+
+
+.average-display strong {
+
+    margin-left:
+        8px;
+
+    color:
+        var(--text);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        24px;
+
+}
+
+
+.average-display small {
+
+    margin-left:
+        3px;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+}
+
+
+/* ============================================================
+   12. MINDSET LADDER
+   ============================================================ */
+
+.mindset-ladder {
+
+    max-width:
+        950px;
+
+    margin:
+        0 auto;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap:
+        10px;
+
+}
+
+
+.ladder-step {
+
+    position:
+        relative;
+
+    min-height:
+        175px;
+
+    padding:
+        22px 16px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    justify-content:
+        center;
+
+    border:
+        1px solid
+        var(--line-soft);
+
+    border-radius:
+        18px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+}
+
+
+.ladder-step::after {
+
+    content:
+        "→";
+
+    position:
+        absolute;
+
+    right:
+        -17px;
+
+    top:
+        50%;
+
+    transform:
+        translateY(-50%);
+
+    z-index:
+        2;
+
+    color:
+        var(--gold);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+}
+
+
+.ladder-step:last-child::after {
+
+    display:
+        none;
+
+}
+
+
+.ladder-step span {
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        12px;
+
+    font-weight:
+        800;
+
+}
+
+
+.ladder-step strong {
+
+    margin:
+        9px 0;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        13px;
+
+    line-height:
+        1.35;
+
+    letter-spacing:
+        0.04em;
+
+}
+
+
+.ladder-step small {
+
+    color:
+        var(--text-muted);
+
+    font-size:
+        11px;
+
+    line-height:
+        1.5;
+
+}
+
+
+.security {
+
+    border-color:
+        rgba(217, 85, 66, 0.35);
+
+}
+
+
+.security span,
+.security strong {
+
+    color:
+        #ef7968;
+
+}
+
+
+.awareness {
+
+    border-color:
+        rgba(240, 154, 50, 0.35);
+
+}
+
+
+.awareness span,
+.awareness strong {
+
+    color:
+        #ffb45b;
+
+}
+
+
+.builder {
+
+    border-color:
+        rgba(8, 183, 173, 0.35);
+
+}
+
+
+.builder span,
+.builder strong {
+
+    color:
+        #38d8d1;
+
+}
+
+
+.wealth {
+
+    border-color:
+        rgba(24, 184, 120, 0.35);
+
+}
+
+
+.wealth span,
+.wealth strong {
+
+    color:
+        #39d895;
+
+}
+
+
+.ladder-step.active {
+
+    transform:
+        translateY(-7px);
+
+    box-shadow:
+        0 18px 45px
+        rgba(0, 0, 0, 0.3);
+
+}
+
+
+.security.active {
+
+    background:
+        rgba(217, 85, 66, 0.15);
+
+}
+
+
+.awareness.active {
+
+    background:
+        rgba(240, 154, 50, 0.15);
+
+}
+
+
+.builder.active {
+
+    background:
+        rgba(8, 183, 173, 0.15);
+
+}
+
+
+.wealth.active {
+
+    background:
+        rgba(24, 184, 120, 0.15);
+
+}
+
+
+.mindset-interpretation {
+
+    max-width:
+        750px;
+
+    min-height:
+        30px;
+
+    margin:
+        36px auto 0;
+
+    color:
+        var(--text-soft);
+
+    font-size:
+        17px;
+
+    line-height:
+        1.7;
+
+}
+
+
+/* ============================================================
+   13. MONEY QUESTION
+   ============================================================ */
+
+.money-question {
+
+    padding:
+        100px 20px;
+
+    text-align:
+        center;
+
+}
+
+
+.question-mark {
+
+    width:
+        80px;
+
+    height:
+        80px;
+
+    margin:
+        0 auto 30px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border:
+        2px solid
+        var(--gold);
+
+    border-radius:
+        50%;
+
+    color:
+        var(--gold);
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size:
+        48px;
+
+}
+
+
+.money-question .tamil {
+
+    margin:
+        0 auto;
+
+    max-width:
+        850px;
+
+    color:
+        var(--text);
+
+    font-size:
+        clamp(28px, 4vw, 44px);
+
+    line-height:
+        1.45;
+
+    font-weight:
+        800;
+
+}
+
+
+.money-question .english {
+
+    margin:
+        20px auto 0;
+
+    color:
+        var(--gold);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        16px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.1em;
+
+}
+
+
+.question-divider {
+
+    width:
+        90px;
+
+    height:
+        2px;
+
+    margin:
+        40px auto;
+
+    background:
+        var(--teal);
+
+}
+
+
+.closing-text {
+
+    color:
+        var(--text-soft);
+
+    font-size:
+        16px;
+
+}
+
+
+.closing-text.english {
+
+    color:
+        var(--text-muted);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        13px;
+
+}
+
+
+/* ============================================================
+   14. NEXT TRANSFORMATION
+   ============================================================ */
+
+.next-transformation {
+
+    margin:
+        0 0 80px;
+
+    padding:
+        52px;
+
+    background:
+        var(--surface);
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius:
+        var(--radius-large);
+
+}
+
+
+.next-transformation h2 {
+
+    margin:
+        0 0 38px;
+
+    text-align:
+        center;
+
+    font-size:
+        30px;
+
+}
+
+
+.transformation-options {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap:
+        14px;
+
+}
+
+
+.transformation-options label {
+
+    position:
+        relative;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        16px;
+
+    min-height:
+        82px;
+
+    padding:
+        17px 22px;
+
+    background:
+        rgba(255, 255, 255, 0.03);
+
+    border:
+        1px solid
+        var(--line-soft);
+
+    border-radius:
+        17px;
+
+    cursor:
+        pointer;
+
+    transition:
+        border-color 0.18s ease,
+        background 0.18s ease;
+
+}
+
+
+.transformation-options label:hover {
+
+    border-color:
+        rgba(245, 196, 61, 0.4);
+
+}
+
+
+.transformation-options input {
+
+    width:
+        21px;
+
+    height:
+        21px;
+
+    accent-color:
+        var(--gold);
+
+}
+
+
+.transformation-options label > span {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    color:
+        var(--text);
+
+    font-weight:
+        700;
+
+}
+
+
+.transformation-options small {
+
+    margin-top:
+        3px;
+
+    color:
+        var(--text-muted);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        11px;
+
+}
+
+
+/* ============================================================
+   15. FINAL TEACHING
+   ============================================================ */
+
+.final-teaching {
+
+    max-width:
+        850px;
+
+    margin:
+        0 auto 80px;
+
+    padding:
+        58px 40px;
+
+    text-align:
+        center;
+
+    border-top:
+        1px solid
+        var(--line);
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+}
+
+
+.final-line {
+
+    margin:
+        18px 0;
+
+}
+
+
+.final-line strong {
+
+    display:
+        block;
+
+    color:
+        var(--gold);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        19px;
+
+    letter-spacing:
+        0.08em;
+
+}
+
+
+.final-line span {
+
+    display:
+        block;
+
+    margin-top:
+        3px;
+
+    color:
+        var(--text-soft);
+
+    font-size:
+        15px;
+
+}
+
+
+/* ============================================================
+   16. GLOBAL NAVIGATION
+   ============================================================ */
+
+.global-navigation {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 120px 1fr;
+
+    gap:
+        22px;
+
+    align-items:
+        center;
+
+    margin:
+        0 0 28px;
+
+}
+
+
+.global-nav-button {
+
+    min-height:
+        94px;
+
+    padding:
+        15px 24px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        26px;
+
+    color:
+        #ffffff;
+
+    box-shadow:
+        0 16px 40px
+        rgba(0, 0, 0, 0.25);
+
+    transition:
+        transform 0.18s ease,
+        filter 0.18s ease;
+
+}
+
+
+.global-nav-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    filter:
+        brightness(1.08);
+
+}
+
+
+.global-nav-button strong {
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        16px;
+
+    letter-spacing:
+        0.04em;
+
+}
+
+
+.global-nav-button span {
+
+    margin-top:
+        4px;
+
+    font-size:
+        12px;
+
+}
+
+
+.global-nav-button.previous {
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--orange),
+            var(--red)
+        );
+
+}
+
+
+.global-nav-button.next {
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--green-dark),
+            var(--green)
+        );
+
+}
+
+
+.global-current-page {
+
+    color:
+        var(--gold);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        18px;
+
+    font-weight:
+        900;
+
+    text-align:
+        center;
+
+    white-space:
+        nowrap;
+
+}
+
+
+/* ============================================================
+   17. SAVE BUTTON
+   ============================================================ */
+
+.save-section {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    margin:
+        0 0 70px;
+
+}
+
+
+.save-button {
+
+    min-width:
+        260px;
+
+    padding:
+        16px 32px;
+
+    border:
+        1px solid
+        rgba(245, 196, 61, 0.45);
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(245, 196, 61, 0.08);
+
+    color:
+        var(--gold);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        13px;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        0.08em;
+
+    transition:
+        background 0.18s ease,
+        transform 0.18s ease;
+
+}
+
+
+.save-button:hover {
+
+    background:
+        rgba(245, 196, 61, 0.15);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* ============================================================
+   18. GLOBAL FOOTER
+   ============================================================ */
+
+.global-footer {
+
+    padding:
+        0 20px 20px;
+
+    text-align:
+        center;
+
+}
+
+
+.footer-tagline {
+
+    margin:
+        0;
+
+    color:
+        var(--gold);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        12px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.28em;
+
+}
+
+
+.footer-club {
+
+    margin:
+        13px 0 0;
+
+    color:
+        var(--text-muted);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        11px;
+
+    letter-spacing:
+        0.18em;
+
+}
+
+
+/* ============================================================
+   19. RESPONSIVE — TABLET
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+    .global-header {
+
+        min-height:
+            210px;
+
+        padding:
+            42px 5vw;
+
+    }
+
+
+    .global-brand img {
+
+        width:
+            185px;
+
+    }
+
+
+    .mindset-lesson {
+
+        padding:
+            45px 32px;
+
+    }
+
+
+    .equation-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .mindset-contrast {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .mindset-panel {
+
+        min-height:
+            auto;
+
+    }
+
+
+    .mindset-ladder {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap:
+            14px;
+
+    }
+
+
+    .ladder-step::after {
+
+        display:
+            none;
+
+    }
+
+
+    .transformation-options {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
+
+
+/* ============================================================
+   20. RESPONSIVE — MOBILE
+   ============================================================ */
+
+@media (max-width: 640px) {
+
+    .global-header {
+
+        min-height:
+            165px;
+
+        padding:
+            30px 22px;
+
+    }
+
+
+    .global-brand img {
+
+        width:
+            145px;
+
+    }
+
+
+    .global-page-number {
+
+        font-size:
+            11px;
+
+        letter-spacing:
+            0.13em;
+
+    }
+
+
+    .global-rule {
+
+        height:
+            3px;
+
+    }
+
+
+    .page04 {
+
+        width:
+            calc(100% - 28px);
+
+    }
+
+
+    .hero-section {
+
+        padding:
+            58px 5px;
+
+    }
+
+
+    .hero-section h1 {
+
+        font-size:
+            34px;
+
+    }
+
+
+    .hero-section h2 {
+
+        font-size:
+            16px;
+
+    }
+
+
+    .hero-introduction {
+
+        font-size:
+            16px;
+
+    }
+
+
+    .mindset-lesson {
+
+        padding:
+            35px 20px;
+
+        border-radius:
+            24px;
+
+    }
+
+
+    .lesson-title h2 {
+
+        font-size:
+            34px;
+
+    }
+
+
+    .lesson-title h2 em {
+
+        display:
+            block;
+
+        margin:
+            8px 0;
+
+    }
+
+
+    .equation-card {
+
+        padding:
+            30px 24px;
+
+    }
+
+
+    .equation-number {
+
+        font-size:
+            46px;
+
+    }
+
+
+    .mindset-panel {
+
+        padding:
+            34px 25px;
+
+        border-radius:
+            25px;
+
+    }
+
+
+    .mindset-panel h3 {
+
+        font-size:
+            24px;
+
+    }
+
+
+    .mindset-question {
+
+        font-size:
+            18px;
+
+    }
+
+
+    .assessment-introduction {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            15px;
+
+        padding:
+            28px 22px;
+
+    }
+
+
+    .scale-options {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .mindset-question-card {
+
+        padding:
+            30px 20px;
+
+        border-radius:
+            24px;
+
+    }
+
+
+    .question-number {
+
+        top:
+            25px;
+
+        right:
+            22px;
+
+        font-size:
+            42px;
+
+    }
+
+
+    .question-heading {
+
+        padding-right:
+            55px;
+
+    }
+
+
+    .question-heading h3 {
+
+        font-size:
+            20px;
+
+    }
+
+
+    .answer-option {
+
+        grid-template-columns:
+            35px 38px 1fr;
+
+        gap:
+            9px;
+
+        min-height:
+            75px;
+
+        padding:
+            11px 12px;
+
+    }
+
+
+    .option-letter {
+
+        width:
+            32px;
+
+        height:
+            32px;
+
+        font-size:
+            12px;
+
+    }
+
+
+    .option-score {
+
+        font-size:
+            16px;
+
+    }
+
+
+    .option-text strong {
+
+        font-size:
+            13px;
+
+    }
+
+
+    .option-text small {
+
+        font-size:
+            10px;
+
+    }
+
+
+    .score-reveal {
+
+        padding:
+            50px 20px;
+
+        border-radius:
+            25px;
+
+    }
+
+
+    .mindset-ladder {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .money-question {
+
+        padding:
+            75px 8px;
+
+    }
+
+
+    .money-question .tamil {
+
+        font-size:
+            27px;
+
+    }
+
+
+    .next-transformation {
+
+        padding:
+            34px 20px;
+
+        border-radius:
+            25px;
+
+    }
+
+
+    .final-teaching {
+
+        padding:
+            45px 20px;
+
+    }
+
+
+    .final-line strong {
+
+        font-size:
+            15px;
+
+    }
+
+
+    .final-line span {
+
+        font-size:
+            14px;
+
+    }
+
+
+    .global-navigation {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            12px;
+
+    }
+
+
+    .global-current-page {
+
+        order:
+            2;
+
+        padding:
+            8px;
+
+    }
+
+
+    .global-nav-button.previous {
+
+        order:
+            1;
+
+    }
+
+
+    .global-nav-button.next {
+
+        order:
+            3;
+
+    }
+
+
+    .global-nav-button {
+
+        min-height:
+            76px;
+
+    }
+
+
+    .save-section {
+
+        margin-bottom:
+            50px;
+
+    }
+
+
+    .footer-tagline {
+
+        font-size:
+            10px;
+
+        letter-spacing:
+            0.18em;
+
+    }
+
+
+    .footer-club {
+
+        font-size:
+            9px;
+
+    }
+
+}
