@@ -2,1840 +2,2932 @@
 /* ============================================================
    CTM PATH™ MILLIONAIRES™
    PAGE 02 — JAVASCRIPT
-   YOUR 12 BASIC LIFE NEEDS
+   COMPLETE REPLACEMENT
+   ============================================================
 
-   FILE:
-   js/page02.js
+   PAGE 02 PURPOSE
+   ------------------------------------------------------------
+   This page does NOT create another /120 score.
 
-   DEPENDENCIES:
-   02.html
-   css/page02.css
+   It captures:
+     1. Status of each of the 12 Basic Life Needs
+        - FULLY FULFILLED
+        - PARTIALLY FULFILLED
+        - NOT YET FULFILLED
 
-   NO EXTERNAL LIBRARIES
+     2. One highest-priority life need.
+
+   The page stores the visitor's responses locally and,
+   when a Visitor ID is available, attempts to save them
+   to the existing CTM PATH™ backend.
+
+   Navigation:
+       /01  ← Previous
+       /02  ← Current page
+       /03  → Next
+
    ============================================================ */
 
-(function () {
 
-    "use strict";
+/* ============================================================
+   01. CONFIGURATION
+   ============================================================ */
+
+const PAGE02_CONFIG = {
+
+    PAGE_NUMBER: 2,
+
+    TOTAL_NEEDS: 12,
+
+    PREVIOUS_PAGE: '/01',
+
+    NEXT_PAGE: '/03',
+
+    STORAGE_KEY:
+        'ctmPage02Answers',
+
+    SUMMARY_STORAGE_KEY:
+        'ctmPage02Summary',
+
+    PRIORITY_STORAGE_KEY:
+        'ctmPage02Priority',
+
+    /*
+     * Existing CTM PATH™ backend.
+     *
+     * Page 01 uses the same endpoint.
+     */
+    BACKEND_URL:
+        'https://script.google.com/macros/s/AKfycbx9eJru7EJYUpReeLv4Sym9wDVLgE_ruSw_ZUJ4ycDoneUKlkI_fcsJ2UJmKM7W_PXtEg/exec',
+
+    /*
+     * Backend action names already used by the
+     * CTM PATH™ assessment architecture.
+     */
+    ACTION_SAVE_ANSWER:
+        'save_answer',
+
+    ACTION_SAVE_PROGRESS:
+        'save_progress'
+};
 
 
-    /* ========================================================
-       01. CONFIGURATION
-       ======================================================== */
+/* ============================================================
+   02. THE 12 BASIC LIFE NEEDS
+   ============================================================ */
 
-    const CONFIG = {
+const PAGE02_NEEDS = [
 
-        STORAGE_KEY:
-            "CTM_PATH_PAGE02_LIFE_NEEDS",
+    {
+        id: 'NEED01',
+        number: '01',
+        ta: 'வீடு',
+        en: 'HOME',
+        questionTa:
+            'உங்கள் குடும்பத்தின் தேவைகளுக்கும் கனவுகளுக்கும் ஏற்ற ஒரு நல்ல வீடு உங்களிடம் உள்ளதா?',
+        questionEn:
+            'Do you have the home you truly want for yourself and your family?'
+    },
 
-        PAGE_NUMBER:
-            "02",
+    {
+        id: 'NEED02',
+        number: '02',
+        ta: 'கார்',
+        en: 'CAR',
+        questionTa:
+            'உங்கள் குடும்பத்தின் தேவைக்கும் உங்கள் வாழ்க்கை முறைக்கும் ஏற்ற கார் உங்களிடம் உள்ளதா?',
+        questionEn:
+            "Do you have the car that suits your family's needs and lifestyle?"
+    },
 
-        TOTAL_NEEDS:
-            12,
+    {
+        id: 'NEED03',
+        number: '03',
+        ta: 'பைக்',
+        en: 'BIKE',
+        questionTa:
+            'உங்கள் தனிப்பட்ட பயணம் மற்றும் அன்றாட தேவைகளுக்கு ஏற்ற இருசக்கர வாகனம் உங்களிடம் உள்ளதா?',
+        questionEn:
+            'Do you have the two-wheeler you need for your daily life?'
+    },
 
-        PREVIOUS_PAGE:
-            "01.html",
+    {
+        id: 'NEED04',
+        number: '04',
+        ta: 'குழந்தைகளின் கல்வி',
+        en: "CHILDREN'S EDUCATION",
+        questionTa:
+            'உங்கள் குழந்தைகளின் கல்வி மற்றும் எதிர்காலத்திற்கான தேவைகளை நீங்கள் நம்பிக்கையுடன் நிறைவேற்றி வருகிறீர்களா?',
+        questionEn:
+            'Are you confident that you can provide the education and future opportunities your children deserve?'
+    },
 
-        NEXT_PAGE:
-            "03.html"
+    {
+        id: 'NEED05',
+        number: '05',
+        ta: 'நகை',
+        en: 'JEWELLERY',
+        questionTa:
+            'உங்கள் குடும்பத்தின் முக்கியமான நகை மற்றும் மதிப்புமிக்க பொருட்கள் தொடர்பான தேவைகள் நிறைவேறியுள்ளனவா?',
+        questionEn:
+            "Have your family's important jewellery and valuables needs been fulfilled?"
+    },
+
+    {
+        id: 'NEED06',
+        number: '06',
+        ta: 'கடனில்லா வாழ்க்கை',
+        en: 'DEBT-FREE LIFE',
+        questionTa:
+            'உங்கள் தற்போதைய வாழ்க்கை தேவையற்ற கடன் சுமையிலிருந்து விடுபட்டுள்ளதா?',
+        questionEn:
+            'Are you living with the level of financial freedom you want, without burdensome debt?'
+    },
+
+    {
+        id: 'NEED07',
+        number: '07',
+        ta: 'சேமிப்பு',
+        en: 'SAVINGS',
+        questionTa:
+            'எதிர்பாராத சூழ்நிலைகளுக்கும் எதிர்கால இலக்குகளுக்கும் போதுமான சேமிப்பு உங்களிடம் உள்ளதா?',
+        questionEn:
+            'Do you have sufficient savings for emergencies and future goals?'
+    },
+
+    {
+        id: 'NEED08',
+        number: '08',
+        ta: 'பெற்றோரை கவனித்தல்',
+        en: 'CARING FOR PARENTS',
+        questionTa:
+            'உங்கள் பெற்றோருக்கு அவர்கள் தகுதியான பாதுகாப்பு, ஆதரவு மற்றும் கவனிப்பை வழங்க முடிகிறதா?',
+        questionEn:
+            'Are you able to provide your parents with the care, support and security they deserve?'
+    },
+
+    {
+        id: 'NEED09',
+        number: '09',
+        ta: 'சுற்றுலா',
+        en: 'TRAVEL',
+        questionTa:
+            'உங்களுக்கும் உங்கள் குடும்பத்திற்கும் விருப்பமான இடங்களுக்குச் சென்று அனுபவித்து மகிழும் சுதந்திரம் உங்களிடம் உள்ளதா?',
+        questionEn:
+            'Do you have the freedom to travel and create experiences with your family?'
+    },
+
+    {
+        id: 'NEED10',
+        number: '10',
+        ta: 'மருத்துவம்',
+        en: 'HEALTHCARE',
+        questionTa:
+            'உங்களுக்கும் உங்கள் குடும்பத்திற்கும் தேவையான தரமான மருத்துவப் பாதுகாப்பை நீங்கள் எளிதாகப் பெற முடிகிறதா?',
+        questionEn:
+            'Can you access the quality healthcare your family needs without financial stress?'
+    },
+
+    {
+        id: 'NEED11',
+        number: '11',
+        ta: 'சமூக சேவை',
+        en: 'SOCIAL SERVICE',
+        questionTa:
+            'மற்றவர்களின் வாழ்க்கையில் மாற்றத்தை ஏற்படுத்தவும், சமூகத்திற்கு பங்களிக்கவும் உங்களிடம் வளமும் நேரமும் உள்ளதா?',
+        questionEn:
+            'Do you have the time and resources to contribute meaningfully to society?'
+    },
+
+    {
+        id: 'NEED12',
+        number: '12',
+        ta: 'பொழுதுபோக்கு',
+        en: 'RECREATION',
+        questionTa:
+            'வேலை மற்றும் பொறுப்புகளுக்கு அப்பால், உங்களுக்காகவும் குடும்பத்திற்காகவும் மகிழ்ச்சியான நேரத்தை செலவிடுகிறீர்களா?',
+        questionEn:
+            'Do you have enough time and freedom for recreation, joy and meaningful experiences?'
+    }
+
+];
+
+
+/* ============================================================
+   03. STATUS DEFINITIONS
+   ============================================================ */
+
+const PAGE02_STATUS = {
+
+    FULL:
+        'fully',
+
+    PARTIAL:
+        'partial',
+
+    NONE:
+        'none'
+
+};
+
+
+/* ============================================================
+   04. RUNTIME STATE
+   ============================================================ */
+
+let page02Answers = {};
+
+let page02Priority = '';
+
+let page02Saving = false;
+
+
+/* ============================================================
+   05. DOM CACHE
+   ============================================================ */
+
+let page02DOM = {};
+
+
+/* ============================================================
+   06. INITIALISE
+   ============================================================ */
+
+function initPage02() {
+
+    cachePage02DOM();
+
+    attachStatusHandlers();
+
+    attachPriorityHandler();
+
+    attachNavigationHandlers();
+
+    restorePage02State();
+
+    updatePage02UI();
+
+    exposePage02DebugAPI();
+
+    console.log(
+        'CTM PATH™ Page 02 initialised.'
+    );
+
+}
+
+
+/* ============================================================
+   07. DOM CACHE
+   ============================================================ */
+
+function cachePage02DOM() {
+
+    page02DOM = {
+
+        /*
+         * Form
+         */
+        form:
+            document.getElementById(
+                'assessmentForm'
+            ) ||
+            document.querySelector(
+                'form'
+            ),
+
+        /*
+         * Need cards
+         */
+        cards:
+            Array.from(
+                document.querySelectorAll(
+                    '[data-need]'
+                )
+            ),
+
+        /*
+         * Status buttons
+         */
+        statusButtons:
+            Array.from(
+                document.querySelectorAll(
+                    '[data-status]'
+                )
+            ),
+
+        /*
+         * Priority selector
+         */
+        prioritySelect:
+            document.getElementById(
+                'prioritySelect'
+            ) ||
+            document.getElementById(
+                'priority'
+            ) ||
+            document.querySelector(
+                '.priority-select'
+            ) ||
+            document.querySelector(
+                'select[name="priority"]'
+            ),
+
+        /*
+         * Snapshot counters
+         */
+        fullCount:
+            document.getElementById(
+                'fullCount'
+            ) ||
+            document.getElementById(
+                'fullyFulfilledCount'
+            ) ||
+            document.querySelector(
+                '[data-count="full"]'
+            ),
+
+        partialCount:
+            document.getElementById(
+                'partialCount'
+            ) ||
+            document.getElementById(
+                'partiallyFulfilledCount'
+            ) ||
+            document.querySelector(
+                '[data-count="partial"]'
+            ),
+
+        noneCount:
+            document.getElementById(
+                'noneCount'
+            ) ||
+            document.getElementById(
+                'notYetFulfilledCount'
+            ) ||
+            document.querySelector(
+                '[data-count="none"]'
+            ),
+
+        /*
+         * Completion progress
+         */
+        completionBar:
+            document.getElementById(
+                'completionBar'
+            ) ||
+            document.querySelector(
+                '.completion-bar'
+            ),
+
+        completionPercent:
+            document.getElementById(
+                'completionPercent'
+            ) ||
+            document.querySelector(
+                '[data-completion-percent]'
+            ),
+
+        completionMessage:
+            document.getElementById(
+                'completion-message'
+            ) ||
+            document.getElementById(
+                'completionMessage'
+            ),
+
+        /*
+         * Priority confirmation
+         */
+        priorityConfirmation:
+            document.getElementById(
+                'priorityConfirmation'
+            ) ||
+            document.querySelector(
+                '.priority-confirmation'
+            ),
+
+        /*
+         * Save / continue
+         */
+        saveContinue:
+            document.getElementById(
+                'saveContinueButton'
+            ) ||
+            document.getElementById(
+                'continueButton'
+            ) ||
+            document.querySelector(
+                '[data-action="save-continue"]'
+            ),
+
+        /*
+         * Generic status area
+         */
+        pageStatus:
+            document.getElementById(
+                'pageStatus'
+            ) ||
+            document.querySelector(
+                '.page-status'
+            ),
+
+        /*
+         * Navigation buttons
+         */
+        previousButton:
+            document.getElementById(
+                'previousButton'
+            ) ||
+            document.querySelector(
+                '[data-navigation="previous"]'
+            ) ||
+            document.querySelector(
+                '.nav-back'
+            ),
+
+        nextButton:
+            document.getElementById(
+                'nextButton'
+            ) ||
+            document.querySelector(
+                '[data-navigation="next"]'
+            ) ||
+            document.querySelector(
+                '.nav-forward'
+            )
 
     };
 
-
-    /* ========================================================
-       02. STATUS DEFINITIONS
-       ======================================================== */
-
-    const STATUS = {
-
-        FULFILLED: "fulfilled",
-
-        PARTIAL: "partial",
-
-        PENDING: "pending"
-
-    };
+}
 
 
-    /* ========================================================
-       03. STATUS DISPLAY
-       ======================================================== */
+/* ============================================================
+   08. STATUS HANDLERS
+   ============================================================ */
 
-    const STATUS_LABELS = {
+function attachStatusHandlers() {
 
-        fulfilled: {
+    const buttons =
+        page02DOM.statusButtons;
 
-            ta:
-                "முழுமையாக நிறைவேறியது",
+    if (!buttons.length) {
 
-            en:
-                "Fully Fulfilled",
+        console.warn(
+            'Page 02: no [data-status] buttons found.'
+        );
 
-            symbol:
-                "✓"
+        return;
+    }
 
-        },
 
-        partial: {
+    buttons.forEach(
+        function(button) {
 
-            ta:
-                "ஓரளவு நிறைவேறியது",
+            button.addEventListener(
+                'click',
+                function(event) {
 
-            en:
-                "Partially Fulfilled",
+                    event.preventDefault();
 
-            symbol:
-                "◐"
+                    handleStatusSelection(
+                        button
+                    );
 
-        },
-
-        pending: {
-
-            ta:
-                "இன்னும் நிறைவேறவில்லை",
-
-            en:
-                "Not Yet Fulfilled",
-
-            symbol:
-                "○"
+                }
+            );
 
         }
+    );
 
-    };
+}
 
 
-    /* ========================================================
-       04. THE 12 BASIC LIFE NEEDS
+/* ============================================================
+   09. STATUS SELECTION
+   ============================================================ */
 
-       The structure is deliberately kept in one place so
-       Page 02 can be maintained without changing the HTML.
-       ======================================================== */
+function handleStatusSelection(
+    button
+) {
 
-    const NEEDS = [
+    const card =
+        button.closest(
+            '[data-need]'
+        );
 
-        {
-            id: "home",
-
-            number: "01",
-
-            ta: "வீடு",
-
-            en: "HOME",
-
-            questionTa:
-                "உங்கள் குடும்பத்தின் தேவைகளுக்கும் கனவுகளுக்கும் ஏற்ற ஒரு நல்ல வீடு உங்களிடம் உள்ளதா?",
-
-            questionEn:
-                "Do you have the home you truly want for yourself and your family?",
-
-            icon: "home"
-        },
-
-
-        {
-            id: "car",
-
-            number: "02",
-
-            ta: "கார்",
-
-            en: "CAR",
-
-            questionTa:
-                "உங்கள் குடும்பத்தின் தேவைகளுக்கும் உங்கள் வாழ்க்கை முறைக்கும் ஏற்ற கார் உங்களிடம் உள்ளதா?",
-
-            questionEn:
-                "Do you have the car that suits your family's needs and lifestyle?",
-
-            icon: "car"
-        },
-
-
-        {
-            id: "education",
-
-            number: "03",
-
-            ta: "கல்வி",
-
-            en: "EDUCATION",
-
-            questionTa:
-                "உங்களுக்கும் உங்கள் குடும்பத்திற்கும் தேவையான தரமான கல்வி மற்றும் கற்றல் வாய்ப்புகள் கிடைக்கிறதா?",
-
-            questionEn:
-                "Do you and your family have access to the education and learning opportunities you need?",
-
-            icon: "education"
-        },
-
-
-        {
-            id: "health",
-
-            number: "04",
-
-            ta: "ஆரோக்கியம்",
-
-            en: "HEALTH",
-
-            questionTa:
-                "உங்களுக்கும் உங்கள் குடும்பத்திற்கும் தேவையான நல்ல ஆரோக்கியத்தையும் பராமரிப்பையும் பெறுகிறீர்களா?",
-
-            questionEn:
-                "Do you and your family have the health, care and wellbeing you need?",
-
-            icon: "health"
-        },
-
-
-        {
-            id: "food",
-
-            number: "05",
-
-            ta: "உணவு",
-
-            en: "FOOD",
-
-            questionTa:
-                "உங்களுக்கும் உங்கள் குடும்பத்திற்கும் தேவையான சத்தான மற்றும் தரமான உணவு போதுமான அளவில் கிடைக்கிறதா?",
-
-            questionEn:
-                "Do you and your family have reliable access to nutritious and quality food?",
-
-            icon: "food"
-        },
-
-
-        {
-            id: "clothing",
-
-            number: "06",
-
-            ta: "உடை",
-
-            en: "CLOTHING",
-
-            questionTa:
-                "உங்களுக்கும் உங்கள் குடும்பத்திற்கும் தேவையான தரமான உடைகள் மற்றும் தனிப்பட்ட தேவைகள் நிறைவேறுகிறதா?",
-
-            questionEn:
-                "Do you and your family have the clothing and personal essentials you need?",
-
-            icon: "clothing"
-        },
-
-
-        {
-            id: "family",
-
-            number: "07",
-
-            ta: "குடும்பம்",
-
-            en: "FAMILY",
-
-            questionTa:
-                "உங்கள் குடும்பத்துடன் அன்பு, பாதுகாப்பு மற்றும் மகிழ்ச்சியுடன் வாழும் வாழ்க்கை உங்களிடம் உள்ளதா?",
-
-            questionEn:
-                "Do you have the loving, secure and happy family life you desire?",
-
-            icon: "family"
-        },
-
-
-        {
-            id: "travel",
-
-            number: "08",
-
-            ta: "பயணம்",
-
-            en: "TRAVEL",
-
-            questionTa:
-                "உங்களுக்கு விருப்பமான இடங்களுக்கு பயணம் செய்து புதிய அனுபவங்களைப் பெறுவதற்கான வாய்ப்பு உங்களிடம் உள்ளதா?",
-
-            questionEn:
-                "Do you have the freedom and resources to travel and experience the places you desire?",
-
-            icon: "travel"
-        },
-
-
-        {
-            id: "technology",
-
-            number: "09",
-
-            ta: "தொழில்நுட்பம்",
-
-            en: "TECHNOLOGY",
-
-            questionTa:
-                "உங்கள் வாழ்க்கை மற்றும் பணிக்குத் தேவையான நவீன தொழில்நுட்ப வசதிகள் உங்களிடம் உள்ளதா?",
-
-            questionEn:
-                "Do you have the technology and digital tools you need for your life and work?",
-
-            icon: "technology"
-        },
-
-
-        {
-            id: "savings",
-
-            number: "10",
-
-            ta: "சேமிப்பு",
-
-            en: "SAVINGS",
-
-            questionTa:
-                "எதிர்காலத் தேவைகளுக்கும் எதிர்பாராத சூழ்நிலைகளுக்கும் போதுமான சேமிப்பு உங்களிடம் உள்ளதா?",
-
-            questionEn:
-                "Do you have enough savings to support your future needs and unexpected situations?",
-
-            icon: "savings"
-        },
-
-
-        {
-            id: "security",
-
-            number: "11",
-
-            ta: "பாதுகாப்பு",
-
-            en: "SECURITY",
-
-            questionTa:
-                "உங்கள் குடும்பத்தின் எதிர்காலத்திற்கு தேவையான நிதி மற்றும் வாழ்க்கைப் பாதுகாப்பு உங்களிடம் உள்ளதா?",
-
-            questionEn:
-                "Do you have the financial and life security your family needs for the future?",
-
-            icon: "security"
-        },
-
-
-        {
-            id: "experiences",
-
-            number: "12",
-
-            ta: "வாழ்க்கை அனுபவங்கள்",
-
-            en: "LIFE EXPERIENCES",
-
-            questionTa:
-                "நீங்கள் விரும்பும் மகிழ்ச்சியான அனுபவங்கள், ஓய்வு மற்றும் வாழ்க்கையை அனுபவிக்கும் வாய்ப்புகள் உங்களிடம் உள்ளதா?",
-
-            questionEn:
-                "Do you have the experiences, recreation and opportunities to enjoy the life you want?",
-
-            icon: "experiences"
-        }
-
-    ];
-
-
-    /* ========================================================
-       05. APPLICATION STATE
-       ======================================================== */
-
-    let state = {
-
-        answers: {},
-
-        priorityNeed: ""
-
-    };
-
-
-    /* ========================================================
-       06. DOM REFERENCES
-       ======================================================== */
-
-    let elements = {};
-
-
-    /* ========================================================
-       07. SVG ICON HELPERS
-       ======================================================== */
-
-    function svg(content, label) {
-
-        return `
-            <svg
-                viewBox="0 0 100 100"
-                role="img"
-                aria-label="${escapeAttribute(label)}"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                ${content}
-            </svg>
-        `;
-
+    if (!card) {
+        return;
     }
 
 
-    function iconHome() {
+    const needId =
+        normalizeNeedId(
+            card.dataset.need
+        );
 
-        return svg(`
-
-            <path d="M18 46 L50 19 L82 46"/>
-
-            <path d="M25 42 V82 H75 V42"/>
-
-            <path d="M42 82 V57 H58 V82"/>
-
-            <path d="M34 49 H66"/>
-
-        `, "Home");
-
+    if (!needId) {
+        return;
     }
 
 
-    function iconCar() {
+    const status =
+        normalizeStatus(
+            button.dataset.status
+        );
 
-        return svg(`
-
-            <path d="
-                M19 60
-                L25 42
-                Q27 35 35 34
-                H65
-                Q73 35 75 42
-                L81 60
-                V72
-                H19
-                Z
-            "/>
-
-            <path d="M28 44 H72"/>
-
-            <path d="M34 50 H66"/>
-
-            <circle cx="30" cy="70" r="6"/>
-
-            <circle cx="70" cy="70" r="6"/>
-
-            <path d="M19 59 H81"/>
-
-        `, "Car");
-
+    if (!status) {
+        return;
     }
 
 
-    function iconEducation() {
+    /*
+     * Save locally immediately.
+     */
+    page02Answers[needId] =
+        status;
 
-        return svg(`
+    savePage02Answers();
 
-            <path d="
-                M15 38
-                L50 21
-                L85 38
-                L50 55
-                Z
-            "/>
+    /*
+     * Update visual state.
+     */
+    updateCardSelection(
+        card,
+        status
+    );
 
-            <path d="M28 46 V67"/>
+    /*
+     * Update snapshot.
+     */
+    updatePage02UI();
 
-            <path d="
-                M72 46
-                V67
-                Q50 80 28 67
-            "/>
+    /*
+     * Save this answer to backend.
+     * Do not block the user's interaction.
+     */
+    saveAnswerToBackend(
+        needId,
+        status
+    );
 
-            <path d="M85 38 V60"/>
+}
 
-            <circle cx="85" cy="66" r="3"/>
 
-        `, "Education");
+/* ============================================================
+   10. NORMALISE NEED ID
+   ============================================================ */
 
+function normalizeNeedId(
+    value
+) {
+
+    if (!value) {
+        return '';
     }
 
 
-    function iconHealth() {
+    const raw =
+        String(value)
+            .trim()
+            .toUpperCase();
 
-        return svg(`
 
-            <path d="
-                M50 82
-                C45 77 20 61 20 42
-                C20 29 36 23 50 37
-                C64 23 80 29 80 42
-                C80 61 55 77 50 82
-                Z
-            "/>
+    /*
+     * Accept:
+     *
+     * NEED01
+     * need01
+     * 01
+     * 1
+     */
+    const digits =
+        raw.match(
+            /(\d{1,2})$/
+        );
 
-            <path d="M36 51 H45 V42 H55 V51 H64 V61 H55 V70 H45 V61 H36 Z"/>
 
-        `, "Health");
-
+    if (!digits) {
+        return raw;
     }
 
 
-    function iconFood() {
+    const number =
+        Number(
+            digits[1]
+        );
 
-        return svg(`
 
-            <path d="M25 24 V76"/>
-
-            <path d="M18 24 V43 Q18 50 25 50 Q32 50 32 43 V24"/>
-
-            <path d="M68 24 V76"/>
-
-            <path d="M68 24 Q82 31 82 45 Q82 55 68 55"/>
-
-            <path d="M44 57 H56"/>
-
-            <path d="M50 50 V76"/>
-
-        `, "Food");
-
+    if (
+        !Number.isFinite(
+            number
+        ) ||
+        number < 1 ||
+        number > PAGE02_CONFIG.TOTAL_NEEDS
+    ) {
+        return raw;
     }
 
 
-    function iconClothing() {
+    return (
+        'NEED' +
+        String(number)
+            .padStart(
+                2,
+                '0'
+            )
+    );
 
-        return svg(`
+}
 
-            <path d="
-                M37 25
-                L47 19
-                H53
-                L63 25
-                L77 34
-                L68 49
-                L60 44
-                V80
-                H40
-                V44
-                L32 49
-                L23 34
-                Z
-            "/>
 
-            <path d="M47 19 Q50 27 53 19"/>
+/* ============================================================
+   11. NORMALISE STATUS
+   ============================================================ */
 
-            <path d="M40 62 H60"/>
+function normalizeStatus(
+    value
+) {
 
-        `, "Clothing");
-
+    if (!value) {
+        return '';
     }
 
 
-    function iconFamily() {
+    const status =
+        String(value)
+            .trim()
+            .toLowerCase();
 
-        return svg(`
 
-            <circle cx="50" cy="31" r="9"/>
-
-            <circle cx="28" cy="39" r="7"/>
-
-            <circle cx="72" cy="39" r="7"/>
-
-            <path d="
-                M34 74
-                V61
-                Q34 49 50 49
-                Q66 49 66 61
-                V74
-            "/>
-
-            <path d="
-                M12 72
-                V61
-                Q12 51 25 51
-                Q34 51 38 57
-            "/>
-
-            <path d="
-                M88 72
-                V61
-                Q88 51 75 51
-                Q66 51 62 57
-            "/>
-
-        `, "Family");
-
+    if (
+        status === 'full' ||
+        status === 'fully' ||
+        status === 'fulfilled' ||
+        status === 'fully-fulfilled' ||
+        status === 'fully_fulfilled'
+    ) {
+        return PAGE02_STATUS.FULL;
     }
 
 
-    function iconTravel() {
-
-        return svg(`
-
-            <circle cx="50" cy="50" r="30"/>
-
-            <path d="M20 50 H80"/>
-
-            <path d="M50 20 V80"/>
-
-            <path d="
-                M31 27
-                Q40 50 31 73
-            "/>
-
-            <path d="
-                M69 27
-                Q60 50 69 73
-            "/>
-
-            <path d="
-                M27 35
-                Q50 43 73 35
-            "/>
-
-            <path d="
-                M27 65
-                Q50 57 73 65
-            "/>
-
-        `, "Travel");
-
+    if (
+        status === 'partial' ||
+        status === 'partially' ||
+        status === 'partially-fulfilled' ||
+        status === 'partially_fulfilled'
+    ) {
+        return PAGE02_STATUS.PARTIAL;
     }
 
 
-    function iconTechnology() {
-
-        return svg(`
-
-            <rect
-                x="19"
-                y="21"
-                width="62"
-                height="43"
-                rx="4"
-            />
-
-            <path d="M36 79 H64"/>
-
-            <path d="M50 64 V79"/>
-
-            <path d="M30 72 H70"/>
-
-            <circle cx="50" cy="42" r="9"/>
-
-        `, "Technology");
-
+    if (
+        status === 'none' ||
+        status === 'notyet' ||
+        status === 'not-yet' ||
+        status === 'not-yet-fulfilled' ||
+        status === 'not_yet_fulfilled'
+    ) {
+        return PAGE02_STATUS.NONE;
     }
 
 
-    function iconSavings() {
+    return '';
 
-        return svg(`
+}
 
-            <path d="
-                M22 39
-                H76
-                Q82 39 82 46
-                V68
-                Q82 75 75 75
-                H25
-                Q18 75 18 68
-                V46
-                Q18 39 22 39
-            "/>
 
-            <path d="
-                M27 39
-                V31
-                Q27 25 34 25
-                H67
-                Q73 25 73 31
-                V39
-            "/>
+/* ============================================================
+   12. UPDATE CARD SELECTION
+   ============================================================ */
 
-            <circle cx="50" cy="56" r="12"/>
+function updateCardSelection(
+    card,
+    selectedStatus
+) {
 
-            <path d="M50 49 V63"/>
-
-            <path d="M45 53 Q50 48 55 53"/>
-
-            <path d="M45 60 Q50 65 55 60"/>
-
-        `, "Savings");
-
+    if (!card) {
+        return;
     }
 
 
-    function iconSecurity() {
-
-        return svg(`
-
-            <path d="
-                M50 18
-                L78 28
-                V48
-                Q78 69 50 83
-                Q22 69 22 48
-                V28
-                Z
-            "/>
-
-            <path d="
-                M36 49
-                L46 59
-                L65 38
-            "/>
-
-        `, "Security");
-
-    }
+    const buttons =
+        Array.from(
+            card.querySelectorAll(
+                '[data-status]'
+            )
+        );
 
 
-    function iconExperiences() {
+    buttons.forEach(
+        function(button) {
 
-        return svg(`
-
-            <circle cx="50" cy="50" r="29"/>
-
-            <path d="
-                M50 30
-                L56 44
-                L71 45
-                L59 55
-                L63 70
-                L50 61
-                L37 70
-                L41 55
-                L29 45
-                L44 44
-                Z
-            "/>
-
-        `, "Life Experiences");
-
-    }
-
-
-    const ICONS = {
-
-        home: iconHome,
-
-        car: iconCar,
-
-        education: iconEducation,
-
-        health: iconHealth,
-
-        food: iconFood,
-
-        clothing: iconClothing,
-
-        family: iconFamily,
-
-        travel: iconTravel,
-
-        technology: iconTechnology,
-
-        savings: iconSavings,
-
-        security: iconSecurity,
-
-        experiences: iconExperiences
-
-    };
-
-
-    /* ========================================================
-       08. INITIALISATION
-       ======================================================== */
-
-    function init() {
-
-        cacheElements();
-
-        loadState();
-
-        renderNeeds();
-
-        renderPriorityOptions();
-
-        bindEvents();
-
-        updateAll();
-
-        scrollToTop();
-
-    }
-
-
-    /* ========================================================
-       09. CACHE DOM
-       ======================================================== */
-
-    function cacheElements() {
-
-        elements.form =
-            document.getElementById("needsForm");
-
-        elements.fulfilledCount =
-            document.getElementById("fulfilledCount");
-
-        elements.partialCount =
-            document.getElementById("partialCount");
-
-        elements.pendingCount =
-            document.getElementById("pendingCount");
-
-        elements.completionText =
-            document.getElementById("completionText");
-
-        elements.completionBar =
-            document.getElementById("completionBar");
-
-        elements.priorityNeed =
-            document.getElementById("priorityNeed");
-
-        elements.pageStatus =
-            document.getElementById("pageStatus");
-
-        elements.previousButton =
-            document.getElementById("previousButton");
-
-        elements.nextButton =
-            document.getElementById("nextButton");
-
-    }
-
-
-    /* ========================================================
-       10. LOAD SAVED STATE
-       ======================================================== */
-
-    function loadState() {
-
-        try {
-
-            const saved =
-                localStorage.getItem(
-                    CONFIG.STORAGE_KEY
+            const status =
+                normalizeStatus(
+                    button.dataset.status
                 );
 
-            if (!saved) {
-                return;
+            const selected =
+                status ===
+                selectedStatus;
+
+
+            /*
+             * Remove old visual state.
+             */
+            button.classList.remove(
+                'selected'
+            );
+
+
+            button.removeAttribute(
+                'aria-pressed'
+            );
+
+
+            /*
+             * Apply new visual state.
+             */
+            if (selected) {
+
+                button.classList.add(
+                    'selected'
+                );
+
+                button.setAttribute(
+                    'aria-pressed',
+                    'true'
+                );
+
+            }
+            else {
+
+                button.setAttribute(
+                    'aria-pressed',
+                    'false'
+                );
+
             }
 
-            const parsed =
-                JSON.parse(saved);
+        }
+    );
 
-            if (
-                parsed &&
-                typeof parsed === "object"
-            ) {
 
-                if (
-                    parsed.answers &&
-                    typeof parsed.answers === "object"
-                ) {
+    /*
+     * Mark the card itself.
+     */
+    if (selectedStatus) {
 
-                    state.answers =
-                        parsed.answers;
+        card.classList.add(
+            'has-selection'
+        );
 
-                }
+        card.dataset.selectedStatus =
+            selectedStatus;
 
-                if (
-                    typeof parsed.priorityNeed ===
-                    "string"
-                ) {
+    }
+    else {
 
-                    state.priorityNeed =
-                        parsed.priorityNeed;
+        card.classList.remove(
+            'has-selection'
+        );
 
-                }
+        delete card.dataset.selectedStatus;
 
-            }
+    }
 
-        } catch (error) {
+}
 
-            console.warn(
-                "CTM PATH™ Page 02: saved state could not be loaded.",
-                error
+
+/* ============================================================
+   13. PRIORITY HANDLER
+   ============================================================ */
+
+function attachPriorityHandler() {
+
+    const select =
+        page02DOM.prioritySelect;
+
+    if (!select) {
+
+        console.warn(
+            'Page 02: priority selector not found.'
+        );
+
+        return;
+    }
+
+
+    select.addEventListener(
+        'change',
+        function() {
+
+            handlePriorityChange(
+                select.value
             );
 
         }
+    );
 
-    }
+}
 
 
-    /* ========================================================
-       11. SAVE STATE
-       ======================================================== */
+/* ============================================================
+   14. PRIORITY CHANGE
+   ============================================================ */
 
-    function saveState() {
+function handlePriorityChange(
+    value
+) {
 
-        try {
+    page02Priority =
+        normalizeNeedId(
+            value
+        );
 
-            localStorage.setItem(
 
-                CONFIG.STORAGE_KEY,
-
-                JSON.stringify({
-
-                    page:
-                        CONFIG.PAGE_NUMBER,
-
-                    answers:
-                        state.answers,
-
-                    priorityNeed:
-                        state.priorityNeed,
-
-                    updatedAt:
-                        new Date().toISOString()
-
-                })
-
-            );
-
-        } catch (error) {
-
-            console.warn(
-                "CTM PATH™ Page 02: state could not be saved.",
-                error
-            );
-
-        }
-
-    }
-
-
-    /* ========================================================
-       12. RENDER THE 12 CARDS
-       ======================================================== */
-
-    function renderNeeds() {
-
-        if (!elements.form) {
-            return;
-        }
-
-        elements.form.innerHTML =
-            NEEDS.map(
-                renderNeedCard
-            ).join("");
-
-    }
-
-
-    /* ========================================================
-       13. RENDER INDIVIDUAL CARD
-       ======================================================== */
-
-    function renderNeedCard(need) {
-
-        const selected =
-            state.answers[need.id] || "";
-
-        const iconFunction =
-            ICONS[need.icon];
-
-        const iconMarkup =
-            iconFunction
-                ? iconFunction()
-                : "";
-
-
-        return `
-
-            <article
-                class="need-card"
-                data-need-id="${escapeAttribute(need.id)}"
-            >
-
-                <div class="need-card-top">
-
-                    <div class="need-number">
-
-                        ${escapeHTML(need.number)}
-
-                    </div>
-
-
-                    <div class="need-icon">
-
-                        ${iconMarkup}
-
-                    </div>
-
-                </div>
-
-
-                <h3 class="need-title">
-
-                    ${escapeHTML(need.ta)}
-
-                </h3>
-
-
-                <div class="need-title-en">
-
-                    ${escapeHTML(need.en)}
-
-                </div>
-
-
-                <p class="need-question">
-
-                    ${escapeHTML(need.questionTa)}
-
-                </p>
-
-
-                <p class="need-question-en">
-
-                    ${escapeHTML(need.questionEn)}
-
-                </p>
-
-
-                <div
-                    class="need-options"
-                    role="radiogroup"
-                    aria-label="${escapeAttribute(
-                        need.en
-                    )}"
-                >
-
-
-                    ${renderOption(
-                        need,
-                        STATUS.FULFILLED,
-                        selected
-                    )}
-
-
-                    ${renderOption(
-                        need,
-                        STATUS.PARTIAL,
-                        selected
-                    )}
-
-
-                    ${renderOption(
-                        need,
-                        STATUS.PENDING,
-                        selected
-                    )}
-
-                </div>
-
-
-                <div
-                    class="need-card-status"
-                    id="status-${escapeAttribute(
-                        need.id
-                    )}"
-                ></div>
-
-            </article>
-
-        `;
-
-    }
-
-
-    /* ========================================================
-       14. RENDER STATUS OPTION
-       ======================================================== */
-
-    function renderOption(
-        need,
-        status,
-        selected
+    /*
+     * If HTML stores the actual value
+     * as NEED01 etc, preserve it.
+     */
+    if (
+        !page02Priority ||
+        !isValidNeedId(
+            page02Priority
+        )
     ) {
 
-        const labels =
-            STATUS_LABELS[status];
-
-        const inputId =
-            `${need.id}-${status}`;
-
-        const checked =
-            selected === status
-                ? "checked"
-                : "";
-
-
-        return `
-
-            <label
-                class="
-                    need-option
-                    option-${status}
-                "
-                for="${escapeAttribute(inputId)}"
-            >
-
-                <input
-                    type="radio"
-                    id="${escapeAttribute(inputId)}"
-                    name="need-${escapeAttribute(need.id)}"
-                    value="${escapeAttribute(status)}"
-                    ${checked}
-                >
-
-
-                <span
-                    class="option-icon"
-                    aria-hidden="true"
-                >
-                    ${escapeHTML(labels.symbol)}
-                </span>
-
-
-                <span class="option-ta">
-
-                    ${escapeHTML(labels.ta)}
-
-                </span>
-
-
-                <span class="option-en">
-
-                    ${escapeHTML(labels.en)}
-
-                </span>
-
-            </label>
-
-        `;
+        page02Priority =
+            String(
+                value || ''
+            ).trim();
 
     }
 
 
-    /* ========================================================
-       15. RENDER PRIORITY OPTIONS
-       ======================================================== */
-
-    function renderPriorityOptions() {
-
-        if (!elements.priorityNeed) {
-            return;
-        }
+    localStorage.setItem(
+        PAGE02_CONFIG.PRIORITY_STORAGE_KEY,
+        page02Priority
+    );
 
 
-        const options =
-            NEEDS.map(function (need) {
-
-                return `
-
-                    <option
-                        value="${escapeAttribute(need.id)}"
-                    >
-
-                        ${escapeHTML(need.number)}
-                        —
-                        ${escapeHTML(need.ta)}
-                        /
-                        ${escapeHTML(need.en)}
-
-                    </option>
-
-                `;
-
-            }).join("");
+    updatePriorityConfirmation();
 
 
-        elements.priorityNeed.insertAdjacentHTML(
-            "beforeend",
-            options
+    /*
+     * Save priority separately.
+     */
+    savePriorityToBackend();
+
+}
+
+
+/* ============================================================
+   15. PRIORITY CONFIRMATION
+   ============================================================ */
+
+function updatePriorityConfirmation() {
+
+    const element =
+        page02DOM.priorityConfirmation;
+
+    if (!element) {
+        return;
+    }
+
+
+    const need =
+        findNeed(
+            page02Priority
         );
 
 
-        elements.priorityNeed.value =
-            state.priorityNeed || "";
+    if (!need) {
 
+        element.classList.remove(
+            'visible'
+        );
+
+        return;
     }
 
 
-    /* ========================================================
-       16. EVENT BINDING
-       ======================================================== */
+    /*
+     * Keep existing HTML if the
+     * page already contains a
+     * structured confirmation.
+     */
+    const ta =
+        element.querySelector(
+            '[data-priority-ta]'
+        );
 
-    function bindEvents() {
-
-
-        /* ----------------------------------------------------
-           STATUS SELECTION
-           ---------------------------------------------------- */
-
-        if (elements.form) {
-
-            elements.form.addEventListener(
-                "change",
-                handleFormChange
-            );
-
-        }
-
-
-        /* ----------------------------------------------------
-           PRIORITY
-           ---------------------------------------------------- */
-
-        if (elements.priorityNeed) {
-
-            elements.priorityNeed.addEventListener(
-                "change",
-                function () {
-
-                    state.priorityNeed =
-                        elements.priorityNeed.value;
-
-                    saveState();
-
-                    updatePriorityStatus();
-
-                }
-            );
-
-        }
-
-
-        /* ----------------------------------------------------
-           PREVIOUS
-           ---------------------------------------------------- */
-
-        if (elements.previousButton) {
-
-            elements.previousButton.addEventListener(
-                "click",
-                function () {
-
-                    saveState();
-
-                    window.location.href =
-                        CONFIG.PREVIOUS_PAGE;
-
-                }
-            );
-
-        }
-
-
-        /* ----------------------------------------------------
-           NEXT
-           ---------------------------------------------------- */
-
-        if (elements.nextButton) {
-
-            elements.nextButton.addEventListener(
-                "click",
-                handleNext
-            );
-
-        }
-
-    }
-
-
-    /* ========================================================
-       17. FORM CHANGE
-       ======================================================== */
-
-    function handleFormChange(event) {
-
-        const input =
-            event.target;
-
-
-        if (
-            !input ||
-            input.type !== "radio"
-        ) {
-
-            return;
-
-        }
-
-
-        const name =
-            input.name;
-
-
-        if (
-            !name.startsWith("need-")
-        ) {
-
-            return;
-
-        }
-
-
-        const needId =
-            name.replace(
-                "need-",
-                ""
-            );
-
-
-        state.answers[needId] =
-            input.value;
-
-
-        saveState();
-
-        updateAll();
-
-    }
-
-
-    /* ========================================================
-       18. UPDATE EVERYTHING
-       ======================================================== */
-
-    function updateAll() {
-
-        const counts =
-            calculateCounts();
-
-
-        updateCounters(
-            counts
+    const en =
+        element.querySelector(
+            '[data-priority-en]'
         );
 
 
-        updateCompletion(
-            counts
-        );
+    if (ta) {
+        ta.textContent =
+            need.ta;
+    }
+
+    if (en) {
+        en.textContent =
+            need.en;
+    }
 
 
-        updateCardStatuses();
+    /*
+     * If no dedicated elements exist,
+     * update only a safe text container.
+     */
+    if (
+        !ta &&
+        !en
+    ) {
 
-
-        updatePriorityStatus();
+        element.textContent =
+            need.ta +
+            ' — ' +
+            need.en;
 
     }
 
 
-    /* ========================================================
-       19. CALCULATE COUNTS
-       ======================================================== */
+    element.classList.add(
+        'visible'
+    );
 
-    function calculateCounts() {
-
-        let fulfilled = 0;
-
-        let partial = 0;
-
-        let pending = 0;
-
-        let answered = 0;
+}
 
 
-        NEEDS.forEach(function (need) {
+/* ============================================================
+   16. UPDATE COMPLETE PAGE UI
+   ============================================================ */
 
-            const value =
-                state.answers[need.id];
+function updatePage02UI() {
+
+    updateAllCardStates();
+
+    updateSnapshotCounts();
+
+    updateCompletionProgress();
+
+    updatePriorityConfirmation();
+
+}
+
+
+/* ============================================================
+   17. UPDATE ALL CARD STATES
+   ============================================================ */
+
+function updateAllCardStates() {
+
+    const cards =
+        page02DOM.cards;
+
+    cards.forEach(
+        function(card) {
+
+            const needId =
+                normalizeNeedId(
+                    card.dataset.need
+                );
+
+            const status =
+                page02Answers[
+                    needId
+                ] || '';
+
+
+            updateCardSelection(
+                card,
+                status
+            );
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   18. CALCULATE SNAPSHOT
+   ============================================================ */
+
+function calculatePage02Snapshot() {
+
+    let full = 0;
+
+    let partial = 0;
+
+    let none = 0;
+
+    let answered = 0;
+
+
+    PAGE02_NEEDS.forEach(
+        function(need) {
+
+            const status =
+                page02Answers[
+                    need.id
+                ];
 
 
             if (
-                value === STATUS.FULFILLED
+                status ===
+                PAGE02_STATUS.FULL
             ) {
 
-                fulfilled++;
-
+                full++;
                 answered++;
 
             }
             else if (
-                value === STATUS.PARTIAL
+                status ===
+                PAGE02_STATUS.PARTIAL
             ) {
 
                 partial++;
-
                 answered++;
 
             }
             else if (
-                value === STATUS.PENDING
+                status ===
+                PAGE02_STATUS.NONE
             ) {
 
-                pending++;
-
+                none++;
                 answered++;
 
             }
 
-        });
+        }
+    );
 
 
-        const unanswered =
-            CONFIG.TOTAL_NEEDS -
-            answered;
+    return {
 
+        full,
+        partial,
+        none,
+        answered,
+
+        unanswered:
+            PAGE02_CONFIG.TOTAL_NEEDS -
+            answered,
+
+        total:
+            PAGE02_CONFIG.TOTAL_NEEDS
+
+    };
+
+}
+
+
+/* ============================================================
+   19. UPDATE SNAPSHOT COUNTERS
+   ============================================================ */
+
+function updateSnapshotCounts() {
+
+    const snapshot =
+        calculatePage02Snapshot();
+
+
+    setElementText(
+        page02DOM.fullCount,
+        snapshot.full
+    );
+
+
+    setElementText(
+        page02DOM.partialCount,
+        snapshot.partial
+    );
+
+
+    setElementText(
+        page02DOM.noneCount,
+        snapshot.none
+    );
+
+}
+
+
+/* ============================================================
+   20. COMPLETION PROGRESS
+   ============================================================ */
+
+function updateCompletionProgress() {
+
+    const snapshot =
+        calculatePage02Snapshot();
+
+
+    const percentage =
+        Math.round(
+            (
+                snapshot.answered /
+                snapshot.total
+            ) *
+            100
+        );
+
+
+    /*
+     * Progress bar.
+     */
+    if (
+        page02DOM.completionBar
+    ) {
+
+        page02DOM.completionBar.style.width =
+            percentage +
+            '%';
+
+    }
+
+
+    /*
+     * Percentage text.
+     */
+    if (
+        page02DOM.completionPercent
+    ) {
+
+        page02DOM.completionPercent.textContent =
+            percentage +
+            '%';
+
+    }
+
+
+    /*
+     * Completion message.
+     */
+    if (
+        page02DOM.completionMessage
+    ) {
+
+        let message;
+
+
+        if (
+            snapshot.answered ===
+            0
+        ) {
+
+            message =
+                'உங்கள் 12 தேவைகளில் ஒவ்வொன்றையும் மதிப்பிடுங்கள்.';
+
+        }
+        else if (
+            snapshot.answered <
+            snapshot.total
+        ) {
+
+            message =
+                (
+                    snapshot.answered +
+                    ' / ' +
+                    snapshot.total +
+                    ' தேவைகள் பதிவு செய்யப்பட்டுள்ளன.'
+                );
+
+        }
+        else {
+
+            message =
+                'அனைத்து 12 தேவைகளும் பதிவு செய்யப்பட்டுள்ளன.';
+
+        }
+
+
+        page02DOM.completionMessage.textContent =
+            message;
+
+    }
+
+}
+
+
+/* ============================================================
+   21. LOCAL STORAGE — SAVE ANSWERS
+   ============================================================ */
+
+function savePage02Answers() {
+
+    try {
+
+        localStorage.setItem(
+            PAGE02_CONFIG.STORAGE_KEY,
+            JSON.stringify(
+                page02Answers
+            )
+        );
+
+    }
+    catch (error) {
+
+        console.warn(
+            'CTM PATH™ Page 02 local save failed:',
+            error
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   22. LOCAL STORAGE — SAVE SUMMARY
+   ============================================================ */
+
+function savePage02Summary() {
+
+    const snapshot =
+        calculatePage02Snapshot();
+
+
+    const summary = {
+
+        pageNumber:
+            PAGE02_CONFIG.PAGE_NUMBER,
+
+        answers:
+            page02Answers,
+
+        full:
+            snapshot.full,
+
+        partial:
+            snapshot.partial,
+
+        none:
+            snapshot.none,
+
+        answered:
+            snapshot.answered,
+
+        total:
+            snapshot.total,
+
+        priority:
+            page02Priority,
+
+        completed:
+            snapshot.answered ===
+            snapshot.total,
+
+        completedAt:
+            snapshot.answered ===
+            snapshot.total
+                ? new Date().toISOString()
+                : null
+
+    };
+
+
+    try {
+
+        localStorage.setItem(
+            PAGE02_CONFIG.SUMMARY_STORAGE_KEY,
+            JSON.stringify(
+                summary
+            )
+        );
+
+    }
+    catch (error) {
+
+        console.warn(
+            'CTM PATH™ Page 02 summary save failed:',
+            error
+        );
+
+    }
+
+
+    return summary;
+
+}
+
+
+/* ============================================================
+   23. RESTORE PAGE 02 STATE
+   ============================================================ */
+
+function restorePage02State() {
+
+    /*
+     * Restore answers.
+     */
+    const storedAnswers =
+        localStorage.getItem(
+            PAGE02_CONFIG.STORAGE_KEY
+        );
+
+
+    if (storedAnswers) {
+
+        try {
+
+            const parsed =
+                JSON.parse(
+                    storedAnswers
+                );
+
+
+            if (
+                parsed &&
+                typeof parsed ===
+                'object'
+            ) {
+
+                Object.keys(
+                    parsed
+                ).forEach(
+                    function(key) {
+
+                        const needId =
+                            normalizeNeedId(
+                                key
+                            );
+
+                        const status =
+                            normalizeStatus(
+                                parsed[key]
+                            );
+
+
+                        if (
+                            isValidNeedId(
+                                needId
+                            ) &&
+                            status
+                        ) {
+
+                            page02Answers[
+                                needId
+                            ] = status;
+
+                        }
+
+                    }
+                );
+
+            }
+
+        }
+        catch (error) {
+
+            console.warn(
+                'CTM PATH™ Page 02 answers could not be restored:',
+                error
+            );
+
+        }
+
+    }
+
+
+    /*
+     * Restore priority.
+     */
+    const storedPriority =
+        localStorage.getItem(
+            PAGE02_CONFIG.PRIORITY_STORAGE_KEY
+        );
+
+
+    if (storedPriority) {
+
+        page02Priority =
+            String(
+                storedPriority
+            ).trim();
+
+    }
+
+
+    /*
+     * Restore select visually.
+     */
+    if (
+        page02DOM.prioritySelect &&
+        page02Priority
+    ) {
+
+        const select =
+            page02DOM.prioritySelect;
+
+
+        const matchingOption =
+            Array.from(
+                select.options
+            ).find(
+                function(option) {
+
+                    return (
+                        normalizeNeedId(
+                            option.value
+                        ) ===
+                        page02Priority
+                    );
+
+                }
+            );
+
+
+        if (matchingOption) {
+
+            select.value =
+                matchingOption.value;
+
+        }
+
+    }
+
+}
+
+
+/* ============================================================
+   24. VALIDATE ALL 12 RESPONSES
+   ============================================================ */
+
+function validatePage02() {
+
+    const missing = [];
+
+
+    PAGE02_NEEDS.forEach(
+        function(need) {
+
+            const status =
+                page02Answers[
+                    need.id
+                ];
+
+
+            if (
+                !normalizeStatus(
+                    status
+                )
+            ) {
+
+                missing.push(
+                    need
+                );
+
+            }
+
+        }
+    );
+
+
+    return {
+
+        valid:
+            missing.length === 0,
+
+        missing,
+
+        answered:
+            PAGE02_CONFIG.TOTAL_NEEDS -
+            missing.length
+
+    };
+
+}
+
+
+/* ============================================================
+   25. SHOW VALIDATION MESSAGE
+   ============================================================ */
+
+function showValidationMessage(
+    validation
+) {
+
+    if (
+        !validation ||
+        validation.valid
+    ) {
+        return;
+    }
+
+
+    const firstMissing =
+        validation.missing[0];
+
+
+    if (firstMissing) {
+
+        const card =
+            findCardByNeedId(
+                firstMissing.id
+            );
+
+
+        if (card) {
+
+            card.scrollIntoView(
+                {
+                    behavior: 'smooth',
+                    block: 'center'
+                }
+            );
+
+
+            card.classList.add(
+                'needs-attention'
+            );
+
+
+            setTimeout(
+                function() {
+
+                    card.classList.remove(
+                        'needs-attention'
+                    );
+
+                },
+                1200
+            );
+
+        }
+
+    }
+
+
+    setPage02Status(
+        'முதலில் 12 தேவைகளுக்கும் உங்கள் நிலையைத் தேர்வு செய்யுங்கள்.',
+        'error'
+    );
+
+}
+
+
+/* ============================================================
+   26. NAVIGATION HANDLERS
+   ============================================================ */
+
+function attachNavigationHandlers() {
+
+    /*
+     * Previous.
+     */
+    if (
+        page02DOM.previousButton
+    ) {
+
+        page02DOM.previousButton.addEventListener(
+            'click',
+            function(event) {
+
+                /*
+                 * If it is already an <a>,
+                 * allow the browser to navigate.
+                 */
+                if (
+                    page02DOM.previousButton.tagName
+                        .toLowerCase() ===
+                    'a'
+                ) {
+                    return;
+                }
+
+
+                event.preventDefault();
+
+                savePage02Summary();
+
+                window.location.href =
+                    PAGE02_CONFIG.PREVIOUS_PAGE;
+
+            }
+        );
+
+    }
+
+
+    /*
+     * Next.
+     */
+    if (
+        page02DOM.nextButton
+    ) {
+
+        page02DOM.nextButton.addEventListener(
+            'click',
+            handlePage02Continue
+        );
+
+    }
+
+
+    /*
+     * Save & Continue.
+     */
+    if (
+        page02DOM.saveContinue &&
+        page02DOM.saveContinue !==
+        page02DOM.nextButton
+    ) {
+
+        page02DOM.saveContinue.addEventListener(
+            'click',
+            handlePage02Continue
+        );
+
+    }
+
+
+    /*
+     * Form submit.
+     */
+    if (
+        page02DOM.form
+    ) {
+
+        page02DOM.form.addEventListener(
+            'submit',
+            function(event) {
+
+                event.preventDefault();
+
+                handlePage02Continue(
+                    event
+                );
+
+            }
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   27. CONTINUE TO PAGE 03
+   ============================================================ */
+
+async function handlePage02Continue(
+    event
+) {
+
+    if (
+        event
+    ) {
+        event.preventDefault();
+    }
+
+
+    /*
+     * Prevent double click.
+     */
+    if (
+        page02Saving
+    ) {
+        return;
+    }
+
+
+    /*
+     * Validate all 12.
+     */
+    const validation =
+        validatePage02();
+
+
+    if (
+        !validation.valid
+    ) {
+
+        showValidationMessage(
+            validation
+        );
+
+        return;
+    }
+
+
+    /*
+     * Priority is required by
+     * the frozen Page 02 concept.
+     */
+    if (
+        !page02Priority ||
+        !isValidNeedId(
+            normalizeNeedId(
+                page02Priority
+            )
+        )
+    ) {
+
+        setPage02Status(
+            'இந்த 12 தேவைகளில் இப்போது உங்களுக்கு மிகவும் முக்கியமான தேவையைத் தேர்வு செய்யுங்கள்.',
+            'error'
+        );
+
+
+        if (
+            page02DOM.prioritySelect
+        ) {
+
+            page02DOM.prioritySelect.focus();
+
+            page02DOM.prioritySelect.scrollIntoView(
+                {
+                    behavior: 'smooth',
+                    block: 'center'
+                }
+            );
+
+        }
+
+
+        return;
+
+    }
+
+
+    /*
+     * Save locally before backend.
+     */
+    const summary =
+        savePage02Summary();
+
+
+    savePage02Answers();
+
+
+    /*
+     * Lock navigation while saving.
+     */
+    page02Saving = true;
+
+    setNavigationDisabled(
+        true
+    );
+
+
+    setPage02Status(
+        'உங்கள் பதில்கள் பாதுகாக்கப்படுகின்றன...',
+        'loading'
+    );
+
+
+    try {
+
+        /*
+         * Save all 12 answers.
+         */
+        await saveAllAnswersToBackend();
+
+
+        /*
+         * Save priority / page progress.
+         */
+        await savePageProgressToBackend(
+            summary
+        );
+
+
+        setPage02Status(
+            '✓ மதிப்பீடு பாதுகாக்கப்பட்டது / Assessment saved',
+            'success'
+        );
+
+
+        /*
+         * Small delay so the user sees
+         * confirmation before navigation.
+         */
+        setTimeout(
+            function() {
+
+                window.location.href =
+                    PAGE02_CONFIG.NEXT_PAGE;
+
+            },
+            350
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            'CTM PATH™ Page 02 save error:',
+            error
+        );
+
+
+        /*
+         * Important:
+         *
+         * Local data has already been saved.
+         * Therefore the user does not lose
+         * the assessment even if backend
+         * saving fails.
+         */
+        setPage02Status(
+            'உங்கள் பதில்கள் இந்த சாதனத்தில் பாதுகாக்கப்பட்டுள்ளன. அடுத்த பக்கத்திற்குச் செல்ல மீண்டும் முயற்சிக்கவும்.',
+            'error'
+        );
+
+
+        setNavigationDisabled(
+            false
+        );
+
+
+        page02Saving = false;
+
+    }
+
+}
+
+
+/* ============================================================
+   28. SAVE ALL ANSWERS
+   ============================================================ */
+
+async function saveAllAnswersToBackend() {
+
+    const visitorId =
+        getVisitorId();
+
+
+    /*
+     * No Visitor ID:
+     *
+     * Do not destroy the user's journey.
+     * Local storage remains authoritative
+     * for this browser session.
+     */
+    if (!visitorId) {
+
+        console.warn(
+            'CTM PATH™ Page 02: Visitor ID unavailable. Backend save skipped.'
+        );
 
         return {
 
-            fulfilled,
+            success: false,
 
-            partial,
+            skipped:
+                true,
 
-            pending,
-
-            answered,
-
-            unanswered,
-
-            completion:
-                Math.round(
-                    (
-                        answered /
-                        CONFIG.TOTAL_NEEDS
-                    ) * 100
-                )
+            reason:
+                'VISITOR_ID_MISSING'
 
         };
 
     }
 
 
-    /* ========================================================
-       20. UPDATE COUNTERS
-       ======================================================== */
+    const requests =
+        PAGE02_NEEDS.map(
+            function(need) {
 
-    function updateCounters(counts) {
-
-        if (elements.fulfilledCount) {
-
-            elements.fulfilledCount.textContent =
-                counts.fulfilled;
-
-        }
+                const status =
+                    page02Answers[
+                        need.id
+                    ];
 
 
-        if (elements.partialCount) {
-
-            elements.partialCount.textContent =
-                counts.partial;
-
-        }
-
-
-        if (elements.pendingCount) {
-
-            elements.pendingCount.textContent =
-                counts.pending;
-
-        }
-
-    }
-
-
-    /* ========================================================
-       21. UPDATE COMPLETION BAR
-       ======================================================== */
-
-    function updateCompletion(counts) {
-
-        if (elements.completionBar) {
-
-            elements.completionBar.style.width =
-                `${counts.completion}%`;
-
-        }
-
-
-        if (elements.completionText) {
-
-            elements.completionText.textContent =
-                `${counts.answered} / ${CONFIG.TOTAL_NEEDS}`;
-
-        }
-
-    }
-
-
-    /* ========================================================
-       22. UPDATE CARD STATUS
-       ======================================================== */
-
-    function updateCardStatuses() {
-
-        NEEDS.forEach(function (need) {
-
-            const statusElement =
-                document.getElementById(
-                    `status-${need.id}`
+                return saveAnswerToBackend(
+                    need.id,
+                    status,
+                    visitorId
                 );
 
-
-            if (!statusElement) {
-                return;
             }
-
-
-            const selected =
-                state.answers[need.id];
-
-
-            if (!selected) {
-
-                statusElement.textContent =
-                    "ஒரு பதிலைத் தேர்வு செய்யுங்கள்";
-
-                statusElement.style.color =
-                    "var(--text-muted)";
-
-                return;
-
-            }
-
-
-            const labels =
-                STATUS_LABELS[selected];
-
-
-            statusElement.innerHTML = `
-
-                <strong>
-
-                    ${escapeHTML(labels.ta)}
-
-                </strong>
-
-                <span>
-
-                    /
-                    ${escapeHTML(labels.en)}
-
-                </span>
-
-            `;
-
-
-            if (
-                selected === STATUS.FULFILLED
-            ) {
-
-                statusElement.style.color =
-                    "var(--green-light)";
-
-            }
-            else if (
-                selected === STATUS.PARTIAL
-            ) {
-
-                statusElement.style.color =
-                    "var(--orange-light)";
-
-            }
-            else {
-
-                statusElement.style.color =
-                    "var(--red-light)";
-
-            }
-
-        });
-
-    }
-
-
-    /* ========================================================
-       23. PRIORITY STATUS
-       ======================================================== */
-
-    function updatePriorityStatus() {
-
-        if (!elements.pageStatus) {
-            return;
-        }
-
-
-        if (
-            state.priorityNeed
-        ) {
-
-            const selectedNeed =
-                NEEDS.find(
-                    function (need) {
-
-                        return (
-                            need.id ===
-                            state.priorityNeed
-                        );
-
-                    }
-                );
-
-
-            if (selectedNeed) {
-
-                elements.pageStatus.textContent =
-                    `✓ ${selectedNeed.ta} / ${selectedNeed.en} — உங்கள் முக்கியமான தேவை பதிவு செய்யப்பட்டது.`;
-
-                return;
-
-            }
-
-        }
-
-
-        elements.pageStatus.textContent =
-            "";
-
-    }
-
-
-    /* ========================================================
-       24. NEXT PAGE
-       ======================================================== */
-
-    function handleNext() {
-
-        const counts =
-            calculateCounts();
-
-
-        saveState();
-
-
-        /*
-         * The user can move forward even if some cards are
-         * unanswered. The page remains exploratory rather
-         * than becoming a hard-blocking form.
-         */
-
-        if (
-            counts.unanswered > 0
-        ) {
-
-            showTemporaryStatus(
-
-                `இன்னும் ${counts.unanswered} தேவைகளுக்கு பதில் அளிக்கப்படவில்லை.`
-
-            );
-
-        }
-
-
-        window.setTimeout(
-            function () {
-
-                window.location.href =
-                    CONFIG.NEXT_PAGE;
-
-            },
-            180
         );
 
-    }
+
+    const results =
+        await Promise.all(
+            requests
+        );
 
 
-    /* ========================================================
-       25. TEMPORARY STATUS MESSAGE
-       ======================================================== */
+    return {
 
-    function showTemporaryStatus(message) {
-
-        if (!elements.pageStatus) {
-            return;
-        }
-
-
-        elements.pageStatus.textContent =
-            message;
-
-
-        window.setTimeout(
-            function () {
-
-                if (
-                    elements.pageStatus
-                ) {
-
-                    updatePriorityStatus();
-
+        success:
+            results.every(
+                function(result) {
+                    return (
+                        result === true ||
+                        result?.skipped === true
+                    );
                 }
+            ),
 
-            },
-            2200
+        results
+
+    };
+
+}
+
+
+/* ============================================================
+   29. SAVE ONE ANSWER TO BACKEND
+   ============================================================ */
+
+async function saveAnswerToBackend(
+    needId,
+    status,
+    visitorIdOverride
+) {
+
+    const visitorId =
+        visitorIdOverride ||
+        getVisitorId();
+
+
+    if (!visitorId) {
+
+        return {
+            skipped: true
+        };
+
+    }
+
+
+    const need =
+        findNeed(
+            needId
         );
 
+
+    if (!need) {
+        return false;
     }
 
 
-    /* ========================================================
-       26. SCROLL TO TOP
-       ======================================================== */
+    const payload = {
 
-    function scrollToTop() {
+        action:
+            PAGE02_CONFIG.ACTION_SAVE_ANSWER,
 
-        window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: "auto"
-        });
+        data: {
 
-    }
+            visitorId,
 
+            pageNumber:
+                PAGE02_CONFIG.PAGE_NUMBER,
 
-    /* ========================================================
-       27. ESCAPE HTML
-       ======================================================== */
+            questionId:
+                need.id,
 
-    function escapeHTML(value) {
+            question:
+                need.ta +
+                ' — ' +
+                need.en,
 
-        return String(value)
-            .replace(
-                /&/g,
-                "&amp;"
-            )
-            .replace(
-                /</g,
-                "&lt;"
-            )
-            .replace(
-                />/g,
-                "&gt;"
-            )
-            .replace(
-                /"/g,
-                "&quot;"
-            )
-            .replace(
-                /'/g,
-                "&#039;"
-            );
+            answer:
+                status,
 
-    }
+            score:
+                statusToScore(
+                    status
+                ),
 
+            status:
 
-    /* ========================================================
-       28. ESCAPE ATTRIBUTE
-       ======================================================== */
+                status,
 
-    function escapeAttribute(value) {
+            statusLabelTa:
+                getStatusLabelTa(
+                    status
+                ),
 
-        return escapeHTML(value);
-
-    }
-
-
-    /* ========================================================
-       29. PUBLIC PAGE API
-       ======================================================== */
-
-    window.CTMPathPage02 = {
-
-        getState: function () {
-
-            return {
-
-                answers:
-                    Object.assign(
-                        {},
-                        state.answers
-                    ),
-
-                priorityNeed:
-                    state.priorityNeed
-
-            };
-
-        },
-
-
-        getNeeds: function () {
-
-            return NEEDS.slice();
-
-        },
-
-
-        getCounts: function () {
-
-            return calculateCounts();
-
-        },
-
-
-        save: function () {
-
-            saveState();
-
-        },
-
-
-        reset: function () {
-
-            state = {
-
-                answers: {},
-
-                priorityNeed: ""
-
-            };
-
-
-            try {
-
-                localStorage.removeItem(
-                    CONFIG.STORAGE_KEY
-                );
-
-            } catch (error) {
-
-                console.warn(
-                    "CTM PATH™ Page 02: reset failed.",
-                    error
-                );
-
-            }
-
-
-            renderNeeds();
-
-            if (elements.priorityNeed) {
-
-                elements.priorityNeed.value =
-                    "";
-
-            }
-
-
-            updateAll();
+            statusLabelEn:
+                getStatusLabelEn(
+                    status
+                )
 
         }
 
     };
 
 
-    /* ========================================================
-       30. START APPLICATION
-       ======================================================== */
+    try {
 
-    if (
-        document.readyState ===
-        "loading"
-    ) {
+        const response =
+            await fetch(
+                PAGE02_CONFIG.BACKEND_URL,
+                {
 
-        document.addEventListener(
-            "DOMContentLoaded",
-            init,
+                    method:
+                        'POST',
+
+                    headers: {
+
+                        'Content-Type':
+                            'text/plain;charset=utf-8'
+
+                    },
+
+                    body:
+                        JSON.stringify(
+                            payload
+                        )
+
+                }
+            );
+
+
+        if (
+            !response.ok
+        ) {
+
+            throw new Error(
+                'Server error: ' +
+                response.status
+            );
+
+        }
+
+
+        const text =
+            await response.text();
+
+
+        /*
+         * Apps Script occasionally returns
+         * an empty body. Treat the HTTP success
+         * as sufficient in that case.
+         */
+        if (
+            !text
+        ) {
+
+            return true;
+
+        }
+
+
+        let result;
+
+
+        try {
+
+            result =
+                JSON.parse(
+                    text
+                );
+
+        }
+        catch (
+            parseError
+        ) {
+
+            /*
+             * If the endpoint returned HTTP 200
+             * but not JSON, do not immediately
+             * destroy the user's progress.
+             */
+            console.warn(
+                'Page 02 backend returned non-JSON response.'
+            );
+
+            return true;
+
+        }
+
+
+        if (
+            result &&
+            result.success === false
+        ) {
+
+            throw new Error(
+                result.message ||
+                'Unable to save Page 02 answer.'
+            );
+
+        }
+
+
+        return true;
+
+    }
+    catch (error) {
+
+        console.error(
+            'CTM PATH™ Page 02 answer save failed:',
+            error
+        );
+
+
+        /*
+         * Keep local state intact.
+         */
+        return false;
+
+    }
+
+}
+
+
+/* ============================================================
+   30. SAVE PAGE PROGRESS
+   ============================================================ */
+
+async function savePageProgressToBackend(
+    summary
+) {
+
+    const visitorId =
+        getVisitorId();
+
+
+    if (!visitorId) {
+
+        return {
+            skipped: true
+        };
+
+    }
+
+
+    const payload = {
+
+        action:
+            PAGE02_CONFIG.ACTION_SAVE_PROGRESS,
+
+        data: {
+
+            visitorId,
+
+            pageNumber:
+                PAGE02_CONFIG.PAGE_NUMBER,
+
+            completed:
+                summary.completed,
+
+            answers:
+                summary.answers,
+
+            full:
+                summary.full,
+
+            partial:
+                summary.partial,
+
+            none:
+                summary.none,
+
+            answered:
+                summary.answered,
+
+            total:
+                summary.total,
+
+            priority:
+                summary.priority,
+
+            priorityNeed:
+                findNeed(
+                    summary.priority
+                ) || null,
+
+            completedAt:
+                summary.completedAt
+
+        }
+
+    };
+
+
+    try {
+
+        const response =
+            await fetch(
+                PAGE02_CONFIG.BACKEND_URL,
+                {
+
+                    method:
+                        'POST',
+
+                    headers: {
+
+                        'Content-Type':
+                            'text/plain;charset=utf-8'
+
+                    },
+
+                    body:
+                        JSON.stringify(
+                            payload
+                        )
+
+                }
+            );
+
+
+        if (
+            !response.ok
+        ) {
+
+            throw new Error(
+                'Page progress server error: ' +
+                response.status
+            );
+
+        }
+
+
+        return true;
+
+    }
+    catch (error) {
+
+        console.error(
+            'CTM PATH™ Page 02 progress save failed:',
+            error
+        );
+
+
+        /*
+         * The 12 individual answers have
+         * already been saved locally.
+         */
+        return false;
+
+    }
+
+}
+
+
+/* ============================================================
+   31. SAVE PRIORITY TO BACKEND
+   ============================================================ */
+
+async function savePriorityToBackend() {
+
+    const visitorId =
+        getVisitorId();
+
+
+    if (!visitorId) {
+        return;
+    }
+
+
+    const need =
+        findNeed(
+            page02Priority
+        );
+
+
+    if (!need) {
+        return;
+    }
+
+
+    /*
+     * Priority is stored locally first.
+     */
+    localStorage.setItem(
+        PAGE02_CONFIG.PRIORITY_STORAGE_KEY,
+        page02Priority
+    );
+
+
+    /*
+     * Use save_progress so this remains
+     * compatible with the existing backend
+     * architecture.
+     */
+    const payload = {
+
+        action:
+            PAGE02_CONFIG.ACTION_SAVE_PROGRESS,
+
+        data: {
+
+            visitorId,
+
+            pageNumber:
+                PAGE02_CONFIG.PAGE_NUMBER,
+
+            priority:
+                need.id,
+
+            priorityTa:
+                need.ta,
+
+            priorityEn:
+                need.en,
+
+            answers:
+                page02Answers,
+
+            completed:
+                calculatePage02Snapshot()
+                    .answered ===
+                PAGE02_CONFIG.TOTAL_NEEDS
+
+        }
+
+    };
+
+
+    try {
+
+        await fetch(
+            PAGE02_CONFIG.BACKEND_URL,
             {
-                once: true
+
+                method:
+                    'POST',
+
+                headers: {
+
+                    'Content-Type':
+                        'text/plain;charset=utf-8'
+
+                },
+
+                body:
+                    JSON.stringify(
+                        payload
+                    )
+
             }
         );
 
     }
-    else {
+    catch (error) {
 
-        init();
+        /*
+         * Priority is already safely
+         * stored locally.
+         */
+        console.warn(
+            'Page 02 priority backend save failed:',
+            error
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   32. STATUS → SCORE
+   ============================================================
+
+   IMPORTANT:
+   Page 02 is NOT presented as a /120 score.
+
+   These values are only useful if the backend
+   wants a normalized internal representation.
+
+       Fully Fulfilled       = 2
+       Partially Fulfilled   = 1
+       Not Yet Fulfilled     = 0
+   */
+
+function statusToScore(
+    status
+) {
+
+    switch (
+        normalizeStatus(
+            status
+        )
+    ) {
+
+        case PAGE02_STATUS.FULL:
+            return 2;
+
+        case PAGE02_STATUS.PARTIAL:
+            return 1;
+
+        case PAGE02_STATUS.NONE:
+            return 0;
+
+        default:
+            return null;
+
+    }
+
+}
+
+
+/* ============================================================
+   33. STATUS LABEL — TAMIL
+   ============================================================ */
+
+function getStatusLabelTa(
+    status
+) {
+
+    switch (
+        normalizeStatus(
+            status
+        )
+    ) {
+
+        case PAGE02_STATUS.FULL:
+            return 'முழுமையாக நிறைவேறியது';
+
+        case PAGE02_STATUS.PARTIAL:
+            return 'ஓரளவு நிறைவேறியது';
+
+        case PAGE02_STATUS.NONE:
+            return 'இன்னும் நிறைவேறவில்லை';
+
+        default:
+            return '';
+
+    }
+
+}
+
+
+/* ============================================================
+   34. STATUS LABEL — ENGLISH
+   ============================================================ */
+
+function getStatusLabelEn(
+    status
+) {
+
+    switch (
+        normalizeStatus(
+            status
+        )
+    ) {
+
+        case PAGE02_STATUS.FULL:
+            return 'Fully Fulfilled';
+
+        case PAGE02_STATUS.PARTIAL:
+            return 'Partially Fulfilled';
+
+        case PAGE02_STATUS.NONE:
+            return 'Not Yet Fulfilled';
+
+        default:
+            return '';
+
+    }
+
+}
+
+
+/* ============================================================
+   35. FIND NEED
+   ============================================================ */
+
+function findNeed(
+    needId
+) {
+
+    const normalized =
+        normalizeNeedId(
+            needId
+        );
+
+
+    return (
+        PAGE02_NEEDS.find(
+            function(need) {
+
+                return (
+                    need.id ===
+                    normalized
+                );
+
+            }
+        ) ||
+        null
+    );
+
+}
+
+
+/* ============================================================
+   36. FIND CARD
+   ============================================================ */
+
+function findCardByNeedId(
+    needId
+) {
+
+    const normalized =
+        normalizeNeedId(
+            needId
+        );
+
+
+    return (
+        page02DOM.cards.find(
+            function(card) {
+
+                return (
+                    normalizeNeedId(
+                        card.dataset.need
+                    ) ===
+                    normalized
+                );
+
+            }
+        ) ||
+        null
+    );
+
+}
+
+
+/* ============================================================
+   37. VALID NEED ID
+   ============================================================ */
+
+function isValidNeedId(
+    needId
+) {
+
+    return Boolean(
+        findNeed(
+            needId
+        )
+    );
+
+}
+
+
+/* ============================================================
+   38. VISITOR ID
+   ============================================================ */
+
+function getVisitorId() {
+
+    return (
+        localStorage.getItem(
+            'ctmVisitorId'
+        ) ||
+        ''
+    ).trim();
+
+}
+
+
+/* ============================================================
+   39. SET PAGE STATUS
+   ============================================================ */
+
+function setPage02Status(
+    message,
+    type
+) {
+
+    const element =
+        page02DOM.pageStatus;
+
+
+    if (!element) {
+
+        console.log(
+            'Page 02 status:',
+            message
+        );
+
+        return;
 
     }
 
 
-})();
+    element.textContent =
+        message;
+
+
+    element.className =
+        'page-status ' +
+        (
+            type ||
+            ''
+        );
+
+}
+
+
+/* ============================================================
+   40. DISABLE / ENABLE NAVIGATION
+   ============================================================ */
+
+function setNavigationDisabled(
+    disabled
+) {
+
+    const buttons = [
+
+        page02DOM.saveContinue,
+
+        page02DOM.nextButton,
+
+        page02DOM.previousButton
+
+    ];
+
+
+    buttons.forEach(
+        function(button) {
+
+            if (!button) {
+                return;
+            }
+
+
+            /*
+             * Buttons.
+             */
+            if (
+                button.tagName
+                    .toLowerCase() ===
+                'button'
+            ) {
+
+                button.disabled =
+                    disabled;
+
+            }
+
+
+            /*
+             * Links.
+             */
+            if (
+                button.tagName
+                    .toLowerCase() ===
+                'a'
+            ) {
+
+                if (disabled) {
+
+                    button.dataset.page02Disabled =
+                        'true';
+
+                    button.setAttribute(
+                        'aria-disabled',
+                        'true'
+                    );
+
+                }
+                else {
+
+                    delete button.dataset.page02Disabled;
+
+                    button.removeAttribute(
+                        'aria-disabled'
+                    );
+
+                }
+
+            }
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   41. SAFE TEXT UPDATE
+   ============================================================ */
+
+function setElementText(
+    element,
+    value
+) {
+
+    if (!element) {
+        return;
+    }
+
+
+    element.textContent =
+        String(
+            value
+        );
+
+}
+
+
+/* ============================================================
+   42. DEBUG / QA API
+   ============================================================
+
+   Available from browser console:
+
+       page02Debug.getState()
+
+       page02Debug.getSnapshot()
+
+       page02Debug.clear()
+
+       page02Debug.completeAll()
+
+   These helpers do not affect normal production
+   operation unless explicitly called.
+   */
+
+function exposePage02DebugAPI() {
+
+    window.page02Debug = {
+
+        getState:
+            function() {
+
+                return {
+
+                    answers:
+                        {
+                            ...page02Answers
+                        },
+
+                    priority:
+                        page02Priority,
+
+                    snapshot:
+                        calculatePage02Snapshot()
+
+                };
+
+            },
+
+
+        getSnapshot:
+            function() {
+
+                return calculatePage02Snapshot();
+
+            },
+
+
+        clear:
+            function() {
+
+                page02Answers = {};
+
+                page02Priority = '';
+
+                localStorage.removeItem(
+                    PAGE02_CONFIG.STORAGE_KEY
+                );
+
+                localStorage.removeItem(
+                    PAGE02_CONFIG.SUMMARY_STORAGE_KEY
+                );
+
+                localStorage.removeItem(
+                    PAGE02_CONFIG.PRIORITY_STORAGE_KEY
+                );
+
+
+                if (
+                    page02DOM.prioritySelect
+                ) {
+
+                    page02DOM.prioritySelect.value =
+                        '';
+
+                }
+
+
+                updatePage02UI();
+
+            },
+
+
+        completeAll:
+            function(
+                status
+            ) {
+
+                const selectedStatus =
+                    normalizeStatus(
+                        status
+                    ) ||
+                    PAGE02_STATUS.FULL;
+
+
+                PAGE02_NEEDS.forEach(
+                    function(need) {
+
+                        page02Answers[
+                            need.id
+                        ] =
+                            selectedStatus;
+
+                    }
+                );
+
+
+                savePage02Answers();
+
+                updatePage02UI();
+
+            },
+
+
+        setAnswer:
+            function(
+                needId,
+                status
+            ) {
+
+                const normalizedNeed =
+                    normalizeNeedId(
+                        needId
+                    );
+
+                const normalizedStatus =
+                    normalizeStatus(
+                        status
+                    );
+
+
+                if (
+                    !isValidNeedId(
+                        normalizedNeed
+                    )
+                ) {
+
+                    console.warn(
+                        'Invalid Page 02 need:',
+                        needId
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    !normalizedStatus
+                ) {
+
+                    console.warn(
+                        'Invalid Page 02 status:',
+                        status
+                    );
+
+                    return;
+
+                }
+
+
+                page02Answers[
+                    normalizedNeed
+                ] =
+                    normalizedStatus;
+
+
+                savePage02Answers();
+
+                updatePage02UI();
+
+            }
+
+    };
+
+}
+
+
+/* ============================================================
+   43. INITIALISATION
+   ============================================================ */
+
+if (
+    document.readyState ===
+    'loading'
+) {
+
+    document.addEventListener(
+        'DOMContentLoaded',
+        initPage02
+    );
+
+}
+else {
+
+    initPage02();
+
+}
+
+
+/* ============================================================
+   END OF js/page02.js
+   ============================================================ */
 
