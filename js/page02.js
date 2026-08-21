@@ -1,4 +1,3 @@
-
 /* ============================================================
    CTM PATH™ MILLIONAIRES™
    PAGE 02 — JAVASCRIPT
@@ -7,24 +6,19 @@
 
    PAGE 02 PURPOSE
    ------------------------------------------------------------
-   This page does NOT create another /120 score.
+   Captures:
 
-   It captures:
-     1. Status of each of the 12 Basic Life Needs
-        - FULLY FULFILLED
-        - PARTIALLY FULFILLED
-        - NOT YET FULFILLED
+   1. Status of each of the 12 Basic Life Needs
+      - FULLY FULFILLED
+      - PARTIALLY FULFILLED
+      - NOT YET FULFILLED
 
-     2. One highest-priority life need.
-
-   The page stores the visitor's responses locally and,
-   when a Visitor ID is available, attempts to save them
-   to the existing CTM PATH™ backend.
+   2. One highest-priority life need.
 
    Navigation:
-       /01  ← Previous
-       /02  ← Current page
-       /03  → Next
+      /01 ← Previous
+      /02 ← Current
+      /03 → Next
 
    ============================================================ */
 
@@ -43,27 +37,15 @@ const PAGE02_CONFIG = {
 
     NEXT_PAGE: '/03',
 
-    STORAGE_KEY:
-        'ctmPage02Answers',
+    STORAGE_KEY: 'ctmPage02Answers',
 
-    SUMMARY_STORAGE_KEY:
-        'ctmPage02Summary',
+    SUMMARY_STORAGE_KEY: 'ctmPage02Summary',
 
-    PRIORITY_STORAGE_KEY:
-        'ctmPage02Priority',
+    PRIORITY_STORAGE_KEY: 'ctmPage02Priority',
 
-    /*
-     * Existing CTM PATH™ backend.
-     *
-     * Page 01 uses the same endpoint.
-     */
     BACKEND_URL:
         'https://script.google.com/macros/s/AKfycbx9eJru7EJYUpReeLv4Sym9wDVLgE_ruSw_ZUJ4ycDoneUKlkI_fcsJ2UJmKM7W_PXtEg/exec',
 
-    /*
-     * Backend action names already used by the
-     * CTM PATH™ assessment architecture.
-     */
     ACTION_SAVE_ANSWER:
         'save_answer',
 
@@ -219,14 +201,11 @@ const PAGE02_NEEDS = [
 
 const PAGE02_STATUS = {
 
-    FULL:
-        'fully',
+    FULL: 'fully',
 
-    PARTIAL:
-        'partial',
+    PARTIAL: 'partial',
 
-    NONE:
-        'none'
+    NONE: 'none'
 
 };
 
@@ -241,16 +220,11 @@ let page02Priority = '';
 
 let page02Saving = false;
 
-
-/* ============================================================
-   05. DOM CACHE
-   ============================================================ */
-
 let page02DOM = {};
 
 
 /* ============================================================
-   06. INITIALISE
+   05. INITIALISATION
    ============================================================ */
 
 function initPage02() {
@@ -277,16 +251,13 @@ function initPage02() {
 
 
 /* ============================================================
-   07. DOM CACHE
+   06. DOM CACHE
    ============================================================ */
 
 function cachePage02DOM() {
 
     page02DOM = {
 
-        /*
-         * Form
-         */
         form:
             document.getElementById(
                 'assessmentForm'
@@ -295,9 +266,6 @@ function cachePage02DOM() {
                 'form'
             ),
 
-        /*
-         * Need cards
-         */
         cards:
             Array.from(
                 document.querySelectorAll(
@@ -305,9 +273,6 @@ function cachePage02DOM() {
                 )
             ),
 
-        /*
-         * Status buttons
-         */
         statusButtons:
             Array.from(
                 document.querySelectorAll(
@@ -315,9 +280,6 @@ function cachePage02DOM() {
                 )
             ),
 
-        /*
-         * Priority selector
-         */
         prioritySelect:
             document.getElementById(
                 'prioritySelect'
@@ -332,9 +294,6 @@ function cachePage02DOM() {
                 'select[name="priority"]'
             ),
 
-        /*
-         * Snapshot counters
-         */
         fullCount:
             document.getElementById(
                 'fullCount'
@@ -368,9 +327,6 @@ function cachePage02DOM() {
                 '[data-count="none"]'
             ),
 
-        /*
-         * Completion progress
-         */
         completionBar:
             document.getElementById(
                 'completionBar'
@@ -395,9 +351,6 @@ function cachePage02DOM() {
                 'completionMessage'
             ),
 
-        /*
-         * Priority confirmation
-         */
         priorityConfirmation:
             document.getElementById(
                 'priorityConfirmation'
@@ -406,9 +359,6 @@ function cachePage02DOM() {
                 '.priority-confirmation'
             ),
 
-        /*
-         * Save / continue
-         */
         saveContinue:
             document.getElementById(
                 'saveContinueButton'
@@ -420,9 +370,6 @@ function cachePage02DOM() {
                 '[data-action="save-continue"]'
             ),
 
-        /*
-         * Generic status area
-         */
         pageStatus:
             document.getElementById(
                 'pageStatus'
@@ -431,9 +378,6 @@ function cachePage02DOM() {
                 '.page-status'
             ),
 
-        /*
-         * Navigation buttons
-         */
         previousButton:
             document.getElementById(
                 'previousButton'
@@ -462,30 +406,17 @@ function cachePage02DOM() {
 
 
 /* ============================================================
-   08. STATUS HANDLERS
+   07. STATUS HANDLERS
    ============================================================ */
 
 function attachStatusHandlers() {
 
-    const buttons =
-        page02DOM.statusButtons;
-
-    if (!buttons.length) {
-
-        console.warn(
-            'Page 02: no [data-status] buttons found.'
-        );
-
-        return;
-    }
-
-
-    buttons.forEach(
-        function(button) {
+    page02DOM.statusButtons.forEach(
+        button => {
 
             button.addEventListener(
                 'click',
-                function(event) {
+                event => {
 
                     event.preventDefault();
 
@@ -503,68 +434,47 @@ function attachStatusHandlers() {
 
 
 /* ============================================================
-   09. STATUS SELECTION
+   08. STATUS SELECTION
    ============================================================ */
 
-function handleStatusSelection(
-    button
-) {
+function handleStatusSelection(button) {
 
     const card =
         button.closest(
             '[data-need]'
         );
 
-    if (!card) {
-        return;
-    }
-
+    if (!card) return;
 
     const needId =
         normalizeNeedId(
             card.dataset.need
         );
 
-    if (!needId) {
-        return;
-    }
-
-
     const status =
         normalizeStatus(
             button.dataset.status
         );
 
-    if (!status) {
+    if (
+        !needId ||
+        !status
+    ) {
         return;
     }
 
-
-    /*
-     * Save locally immediately.
-     */
     page02Answers[needId] =
         status;
 
     savePage02Answers();
 
-    /*
-     * Update visual state.
-     */
     updateCardSelection(
         card,
         status
     );
 
-    /*
-     * Update snapshot.
-     */
     updatePage02UI();
 
-    /*
-     * Save this answer to backend.
-     * Do not block the user's interaction.
-     */
     saveAnswerToBackend(
         needId,
         status
@@ -574,122 +484,96 @@ function handleStatusSelection(
 
 
 /* ============================================================
-   10. NORMALISE NEED ID
+   09. NORMALISE NEED ID
    ============================================================ */
 
-function normalizeNeedId(
-    value
-) {
+function normalizeNeedId(value) {
 
-    if (!value) {
-        return '';
-    }
-
+    if (!value) return '';
 
     const raw =
         String(value)
             .trim()
             .toUpperCase();
 
-
-    /*
-     * Accept:
-     *
-     * NEED01
-     * need01
-     * 01
-     * 1
-     */
-    const digits =
+    const match =
         raw.match(
             /(\d{1,2})$/
         );
 
-
-    if (!digits) {
+    if (!match) {
         return raw;
     }
 
-
     const number =
         Number(
-            digits[1]
+            match[1]
         );
 
-
     if (
-        !Number.isFinite(
-            number
-        ) ||
+        !Number.isFinite(number) ||
         number < 1 ||
         number > PAGE02_CONFIG.TOTAL_NEEDS
     ) {
         return raw;
     }
 
-
     return (
         'NEED' +
         String(number)
-            .padStart(
-                2,
-                '0'
-            )
+            .padStart(2, '0')
     );
 
 }
 
 
 /* ============================================================
-   11. NORMALISE STATUS
+   10. NORMALISE STATUS
    ============================================================ */
 
-function normalizeStatus(
-    value
-) {
+function normalizeStatus(value) {
 
-    if (!value) {
-        return '';
-    }
-
+    if (!value) return '';
 
     const status =
         String(value)
             .trim()
             .toLowerCase();
 
-
     if (
-        status === 'full' ||
-        status === 'fully' ||
-        status === 'fulfilled' ||
-        status === 'fully-fulfilled' ||
-        status === 'fully_fulfilled'
+        [
+            'full',
+            'fully',
+            'fulfilled',
+            'fully-fulfilled',
+            'fully_fulfilled'
+        ].includes(status)
     ) {
         return PAGE02_STATUS.FULL;
     }
 
-
     if (
-        status === 'partial' ||
-        status === 'partially' ||
-        status === 'partially-fulfilled' ||
-        status === 'partially_fulfilled'
+        [
+            'partial',
+            'partially',
+            'partially-fulfilled',
+            'partially_fulfilled'
+        ].includes(status)
     ) {
         return PAGE02_STATUS.PARTIAL;
     }
 
-
     if (
-        status === 'none' ||
-        status === 'notyet' ||
-        status === 'not-yet' ||
-        status === 'not-yet-fulfilled' ||
-        status === 'not_yet_fulfilled'
+        [
+            'none',
+            'notyet',
+            'not-yet',
+            'not-yet-fulfilled',
+            'not_yet_fulfilled'
+        ].includes(status)
     ) {
         return PAGE02_STATUS.NONE;
     }
-
 
     return '';
 
@@ -697,7 +581,7 @@ function normalizeStatus(
 
 
 /* ============================================================
-   12. UPDATE CARD SELECTION
+   11. CARD SELECTION
    ============================================================ */
 
 function updateCardSelection(
@@ -705,10 +589,7 @@ function updateCardSelection(
     selectedStatus
 ) {
 
-    if (!card) {
-        return;
-    }
-
+    if (!card) return;
 
     const buttons =
         Array.from(
@@ -717,9 +598,8 @@ function updateCardSelection(
             )
         );
 
-
     buttons.forEach(
-        function(button) {
+        button => {
 
             const status =
                 normalizeStatus(
@@ -730,66 +610,33 @@ function updateCardSelection(
                 status ===
                 selectedStatus;
 
-
-            /*
-             * Remove old visual state.
-             */
-            button.classList.remove(
-                'selected'
+            button.classList.toggle(
+                'selected',
+                selected
             );
 
-
-            button.removeAttribute(
-                'aria-pressed'
+            button.setAttribute(
+                'aria-pressed',
+                selected
+                    ? 'true'
+                    : 'false'
             );
-
-
-            /*
-             * Apply new visual state.
-             */
-            if (selected) {
-
-                button.classList.add(
-                    'selected'
-                );
-
-                button.setAttribute(
-                    'aria-pressed',
-                    'true'
-                );
-
-            }
-            else {
-
-                button.setAttribute(
-                    'aria-pressed',
-                    'false'
-                );
-
-            }
 
         }
     );
 
+    card.classList.toggle(
+        'has-selection',
+        Boolean(selectedStatus)
+    );
 
-    /*
-     * Mark the card itself.
-     */
     if (selectedStatus) {
-
-        card.classList.add(
-            'has-selection'
-        );
 
         card.dataset.selectedStatus =
             selectedStatus;
 
     }
     else {
-
-        card.classList.remove(
-            'has-selection'
-        );
 
         delete card.dataset.selectedStatus;
 
@@ -799,7 +646,7 @@ function updateCardSelection(
 
 
 /* ============================================================
-   13. PRIORITY HANDLER
+   12. PRIORITY HANDLER
    ============================================================ */
 
 function attachPriorityHandler() {
@@ -807,19 +654,11 @@ function attachPriorityHandler() {
     const select =
         page02DOM.prioritySelect;
 
-    if (!select) {
-
-        console.warn(
-            'Page 02: priority selector not found.'
-        );
-
-        return;
-    }
-
+    if (!select) return;
 
     select.addEventListener(
         'change',
-        function() {
+        () => {
 
             handlePriorityChange(
                 select.value
@@ -832,23 +671,16 @@ function attachPriorityHandler() {
 
 
 /* ============================================================
-   14. PRIORITY CHANGE
+   13. PRIORITY CHANGE
    ============================================================ */
 
-function handlePriorityChange(
-    value
-) {
+function handlePriorityChange(value) {
 
     page02Priority =
         normalizeNeedId(
             value
         );
 
-
-    /*
-     * If HTML stores the actual value
-     * as NEED01 etc, preserve it.
-     */
     if (
         !page02Priority ||
         !isValidNeedId(
@@ -863,26 +695,20 @@ function handlePriorityChange(
 
     }
 
-
     localStorage.setItem(
         PAGE02_CONFIG.PRIORITY_STORAGE_KEY,
         page02Priority
     );
 
-
     updatePriorityConfirmation();
 
-
-    /*
-     * Save priority separately.
-     */
     savePriorityToBackend();
 
 }
 
 
 /* ============================================================
-   15. PRIORITY CONFIRMATION
+   14. PRIORITY CONFIRMATION
    ============================================================ */
 
 function updatePriorityConfirmation() {
@@ -890,16 +716,12 @@ function updatePriorityConfirmation() {
     const element =
         page02DOM.priorityConfirmation;
 
-    if (!element) {
-        return;
-    }
-
+    if (!element) return;
 
     const need =
         findNeed(
             page02Priority
         );
-
 
     if (!need) {
 
@@ -908,14 +730,9 @@ function updatePriorityConfirmation() {
         );
 
         return;
+
     }
 
-
-    /*
-     * Keep existing HTML if the
-     * page already contains a
-     * structured confirmation.
-     */
     const ta =
         element.querySelector(
             '[data-priority-ta]'
@@ -926,26 +743,21 @@ function updatePriorityConfirmation() {
             '[data-priority-en]'
         );
 
-
     if (ta) {
+
         ta.textContent =
             need.ta;
+
     }
 
     if (en) {
+
         en.textContent =
             need.en;
+
     }
 
-
-    /*
-     * If no dedicated elements exist,
-     * update only a safe text container.
-     */
-    if (
-        !ta &&
-        !en
-    ) {
+    if (!ta && !en) {
 
         element.textContent =
             need.ta +
@@ -953,7 +765,6 @@ function updatePriorityConfirmation() {
             need.en;
 
     }
-
 
     element.classList.add(
         'visible'
@@ -963,7 +774,7 @@ function updatePriorityConfirmation() {
 
 
 /* ============================================================
-   16. UPDATE COMPLETE PAGE UI
+   15. COMPLETE PAGE UI
    ============================================================ */
 
 function updatePage02UI() {
@@ -980,16 +791,13 @@ function updatePage02UI() {
 
 
 /* ============================================================
-   17. UPDATE ALL CARD STATES
+   16. RESTORE CARD STATES
    ============================================================ */
 
 function updateAllCardStates() {
 
-    const cards =
-        page02DOM.cards;
-
-    cards.forEach(
-        function(card) {
+    page02DOM.cards.forEach(
+        card => {
 
             const needId =
                 normalizeNeedId(
@@ -1000,7 +808,6 @@ function updateAllCardStates() {
                 page02Answers[
                     needId
                 ] || '';
-
 
             updateCardSelection(
                 card,
@@ -1014,7 +821,7 @@ function updateAllCardStates() {
 
 
 /* ============================================================
-   18. CALCULATE SNAPSHOT
+   17. SNAPSHOT
    ============================================================ */
 
 function calculatePage02Snapshot() {
@@ -1027,15 +834,13 @@ function calculatePage02Snapshot() {
 
     let answered = 0;
 
-
     PAGE02_NEEDS.forEach(
-        function(need) {
+        need => {
 
             const status =
                 page02Answers[
                     need.id
                 ];
-
 
             if (
                 status ===
@@ -1043,6 +848,7 @@ function calculatePage02Snapshot() {
             ) {
 
                 full++;
+
                 answered++;
 
             }
@@ -1052,6 +858,7 @@ function calculatePage02Snapshot() {
             ) {
 
                 partial++;
+
                 answered++;
 
             }
@@ -1061,6 +868,7 @@ function calculatePage02Snapshot() {
             ) {
 
                 none++;
+
                 answered++;
 
             }
@@ -1068,12 +876,14 @@ function calculatePage02Snapshot() {
         }
     );
 
-
     return {
 
         full,
+
         partial,
+
         none,
+
         answered,
 
         unanswered:
@@ -1089,7 +899,7 @@ function calculatePage02Snapshot() {
 
 
 /* ============================================================
-   19. UPDATE SNAPSHOT COUNTERS
+   18. SNAPSHOT COUNTERS
    ============================================================ */
 
 function updateSnapshotCounts() {
@@ -1097,18 +907,15 @@ function updateSnapshotCounts() {
     const snapshot =
         calculatePage02Snapshot();
 
-
     setElementText(
         page02DOM.fullCount,
         snapshot.full
     );
 
-
     setElementText(
         page02DOM.partialCount,
         snapshot.partial
     );
-
 
     setElementText(
         page02DOM.noneCount,
@@ -1119,7 +926,7 @@ function updateSnapshotCounts() {
 
 
 /* ============================================================
-   20. COMPLETION PROGRESS
+   19. COMPLETION PROGRESS
    ============================================================ */
 
 function updateCompletionProgress() {
@@ -1127,58 +934,40 @@ function updateCompletionProgress() {
     const snapshot =
         calculatePage02Snapshot();
 
-
     const percentage =
         Math.round(
             (
                 snapshot.answered /
                 snapshot.total
-            ) *
-            100
+            ) * 100
         );
 
-
-    /*
-     * Progress bar.
-     */
     if (
         page02DOM.completionBar
     ) {
 
         page02DOM.completionBar.style.width =
-            percentage +
-            '%';
+            percentage + '%';
 
     }
 
-
-    /*
-     * Percentage text.
-     */
     if (
         page02DOM.completionPercent
     ) {
 
         page02DOM.completionPercent.textContent =
-            percentage +
-            '%';
+            percentage + '%';
 
     }
 
-
-    /*
-     * Completion message.
-     */
     if (
         page02DOM.completionMessage
     ) {
 
         let message;
 
-
         if (
-            snapshot.answered ===
-            0
+            snapshot.answered === 0
         ) {
 
             message =
@@ -1191,12 +980,10 @@ function updateCompletionProgress() {
         ) {
 
             message =
-                (
-                    snapshot.answered +
-                    ' / ' +
-                    snapshot.total +
-                    ' தேவைகள் பதிவு செய்யப்பட்டுள்ளன.'
-                );
+                snapshot.answered +
+                ' / ' +
+                snapshot.total +
+                ' தேவைகள் பதிவு செய்யப்பட்டுள்ளன.';
 
         }
         else {
@@ -1205,7 +992,6 @@ function updateCompletionProgress() {
                 'அனைத்து 12 தேவைகளும் பதிவு செய்யப்பட்டுள்ளன.';
 
         }
-
 
         page02DOM.completionMessage.textContent =
             message;
@@ -1216,7 +1002,7 @@ function updateCompletionProgress() {
 
 
 /* ============================================================
-   21. LOCAL STORAGE — SAVE ANSWERS
+   20. LOCAL STORAGE — ANSWERS
    ============================================================ */
 
 function savePage02Answers() {
@@ -1244,7 +1030,7 @@ function savePage02Answers() {
 
 
 /* ============================================================
-   22. LOCAL STORAGE — SAVE SUMMARY
+   21. LOCAL STORAGE — SUMMARY
    ============================================================ */
 
 function savePage02Summary() {
@@ -1252,14 +1038,15 @@ function savePage02Summary() {
     const snapshot =
         calculatePage02Snapshot();
 
-
     const summary = {
 
         pageNumber:
             PAGE02_CONFIG.PAGE_NUMBER,
 
         answers:
-            page02Answers,
+            {
+                ...page02Answers
+            },
 
         full:
             snapshot.full,
@@ -1291,7 +1078,6 @@ function savePage02Summary() {
 
     };
 
-
     try {
 
         localStorage.setItem(
@@ -1311,26 +1097,21 @@ function savePage02Summary() {
 
     }
 
-
     return summary;
 
 }
 
 
 /* ============================================================
-   23. RESTORE PAGE 02 STATE
+   22. RESTORE STATE
    ============================================================ */
 
 function restorePage02State() {
 
-    /*
-     * Restore answers.
-     */
     const storedAnswers =
         localStorage.getItem(
             PAGE02_CONFIG.STORAGE_KEY
         );
-
 
     if (storedAnswers) {
 
@@ -1341,7 +1122,6 @@ function restorePage02State() {
                     storedAnswers
                 );
 
-
             if (
                 parsed &&
                 typeof parsed ===
@@ -1351,7 +1131,7 @@ function restorePage02State() {
                 Object.keys(
                     parsed
                 ).forEach(
-                    function(key) {
+                    key => {
 
                         const needId =
                             normalizeNeedId(
@@ -1363,7 +1143,6 @@ function restorePage02State() {
                                 parsed[key]
                             );
 
-
                         if (
                             isValidNeedId(
                                 needId
@@ -1373,7 +1152,8 @@ function restorePage02State() {
 
                             page02Answers[
                                 needId
-                            ] = status;
+                            ] =
+                                status;
 
                         }
 
@@ -1394,15 +1174,10 @@ function restorePage02State() {
 
     }
 
-
-    /*
-     * Restore priority.
-     */
     const storedPriority =
         localStorage.getItem(
             PAGE02_CONFIG.PRIORITY_STORAGE_KEY
         );
-
 
     if (storedPriority) {
 
@@ -1413,40 +1188,26 @@ function restorePage02State() {
 
     }
 
-
-    /*
-     * Restore select visually.
-     */
     if (
         page02DOM.prioritySelect &&
         page02Priority
     ) {
 
-        const select =
-            page02DOM.prioritySelect;
-
-
-        const matchingOption =
+        const option =
             Array.from(
-                select.options
+                page02DOM.prioritySelect.options
             ).find(
-                function(option) {
-
-                    return (
-                        normalizeNeedId(
-                            option.value
-                        ) ===
-                        page02Priority
-                    );
-
-                }
+                item =>
+                    normalizeNeedId(
+                        item.value
+                    ) ===
+                    page02Priority
             );
 
+        if (option) {
 
-        if (matchingOption) {
-
-            select.value =
-                matchingOption.value;
+            page02DOM.prioritySelect.value =
+                option.value;
 
         }
 
@@ -1456,22 +1217,20 @@ function restorePage02State() {
 
 
 /* ============================================================
-   24. VALIDATE ALL 12 RESPONSES
+   23. VALIDATION
    ============================================================ */
 
 function validatePage02() {
 
     const missing = [];
 
-
     PAGE02_NEEDS.forEach(
-        function(need) {
+        need => {
 
             const status =
                 page02Answers[
                     need.id
                 ];
-
 
             if (
                 !normalizeStatus(
@@ -1487,7 +1246,6 @@ function validatePage02() {
 
         }
     );
-
 
     return {
 
@@ -1506,7 +1264,7 @@ function validatePage02() {
 
 
 /* ============================================================
-   25. SHOW VALIDATION MESSAGE
+   24. VALIDATION MESSAGE
    ============================================================ */
 
 function showValidationMessage(
@@ -1520,10 +1278,8 @@ function showValidationMessage(
         return;
     }
 
-
     const firstMissing =
         validation.missing[0];
-
 
     if (firstMissing) {
 
@@ -1531,7 +1287,6 @@ function showValidationMessage(
             findCardByNeedId(
                 firstMissing.id
             );
-
 
         if (card) {
 
@@ -1542,14 +1297,12 @@ function showValidationMessage(
                 }
             );
 
-
             card.classList.add(
                 'needs-attention'
             );
 
-
             setTimeout(
-                function() {
+                () => {
 
                     card.classList.remove(
                         'needs-attention'
@@ -1563,7 +1316,6 @@ function showValidationMessage(
 
     }
 
-
     setPage02Status(
         'முதலில் 12 தேவைகளுக்கும் உங்கள் நிலையைத் தேர்வு செய்யுங்கள்.',
         'error'
@@ -1573,26 +1325,19 @@ function showValidationMessage(
 
 
 /* ============================================================
-   26. NAVIGATION HANDLERS
+   25. NAVIGATION
    ============================================================ */
 
 function attachNavigationHandlers() {
 
-    /*
-     * Previous.
-     */
     if (
         page02DOM.previousButton
     ) {
 
         page02DOM.previousButton.addEventListener(
             'click',
-            function(event) {
+            event => {
 
-                /*
-                 * If it is already an <a>,
-                 * allow the browser to navigate.
-                 */
                 if (
                     page02DOM.previousButton.tagName
                         .toLowerCase() ===
@@ -1600,7 +1345,6 @@ function attachNavigationHandlers() {
                 ) {
                     return;
                 }
-
 
                 event.preventDefault();
 
@@ -1615,9 +1359,6 @@ function attachNavigationHandlers() {
     }
 
 
-    /*
-     * Next.
-     */
     if (
         page02DOM.nextButton
     ) {
@@ -1630,9 +1371,6 @@ function attachNavigationHandlers() {
     }
 
 
-    /*
-     * Save & Continue.
-     */
     if (
         page02DOM.saveContinue &&
         page02DOM.saveContinue !==
@@ -1647,16 +1385,13 @@ function attachNavigationHandlers() {
     }
 
 
-    /*
-     * Form submit.
-     */
     if (
         page02DOM.form
     ) {
 
         page02DOM.form.addEventListener(
             'submit',
-            function(event) {
+            event => {
 
                 event.preventDefault();
 
@@ -1673,36 +1408,27 @@ function attachNavigationHandlers() {
 
 
 /* ============================================================
-   27. CONTINUE TO PAGE 03
+   26. CONTINUE TO PAGE 03
    ============================================================ */
 
 async function handlePage02Continue(
     event
 ) {
 
-    if (
-        event
-    ) {
+    if (event) {
+
         event.preventDefault();
+
     }
 
+    if (page02Saving) {
 
-    /*
-     * Prevent double click.
-     */
-    if (
-        page02Saving
-    ) {
         return;
+
     }
 
-
-    /*
-     * Validate all 12.
-     */
     const validation =
         validatePage02();
-
 
     if (
         !validation.valid
@@ -1713,13 +1439,9 @@ async function handlePage02Continue(
         );
 
         return;
+
     }
 
-
-    /*
-     * Priority is required by
-     * the frozen Page 02 concept.
-     */
     if (
         !page02Priority ||
         !isValidNeedId(
@@ -1733,7 +1455,6 @@ async function handlePage02Continue(
             'இந்த 12 தேவைகளில் இப்போது உங்களுக்கு மிகவும் முக்கியமான தேவையைத் தேர்வு செய்யுங்கள்.',
             'error'
         );
-
 
         if (
             page02DOM.prioritySelect
@@ -1750,66 +1471,41 @@ async function handlePage02Continue(
 
         }
 
-
         return;
 
     }
 
-
-    /*
-     * Save locally before backend.
-     */
     const summary =
         savePage02Summary();
 
-
     savePage02Answers();
 
-
-    /*
-     * Lock navigation while saving.
-     */
     page02Saving = true;
 
     setNavigationDisabled(
         true
     );
 
-
     setPage02Status(
         'உங்கள் பதில்கள் பாதுகாக்கப்படுகின்றன...',
         'loading'
     );
 
-
     try {
 
-        /*
-         * Save all 12 answers.
-         */
         await saveAllAnswersToBackend();
 
-
-        /*
-         * Save priority / page progress.
-         */
         await savePageProgressToBackend(
             summary
         );
-
 
         setPage02Status(
             '✓ மதிப்பீடு பாதுகாக்கப்பட்டது / Assessment saved',
             'success'
         );
 
-
-        /*
-         * Small delay so the user sees
-         * confirmation before navigation.
-         */
         setTimeout(
-            function() {
+            () => {
 
                 window.location.href =
                     PAGE02_CONFIG.NEXT_PAGE;
@@ -1826,25 +1522,14 @@ async function handlePage02Continue(
             error
         );
 
-
-        /*
-         * Important:
-         *
-         * Local data has already been saved.
-         * Therefore the user does not lose
-         * the assessment even if backend
-         * saving fails.
-         */
         setPage02Status(
             'உங்கள் பதில்கள் இந்த சாதனத்தில் பாதுகாக்கப்பட்டுள்ளன. அடுத்த பக்கத்திற்குச் செல்ல மீண்டும் முயற்சிக்கவும்.',
             'error'
         );
 
-
         setNavigationDisabled(
             false
         );
-
 
         page02Saving = false;
 
@@ -1854,7 +1539,7 @@ async function handlePage02Continue(
 
 
 /* ============================================================
-   28. SAVE ALL ANSWERS
+   27. SAVE ALL ANSWERS
    ============================================================ */
 
 async function saveAllAnswersToBackend() {
@@ -1862,14 +1547,6 @@ async function saveAllAnswersToBackend() {
     const visitorId =
         getVisitorId();
 
-
-    /*
-     * No Visitor ID:
-     *
-     * Do not destroy the user's journey.
-     * Local storage remains authoritative
-     * for this browser session.
-     */
     if (!visitorId) {
 
         console.warn(
@@ -1880,8 +1557,7 @@ async function saveAllAnswersToBackend() {
 
             success: false,
 
-            skipped:
-                true,
+            skipped: true,
 
             reason:
                 'VISITOR_ID_MISSING'
@@ -1890,43 +1566,33 @@ async function saveAllAnswersToBackend() {
 
     }
 
-
     const requests =
         PAGE02_NEEDS.map(
-            function(need) {
-
-                const status =
-                    page02Answers[
-                        need.id
-                    ];
-
+            need => {
 
                 return saveAnswerToBackend(
                     need.id,
-                    status,
+                    page02Answers[
+                        need.id
+                    ],
                     visitorId
                 );
 
             }
         );
 
-
     const results =
         await Promise.all(
             requests
         );
 
-
     return {
 
         success:
             results.every(
-                function(result) {
-                    return (
-                        result === true ||
-                        result?.skipped === true
-                    );
-                }
+                result =>
+                    result === true ||
+                    result?.skipped === true
             ),
 
         results
@@ -1937,7 +1603,7 @@ async function saveAllAnswersToBackend() {
 
 
 /* ============================================================
-   29. SAVE ONE ANSWER TO BACKEND
+   28. SAVE ONE ANSWER
    ============================================================ */
 
 async function saveAnswerToBackend(
@@ -1950,7 +1616,6 @@ async function saveAnswerToBackend(
         visitorIdOverride ||
         getVisitorId();
 
-
     if (!visitorId) {
 
         return {
@@ -1959,17 +1624,16 @@ async function saveAnswerToBackend(
 
     }
 
-
     const need =
         findNeed(
             needId
         );
 
-
     if (!need) {
-        return false;
-    }
 
+        return false;
+
+    }
 
     const payload = {
 
@@ -1999,9 +1663,7 @@ async function saveAnswerToBackend(
                     status
                 ),
 
-            status:
-
-                status,
+            status,
 
             statusLabelTa:
                 getStatusLabelTa(
@@ -2017,7 +1679,6 @@ async function saveAnswerToBackend(
 
     };
 
-
     try {
 
         const response =
@@ -2025,8 +1686,7 @@ async function saveAnswerToBackend(
                 PAGE02_CONFIG.BACKEND_URL,
                 {
 
-                    method:
-                        'POST',
+                    method: 'POST',
 
                     headers: {
 
@@ -2043,10 +1703,7 @@ async function saveAnswerToBackend(
                 }
             );
 
-
-        if (
-            !response.ok
-        ) {
+        if (!response.ok) {
 
             throw new Error(
                 'Server error: ' +
@@ -2055,27 +1712,16 @@ async function saveAnswerToBackend(
 
         }
 
-
         const text =
             await response.text();
 
-
-        /*
-         * Apps Script occasionally returns
-         * an empty body. Treat the HTTP success
-         * as sufficient in that case.
-         */
-        if (
-            !text
-        ) {
+        if (!text) {
 
             return true;
 
         }
 
-
         let result;
-
 
         try {
 
@@ -2085,15 +1731,8 @@ async function saveAnswerToBackend(
                 );
 
         }
-        catch (
-            parseError
-        ) {
+        catch (parseError) {
 
-            /*
-             * If the endpoint returned HTTP 200
-             * but not JSON, do not immediately
-             * destroy the user's progress.
-             */
             console.warn(
                 'Page 02 backend returned non-JSON response.'
             );
@@ -2101,7 +1740,6 @@ async function saveAnswerToBackend(
             return true;
 
         }
-
 
         if (
             result &&
@@ -2115,7 +1753,6 @@ async function saveAnswerToBackend(
 
         }
 
-
         return true;
 
     }
@@ -2126,10 +1763,6 @@ async function saveAnswerToBackend(
             error
         );
 
-
-        /*
-         * Keep local state intact.
-         */
         return false;
 
     }
@@ -2138,7 +1771,7 @@ async function saveAnswerToBackend(
 
 
 /* ============================================================
-   30. SAVE PAGE PROGRESS
+   29. SAVE PAGE PROGRESS
    ============================================================ */
 
 async function savePageProgressToBackend(
@@ -2148,7 +1781,6 @@ async function savePageProgressToBackend(
     const visitorId =
         getVisitorId();
 
-
     if (!visitorId) {
 
         return {
@@ -2156,7 +1788,6 @@ async function savePageProgressToBackend(
         };
 
     }
-
 
     const payload = {
 
@@ -2206,7 +1837,6 @@ async function savePageProgressToBackend(
 
     };
 
-
     try {
 
         const response =
@@ -2214,8 +1844,7 @@ async function savePageProgressToBackend(
                 PAGE02_CONFIG.BACKEND_URL,
                 {
 
-                    method:
-                        'POST',
+                    method: 'POST',
 
                     headers: {
 
@@ -2232,10 +1861,7 @@ async function savePageProgressToBackend(
                 }
             );
 
-
-        if (
-            !response.ok
-        ) {
+        if (!response.ok) {
 
             throw new Error(
                 'Page progress server error: ' +
@@ -2243,7 +1869,6 @@ async function savePageProgressToBackend(
             );
 
         }
-
 
         return true;
 
@@ -2255,11 +1880,6 @@ async function savePageProgressToBackend(
             error
         );
 
-
-        /*
-         * The 12 individual answers have
-         * already been saved locally.
-         */
         return false;
 
     }
@@ -2268,7 +1888,7 @@ async function savePageProgressToBackend(
 
 
 /* ============================================================
-   31. SAVE PRIORITY TO BACKEND
+   30. SAVE PRIORITY
    ============================================================ */
 
 async function savePriorityToBackend() {
@@ -2276,37 +1896,28 @@ async function savePriorityToBackend() {
     const visitorId =
         getVisitorId();
 
-
     if (!visitorId) {
-        return;
-    }
 
+        return;
+
+    }
 
     const need =
         findNeed(
             page02Priority
         );
 
-
     if (!need) {
+
         return;
+
     }
 
-
-    /*
-     * Priority is stored locally first.
-     */
     localStorage.setItem(
         PAGE02_CONFIG.PRIORITY_STORAGE_KEY,
         page02Priority
     );
 
-
-    /*
-     * Use save_progress so this remains
-     * compatible with the existing backend
-     * architecture.
-     */
     const payload = {
 
         action:
@@ -2340,15 +1951,13 @@ async function savePriorityToBackend() {
 
     };
 
-
     try {
 
         await fetch(
             PAGE02_CONFIG.BACKEND_URL,
             {
 
-                method:
-                    'POST',
+                method: 'POST',
 
                 headers: {
 
@@ -2368,12 +1977,8 @@ async function savePriorityToBackend() {
     }
     catch (error) {
 
-        /*
-         * Priority is already safely
-         * stored locally.
-         */
         console.warn(
-            'Page 02 priority backend save failed:',
+            'CTM PATH™ Page 02 priority backend save failed:',
             error
         );
 
@@ -2383,23 +1988,10 @@ async function savePriorityToBackend() {
 
 
 /* ============================================================
-   32. STATUS → SCORE
-   ============================================================
+   31. STATUS → SCORE
+   ============================================================ */
 
-   IMPORTANT:
-   Page 02 is NOT presented as a /120 score.
-
-   These values are only useful if the backend
-   wants a normalized internal representation.
-
-       Fully Fulfilled       = 2
-       Partially Fulfilled   = 1
-       Not Yet Fulfilled     = 0
-   */
-
-function statusToScore(
-    status
-) {
+function statusToScore(status) {
 
     switch (
         normalizeStatus(
@@ -2408,15 +2000,19 @@ function statusToScore(
     ) {
 
         case PAGE02_STATUS.FULL:
+
             return 2;
 
         case PAGE02_STATUS.PARTIAL:
+
             return 1;
 
         case PAGE02_STATUS.NONE:
+
             return 0;
 
         default:
+
             return null;
 
     }
@@ -2425,12 +2021,10 @@ function statusToScore(
 
 
 /* ============================================================
-   33. STATUS LABEL — TAMIL
+   32. STATUS LABEL — TAMIL
    ============================================================ */
 
-function getStatusLabelTa(
-    status
-) {
+function getStatusLabelTa(status) {
 
     switch (
         normalizeStatus(
@@ -2439,15 +2033,19 @@ function getStatusLabelTa(
     ) {
 
         case PAGE02_STATUS.FULL:
+
             return 'முழுமையாக நிறைவேறியது';
 
         case PAGE02_STATUS.PARTIAL:
+
             return 'ஓரளவு நிறைவேறியது';
 
         case PAGE02_STATUS.NONE:
+
             return 'இன்னும் நிறைவேறவில்லை';
 
         default:
+
             return '';
 
     }
@@ -2456,12 +2054,10 @@ function getStatusLabelTa(
 
 
 /* ============================================================
-   34. STATUS LABEL — ENGLISH
+   33. STATUS LABEL — ENGLISH
    ============================================================ */
 
-function getStatusLabelEn(
-    status
-) {
+function getStatusLabelEn(status) {
 
     switch (
         normalizeStatus(
@@ -2470,15 +2066,19 @@ function getStatusLabelEn(
     ) {
 
         case PAGE02_STATUS.FULL:
+
             return 'Fully Fulfilled';
 
         case PAGE02_STATUS.PARTIAL:
+
             return 'Partially Fulfilled';
 
         case PAGE02_STATUS.NONE:
+
             return 'Not Yet Fulfilled';
 
         default:
+
             return '';
 
     }
@@ -2487,29 +2087,21 @@ function getStatusLabelEn(
 
 
 /* ============================================================
-   35. FIND NEED
+   34. FIND NEED
    ============================================================ */
 
-function findNeed(
-    needId
-) {
+function findNeed(needId) {
 
     const normalized =
         normalizeNeedId(
             needId
         );
-
 
     return (
         PAGE02_NEEDS.find(
-            function(need) {
-
-                return (
-                    need.id ===
-                    normalized
-                );
-
-            }
+            need =>
+                need.id ===
+                normalized
         ) ||
         null
     );
@@ -2518,31 +2110,23 @@ function findNeed(
 
 
 /* ============================================================
-   36. FIND CARD
+   35. FIND CARD
    ============================================================ */
 
-function findCardByNeedId(
-    needId
-) {
+function findCardByNeedId(needId) {
 
     const normalized =
         normalizeNeedId(
             needId
         );
 
-
     return (
         page02DOM.cards.find(
-            function(card) {
-
-                return (
-                    normalizeNeedId(
-                        card.dataset.need
-                    ) ===
-                    normalized
-                );
-
-            }
+            card =>
+                normalizeNeedId(
+                    card.dataset.need
+                ) ===
+                normalized
         ) ||
         null
     );
@@ -2551,12 +2135,10 @@ function findCardByNeedId(
 
 
 /* ============================================================
-   37. VALID NEED ID
+   36. VALID NEED ID
    ============================================================ */
 
-function isValidNeedId(
-    needId
-) {
+function isValidNeedId(needId) {
 
     return Boolean(
         findNeed(
@@ -2568,7 +2150,7 @@ function isValidNeedId(
 
 
 /* ============================================================
-   38. VISITOR ID
+   37. VISITOR ID
    ============================================================ */
 
 function getVisitorId() {
@@ -2584,7 +2166,7 @@ function getVisitorId() {
 
 
 /* ============================================================
-   39. SET PAGE STATUS
+   38. PAGE STATUS
    ============================================================ */
 
 function setPage02Status(
@@ -2594,7 +2176,6 @@ function setPage02Status(
 
     const element =
         page02DOM.pageStatus;
-
 
     if (!element) {
 
@@ -2607,10 +2188,8 @@ function setPage02Status(
 
     }
 
-
     element.textContent =
         message;
-
 
     element.className =
         'page-status ' +
@@ -2623,7 +2202,7 @@ function setPage02Status(
 
 
 /* ============================================================
-   40. DISABLE / ENABLE NAVIGATION
+   39. DISABLE / ENABLE NAVIGATION
    ============================================================ */
 
 function setNavigationDisabled(
@@ -2640,18 +2219,11 @@ function setNavigationDisabled(
 
     ];
 
-
     buttons.forEach(
-        function(button) {
+        button => {
 
-            if (!button) {
-                return;
-            }
+            if (!button) return;
 
-
-            /*
-             * Buttons.
-             */
             if (
                 button.tagName
                     .toLowerCase() ===
@@ -2663,10 +2235,6 @@ function setNavigationDisabled(
 
             }
 
-
-            /*
-             * Links.
-             */
             if (
                 button.tagName
                     .toLowerCase() ===
@@ -2703,7 +2271,7 @@ function setNavigationDisabled(
 
 
 /* ============================================================
-   41. SAFE TEXT UPDATE
+   40. SAFE TEXT UPDATE
    ============================================================ */
 
 function setElementText(
@@ -2711,10 +2279,7 @@ function setElementText(
     value
 ) {
 
-    if (!element) {
-        return;
-    }
-
+    if (!element) return;
 
     element.textContent =
         String(
@@ -2725,180 +2290,151 @@ function setElementText(
 
 
 /* ============================================================
-   42. DEBUG / QA API
-   ============================================================
-
-   Available from browser console:
-
-       page02Debug.getState()
-
-       page02Debug.getSnapshot()
-
-       page02Debug.clear()
-
-       page02Debug.completeAll()
-
-   These helpers do not affect normal production
-   operation unless explicitly called.
-   */
+   41. DEBUG / QA API
+   ============================================================ */
 
 function exposePage02DebugAPI() {
 
     window.page02Debug = {
 
-        getState:
-            function() {
+        getState() {
 
-                return {
+            return {
 
-                    answers:
-                        {
-                            ...page02Answers
-                        },
+                answers:
+                    {
+                        ...page02Answers
+                    },
 
-                    priority:
-                        page02Priority,
+                priority:
+                    page02Priority,
 
-                    snapshot:
-                        calculatePage02Snapshot()
+                snapshot:
+                    calculatePage02Snapshot()
 
-                };
+            };
 
-            },
-
-
-        getSnapshot:
-            function() {
-
-                return calculatePage02Snapshot();
-
-            },
+        },
 
 
-        clear:
-            function() {
+        getSnapshot() {
 
-                page02Answers = {};
+            return calculatePage02Snapshot();
 
-                page02Priority = '';
-
-                localStorage.removeItem(
-                    PAGE02_CONFIG.STORAGE_KEY
-                );
-
-                localStorage.removeItem(
-                    PAGE02_CONFIG.SUMMARY_STORAGE_KEY
-                );
-
-                localStorage.removeItem(
-                    PAGE02_CONFIG.PRIORITY_STORAGE_KEY
-                );
+        },
 
 
-                if (
-                    page02DOM.prioritySelect
-                ) {
+        clear() {
 
-                    page02DOM.prioritySelect.value =
-                        '';
+            page02Answers = {};
 
-                }
+            page02Priority = '';
 
+            localStorage.removeItem(
+                PAGE02_CONFIG.STORAGE_KEY
+            );
 
-                updatePage02UI();
+            localStorage.removeItem(
+                PAGE02_CONFIG.SUMMARY_STORAGE_KEY
+            );
 
-            },
+            localStorage.removeItem(
+                PAGE02_CONFIG.PRIORITY_STORAGE_KEY
+            );
 
-
-        completeAll:
-            function(
-                status
+            if (
+                page02DOM.prioritySelect
             ) {
 
-                const selectedStatus =
-                    normalizeStatus(
-                        status
-                    ) ||
-                    PAGE02_STATUS.FULL;
-
-
-                PAGE02_NEEDS.forEach(
-                    function(need) {
-
-                        page02Answers[
-                            need.id
-                        ] =
-                            selectedStatus;
-
-                    }
-                );
-
-
-                savePage02Answers();
-
-                updatePage02UI();
-
-            },
-
-
-        setAnswer:
-            function(
-                needId,
-                status
-            ) {
-
-                const normalizedNeed =
-                    normalizeNeedId(
-                        needId
-                    );
-
-                const normalizedStatus =
-                    normalizeStatus(
-                        status
-                    );
-
-
-                if (
-                    !isValidNeedId(
-                        normalizedNeed
-                    )
-                ) {
-
-                    console.warn(
-                        'Invalid Page 02 need:',
-                        needId
-                    );
-
-                    return;
-
-                }
-
-
-                if (
-                    !normalizedStatus
-                ) {
-
-                    console.warn(
-                        'Invalid Page 02 status:',
-                        status
-                    );
-
-                    return;
-
-                }
-
-
-                page02Answers[
-                    normalizedNeed
-                ] =
-                    normalizedStatus;
-
-
-                savePage02Answers();
-
-                updatePage02UI();
+                page02DOM.prioritySelect.value =
+                    '';
 
             }
+
+            updatePage02UI();
+
+        },
+
+
+        completeAll(
+            status
+        ) {
+
+            const selectedStatus =
+                normalizeStatus(
+                    status
+                ) ||
+                PAGE02_STATUS.FULL;
+
+            PAGE02_NEEDS.forEach(
+                need => {
+
+                    page02Answers[
+                        need.id
+                    ] =
+                        selectedStatus;
+
+                }
+            );
+
+            savePage02Answers();
+
+            updatePage02UI();
+
+        },
+
+
+        setAnswer(
+            needId,
+            status
+        ) {
+
+            const normalizedNeed =
+                normalizeNeedId(
+                    needId
+                );
+
+            const normalizedStatus =
+                normalizeStatus(
+                    status
+                );
+
+            if (
+                !isValidNeedId(
+                    normalizedNeed
+                )
+            ) {
+
+                console.warn(
+                    'Invalid Page 02 need:',
+                    needId
+                );
+
+                return;
+
+            }
+
+            if (!normalizedStatus) {
+
+                console.warn(
+                    'Invalid Page 02 status:',
+                    status
+                );
+
+                return;
+
+            }
+
+            page02Answers[
+                normalizedNeed
+            ] =
+                normalizedStatus;
+
+            savePage02Answers();
+
+            updatePage02UI();
+
+        }
 
     };
 
@@ -2906,7 +2442,7 @@ function exposePage02DebugAPI() {
 
 
 /* ============================================================
-   43. INITIALISATION
+   42. INITIALISE
    ============================================================ */
 
 if (
@@ -2930,4 +2466,3 @@ else {
 /* ============================================================
    END OF js/page02.js
    ============================================================ */
-
