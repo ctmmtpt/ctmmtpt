@@ -1,1 +1,2760 @@
+/* =========================================================
+   CTM PATH™ MILLIONAIRES™
+   PAGE 15 — BUILD YOUR CUSTOMER BASE™
+   Complete replacement
+   css/page15.css
+   ========================================================= */
 
+
+/* =========================================================
+   PAGE VARIABLES
+   ========================================================= */
+
+:root {
+    --p15-bg: #06131d;
+    --p15-bg-deep: #020b12;
+
+    --p15-panel: #091d2b;
+    --p15-panel-soft: #0c2637;
+    --p15-panel-light: #103149;
+
+    --p15-ivory: #f5f0e7;
+    --p15-white: #ffffff;
+
+    --p15-muted: #aab9c2;
+    --p15-muted-dark: #71838e;
+
+    --p15-gold: #f2b52b;
+    --p15-gold-light: #ffd96b;
+    --p15-gold-dark: #b97b0a;
+
+    --p15-teal: #08c8ce;
+    --p15-teal-light: #72ecec;
+    --p15-teal-dark: #078f96;
+
+    --p15-border: rgba(255, 255, 255, 0.09);
+    --p15-border-gold: rgba(242, 181, 43, 0.36);
+    --p15-border-teal: rgba(8, 200, 206, 0.34);
+
+    --p15-radius: 24px;
+
+    --p15-shadow:
+        0 30px 90px rgba(0, 0, 0, 0.42);
+}
+
+
+/* =========================================================
+   RESET / FOUNDATION
+   ========================================================= */
+
+html {
+    background: var(--p15-bg-deep);
+    scroll-behavior: smooth;
+}
+
+body.page-15 {
+    margin: 0;
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+    color: var(--p15-ivory);
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(8, 200, 206, 0.065),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 50% 42%,
+            rgba(242, 181, 43, 0.035),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #06131d 0%,
+            #071c2a 48%,
+            #030d15 100%
+        );
+
+    font-family:
+        "Noto Sans Tamil",
+        "Nirmala UI",
+        "Latha",
+        Arial,
+        sans-serif;
+}
+
+.page-15 *,
+.page-15 *::before,
+.page-15 *::after {
+    box-sizing: border-box;
+}
+
+.page-15 img {
+    display: block;
+    max-width: 100%;
+}
+
+.page-15 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   GLOBAL HEADER
+   ========================================================= */
+
+.page-15 .global-header {
+    position: relative;
+    z-index: 10;
+
+    min-height: 235px;
+
+    padding:
+        62px
+        clamp(42px, 6vw, 105px)
+        52px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 35px;
+}
+
+.page-15 .global-brand {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 20px;
+}
+
+.page-15 .global-logo {
+    width: 108px;
+    height: 108px;
+
+    flex: 0 0 auto;
+
+    object-fit: contain;
+}
+
+.page-15 .global-brand-name {
+    display: flex;
+    flex-direction: column;
+
+    padding-top: 8px;
+
+    color: var(--p15-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(24px, 2vw, 36px);
+
+    font-weight: 900;
+
+    line-height: 1.05;
+}
+
+.page-15 .global-brand-name span:last-child {
+    margin-top: 7px;
+}
+
+.page-15 .global-page-number {
+    padding-top: 15px;
+
+    color: var(--p15-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(18px, 1.45vw, 28px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.24em;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   HEADER DIVIDER
+   ========================================================= */
+
+.page-15 .global-divider {
+    width: 100%;
+    height: 4px;
+
+    display: grid;
+
+    grid-template-columns:
+        27% 46% 27%;
+}
+
+.page-15 .global-divider span {
+    height: 100%;
+}
+
+.page-15 .global-divider span:nth-child(1),
+.page-15 .global-divider span:nth-child(3) {
+    background: var(--p15-gold);
+}
+
+.page-15 .global-divider span:nth-child(2) {
+    background: var(--p15-teal);
+}
+
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.page-15 .page15-main {
+    width:
+        min(
+            1420px,
+            calc(100% - 96px)
+        );
+
+    margin: 0 auto;
+
+    padding:
+        105px 0 135px;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.page-15 .growth-hero {
+    max-width: 1120px;
+
+    margin:
+        0 auto 120px;
+
+    text-align: center;
+}
+
+.page-15 .hero-kicker {
+    display: inline-flex;
+
+    padding:
+        9px 23px;
+
+    border:
+        1px solid var(--p15-border-gold);
+
+    border-radius: 999px;
+
+    color: var(--p15-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.22em;
+}
+
+.page-15 .growth-hero h1 {
+    margin:
+        42px auto 0;
+
+    color: var(--p15-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(53px, 6.2vw, 92px);
+
+    font-weight: 900;
+
+    line-height: 1.02;
+
+    letter-spacing: 0.015em;
+}
+
+.page-15 .growth-hero h1 strong {
+    display: block;
+
+    margin-top: 8px;
+
+    color: var(--p15-gold-light);
+}
+
+.page-15 .hero-tamil {
+    margin:
+        22px auto 0;
+
+    color: var(--p15-teal);
+
+    font-size:
+        clamp(18px, 1.6vw, 27px);
+
+    font-weight: 800;
+}
+
+.page-15 .hero-message {
+    max-width: 900px;
+
+    margin:
+        40px auto 0;
+
+    color: var(--p15-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(20px, 1.8vw, 29px);
+
+    font-weight: 800;
+
+    line-height: 1.55;
+}
+
+.page-15 .hero-secondary {
+    max-width: 820px;
+
+    margin:
+        18px auto 0;
+
+    color: var(--p15-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(14px, 1.2vw, 19px);
+
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   GROWTH PRINCIPLE
+   ========================================================= */
+
+.page-15 .growth-principle {
+    max-width: 900px;
+
+    margin:
+        45px auto 0;
+
+    padding:
+        22px 25px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr auto 1fr auto 1fr auto 1fr;
+
+    align-items: center;
+
+    gap: 17px;
+
+    border-top:
+        1px solid var(--p15-border);
+
+    border-bottom:
+        1px solid var(--p15-border);
+
+    background:
+        rgba(255,255,255,0.008);
+}
+
+.page-15 .principle-item {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+.page-15 .principle-item span {
+    color: var(--p15-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.13em;
+}
+
+.page-15 .principle-item small {
+    color: var(--p15-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 9px;
+}
+
+.page-15 .growth-principle > b {
+    color: var(--p15-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 18px;
+
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   MILESTONE INTRO
+   ========================================================= */
+
+.page-15 .milestone-intro {
+    max-width: 900px;
+
+    margin:
+        0 auto 65px;
+
+    text-align: center;
+}
+
+.page-15 .milestone-count {
+    color: var(--p15-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.25em;
+}
+
+.page-15 .milestone-intro h2 {
+    margin:
+        17px 0 0;
+
+    color: var(--p15-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(34px, 3.7vw, 57px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.045em;
+
+    line-height: 1.12;
+}
+
+.page-15 .milestone-intro p {
+    max-width: 700px;
+
+    margin:
+        15px auto 0;
+
+    color: var(--p15-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(14px, 1.2vw, 18px);
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   GROWTH LADDER
+   ========================================================= */
+
+.page-15 .growth-ladder {
+    position: relative;
+
+    max-width: 1100px;
+
+    margin:
+        0 auto 130px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+.page-15 .ladder-line {
+    position: absolute;
+
+    left: 48px;
+
+    top: 48px;
+    bottom: 48px;
+
+    width: 2px;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--p15-gold),
+            var(--p15-teal),
+            var(--p15-gold)
+        );
+
+    opacity: 0.35;
+}
+
+
+/* =========================================================
+   GROWTH CARD
+   ========================================================= */
+
+.page-15 .growth-card {
+    position: relative;
+    z-index: 2;
+
+    min-height: 175px;
+
+    padding:
+        28px 30px 28px 25px;
+
+    display: grid;
+
+    grid-template-columns:
+        68px minmax(0, 1fr) 110px;
+
+    align-items: center;
+
+    gap: 25px;
+
+    border:
+        1px solid var(--p15-border);
+
+    border-radius:
+        20px;
+
+    background:
+        linear-gradient(
+            105deg,
+            rgba(9,29,43,0.98),
+            rgba(6,20,31,0.96)
+        );
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,0.20);
+
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        background 180ms ease;
+}
+
+.page-15 .growth-card:hover,
+.page-15 .growth-card.is-active {
+    transform:
+        translateX(7px);
+
+    border-color:
+        var(--p15-border-gold);
+
+    background:
+        linear-gradient(
+            105deg,
+            rgba(14,38,54,0.98),
+            rgba(7,25,38,0.98)
+        );
+
+    box-shadow:
+        0 22px 60px rgba(0,0,0,0.30);
+}
+
+
+/* =========================================================
+   GROWTH NUMBER
+   ========================================================= */
+
+.page-15 .growth-number {
+    width: 68px;
+    height: 68px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        2px solid var(--p15-gold);
+
+    border-radius: 50%;
+
+    color: var(--p15-gold-light);
+
+    background:
+        var(--p15-panel);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 23px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 0 35px rgba(242,181,43,0.06);
+}
+
+
+/* =========================================================
+   GROWTH CONTENT
+   ========================================================= */
+
+.page-15 .growth-label {
+    color: var(--p15-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 8px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.16em;
+}
+
+.page-15 .growth-content h3 {
+    margin:
+        7px 0 0;
+
+    color: var(--p15-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(17px, 1.45vw, 24px);
+
+    font-weight: 900;
+
+    line-height: 1.3;
+
+    letter-spacing: 0.035em;
+}
+
+.page-15 .growth-tamil {
+    margin:
+        5px 0 0;
+
+    color: var(--p15-teal-light);
+
+    font-size:
+        clamp(12px, 1vw, 16px);
+
+    font-weight: 700;
+}
+
+.page-15 .growth-content > p:last-child {
+    max-width: 760px;
+
+    margin:
+        11px 0 0;
+
+    color: var(--p15-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(12px, 1vw, 15px);
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   GROWTH STATUS
+   ========================================================= */
+
+.page-15 .growth-status {
+    justify-self: end;
+
+    min-width: 90px;
+
+    padding:
+        9px 11px;
+
+    text-align: center;
+
+    border:
+        1px solid var(--p15-border-gold);
+
+    border-radius: 999px;
+
+    color: var(--p15-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 7px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.13em;
+}
+
+
+/* =========================================================
+   LEARNING / SERVING ACCENTS
+   ========================================================= */
+
+.page-15 .growth-18 .growth-number,
+.page-15 .growth-19 .growth-number {
+    border-color:
+        var(--p15-teal);
+
+    color:
+        var(--p15-teal-light);
+}
+
+.page-15 .growth-18 .growth-status,
+.page-15 .growth-19 .growth-status {
+    border-color:
+        var(--p15-border-teal);
+
+    color:
+        var(--p15-teal);
+}
+
+
+/* =========================================================
+   CUSTOMER MILESTONES
+   ========================================================= */
+
+.page-15 .customer-milestone {
+    min-height: 190px;
+
+    border-color:
+        var(--p15-border-gold);
+}
+
+.page-15 .customer-milestone .growth-number {
+    color:
+        var(--p15-gold-light);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(242,181,43,0.08),
+            var(--p15-panel)
+        );
+}
+
+.page-15 .growth-20 .growth-number {
+    font-size: 20px;
+}
+
+.page-15 .growth-21 .growth-number {
+    font-size: 18px;
+}
+
+.page-15 .growth-22 .growth-number {
+    width: 75px;
+    height: 75px;
+
+    color:
+        var(--p15-teal-light);
+
+    border-color:
+        var(--p15-teal);
+
+    font-size: 20px;
+}
+
+.page-15 .growth-22 {
+    border-color:
+        var(--p15-border-teal);
+
+    background:
+        radial-gradient(
+            circle at 20% 50%,
+            rgba(8,200,206,0.045),
+            transparent 50%
+        ),
+        linear-gradient(
+            105deg,
+            rgba(9,29,43,0.98),
+            rgba(6,20,31,0.96)
+        );
+}
+
+.page-15 .growth-22 .growth-status {
+    border-color:
+        var(--p15-border-teal);
+
+    color:
+        var(--p15-teal);
+}
+
+
+/* =========================================================
+   LEADER MILESTONE
+   ========================================================= */
+
+.page-15 .leader-milestone {
+    min-height: 215px;
+
+    border-color:
+        var(--p15-border-gold);
+
+    background:
+        radial-gradient(
+            circle at 25% 50%,
+            rgba(242,181,43,0.06),
+            transparent 48%
+        ),
+        linear-gradient(
+            105deg,
+            rgba(12,31,45,0.99),
+            rgba(6,20,31,0.98)
+        );
+
+    box-shadow:
+        0 25px 75px rgba(0,0,0,0.32);
+}
+
+.page-15 .leader-milestone .growth-number {
+    width: 76px;
+    height: 76px;
+
+    border-color:
+        var(--p15-gold-light);
+
+    color:
+        var(--p15-gold-light);
+
+    font-size: 20px;
+
+    box-shadow:
+        0 0 45px rgba(242,181,43,0.12);
+}
+
+.page-15 .leader-milestone .growth-content h3 {
+    color:
+        var(--p15-gold-light);
+
+    font-size:
+        clamp(21px, 1.7vw, 28px);
+}
+
+.page-15 .leader-milestone .growth-status {
+    border-color:
+        var(--p15-border-teal);
+
+    color:
+        var(--p15-teal);
+
+    background:
+        rgba(8,200,206,0.025);
+}
+
+
+/* =========================================================
+   CUSTOMER TRANSFORMATION
+   ========================================================= */
+
+.page-15 .customer-transformation {
+    max-width: 1200px;
+
+    margin:
+        0 auto 125px;
+
+    padding:
+        90px 55px;
+
+    text-align: center;
+
+    border:
+        1px solid var(--p15-border-teal);
+
+    border-radius:
+        var(--p15-radius);
+
+    background:
+        radial-gradient(
+            circle at 50% 25%,
+            rgba(8,200,206,0.055),
+            transparent 48%
+        ),
+        var(--p15-panel);
+
+    box-shadow:
+        var(--p15-shadow);
+}
+
+.page-15 .section-kicker {
+    color: var(--p15-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.24em;
+}
+
+.page-15 .customer-transformation h2 {
+    max-width: 950px;
+
+    margin:
+        20px auto 0;
+
+    color: var(--p15-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(35px, 4.2vw, 62px);
+
+    font-weight: 900;
+
+    line-height: 1.12;
+}
+
+.page-15 .customer-transformation h2 strong {
+    display: block;
+
+    color: var(--p15-gold-light);
+}
+
+.page-15 .section-tamil {
+    margin:
+        15px 0 0;
+
+    color: var(--p15-teal);
+
+    font-size:
+        clamp(15px, 1.3vw, 21px);
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   TRANSFORMATION GRID
+   ========================================================= */
+
+.page-15 .transformation-grid {
+    margin:
+        55px auto 0;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+.page-15 .transformation-card {
+    min-height: 230px;
+
+    padding:
+        30px 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid var(--p15-border);
+
+    border-radius: 17px;
+
+    background:
+        rgba(255,255,255,0.012);
+
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease;
+}
+
+.page-15 .transformation-card:hover {
+    transform:
+        translateY(-6px);
+
+    border-color:
+        var(--p15-border-gold);
+}
+
+.page-15 .transformation-number {
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid var(--p15-border-gold);
+
+    border-radius: 50%;
+
+    color: var(--p15-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 8px;
+
+    font-weight: 900;
+}
+
+.page-15 .transformation-card h3 {
+    margin:
+        18px 0 0;
+
+    color: var(--p15-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(12px, 1vw, 16px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.045em;
+
+    line-height: 1.4;
+}
+
+.page-15 .transformation-card p {
+    max-width: 240px;
+
+    margin:
+        11px 0 0;
+
+    color: var(--p15-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   100 CUSTOMER TARGET
+   ========================================================= */
+
+.page-15 .hundred-target {
+    max-width: 1200px;
+
+    margin:
+        0 auto 125px;
+
+    padding:
+        85px 50px;
+
+    text-align: center;
+
+    border:
+        1px solid var(--p15-border-gold);
+
+    border-radius:
+        var(--p15-radius);
+
+    background:
+        radial-gradient(
+            circle at 50% 28%,
+            rgba(242,181,43,0.065),
+            transparent 55%
+        ),
+        rgba(5,17,26,0.88);
+
+    box-shadow:
+        var(--p15-shadow);
+}
+
+.page-15 .target-kicker {
+    color: var(--p15-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.23em;
+}
+
+.page-15 .target-number {
+    width: 135px;
+    height: 135px;
+
+    margin:
+        27px auto 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        3px solid var(--p15-gold);
+
+    border-radius: 50%;
+
+    color: var(--p15-gold-light);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 50px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 0 70px rgba(242,181,43,0.09);
+}
+
+.page-15 .target-label {
+    margin-top: 16px;
+
+    color: var(--p15-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.30em;
+}
+
+.page-15 .hundred-target h2 {
+    margin:
+        27px auto 0;
+
+    color: var(--p15-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(35px, 4vw, 58px);
+
+    font-weight: 900;
+
+    line-height: 1.15;
+}
+
+.page-15 .hundred-target h2 strong {
+    display: block;
+
+    color: var(--p15-gold-light);
+}
+
+.page-15 .hundred-target > p {
+    max-width: 720px;
+
+    margin:
+        20px auto 0;
+
+    color: var(--p15-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(14px, 1.25vw, 19px);
+
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   TARGET EQUATION
+   ========================================================= */
+
+.page-15 .target-equation {
+    margin:
+        45px auto 0;
+
+    padding:
+        21px 25px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 13px;
+
+    border:
+        1px solid var(--p15-border);
+
+    border-radius: 14px;
+
+    background:
+        rgba(255,255,255,0.012);
+}
+
+.page-15 .target-equation span {
+    color: var(--p15-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 8px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.13em;
+}
+
+.page-15 .target-equation b {
+    color: var(--p15-gold);
+
+    font-size: 15px;
+
+    font-weight: 400;
+}
+
+.page-15 .target-equation strong {
+    color: var(--p15-gold-light);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.13em;
+}
+
+
+/* =========================================================
+   REVENUE CONNECTION
+   ========================================================= */
+
+.page-15 .revenue-connection {
+    max-width: 1100px;
+
+    margin:
+        0 auto 125px;
+
+    text-align: center;
+}
+
+.page-15 .connection-kicker {
+    color: var(--p15-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.24em;
+}
+
+.page-15 .revenue-connection h2 {
+    margin:
+        18px auto 0;
+
+    color: var(--p15-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(35px, 4vw, 60px);
+
+    font-weight: 900;
+
+    line-height: 1.15;
+}
+
+.page-15 .revenue-connection h2 strong {
+    display: block;
+
+    color: var(--p15-gold-light);
+}
+
+.page-15 .connection-tamil {
+    margin-top: 15px;
+
+    color: var(--p15-teal);
+
+    font-size:
+        clamp(15px, 1.3vw, 21px);
+
+    font-weight: 700;
+}
+
+.page-15 .connection-statement {
+    max-width: 850px;
+
+    margin:
+        45px auto 0;
+
+    padding:
+        35px 30px;
+
+    border-top:
+        1px solid var(--p15-border-gold);
+
+    border-bottom:
+        1px solid var(--p15-border-gold);
+}
+
+.page-15 .connection-statement p {
+    margin: 0;
+
+    color: var(--p15-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(15px, 1.3vw, 21px);
+
+    line-height: 1.65;
+}
+
+.page-15 .connection-statement strong {
+    display: block;
+
+    margin-top: 15px;
+
+    color: var(--p15-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(19px, 1.65vw, 27px);
+
+    font-weight: 900;
+
+    line-height: 1.45;
+}
+
+
+/* =========================================================
+   FINAL PUNCH
+   ========================================================= */
+
+.page-15 .final-punch {
+    max-width: 1050px;
+
+    margin:
+        0 auto 130px;
+
+    text-align: center;
+}
+
+.page-15 .punch-line {
+    width: 100%;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--p15-border-gold),
+            transparent
+        );
+}
+
+.page-15 .punch-kicker {
+    margin-top: 40px;
+
+    color: var(--p15-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.23em;
+}
+
+.page-15 .final-punch h2 {
+    margin:
+        20px 0 0;
+
+    color: var(--p15-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(39px, 4.8vw, 72px);
+
+    font-weight: 900;
+
+    line-height: 1.08;
+}
+
+.page-15 .final-punch h2 strong {
+    display: block;
+
+    color: var(--p15-gold-light);
+}
+
+.page-15 .final-punch > p {
+    max-width: 650px;
+
+    margin:
+        24px auto 0;
+
+    color: var(--p15-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(14px, 1.25vw, 19px);
+
+    line-height: 1.75;
+}
+
+.page-15 .punch-statement {
+    margin:
+        40px auto 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.page-15 .punch-statement span {
+    color: var(--p15-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.30em;
+}
+
+.page-15 .punch-statement strong {
+    color: var(--p15-gold-light);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(48px, 6vw, 88px);
+
+    font-weight: 900;
+
+    line-height: 1;
+}
+
+.page-15 .punch-tamil {
+    margin-top: 13px !important;
+
+    color: var(--p15-teal) !important;
+
+    font-size:
+        clamp(15px, 1.3vw, 21px) !important;
+
+    font-weight: 700;
+}
+
+.page-15 .final-punch .punch-line:last-child {
+    margin-top: 42px;
+}
+
+
+/* =========================================================
+   NEXT PHASE
+   ========================================================= */
+
+.page-15 .next-phase {
+    max-width: 1180px;
+
+    margin:
+        0 auto;
+
+    padding:
+        70px 60px;
+
+    display: grid;
+
+    grid-template-columns:
+        120px minmax(0, 1fr) auto;
+
+    align-items: center;
+
+    gap: 40px;
+
+    border:
+        1px solid var(--p15-border-gold);
+
+    border-radius:
+        var(--p15-radius);
+
+    background:
+        linear-gradient(
+            105deg,
+            rgba(242,181,43,0.045),
+            rgba(8,200,206,0.035)
+        );
+
+    box-shadow:
+        var(--p15-shadow);
+}
+
+.page-15 .next-phase-number {
+    color: var(--p15-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.18em;
+}
+
+.page-15 .next-phase-kicker {
+    color: var(--p15-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.20em;
+}
+
+.page-15 .next-phase-content h2 {
+    margin:
+        10px 0 0;
+
+    color: var(--p15-ivory);
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(27px, 2.6vw, 42px);
+
+    font-weight: 900;
+
+    line-height: 1.25;
+}
+
+.page-15 .next-phase-content h2 strong {
+    color: var(--p15-gold-light);
+}
+
+.page-15 .next-phase-content p {
+    max-width: 650px;
+
+    margin:
+        12px 0 0;
+
+    color: var(--p15-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+    line-height: 1.65;
+}
+
+.page-15 .next-phase-button {
+    min-width: 175px;
+
+    min-height: 60px;
+
+    padding:
+        14px 19px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 18px;
+
+    border:
+        1px solid var(--p15-gold);
+
+    border-radius: 12px;
+
+    color: var(--p15-bg-deep);
+
+    background:
+        var(--p15-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.12em;
+
+    box-shadow:
+        0 15px 45px rgba(242,181,43,0.10);
+
+    transition:
+        transform 180ms ease,
+        background 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.page-15 .next-phase-button b {
+    font-size: 23px;
+}
+
+.page-15 .next-phase-button:hover,
+.page-15 .next-phase-button:focus-visible {
+    transform:
+        translateY(-3px);
+
+    background:
+        var(--p15-gold-light);
+
+    box-shadow:
+        0 20px 60px rgba(242,181,43,0.18);
+
+    outline: none;
+}
+
+
+/* =========================================================
+   GLOBAL FOOTER
+   ========================================================= */
+
+.page-15 .global-footer {
+    margin-top: 35px;
+
+    padding:
+        0
+        clamp(35px, 6vw, 105px)
+        55px;
+
+    background:
+        var(--p15-bg-deep);
+
+    border-top:
+        1px solid rgba(255,255,255,0.07);
+}
+
+.page-15 .page-navigation {
+    min-height: 125px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr auto 1fr;
+
+    align-items: center;
+
+    gap: 25px;
+}
+
+.page-15 .nav-button {
+    width: fit-content;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    padding:
+        14px 17px;
+
+    border:
+        1px solid transparent;
+
+    border-radius: 11px;
+
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease;
+}
+
+.page-15 .nav-button:hover,
+.page-15 .nav-button:focus-visible {
+    transform:
+        translateY(-2px);
+
+    border-color:
+        var(--p15-border-teal);
+
+    background:
+        rgba(255,255,255,0.025);
+
+    outline: none;
+}
+
+.page-15 .nav-next {
+    justify-self: end;
+
+    text-align: right;
+}
+
+.page-15 .nav-arrow {
+    color: var(--p15-gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 27px;
+}
+
+.page-15 .nav-text {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.page-15 .nav-text strong {
+    color: var(--p15-ivory);
+
+    font-size: 15px;
+
+    font-weight: 800;
+}
+
+.page-15 .nav-text small {
+    color: var(--p15-muted);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.20em;
+}
+
+.page-15 .nav-current {
+    min-width: 90px;
+
+    display: flex;
+
+    align-items: baseline;
+    justify-content: center;
+
+    color: var(--p15-gold);
+
+    font-family: Arial, sans-serif;
+}
+
+.page-15 .nav-current span {
+    font-size: 29px;
+
+    font-weight: 900;
+}
+
+.page-15 .nav-current small {
+    margin-left: 4px;
+
+    color: var(--p15-muted);
+
+    font-size: 12px;
+}
+
+.page-15 .global-footer-brand {
+    padding-top: 24px;
+
+    text-align: center;
+
+    border-top:
+        1px solid rgba(255,255,255,0.07);
+}
+
+.page-15 .footer-tagline {
+    color: var(--p15-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.25em;
+}
+
+.page-15 .footer-brand {
+    margin-top: 9px;
+
+    color:
+        rgba(245,240,231,0.58);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+}
+
+
+/* =========================================================
+   JAVASCRIPT REVEAL SUPPORT
+   ========================================================= */
+
+.page-15 .reveal-ready {
+    opacity: 0;
+
+    transform:
+        translateY(25px);
+
+    transition:
+        opacity 650ms ease,
+        transform 650ms ease;
+}
+
+.page-15 .reveal-ready.is-visible {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1500px) {
+
+    .page-15 .global-header {
+        min-height: 285px;
+
+        padding-top: 76px;
+        padding-bottom: 65px;
+    }
+
+    .page-15 .global-logo {
+        width: 120px;
+        height: 120px;
+    }
+
+    .page-15 .page15-main {
+        width:
+            min(
+                1500px,
+                calc(100% - 120px)
+            );
+
+        padding-top: 125px;
+    }
+
+    .page-15 .growth-card {
+        min-height: 190px;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+    .page-15 .global-header {
+        min-height: 190px;
+
+        padding:
+            48px 42px 45px;
+    }
+
+    .page-15 .global-logo {
+        width: 82px;
+        height: 82px;
+    }
+
+    .page-15 .global-brand {
+        gap: 15px;
+    }
+
+    .page-15 .global-brand-name {
+        font-size: 25px;
+    }
+
+    .page-15 .global-page-number {
+        padding-top: 8px;
+
+        font-size: 17px;
+    }
+
+    .page-15 .page15-main {
+        width:
+            min(
+                calc(100% - 60px),
+                1000px
+            );
+
+        padding-top: 80px;
+    }
+
+    .page-15 .growth-ladder {
+        max-width: 900px;
+    }
+
+    .page-15 .transformation-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .page-15 .next-phase {
+        grid-template-columns:
+            90px minmax(0, 1fr) auto;
+
+        padding:
+            55px 40px;
+
+        gap: 25px;
+    }
+
+}
+
+
+/* =========================================================
+   MEDIUM TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .page-15 .growth-hero h1 {
+        font-size:
+            clamp(45px, 7vw, 65px);
+    }
+
+    .page-15 .growth-principle {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 20px;
+    }
+
+    .page-15 .growth-principle > b {
+        display: none;
+    }
+
+    .page-15 .growth-card {
+        grid-template-columns:
+            60px minmax(0, 1fr);
+
+        padding:
+            24px;
+
+        gap: 20px;
+    }
+
+    .page-15 .growth-status {
+        grid-column: 2;
+
+        justify-self: start;
+    }
+
+    .page-15 .ladder-line {
+        left: 54px;
+    }
+
+    .page-15 .transformation-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .page-15 .next-phase {
+        grid-template-columns:
+            1fr;
+
+        text-align: center;
+    }
+
+    .page-15 .next-phase-number {
+        justify-self: center;
+    }
+
+    .page-15 .next-phase-content p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .page-15 .next-phase-button {
+        justify-self: center;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    /* -----------------------------------------------------
+       HEADER
+       ----------------------------------------------------- */
+
+    .page-15 .global-header {
+        min-height: auto;
+
+        padding:
+            28px 20px 30px;
+
+        align-items: center;
+
+        gap: 15px;
+    }
+
+    .page-15 .global-brand {
+        gap: 10px;
+    }
+
+    .page-15 .global-logo {
+        width: 58px;
+        height: 58px;
+    }
+
+    .page-15 .global-brand-name {
+        padding-top: 0;
+
+        font-size: 15px;
+    }
+
+    .page-15 .global-brand-name span:last-child {
+        margin-top: 4px;
+    }
+
+    .page-15 .global-page-number {
+        padding-top: 0;
+
+        font-size: 9px;
+
+        letter-spacing: 0.13em;
+    }
+
+    .page-15 .global-divider {
+        height: 3px;
+    }
+
+
+    /* -----------------------------------------------------
+       MAIN
+       ----------------------------------------------------- */
+
+    .page-15 .page15-main {
+        width:
+            calc(100% - 34px);
+
+        padding:
+            58px 0 80px;
+    }
+
+
+    /* -----------------------------------------------------
+       HERO
+       ----------------------------------------------------- */
+
+    .page-15 .growth-hero {
+        margin-bottom: 75px;
+    }
+
+    .page-15 .hero-kicker {
+        padding:
+            7px 14px;
+
+        font-size: 8px;
+
+        letter-spacing: 0.12em;
+    }
+
+    .page-15 .growth-hero h1 {
+        margin-top: 30px;
+
+        font-size:
+            clamp(35px, 10.5vw, 53px);
+
+        line-height: 1.08;
+    }
+
+    .page-15 .hero-tamil {
+        margin-top: 17px;
+
+        font-size: 15px;
+    }
+
+    .page-15 .hero-message {
+        margin-top: 31px;
+
+        font-size: 17px;
+
+        line-height: 1.6;
+    }
+
+    .page-15 .hero-secondary {
+        margin-top: 15px;
+
+        font-size: 12px;
+
+        line-height: 1.7;
+    }
+
+
+    /* -----------------------------------------------------
+       GROWTH PRINCIPLE
+       ----------------------------------------------------- */
+
+    .page-15 .growth-principle {
+        margin-top: 30px;
+
+        padding:
+            17px 10px;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 15px;
+    }
+
+    .page-15 .principle-item span {
+        font-size: 7px;
+    }
+
+    .page-15 .principle-item small {
+        font-size: 7px;
+    }
+
+
+    /* -----------------------------------------------------
+       MILESTONE INTRO
+       ----------------------------------------------------- */
+
+    .page-15 .milestone-intro {
+        margin-bottom: 35px;
+    }
+
+    .page-15 .milestone-count {
+        font-size: 8px;
+    }
+
+    .page-15 .milestone-intro h2 {
+        margin-top: 12px;
+
+        font-size: 27px;
+    }
+
+    .page-15 .milestone-intro p {
+        margin-top: 10px;
+
+        font-size: 11px;
+    }
+
+
+    /* -----------------------------------------------------
+       GROWTH LADDER
+       ----------------------------------------------------- */
+
+    .page-15 .growth-ladder {
+        margin-bottom: 75px;
+
+        gap: 10px;
+    }
+
+    .page-15 .ladder-line {
+        left: 34px;
+
+        top: 35px;
+        bottom: 35px;
+    }
+
+
+    /* -----------------------------------------------------
+       GROWTH CARDS
+       ----------------------------------------------------- */
+
+    .page-15 .growth-card {
+        min-height: 0;
+
+        padding:
+            19px 15px;
+
+        grid-template-columns:
+            42px minmax(0, 1fr);
+
+        gap: 13px;
+
+        border-radius: 15px;
+    }
+
+    .page-15 .growth-card:hover,
+    .page-15 .growth-card.is-active {
+        transform:
+            translateX(3px);
+    }
+
+    .page-15 .growth-number {
+        width: 42px;
+        height: 42px;
+
+        font-size: 15px;
+    }
+
+    .page-15 .growth-label {
+        font-size: 6px;
+
+        letter-spacing: 0.10em;
+    }
+
+    .page-15 .growth-content h3 {
+        margin-top: 5px;
+
+        font-size: 12px;
+    }
+
+    .page-15 .growth-tamil {
+        margin-top: 4px;
+
+        font-size: 9px;
+    }
+
+    .page-15 .growth-content > p:last-child {
+        margin-top: 8px;
+
+        font-size: 8px;
+
+        line-height: 1.55;
+    }
+
+    .page-15 .growth-status {
+        grid-column: 2;
+
+        justify-self: start;
+
+        min-width: 70px;
+
+        padding:
+            6px 8px;
+
+        font-size: 5px;
+    }
+
+    .page-15 .growth-22 .growth-number {
+        width: 48px;
+        height: 48px;
+
+        font-size: 16px;
+    }
+
+    .page-15 .leader-milestone {
+        min-height: 0;
+    }
+
+    .page-15 .leader-milestone .growth-number {
+        width: 48px;
+        height: 48px;
+
+        font-size: 15px;
+    }
+
+    .page-15 .leader-milestone .growth-content h3 {
+        font-size: 14px;
+    }
+
+
+    /* -----------------------------------------------------
+       CUSTOMER TRANSFORMATION
+       ----------------------------------------------------- */
+
+    .page-15 .customer-transformation {
+        margin-bottom: 75px;
+
+        padding:
+            55px 18px;
+
+        border-radius: 19px;
+    }
+
+    .page-15 .section-kicker {
+        font-size: 8px;
+    }
+
+    .page-15 .customer-transformation h2 {
+        margin-top: 14px;
+
+        font-size: 30px;
+    }
+
+    .page-15 .section-tamil {
+        margin-top: 10px;
+
+        font-size: 13px;
+    }
+
+    .page-15 .transformation-grid {
+        margin-top: 32px;
+
+        grid-template-columns:
+            1fr;
+
+        gap: 9px;
+    }
+
+    .page-15 .transformation-card {
+        min-height: 160px;
+
+        padding:
+            25px 18px;
+
+        border-radius: 15px;
+    }
+
+    .page-15 .transformation-number {
+        width: 37px;
+        height: 37px;
+
+        font-size: 7px;
+    }
+
+    .page-15 .transformation-card h3 {
+        margin-top: 14px;
+
+        font-size: 11px;
+    }
+
+    .page-15 .transformation-card p {
+        margin-top: 8px;
+
+        font-size: 8px;
+    }
+
+
+    /* -----------------------------------------------------
+       100 CUSTOMER TARGET
+       ----------------------------------------------------- */
+
+    .page-15 .hundred-target {
+        margin-bottom: 75px;
+
+        padding:
+            55px 17px;
+
+        border-radius: 19px;
+    }
+
+    .page-15 .target-kicker {
+        font-size: 8px;
+    }
+
+    .page-15 .target-number {
+        width: 100px;
+        height: 100px;
+
+        margin-top: 20px;
+
+        font-size: 38px;
+    }
+
+    .page-15 .target-label {
+        margin-top: 12px;
+
+        font-size: 9px;
+    }
+
+    .page-15 .hundred-target h2 {
+        margin-top: 20px;
+
+        font-size: 30px;
+    }
+
+    .page-15 .hundred-target > p {
+        margin-top: 15px;
+
+        font-size: 11px;
+
+        line-height: 1.7;
+    }
+
+    .page-15 .target-equation {
+        margin-top: 30px;
+
+        padding:
+            15px 9px;
+
+        gap: 7px;
+    }
+
+    .page-15 .target-equation span,
+    .page-15 .target-equation strong {
+        font-size: 6px;
+    }
+
+    .page-15 .target-equation b {
+        font-size: 10px;
+    }
+
+
+    /* -----------------------------------------------------
+       REVENUE CONNECTION
+       ----------------------------------------------------- */
+
+    .page-15 .revenue-connection {
+        margin-bottom: 75px;
+    }
+
+    .page-15 .connection-kicker {
+        font-size: 8px;
+    }
+
+    .page-15 .revenue-connection h2 {
+        margin-top: 13px;
+
+        font-size: 29px;
+    }
+
+    .page-15 .connection-tamil {
+        margin-top: 10px;
+
+        font-size: 12px;
+    }
+
+    .page-15 .connection-statement {
+        margin-top: 30px;
+
+        padding:
+            24px 12px;
+    }
+
+    .page-15 .connection-statement p {
+        font-size: 11px;
+    }
+
+    .page-15 .connection-statement strong {
+        margin-top: 11px;
+
+        font-size: 15px;
+
+        line-height: 1.5;
+    }
+
+
+    /* -----------------------------------------------------
+       FINAL PUNCH
+       ----------------------------------------------------- */
+
+    .page-15 .final-punch {
+        margin-bottom: 75px;
+    }
+
+    .page-15 .punch-kicker {
+        margin-top: 27px;
+
+        font-size: 8px;
+    }
+
+    .page-15 .final-punch h2 {
+        margin-top: 14px;
+
+        font-size: 35px;
+    }
+
+    .page-15 .final-punch > p {
+        margin-top: 16px;
+
+        font-size: 11px;
+
+        line-height: 1.7;
+    }
+
+    .page-15 .punch-statement {
+        margin-top: 30px;
+    }
+
+    .page-15 .punch-statement span {
+        font-size: 8px;
+    }
+
+    .page-15 .punch-statement strong {
+        font-size: 57px;
+    }
+
+    .page-15 .punch-tamil {
+        margin-top: 10px !important;
+
+        font-size: 12px !important;
+    }
+
+    .page-15 .final-punch .punch-line:last-child {
+        margin-top: 28px;
+    }
+
+
+    /* -----------------------------------------------------
+       NEXT PHASE
+       ----------------------------------------------------- */
+
+    .page-15 .next-phase {
+        padding:
+            45px 18px;
+
+        gap: 18px;
+
+        border-radius: 19px;
+    }
+
+    .page-15 .next-phase-number {
+        font-size: 8px;
+    }
+
+    .page-15 .next-phase-kicker {
+        font-size: 7px;
+    }
+
+    .page-15 .next-phase-content h2 {
+        margin-top: 8px;
+
+        font-size: 23px;
+    }
+
+    .page-15 .next-phase-content p {
+        margin-top: 10px;
+
+        font-size: 10px;
+
+        line-height: 1.65;
+    }
+
+    .page-15 .next-phase-button {
+        min-width: 145px;
+
+        min-height: 50px;
+
+        padding:
+            12px 14px;
+
+        font-size: 8px;
+    }
+
+    .page-15 .next-phase-button b {
+        font-size: 20px;
+    }
+
+
+    /* -----------------------------------------------------
+       FOOTER
+       ----------------------------------------------------- */
+
+    .page-15 .global-footer {
+        padding:
+            0 18px 35px;
+    }
+
+    .page-15 .page-navigation {
+        min-height: 105px;
+
+        gap: 7px;
+    }
+
+    .page-15 .nav-button {
+        gap: 7px;
+
+        padding:
+            8px 3px;
+    }
+
+    .page-15 .nav-arrow {
+        font-size: 20px;
+    }
+
+    .page-15 .nav-text strong {
+        font-size: 10px;
+    }
+
+    .page-15 .nav-text small {
+        font-size: 6px;
+    }
+
+    .page-15 .nav-current span {
+        font-size: 22px;
+    }
+
+    .page-15 .nav-current small {
+        font-size: 8px;
+    }
+
+    .page-15 .footer-tagline {
+        font-size: 7px;
+
+        letter-spacing: 0.15em;
+    }
+
+    .page-15 .footer-brand {
+        font-size: 7px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .page-15 .global-header {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .page-15 .global-logo {
+        width: 48px;
+        height: 48px;
+    }
+
+    .page-15 .global-brand-name {
+        font-size: 12px;
+    }
+
+    .page-15 .global-page-number {
+        font-size: 7px;
+    }
+
+    .page-15 .page15-main {
+        width:
+            calc(100% - 26px);
+    }
+
+    .page-15 .growth-hero h1 {
+        font-size: 33px;
+    }
+
+    .page-15 .hero-message {
+        font-size: 15px;
+    }
+
+    .page-15 .growth-card {
+        padding:
+            17px 12px;
+
+        grid-template-columns:
+            38px minmax(0, 1fr);
+
+        gap: 10px;
+    }
+
+    .page-15 .ladder-line {
+        left: 31px;
+    }
+
+    .page-15 .growth-number {
+        width: 38px;
+        height: 38px;
+
+        font-size: 13px;
+    }
+
+    .page-15 .growth-content h3 {
+        font-size: 10px;
+    }
+
+    .page-15 .growth-content > p:last-child {
+        font-size: 8px;
+    }
+
+    .page-15 .customer-transformation h2 {
+        font-size: 27px;
+    }
+
+    .page-15 .hundred-target h2 {
+        font-size: 27px;
+    }
+
+    .page-15 .target-number {
+        width: 88px;
+        height: 88px;
+
+        font-size: 33px;
+    }
+
+    .page-15 .revenue-connection h2 {
+        font-size: 27px;
+    }
+
+    .page-15 .final-punch h2 {
+        font-size: 31px;
+    }
+
+    .page-15 .punch-statement strong {
+        font-size: 51px;
+    }
+
+    .page-15 .next-phase-content h2 {
+        font-size: 20px;
+    }
+
+}
+
+
+/* =========================================================
+   FOCUS / ACCESSIBILITY
+   ========================================================= */
+
+.page-15 .growth-card:focus-visible,
+.page-15 .transformation-card:focus-visible {
+    outline:
+        2px solid var(--p15-teal);
+
+    outline-offset: 4px;
+}
+
+.page-15 .next-phase-button:focus-visible,
+.page-15 .nav-button:focus-visible {
+    outline:
+        2px solid var(--p15-teal);
+
+    outline-offset: 4px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    .page-15 .reveal-ready {
+        opacity: 1;
+
+        transform: none;
+
+        transition: none;
+    }
+
+    .page-15 .growth-card,
+    .page-15 .transformation-card,
+    .page-15 .next-phase-button,
+    .page-15 .nav-button {
+        transition: none;
+    }
+
+}
