@@ -1,7 +1,7 @@
-
 /* ============================================================
    CTM PATH™ MILLIONAIRES™
    PAGE 03 — JAVASCRIPT
+   ============================================================
 
    FILE:
    js/page03.js
@@ -11,6 +11,10 @@
 
    PURPOSE:
    DIGNITY → IDENTITY → AUTHORITY
+
+   NAVIGATION:
+   BACK → 02.html
+   NEXT → 04.html
    ============================================================ */
 
 (function () {
@@ -18,9 +22,9 @@
     "use strict";
 
 
-    /* ========================================================
+    /* ============================================================
        CONFIGURATION
-       ======================================================== */
+       ============================================================ */
 
     const CONFIG = {
 
@@ -28,20 +32,25 @@
             "CTM_PATH_PAGE03_TRANSFORMATION",
 
         PREVIOUS_PAGE:
-            "01.html",
+            "02.html",
 
         NEXT_PAGE:
             "04.html",
 
+        PAGE_NUMBER:
+            "03",
+
+        TOTAL_PAGES:
+            16,
+
         TOTAL_QUESTIONS:
             6
-
     };
 
 
-    /* ========================================================
-       QUESTION MAP
-       ======================================================== */
+    /* ============================================================
+       DIMENSION MAP
+       ============================================================ */
 
     const DIMENSIONS = {
 
@@ -63,7 +72,6 @@
 
             resultElement:
                 "resultDignity"
-
         },
 
 
@@ -85,7 +93,6 @@
 
             resultElement:
                 "resultIdentity"
-
         },
 
 
@@ -107,43 +114,54 @@
 
             resultElement:
                 "resultAuthority"
-
         }
 
     };
 
 
-    /* ========================================================
-       STATE
-       ======================================================== */
+    /* ============================================================
+       INITIAL STATE
+       ============================================================ */
 
-    let state = {
+    function createInitialState() {
 
-        answers: {
+        return {
 
-            "dignity-1": null,
+            answers: {
 
-            "dignity-2": null,
+                "dignity-1":
+                    null,
 
-            "identity-1": null,
+                "dignity-2":
+                    null,
 
-            "identity-2": null,
+                "identity-1":
+                    null,
 
-            "authority-1": null,
+                "identity-2":
+                    null,
 
-            "authority-2": null
+                "authority-1":
+                    null,
 
-        },
+                "authority-2":
+                    null
 
-        development:
-            ""
+            },
 
-    };
+            development:
+                ""
+        };
+    }
 
 
-    /* ========================================================
+    let state =
+        createInitialState();
+
+
+    /* ============================================================
        INITIALISE
-       ======================================================== */
+       ============================================================ */
 
     function init() {
 
@@ -162,9 +180,9 @@
     }
 
 
-    /* ========================================================
-       LOAD STATE
-       ======================================================== */
+    /* ============================================================
+       LOAD SAVED STATE
+       ============================================================ */
 
     function loadState() {
 
@@ -177,9 +195,7 @@
 
 
             if (!saved) {
-
                 return;
-
             }
 
 
@@ -191,9 +207,7 @@
                 !parsed ||
                 typeof parsed !== "object"
             ) {
-
                 return;
-
             }
 
 
@@ -207,30 +221,30 @@
                 ).forEach(function (key) {
 
                     if (
-                        parsed.answers[key] !==
+                        parsed.answers[key] ===
                         undefined
                     ) {
-
-                        const value =
-                            Number(
-                                parsed.answers[key]
-                            );
+                        return;
+                    }
 
 
-                        if (
-                            value >= 1 &&
-                            value <= 10
-                        ) {
+                    const value =
+                        Number(
+                            parsed.answers[key]
+                        );
 
-                            state.answers[key] =
-                                value;
 
-                        }
+                    if (
+                        Number.isFinite(value) &&
+                        value >= 1 &&
+                        value <= 10
+                    ) {
 
+                        state.answers[key] =
+                            value;
                     }
 
                 });
-
             }
 
 
@@ -241,14 +255,13 @@
 
                 state.development =
                     parsed.development;
-
             }
 
         }
         catch (error) {
 
             console.warn(
-                "Page 03 state load failed:",
+                "CTM PATH™ Page 03 state load failed:",
                 error
             );
 
@@ -257,16 +270,16 @@
     }
 
 
-    /* ========================================================
+    /* ============================================================
        SAVE STATE
-       ======================================================== */
+       ============================================================ */
 
     function saveState() {
 
         const payload = {
 
             page:
-                "03",
+                CONFIG.PAGE_NUMBER,
 
             answers:
                 state.answers,
@@ -276,6 +289,11 @@
 
             scores:
                 calculateScores(),
+
+            overallScore:
+                calculateOverallScore(
+                    calculateScores()
+                ),
 
             updatedAt:
                 new Date().toISOString()
@@ -294,7 +312,7 @@
         catch (error) {
 
             console.warn(
-                "Page 03 state save failed:",
+                "CTM PATH™ Page 03 state save failed:",
                 error
             );
 
@@ -303,9 +321,9 @@
     }
 
 
-    /* ========================================================
+    /* ============================================================
        SCORE BUTTONS
-       ======================================================== */
+       ============================================================ */
 
     function bindScoreButtons() {
 
@@ -328,9 +346,7 @@
 
 
                     if (!questionBlock) {
-
                         return;
-
                     }
 
 
@@ -350,14 +366,13 @@
                         score < 1 ||
                         score > 10
                     ) {
-
                         return;
-
                     }
 
 
-                    state.answers[questionId] =
-                        score;
+                    state.answers[
+                        questionId
+                    ] = score;
 
 
                     updateQuestionButtons(
@@ -378,9 +393,9 @@
     }
 
 
-    /* ========================================================
+    /* ============================================================
        APPLY SAVED ANSWERS
-       ======================================================== */
+       ============================================================ */
 
     function applySavedAnswers() {
 
@@ -389,31 +404,31 @@
         ).forEach(function (questionId) {
 
             const score =
-                state.answers[questionId];
+                state.answers[
+                    questionId
+                ];
 
 
-            if (!score) {
-
+            if (
+                !Number.isFinite(score)
+            ) {
                 return;
-
             }
 
 
-            const block =
+            const questionBlock =
                 document.querySelector(
                     `[data-question="${questionId}"]`
                 );
 
 
-            if (!block) {
-
+            if (!questionBlock) {
                 return;
-
             }
 
 
             updateQuestionButtons(
-                block,
+                questionBlock,
                 score
             );
 
@@ -422,9 +437,9 @@
     }
 
 
-    /* ========================================================
+    /* ============================================================
        UPDATE QUESTION BUTTONS
-       ======================================================== */
+       ============================================================ */
 
     function updateQuestionButtons(
         questionBlock,
@@ -453,7 +468,10 @@
             );
 
 
-            if (score >= 1 && score <= 3) {
+            if (
+                score >= 1 &&
+                score <= 3
+            ) {
 
                 button.classList.add(
                     "score-low"
@@ -497,9 +515,9 @@
     }
 
 
-    /* ========================================================
+    /* ============================================================
        CALCULATE DIMENSION SCORES
-       ======================================================== */
+       ============================================================ */
 
     function calculateScores() {
 
@@ -511,7 +529,9 @@
         ).forEach(function (dimensionKey) {
 
             const dimension =
-                DIMENSIONS[dimensionKey];
+                DIMENSIONS[
+                    dimensionKey
+                ];
 
 
             const values =
@@ -540,11 +560,11 @@
                 values.length === 0
             ) {
 
-                scores[dimensionKey] =
-                    null;
+                scores[
+                    dimensionKey
+                ] = null;
 
                 return;
-
             }
 
 
@@ -555,26 +575,18 @@
                         value
                     ) {
 
-                        return sum + value;
+                        return (
+                            sum + value
+                        );
 
                     },
                     0
                 );
 
 
-            /*
-             * Each dimension contains two questions.
-             *
-             * Example:
-             *
-             * Q1 = 8
-             * Q2 = 6
-             *
-             * Dimension score =
-             * (8 + 6) / 2 = 7
-             */
-
-            scores[dimensionKey] =
+            scores[
+                dimensionKey
+            ] =
                 Number(
                     (
                         total /
@@ -590,9 +602,9 @@
     }
 
 
-    /* ========================================================
-       CALCULATE OVERALL TRANSFORMATION SCORE
-       ======================================================== */
+    /* ============================================================
+       CALCULATE OVERALL SCORE
+       ============================================================ */
 
     function calculateOverallScore(
         scores
@@ -632,7 +644,9 @@
                     value
                 ) {
 
-                    return sum + value;
+                    return (
+                        sum + value
+                    );
 
                 },
                 0
@@ -649,9 +663,9 @@
     }
 
 
-    /* ========================================================
-       RENDER SCORES
-       ======================================================== */
+    /* ============================================================
+       RENDER EVERYTHING
+       ============================================================ */
 
     function calculateAndRender() {
 
@@ -702,9 +716,9 @@
     }
 
 
-    /* ========================================================
+    /* ============================================================
        DIMENSION SCORE DISPLAY
-       ======================================================== */
+       ============================================================ */
 
     function renderDimensionScore(
         dimensionKey,
@@ -712,7 +726,9 @@
     ) {
 
         const dimension =
-            DIMENSIONS[dimensionKey];
+            DIMENSIONS[
+                dimensionKey
+            ];
 
 
         const element =
@@ -722,9 +738,7 @@
 
 
         if (!element) {
-
             return;
-
         }
 
 
@@ -737,7 +751,6 @@
                 "";
 
             return;
-
         }
 
 
@@ -751,9 +764,9 @@
     }
 
 
-    /* ========================================================
+    /* ============================================================
        RESULT SCORE DISPLAY
-       ======================================================== */
+       ============================================================ */
 
     function renderResultScore(
         dimensionKey,
@@ -761,7 +774,9 @@
     ) {
 
         const dimension =
-            DIMENSIONS[dimensionKey];
+            DIMENSIONS[
+                dimensionKey
+            ];
 
 
         const element =
@@ -771,9 +786,7 @@
 
 
         if (!element) {
-
             return;
-
         }
 
 
@@ -786,7 +799,6 @@
                 "";
 
             return;
-
         }
 
 
@@ -800,11 +812,13 @@
     }
 
 
-    /* ========================================================
+    /* ============================================================
        SCORE CLASS
-       ======================================================== */
+       ============================================================ */
 
-    function getScoreClass(score) {
+    function getScoreClass(
+        score
+    ) {
 
         if (score <= 3) {
 
@@ -825,11 +839,13 @@
     }
 
 
-    /* ========================================================
+    /* ============================================================
        FORMAT SCORE
-       ======================================================== */
+       ============================================================ */
 
-    function formatScore(score) {
+    function formatScore(
+        score
+    ) {
 
         if (
             typeof score !== "number"
@@ -854,9 +870,9 @@
     }
 
 
-    /* ========================================================
-       DEVELOPMENT CHOICE
-       ======================================================== */
+    /* ============================================================
+       DEVELOPMENT AREA
+       ============================================================ */
 
     function bindDevelopmentButtons() {
 
@@ -908,9 +924,9 @@
     }
 
 
-    /* ========================================================
+    /* ============================================================
        UPDATE DEVELOPMENT BUTTONS
-       ======================================================== */
+       ============================================================ */
 
     function updateDevelopmentButtons() {
 
@@ -933,9 +949,9 @@
     }
 
 
-    /* ========================================================
-       DETERMINE LOWEST DIMENSION
-       ======================================================== */
+    /* ============================================================
+       FIND LOWEST DIMENSION
+       ============================================================ */
 
     function getLowestDimension(
         scores
@@ -944,8 +960,7 @@
         const available =
             Object.keys(
                 DIMENSIONS
-            )
-            .filter(function (key) {
+            ).filter(function (key) {
 
                 return (
                     typeof scores[key] ===
@@ -996,9 +1011,9 @@
     }
 
 
-    /* ========================================================
-       RENDER DEVELOPMENT RECOMMENDATION
-       ======================================================== */
+    /* ============================================================
+       DEVELOPMENT RECOMMENDATION
+       ============================================================ */
 
     function renderDevelopmentChoice(
         scores
@@ -1010,9 +1025,7 @@
             );
 
 
-        if (
-            !lowest
-        ) {
+        if (!lowest) {
 
             renderDevelopmentMessage();
 
@@ -1022,8 +1035,9 @@
 
 
         /*
-         * Only suggest automatically when the user has not
-         * explicitly chosen a development area.
+         * If the user has not manually selected
+         * a development area, recommend the
+         * lowest-scoring dimension.
          */
 
         if (
@@ -1044,9 +1058,9 @@
     }
 
 
-    /* ========================================================
+    /* ============================================================
        DEVELOPMENT MESSAGE
-       ======================================================== */
+       ============================================================ */
 
     function renderDevelopmentMessage(
         suggestedDimension
@@ -1059,9 +1073,7 @@
 
 
         if (!element) {
-
             return;
-
         }
 
 
@@ -1070,7 +1082,10 @@
             suggestedDimension;
 
 
-        if (!key || !DIMENSIONS[key]) {
+        if (
+            !key ||
+            !DIMENSIONS[key]
+        ) {
 
             element.textContent =
                 "";
@@ -1102,9 +1117,20 @@
     }
 
 
-    /* ========================================================
+    /* ============================================================
        NAVIGATION
-       ======================================================== */
+       ============================================================
+
+       LOCKED GLOBAL NAVIGATION
+
+       Page 03:
+       BACK → 02.html
+       NEXT → 04.html
+
+       The HTML anchors already carry the correct href.
+       JavaScript additionally saves the current state
+       before allowing navigation.
+       ============================================================ */
 
     function bindNavigation() {
 
@@ -1114,25 +1140,47 @@
             );
 
 
-        const save =
-            document.getElementById(
-                "saveButton"
-            );
-
-
         const next =
             document.getElementById(
                 "nextButton"
             );
 
 
+        const save =
+            document.getElementById(
+                "saveButton"
+            );
+
+
+        /* --------------------------------------------------------
+           PREVIOUS → PAGE 02
+           -------------------------------------------------------- */
+
         if (previous) {
 
             previous.addEventListener(
                 "click",
-                function () {
+                function (event) {
 
                     saveState();
+
+
+                    /*
+                     * If this is an anchor, allow its
+                     * frozen href to perform navigation.
+                     */
+
+                    if (
+                        previous.tagName.toLowerCase() ===
+                        "a"
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    event.preventDefault();
 
                     window.location.href =
                         CONFIG.PREVIOUS_PAGE;
@@ -1142,6 +1190,10 @@
 
         }
 
+
+        /* --------------------------------------------------------
+           SAVE
+           -------------------------------------------------------- */
 
         if (save) {
 
@@ -1159,13 +1211,35 @@
         }
 
 
+        /* --------------------------------------------------------
+           NEXT → PAGE 04
+           -------------------------------------------------------- */
+
         if (next) {
 
             next.addEventListener(
                 "click",
-                function () {
+                function (event) {
 
                     saveState();
+
+
+                    /*
+                     * If this is an anchor, allow its
+                     * frozen href to perform navigation.
+                     */
+
+                    if (
+                        next.tagName.toLowerCase() ===
+                        "a"
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    event.preventDefault();
 
                     window.location.href =
                         CONFIG.NEXT_PAGE;
@@ -1178,9 +1252,9 @@
     }
 
 
-    /* ========================================================
+    /* ============================================================
        SAVE CONFIRMATION
-       ======================================================== */
+       ============================================================ */
 
     function showSavedMessage() {
 
@@ -1191,9 +1265,7 @@
 
 
         if (!button) {
-
             return;
-
         }
 
 
@@ -1218,11 +1290,15 @@
     }
 
 
-    /* ========================================================
+    /* ============================================================
        PUBLIC API
-       ======================================================== */
+       ============================================================ */
 
     window.CTMPathPage03 = {
+
+        /* --------------------------------------------------------
+           RETURN COMPLETE STATE
+           -------------------------------------------------------- */
 
         getState:
             function () {
@@ -1236,6 +1312,10 @@
             },
 
 
+        /* --------------------------------------------------------
+           RETURN DIMENSION SCORES
+           -------------------------------------------------------- */
+
         getScores:
             function () {
 
@@ -1244,15 +1324,27 @@
             },
 
 
+        /* --------------------------------------------------------
+           RETURN OVERALL SCORE
+           -------------------------------------------------------- */
+
         getOverallScore:
             function () {
 
+                const scores =
+                    calculateScores();
+
+
                 return calculateOverallScore(
-                    calculateScores()
+                    scores
                 );
 
             },
 
+
+        /* --------------------------------------------------------
+           SAVE
+           -------------------------------------------------------- */
 
         save:
             function () {
@@ -1262,31 +1354,15 @@
             },
 
 
+        /* --------------------------------------------------------
+           RESET
+           -------------------------------------------------------- */
+
         reset:
             function () {
 
-                state = {
-
-                    answers: {
-
-                        "dignity-1": null,
-
-                        "dignity-2": null,
-
-                        "identity-1": null,
-
-                        "identity-2": null,
-
-                        "authority-1": null,
-
-                        "authority-2": null
-
-                    },
-
-                    development:
-                        ""
-
-                };
+                state =
+                    createInitialState();
 
 
                 try {
@@ -1299,7 +1375,7 @@
                 catch (error) {
 
                     console.warn(
-                        "Page 03 reset failed:",
+                        "CTM PATH™ Page 03 reset failed:",
                         error
                     );
 
@@ -1314,7 +1390,10 @@
                         function (button) {
 
                             button.classList.remove(
-                                "selected"
+                                "selected",
+                                "score-low",
+                                "score-medium",
+                                "score-high"
                             );
 
                         }
@@ -1343,9 +1422,9 @@
     };
 
 
-    /* ========================================================
+    /* ============================================================
        START
-       ======================================================== */
+       ============================================================ */
 
     if (
         document.readyState ===
@@ -1366,5 +1445,6 @@
         init();
 
     }
+
 
 })();
