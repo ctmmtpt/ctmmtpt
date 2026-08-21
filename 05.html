@@ -1,1 +1,2831 @@
+<!DOCTYPE html>
+<html lang="ta">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="CTM PATH™ MILLIONAIRES™ — Page 05: Time, Work & Business"
+    >
+
+    <title>
+        CTM PATH™ MILLIONAIRES™ — 05
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="css/page05.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         GLOBAL TOP SECTION
+         LOCKED STYLE — ALL PAGES
+         ========================================================= -->
+
+    <header class="global-header">
+
+        <a
+            href="index.html"
+            class="global-brand"
+            aria-label="CTM PATH™ MILLIONAIRES™"
+        >
+
+            <img
+                src="assets/CTMMTPTLogo.svg"
+                alt="CTM PATH™ MILLIONAIRES™"
+            >
+
+        </a>
+
+
+        <div class="global-page-number">
+
+            PAGE 05 / 16
+
+        </div>
+
+    </header>
+
+
+    <div class="global-rule"></div>
+
+
+
+    <!-- =========================================================
+         MAIN PAGE
+         ========================================================= -->
+
+    <main class="page05">
+
+
+        <!-- =====================================================
+             HERO
+             ===================================================== -->
+
+        <section class="hero-section">
+
+
+            <div class="hero-kicker">
+
+                YOUR TIME IS YOUR LIFE
+
+            </div>
+
+
+            <h1>
+
+                வேலை vs வணிகம்
+
+            </h1>
+
+
+            <h2>
+
+                JOB vs BUSINESS
+
+            </h2>
+
+
+            <p class="hero-title-tamil">
+
+                நீங்கள் உங்கள் நேரத்தை
+                வருமானத்திற்காக மட்டும் விற்கப் போகிறீர்களா?
+
+            </p>
+
+
+            <p class="hero-title-english">
+
+                WILL YOU SPEND YOUR LIFE
+                TRADING TIME FOR INCOME?
+
+            </p>
+
+
+            <div class="hero-divider"></div>
+
+
+            <p class="hero-introduction tamil">
+
+                உங்கள் வாழ்க்கையின் மிக மதிப்புமிக்க
+                சொத்து உங்கள் பணம் அல்ல.
+
+                <br>
+
+                அது உங்கள் <strong>நேரம்.</strong>
+
+            </p>
+
+
+            <p class="hero-introduction english">
+
+                The most valuable asset you have
+                is not your money.
+
+                <br>
+
+                It is your <strong>time.</strong>
+
+            </p>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             TIME IS LIFE
+             ===================================================== -->
+
+        <section class="time-life-section">
+
+
+            <div class="section-kicker">
+
+                BEFORE WE TALK ABOUT BUSINESS...
+
+            </div>
+
+
+            <h2>
+
+                முதலில் உங்கள் வாழ்க்கையை எண்ணிப் பார்ப்போம்.
+
+            </h2>
+
+
+            <p class="section-subtitle">
+
+                LET'S COUNT THE LIFE YOU ACTUALLY HAVE.
+
+            </p>
+
+
+            <div class="life-form-card">
+
+
+                <div class="life-form-icon">
+
+                    ⏳
+
+                </div>
+
+
+                <h3>
+
+                    உங்கள் பிறந்த தேதி என்ன?
+
+                </h3>
+
+
+                <p>
+
+                    WHAT IS YOUR DATE OF BIRTH?
+
+                </p>
+
+
+                <div class="dob-fields">
+
+
+                    <div class="dob-field">
+
+                        <label for="birthDay">
+                            DAY
+                        </label>
+
+                        <input
+                            type="number"
+                            id="birthDay"
+                            name="birthDay"
+                            min="1"
+                            max="31"
+                            placeholder="DD"
+                            inputmode="numeric"
+                        >
+
+                    </div>
+
+
+                    <div class="dob-field">
+
+                        <label for="birthMonth">
+                            MONTH
+                        </label>
+
+                        <input
+                            type="number"
+                            id="birthMonth"
+                            name="birthMonth"
+                            min="1"
+                            max="12"
+                            placeholder="MM"
+                            inputmode="numeric"
+                        >
+
+                    </div>
+
+
+                    <div class="dob-field dob-year">
+
+                        <label for="birthYear">
+                            YEAR
+                        </label>
+
+                        <input
+                            type="number"
+                            id="birthYear"
+                            name="birthYear"
+                            min="1900"
+                            max="2100"
+                            placeholder="YYYY"
+                            inputmode="numeric"
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="calculateLifeButton"
+                    class="life-calculate-button"
+                >
+
+                    <span>
+                        என் வாழ்க்கையை எண்ணிப் பார்ப்போம்
+                    </span>
+
+                    <small>
+                        CALCULATE MY LIFE
+                    </small>
+
+                </button>
+
+
+                <div
+                    id="dobError"
+                    class="dob-error"
+                    aria-live="polite"
+                ></div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             LIFE REVEAL
+             ===================================================== -->
+
+        <section
+            id="lifeReveal"
+            class="life-reveal"
+            aria-live="polite"
+        >
+
+
+            <div class="life-reveal-kicker">
+
+                YOUR LIFE SO FAR
+
+            </div>
+
+
+            <p class="life-reveal-tamil">
+
+                நீங்கள் இப்போது...
+
+            </p>
+
+
+            <div class="age-display">
+
+                <strong id="ageYears">
+
+                    —
+
+                </strong>
+
+                <span>
+
+                    YEARS OLD
+
+                </span>
+
+            </div>
+
+
+            <p class="life-lived-text">
+
+                நீங்கள் ஏற்கனவே உங்கள் வாழ்க்கையின்
+                ஒரு பகுதியை வாழ்ந்துவிட்டீர்கள்.
+
+                <br>
+
+                YOU HAVE ALREADY LIVED A PART
+                OF YOUR 100-YEAR LIFE.
+
+            </p>
+
+
+            <div class="life-divider"></div>
+
+
+            <p class="hundred-year-question">
+
+                நீங்கள் 100 ஆண்டுகள் வாழ்ந்தால்...
+
+            </p>
+
+
+            <p class="hundred-year-question-english">
+
+                IF YOU LIVE TO 100...
+
+            </p>
+
+
+            <div class="remaining-years">
+
+                <strong id="remainingYears">
+
+                    —
+
+                </strong>
+
+                <span>
+
+                    YEARS LEFT
+
+                </span>
+
+            </div>
+
+
+            <!-- LIFE CONVERSION -->
+
+            <div class="life-conversion">
+
+
+                <div class="life-unit">
+
+                    <strong id="remainingMonths">
+
+                        —
+
+                    </strong>
+
+                    <span>
+                        MONTHS
+                    </span>
+
+                </div>
+
+
+                <div class="life-unit">
+
+                    <strong id="remainingDays">
+
+                        —
+
+                    </strong>
+
+                    <span>
+                        DAYS
+                    </span>
+
+                </div>
+
+
+                <div class="life-unit">
+
+                    <strong id="remainingHours">
+
+                        —
+
+                    </strong>
+
+                    <span>
+                        HOURS
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- LIFE BAR -->
+
+            <div class="life-bar-section">
+
+
+                <div class="life-bar-labels">
+
+                    <span>
+                        LIFE LIVED
+                    </span>
+
+                    <span>
+                        LIFE REMAINING
+                    </span>
+
+                </div>
+
+
+                <div class="life-bar">
+
+                    <div
+                        id="lifeBarLived"
+                        class="life-bar-lived"
+                    ></div>
+
+                </div>
+
+
+                <div class="life-bar-years">
+
+                    <span id="livedYearsLabel">
+                        —
+                    </span>
+
+                    <span>
+                        100 YEARS
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             THAT'S ALL
+             ===================================================== -->
+
+        <section class="thats-all-section">
+
+
+            <div class="thats-all-word">
+
+                அவ்வளவுதான்.
+
+            </div>
+
+
+            <div class="thats-all-english">
+
+                THAT'S ALL.
+
+            </div>
+
+
+            <p>
+
+                100 ஆண்டுகள் என்பது நீண்ட காலமாகத்
+                தோன்றலாம்.
+
+                <br><br>
+
+                ஆனால் அதை ஆண்டுகளாகவும்,
+                மாதங்களாகவும், நாட்களாகவும்,
+                மணிநேரங்களாகவும் பிரித்துப் பார்த்தால்...
+
+            </p>
+
+
+            <strong>
+
+                வாழ்க்கை எவ்வளவு குறுகியது
+                என்பதை உணர முடியும்.
+
+            </strong>
+
+
+            <small>
+
+                LIFE IS SHORTER THAN IT FEELS.
+
+            </small>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             NO TIME TO WASTE
+             ===================================================== -->
+
+        <section class="no-time-section">
+
+
+            <div class="warning-symbol">
+
+                !
+
+            </div>
+
+
+            <h2>
+
+                நமக்கு வீணடிக்க நேரமில்லை.
+
+            </h2>
+
+
+            <h3>
+
+                WE DON'T HAVE TIME TO WASTE.
+
+            </h3>
+
+
+            <div class="finite-grid">
+
+
+                <div class="finite-card">
+
+                    <strong>
+
+                        TIME
+
+                    </strong>
+
+                    <span>
+
+                        நேரம்
+
+                    </span>
+
+                    <p>
+
+                        மீண்டும் கிடைக்காது.
+
+                        <br>
+
+                        It never comes back.
+
+                    </p>
+
+                </div>
+
+
+                <div class="finite-card">
+
+                    <strong>
+
+                        ENERGY
+
+                    </strong>
+
+                    <span>
+
+                        ஆற்றல்
+
+                    </span>
+
+                    <p>
+
+                        என்றென்றும் ஒரே மாதிரி இருக்காது.
+
+                        <br>
+
+                        It does not remain the same forever.
+
+                    </p>
+
+                </div>
+
+
+                <div class="finite-card">
+
+                    <strong>
+
+                        OPPORTUNITY
+
+                    </strong>
+
+                    <span>
+
+                        வாய்ப்பு
+
+                    </span>
+
+                    <p>
+
+                        எல்லா நேரமும் காத்திருக்காது.
+
+                        <br>
+
+                        It does not wait forever.
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             JOB PAIN
+             ===================================================== -->
+
+        <section class="job-pain-section">
+
+
+            <div class="section-kicker">
+
+                THE COST OF TRADING TIME
+
+            </div>
+
+
+            <h2>
+
+                வேலையின் மறைக்கப்பட்ட விலை
+
+            </h2>
+
+
+            <p class="section-subtitle">
+
+                THE HIDDEN COST OF A JOB
+
+            </p>
+
+
+            <div class="job-flow">
+
+
+                <div class="job-flow-step">
+
+                    <div class="flow-icon">
+
+                        ⏳
+
+                    </div>
+
+                    <strong>
+
+                        TIME
+
+                    </strong>
+
+                    <span>
+
+                        நேரம்
+
+                    </span>
+
+                </div>
+
+
+                <div class="flow-arrow">
+
+                    →
+
+                </div>
+
+
+                <div class="job-flow-step">
+
+                    <div class="flow-icon">
+
+                        💼
+
+                    </div>
+
+                    <strong>
+
+                        WORK
+
+                    </strong>
+
+                    <span>
+
+                        வேலை
+
+                    </span>
+
+                </div>
+
+
+                <div class="flow-arrow">
+
+                    →
+
+                </div>
+
+
+                <div class="job-flow-step">
+
+                    <div class="flow-icon">
+
+                        ₹
+
+                    </div>
+
+                    <strong>
+
+                        INCOME
+
+                    </strong>
+
+                    <span>
+
+                        வருமானம்
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="job-realization">
+
+
+                <p class="tamil">
+
+                    நீங்கள் வேலை செய்ய முடியாத
+                    ஒரு மாதம் வந்தால்...
+
+                </p>
+
+
+                <p class="english">
+
+                    WHAT HAPPENS IF YOU CANNOT WORK
+                    FOR A MONTH?
+
+                </p>
+
+
+                <div class="income-stop">
+
+                    <span>
+
+                        INCOME
+
+                    </span>
+
+                    <strong>
+
+                        STOPS
+
+                    </strong>
+
+                </div>
+
+
+                <p class="realization-line">
+
+                    நான் நிறுத்தினால்...
+                    வருமானமும் நிற்கிறது.
+
+                </p>
+
+
+                <p class="realization-line-english">
+
+                    IF I STOP WORKING,
+                    MY INCOME STOPS.
+
+                </p>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             BUSINESS PLEASURE
+             ===================================================== -->
+
+        <section class="business-pleasure-section">
+
+
+            <div class="section-kicker">
+
+                THE POSSIBILITY OF BUSINESS
+
+            </div>
+
+
+            <h2>
+
+                வணிகத்தின் மறுபக்கம்
+
+            </h2>
+
+
+            <p class="section-subtitle">
+
+                BUILD SOMETHING THAT CAN GROW
+
+            </p>
+
+
+            <div class="business-flow">
+
+
+                <div class="business-you">
+
+                    <div class="business-circle">
+
+                        YOU
+
+                    </div>
+
+                    <span>
+
+                        நீங்கள்
+
+                    </span>
+
+                </div>
+
+
+                <div class="business-line">
+
+                    ↓
+
+                </div>
+
+
+                <div class="business-system">
+
+                    <div class="system-box">
+
+                        SYSTEM
+
+                    </div>
+
+                    <span>
+
+                        அமைப்பு
+
+                    </span>
+
+                </div>
+
+
+                <div class="business-branches">
+
+
+                    <div>
+
+                        <strong>
+                            PEOPLE
+                        </strong>
+
+                        <span>
+                            மக்கள்
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            SALES
+                        </strong>
+
+                        <span>
+                            விற்பனை
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            REVENUE
+                        </strong>
+
+                        <span>
+                            வருவாய்
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="business-line">
+
+                    ↓
+
+                </div>
+
+
+                <div class="business-expansion">
+
+                    <strong>
+
+                        EXPANSION
+
+                    </strong>
+
+                    <span>
+
+                        விரிவாக்கம்
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="business-statement">
+
+
+                <strong>
+
+                    நீங்கள் மட்டும் வேலை செய்வதில்லை.
+
+                </strong>
+
+
+                <span>
+
+                    YOU DON'T JUST WORK.
+
+                </span>
+
+
+                <strong>
+
+                    நீங்கள் வளரக்கூடிய ஒரு அமைப்பை உருவாக்குகிறீர்கள்.
+
+                </strong>
+
+
+                <span>
+
+                    YOU BUILD A SYSTEM THAT CAN GROW.
+
+                </span>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             JOB VS BUSINESS
+             ===================================================== -->
+
+        <section class="job-business-section">
+
+
+            <div class="section-kicker">
+
+                THE CHOICE
+
+            </div>
+
+
+            <h2>
+
+                நீங்கள் எதை உருவாக்கப் போகிறீர்கள்?
+
+            </h2>
+
+
+            <p class="section-subtitle">
+
+                WHAT WILL YOU BUILD?
+
+            </p>
+
+
+            <div class="job-business-grid">
+
+
+                <!-- JOB -->
+
+                <article class="job-card">
+
+
+                    <div class="comparison-title">
+
+                        JOB
+
+                    </div>
+
+
+                    <div class="comparison-tamil">
+
+                        வேலை
+
+                    </div>
+
+
+                    <div class="comparison-item">
+
+                        <strong>
+                            TIME
+                        </strong>
+
+                        <span>
+                            நேரம்
+                        </span>
+
+                    </div>
+
+
+                    <div class="comparison-item">
+
+                        <strong>
+                            SKILL
+                        </strong>
+
+                        <span>
+                            திறமை
+                        </span>
+
+                    </div>
+
+
+                    <div class="comparison-item">
+
+                        <strong>
+                            INCOME
+                        </strong>
+
+                        <span>
+                            வருமானம்
+                        </span>
+
+                    </div>
+
+
+                    <div class="comparison-item">
+
+                        <strong>
+                            DEPENDENCE
+                        </strong>
+
+                        <span>
+                            சார்ந்திருத்தல்
+                        </span>
+
+                    </div>
+
+
+                    <div class="comparison-equation">
+
+                        MORE TIME
+                        <br>
+                        ↓
+                        <br>
+                        MORE INCOME
+
+                    </div>
+
+
+                </article>
+
+
+
+                <!-- BUSINESS -->
+
+                <article class="business-card">
+
+
+                    <div class="comparison-title">
+
+                        BUSINESS
+
+                    </div>
+
+
+                    <div class="comparison-tamil">
+
+                        வணிகம்
+
+                    </div>
+
+
+                    <div class="comparison-item">
+
+                        <strong>
+                            SYSTEM
+                        </strong>
+
+                        <span>
+                            அமைப்பு
+                        </span>
+
+                    </div>
+
+
+                    <div class="comparison-item">
+
+                        <strong>
+                            PEOPLE
+                        </strong>
+
+                        <span>
+                            மக்கள்
+                        </span>
+
+                    </div>
+
+
+                    <div class="comparison-item">
+
+                        <strong>
+                            SALES
+                        </strong>
+
+                        <span>
+                            விற்பனை
+                        </span>
+
+                    </div>
+
+
+                    <div class="comparison-item">
+
+                        <strong>
+                            REVENUE
+                        </strong>
+
+                        <span>
+                            வருவாய்
+                        </span>
+
+                    </div>
+
+
+                    <div class="comparison-item">
+
+                        <strong>
+                            EXPANSION
+                        </strong>
+
+                        <span>
+                            விரிவாக்கம்
+                        </span>
+
+                    </div>
+
+
+                    <div class="comparison-equation">
+
+                        BUILD SYSTEM
+                        <br>
+                        ↓
+                        <br>
+                        CREATE VALUE
+                        <br>
+                        ↓
+                        <br>
+                        GROW
+
+                    </div>
+
+
+                </article>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             LIFE + BUSINESS QUESTION
+             ===================================================== -->
+
+        <section class="life-business-question">
+
+
+            <div class="question-number-large">
+
+                ?
+
+            </div>
+
+
+            <p class="question-tamil">
+
+                இந்த குறுகிய வாழ்க்கைக்குள்...
+
+            </p>
+
+
+            <h2>
+
+                நீங்கள் என்ன உருவாக்கப் போகிறீர்கள்?
+
+            </h2>
+
+
+            <p class="question-english">
+
+                WITHIN THIS SHORT LIFE,
+                WHAT ARE YOU GOING TO BUILD?
+
+            </p>
+
+
+            <div class="choice-divider">
+
+                <span>
+                    OR
+                </span>
+
+            </div>
+
+
+            <div class="choice-statement">
+
+
+                <p>
+
+                    உங்கள் வாழ்க்கையை
+                    வெறும் சம்பளத்திற்காக
+                    செலவிடப் போகிறீர்களா?
+
+                </p>
+
+
+                <small>
+
+                    WILL YOU SPEND YOUR LIFE
+                    SIMPLY EARNING A SALARY?
+
+                </small>
+
+
+            </div>
+
+
+            <div class="choice-statement">
+
+                <p>
+
+                    அல்லது உங்கள் நேரத்தைக் கொண்டு
+                    உங்களுடைய ஒரு பெரிய வாழ்க்கையை
+                    உருவாக்கப் போகிறீர்களா?
+
+                </p>
+
+
+                <small>
+
+                    OR WILL YOU USE YOUR LIMITED TIME
+                    TO BUILD SOMETHING OF YOUR OWN?
+
+                </small>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             MOMENT OF TRUTH
+             ===================================================== -->
+
+        <section class="moment-of-truth">
+
+
+            <div class="moment-kicker">
+
+                STOP. THINK.
+
+            </div>
+
+
+            <h2>
+
+                ஒரு நிமிடம் நின்று சிந்தியுங்கள்...
+
+            </h2>
+
+
+            <p class="moment-english">
+
+                TAKE A MOMENT AND THINK...
+
+            </p>
+
+
+            <div class="moment-question">
+
+
+                <p>
+
+                    நான் வேலை செய்வதை நிறுத்தினாலும்,
+
+                </p>
+
+
+                <strong>
+
+                    நான் உருவாக்கியது
+                    தொடர்ந்து மதிப்பை உருவாக்குமா?
+
+                </strong>
+
+
+                <small>
+
+                    IF I STOP WORKING,
+                    WILL WHAT I BUILT
+                    CONTINUE TO CREATE VALUE?
+
+                </small>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             ASSESSMENT INTRO
+             ===================================================== -->
+
+        <section class="assessment-introduction">
+
+
+            <div class="assessment-number">
+
+                01 — 05
+
+            </div>
+
+
+            <div>
+
+                <h2>
+
+                    வேலை அல்லது வணிகம் —
+                    உங்கள் தற்போதைய நிலை என்ன?
+
+                </h2>
+
+
+                <p>
+
+                    DISCOVER YOUR JOB vs BUSINESS MINDSET
+
+                </p>
+
+
+                <span>
+
+                    ஒவ்வொரு கேள்விக்கும் உங்களுக்கு மிகவும்
+                    பொருத்தமான பதிலைத் தேர்வு செய்யுங்கள்.
+
+                    <br>
+
+                    Choose the answer that most honestly
+                    describes your current position.
+
+                </span>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             SCORING SCALE
+             ===================================================== -->
+
+        <section class="scoring-scale">
+
+
+            <span>
+
+                மதிப்பீட்டு முறை / SCORING SCALE
+
+            </span>
+
+
+            <div class="scale-options">
+
+
+                <div class="scale-option scale-low">
+
+                    <strong>
+                        A
+                    </strong>
+
+                    <span>
+                        2
+                    </span>
+
+                </div>
+
+
+                <div class="scale-option scale-mid">
+
+                    <strong>
+                        B
+                    </strong>
+
+                    <span>
+                        5
+                    </span>
+
+                </div>
+
+
+                <div class="scale-option scale-builder">
+
+                    <strong>
+                        C
+                    </strong>
+
+                    <span>
+                        8
+                    </span>
+
+                </div>
+
+
+                <div class="scale-option scale-wealth">
+
+                    <strong>
+                        D
+                    </strong>
+
+                    <span>
+                        10
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <p>
+
+                TOTAL SCORE:
+                <strong id="totalScoreTop">
+                    —
+                </strong>
+                / 50
+
+            </p>
+
+
+            <p>
+
+                AVERAGE:
+                <strong id="averageScore">
+                    —
+                </strong>
+                / 10
+
+            </p>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             ASSESSMENT
+             ===================================================== -->
+
+        <form
+            id="jobBusinessForm"
+            class="job-business-form"
+            novalidate
+        >
+
+
+            <!-- =================================================
+                 QUESTION 01
+                 ================================================= -->
+
+            <article
+                class="assessment-card"
+                data-question="1"
+            >
+
+
+                <div class="question-number">
+
+                    01
+
+                </div>
+
+
+                <div class="question-heading">
+
+                    <h3>
+
+                        உங்கள் வருமானத்தின் அடிப்படை என்ன?
+
+                    </h3>
+
+
+                    <p>
+
+                        WHAT DOES YOUR INCOME
+                        MOSTLY DEPEND ON?
+
+                    </p>
+
+                </div>
+
+
+                <div class="answer-options">
+
+
+                    <button
+                        type="button"
+                        class="answer-option option-a"
+                        data-question="1"
+                        data-value="2"
+                    >
+
+                        <span class="option-letter">
+                            A
+                        </span>
+
+                        <span class="option-score">
+                            2
+                        </span>
+
+                        <span class="option-text">
+
+                            <strong>
+
+                                நான் வேலை செய்யும் நேரம் மற்றும்
+                                பெறும் சம்பளத்தைப் பொறுத்தது.
+
+                            </strong>
+
+                            <small>
+
+                                It depends mainly on
+                                the time I work and my salary.
+
+                            </small>
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="answer-option option-b"
+                        data-question="1"
+                        data-value="5"
+                    >
+
+                        <span class="option-letter">
+                            B
+                        </span>
+
+                        <span class="option-score">
+                            5
+                        </span>
+
+                        <span class="option-text">
+
+                            <strong>
+
+                                என் வேலை மற்றும் சில கூடுதல்
+                                வருமான வாய்ப்புகளைப் பொறுத்தது.
+
+                            </strong>
+
+                            <small>
+
+                                It depends on my job and
+                                some additional income sources.
+
+                            </small>
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="answer-option option-c"
+                        data-question="1"
+                        data-value="8"
+                    >
+
+                        <span class="option-letter">
+                            C
+                        </span>
+
+                        <span class="option-score">
+                            8
+                        </span>
+
+                        <span class="option-text">
+
+                            <strong>
+
+                                என் தனிப்பட்ட உழைப்புடன்
+                                சில அமைப்புகள் அல்லது
+                                பிற வருமான வழிகளும் உள்ளன.
+
+                            </strong>
+
+                            <small>
+
+                                Along with my personal effort,
+                                I have some systems or
+                                additional income sources.
+
+                            </small>
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="answer-option option-d"
+                        data-question="1"
+                        data-value="10"
+                    >
+
+                        <span class="option-letter">
+                            D
+                        </span>
+
+                        <span class="option-score">
+                            10
+                        </span>
+
+                        <span class="option-text">
+
+                            <strong>
+
+                                அமைப்புகள், மக்கள், விற்பனை மற்றும்
+                                பல வருமான வழிகள் இணைந்து செயல்படுகின்றன.
+
+                            </strong>
+
+                            <small>
+
+                                Systems, people, sales and
+                                multiple income streams
+                                work together.
+
+                            </small>
+
+                        </span>
+
+                    </button>
+
+
+                </div>
+
+
+                <div class="question-score">
+
+                    YOUR SCORE:
+                    <strong id="questionScore1">—</strong>
+                    / 10
+
+                </div>
+
+
+            </article>
+
+
+
+            <!-- =================================================
+                 QUESTION 02
+                 ================================================= -->
+
+            <article
+                class="assessment-card"
+                data-question="2"
+            >
+
+
+                <div class="question-number">
+
+                    02
+
+                </div>
+
+
+                <div class="question-heading">
+
+                    <h3>
+
+                        உங்கள் நேரத்தை நீங்கள் எப்படி
+                        பயன்படுத்துகிறீர்கள்?
+
+                    </h3>
+
+
+                    <p>
+
+                        HOW IS YOUR TIME CURRENTLY
+                        CONNECTED TO YOUR INCOME?
+
+                    </p>
+
+                </div>
+
+
+                <div class="answer-options">
+
+
+                    <button
+                        type="button"
+                        class="answer-option option-a"
+                        data-question="2"
+                        data-value="2"
+                    >
+
+                        <span class="option-letter">
+                            A
+                        </span>
+
+                        <span class="option-score">
+                            2
+                        </span>
+
+                        <span class="option-text">
+
+                            <strong>
+
+                                நான் வேலை செய்யும் நேரத்திற்கு
+                                நேரடியாக வருமானம் கிடைக்கிறது.
+
+                            </strong>
+
+                            <small>
+
+                                My income is directly tied
+                                to the hours I work.
+
+                            </small>
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="answer-option option-b"
+                        data-question="2"
+                        data-value="5"
+                    >
+
+                        <span class="option-letter">
+                            B
+                        </span>
+
+                        <span class="option-score">
+                            5
+                        </span>
+
+                        <span class="option-text">
+
+                            <strong>
+
+                                என் நேரத்தின் பெரும்பகுதி
+                                வேலைக்காக செல்கிறது.
+
+                            </strong>
+
+                            <small>
+
+                                Most of my time is
+                                still spent working.
+
+                            </small>
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="answer-option option-c"
+                        data-question="2"
+                        data-value="8"
+                    >
+
+                        <span class="option-letter">
+                            C
+                        </span>
+
+                        <span class="option-score">
+                            8
+                        </span>
+
+                        <span class="option-text">
+
+                            <strong>
+
+                                நான் வேலை செய்வதோடு,
+                                எதிர்கால வருமானத்தை உருவாக்கும்
+                                நேரத்தையும் ஒதுக்குகிறேன்.
+
+                            </strong>
+
+                            <small>
+
+                                I work while also investing
+                                time in building future income.
+
+                            </small>
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="answer-option option-d"
+                        data-question="2"
+                        data-value="10"
+                    >
+
+                        <span class="option-letter">
+                            D
+                        </span>
+
+                        <span class="option-score">
+                            10
+                        </span>
+
+                        <span class="option-text">
+
+                            <strong>
+
+                                என் நேரத்தைத் தாண்டியும்
+                                மதிப்பை உருவாக்கும்
+                                அமைப்புகளை உருவாக்குகிறேன்.
+
+                            </strong>
+
+                            <small>
+
+                                I build systems that can
+                                create value beyond
+                                my personal working hours.
+
+                            </small>
+
+                        </span>
+
+                    </button>
+
+
+                </div>
+
+
+                <div class="question-score">
+
+                    YOUR SCORE:
+                    <strong id="questionScore2">—</strong>
+                    / 10
+
+                </div>
+
+
+            </article>
+
+
+
+            <!-- =================================================
+                 QUESTION 03
+                 ================================================= -->
+
+            <article
+                class="assessment-card"
+                data-question="3"
+            >
+
+
+                <div class="question-number">
+
+                    03
+
+                </div>
+
+
+                <div class="question-heading">
+
+                    <h3>
+
+                        நீங்கள் மட்டும் வேலை செய்கிறீர்களா?
+
+                    </h3>
+
+
+                    <p>
+
+                        DOES YOUR INCOME DEPEND
+                        ENTIRELY ON YOU?
+
+                    </p>
+
+                </div>
+
+
+                <div class="answer-options">
+
+
+                    <button
+                        type="button"
+                        class="answer-option option-a"
+                        data-question="3"
+                        data-value="2"
+                    >
+
+                        <span class="option-letter">
+                            A
+                        </span>
+
+                        <span class="option-score">
+                            2
+                        </span>
+
+                        <span class="option-text">
+
+                            <strong>
+
+                                ஆம். நான் இல்லையென்றால்
+                                வேலை நின்றுவிடும்.
+
+                            </strong>
+
+                            <small>
+
+                                Yes. If I stop,
+                                the work stops.
+
+                            </small>
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="answer-option option-b"
+                        data-question="3"
+                        data-value="5"
+                    >
+
+                        <span class="option-letter">
+                            B
+                        </span>
+
+                        <span class="option-score">
+                            5
+                        </span>
+
+                        <span class="option-text">
+
+                            <strong>
+
+                                சில வேலைகளை மற்றவர்களிடம்
+                                ஒப்படைக்கத் தொடங்கியுள்ளேன்.
+
+                            </strong>
+
+                            <small>
+
+                                I have started delegating
+                                some work to others.
+
+                            </small>
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="answer-option option-c"
+                        data-question="3"
+                        data-value="8"
+                    >
+
+                        <span class="option-letter">
+                            C
+                        </span>
+
+                        <span class="option-score">
+                            8
+                        </span>
+
+                        <span class="option-text">
+
+                            <strong>
+
+                                என்னுடன் இணைந்து செயல்படும்
+                                சிலர் உள்ளனர்.
+
+                            </strong>
+
+                            <small>
+
+                                I have people who
+                                work with me.
+
+                            </small>
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="answer-option option-d"
+                        data-question="3"
+                        data-value="10"
+                    >
+
+                        <span class="option-letter">
+                            D
+                        </span>
+
+                        <span class="option-score">
+                            10
+                        </span>
+
+                        <span class="option-text">
+
+                            <strong>
+
+                                மக்கள், அமைப்புகள் மற்றும்
+                                செயல்முறைகள் இணைந்து
+                                வணிகத்தை இயக்குகின்றன.
+
+                            </strong>
+
+                            <small>
+
+                                People, systems and processes
+                                work together to operate
+                                the business.
+
+                            </small>
+
+                        </span>
+
+                    </button>
+
+
+                </div>
+
+
+                <div class="question-score">
+
+                    YOUR SCORE:
+                    <strong id="questionScore3">—</strong>
+                    / 10
+
+                </div>
+
+
+            </article>
+
+
+
+            <!-- =================================================
+                 QUESTION 04
+                 ================================================= -->
+
+            <article
+                class="assessment-card"
+                data-question="4"
+            >
+
+
+                <div class="question-number">
+
+                    04
+
+                </div>
+
+
+                <div class="question-heading">
+
+                    <h3>
+
+                        உங்கள் திறனை நீங்கள் எப்படிப் பார்க்கிறீர்கள்?
+
+                    </h3>
+
+
+                    <p>
+
+                        HOW DO YOU CURRENTLY USE
+                        YOUR SKILLS?
+
+                    </p>
+
+                </div>
+
+
+                <div class="answer-options">
+
+
+                    <button
+                        type="button"
+                        class="answer-option option-a"
+                        data-question="4"
+                        data-value="2"
+                    >
+
+                        <span class="option-letter">
+                            A
+                        </span>
+
+                        <span class="option-score">
+                            2
+                        </span>
+
+                        <span class="option-text">
+
+                            <strong>
+
+                                என் திறனை ஒரு வேலைக்காக
+                                பயன்படுத்துகிறேன்.
+
+                            </strong>
+
+                            <small>
+
+                                I mainly use my skills
+                                for a job.
+
+                            </small>
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="answer-option option-b"
+                        data-question="4"
+                        data-value="5"
+                    >
+
+                        <span class="option-letter">
+                            B
+                        </span>
+
+                        <span class="option-score">
+                            5
+                        </span>
+
+                        <span class="option-text">
+
+                            <strong>
+
+                                என் திறனை மேம்படுத்திக்
+                                கொண்டிருக்கிறேன்.
+
+                            </strong>
+
+                            <small>
+
+                                I am improving my skills
+                                for better opportunities.
+
+                            </small>
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="answer-option option-c"
+                        data-question="4"
+                        data-value="8"
+                    >
+
+                        <span class="option-letter">
+                            C
+                        </span>
+
+                        <span class="option-score">
+                            8
+                        </span>
+
+                        <span class="option-text">
+
+                            <strong>
+
+                                என் திறனைப் பயன்படுத்தி
+                                மதிப்பையும் கூடுதல்
+                                வருமானத்தையும் உருவாக்குகிறேன்.
+
+                            </strong>
+
+                            <small>
+
+                                I use my skills to create
+                                value and additional income.
+
+                            </small>
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="answer-option option-d"
+                        data-question="4"
+                        data-value="10"
+                    >
+
+                        <span class="option-letter">
+                            D
+                        </span>
+
+                        <span class="option-score">
+                            10
+                        </span>
+
+                        <span class="option-text">
+
+                            <strong>
+
+                                என் திறனை மற்றவர்களின்
+                                திறன்களுடன் இணைத்து
+                                வளரக்கூடிய அமைப்பை உருவாக்குகிறேன்.
+
+                            </strong>
+
+                            <small>
+
+                                I combine my skills with
+                                other people's skills to
+                                build a scalable system.
+
+                            </small>
+
+                        </span>
+
+                    </button>
+
+
+                </div>
+
+
+                <div class="question-score">
+
+                    YOUR SCORE:
+                    <strong id="questionScore4">—</strong>
+                    / 10
+
+                </div>
+
+
+            </article>
+
+
+
+            <!-- =================================================
+                 QUESTION 05
+                 ================================================= -->
+
+            <article
+                class="assessment-card"
+                data-question="5"
+            >
+
+
+                <div class="question-number">
+
+                    05
+
+                </div>
+
+
+                <div class="question-heading">
+
+                    <h3>
+
+                        நீங்கள் எதைத் தேர்வு செய்கிறீர்கள்?
+
+                    </h3>
+
+
+                    <p>
+
+                        WHAT ARE YOU ULTIMATELY
+                        TRYING TO BUILD?
+
+                    </p>
+
+                </div>
+
+
+                <div class="answer-options">
+
+
+                    <button
+                        type="button"
+                        class="answer-option option-a"
+                        data-question="5"
+                        data-value="2"
+                    >
+
+                        <span class="option-letter">
+                            A
+                        </span>
+
+                        <span class="option-score">
+                            2
+                        </span>
+
+                        <span class="option-text">
+
+                            <strong>
+
+                                நிலையான ஒரு வேலை மற்றும்
+                                சம்பளத்தைப் பெற விரும்புகிறேன்.
+
+                            </strong>
+
+                            <small>
+
+                                I want a stable job
+                                and salary.
+
+                            </small>
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="answer-option option-b"
+                        data-question="5"
+                        data-value="5"
+                    >
+
+                        <span class="option-letter">
+                            B
+                        </span>
+
+                        <span class="option-score">
+                            5
+                        </span>
+
+                        <span class="option-text">
+
+                            <strong>
+
+                                நல்ல வருமானத்துடன்
+                                பாதுகாப்பான வாழ்க்கையை
+                                உருவாக்க விரும்புகிறேன்.
+
+                            </strong>
+
+                            <small>
+
+                                I want a secure life
+                                with a good income.
+
+                            </small>
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="answer-option option-c"
+                        data-question="5"
+                        data-value="8"
+                    >
+
+                        <span class="option-letter">
+                            C
+                        </span>
+
+                        <span class="option-score">
+                            8
+                        </span>
+
+                        <span class="option-text">
+
+                            <strong>
+
+                                என் நேரத்திற்கும் உழைப்பிற்கும்
+                                அப்பாற்பட்ட கூடுதல் வருமானத்தை
+                                உருவாக்க விரும்புகிறேன்.
+
+                            </strong>
+
+                            <small>
+
+                                I want additional income
+                                beyond my personal time
+                                and effort.
+
+                            </small>
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="answer-option option-d"
+                        data-question="5"
+                        data-value="10"
+                    >
+
+                        <span class="option-letter">
+                            D
+                        </span>
+
+                        <span class="option-score">
+                            10
+                        </span>
+
+                        <span class="option-text">
+
+                            <strong>
+
+                                என் நேரத்தைக் கடந்து வளரக்கூடிய
+                                ஒரு வணிக அமைப்பையும்,
+                                நீண்டகால வருமானத்தையும் உருவாக்க
+                                விரும்புகிறேன்.
+
+                            </strong>
+
+                            <small>
+
+                                I want to build a business system
+                                and long-term income that can
+                                grow beyond my personal time.
+
+                            </small>
+
+                        </span>
+
+                    </button>
+
+
+                </div>
+
+
+                <div class="question-score">
+
+                    YOUR SCORE:
+                    <strong id="questionScore5">—</strong>
+                    / 10
+
+                </div>
+
+
+            </article>
+
+
+        </form>
+
+
+
+        <!-- =====================================================
+             SCORE REVEAL
+             ===================================================== -->
+
+        <section class="score-reveal">
+
+
+            <div class="section-kicker">
+
+                YOUR JOB vs BUSINESS SCORE
+
+            </div>
+
+
+            <h2>
+
+                உங்கள் தற்போதைய நிலை
+
+            </h2>
+
+
+            <div class="score-display">
+
+                <strong id="totalScore">
+
+                    —
+
+                </strong>
+
+                <span>
+
+                    / 50
+
+                </span>
+
+            </div>
+
+
+            <div class="average-display">
+
+                <span>
+
+                    சராசரி மதிப்பெண்
+
+                </span>
+
+                <strong id="averageScoreReveal">
+
+                    —
+
+                </strong>
+
+                <small>
+
+                    / 10
+
+                </small>
+
+            </div>
+
+
+            <div
+                id="businessInterpretation"
+                class="business-interpretation"
+                aria-live="polite"
+            ></div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             FINAL LIFE QUESTION
+             ===================================================== -->
+
+        <section class="final-life-question">
+
+
+            <div class="final-life-symbol">
+
+                ⏳
+
+            </div>
+
+
+            <p>
+
+                உங்கள் மீதமுள்ள நேரம் குறைந்து கொண்டே இருக்கிறது.
+
+            </p>
+
+
+            <h2>
+
+                அதை எப்படி பயன்படுத்தப் போகிறீர்கள்?
+
+            </h2>
+
+
+            <span>
+
+                YOUR TIME IS RUNNING DOWN.
+
+                <br>
+
+                HOW WILL YOU USE WHAT YOU HAVE LEFT?
+
+            </span>
+
+
+            <div class="final-question-divider"></div>
+
+
+            <strong>
+
+                BUILD YOUR LIFE.
+
+                <br>
+
+                BUILD YOUR FUTURE.
+
+                <br>
+
+                BUILD SOMETHING THAT CAN GROW.
+
+            </strong>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             GLOBAL BOTTOM NAVIGATION
+             ===================================================== -->
+
+        <nav
+            class="global-navigation"
+            aria-label="Page navigation"
+        >
+
+
+            <a
+                href="04.html"
+                class="global-nav-button previous"
+                id="previousButton"
+            >
+
+                <strong>
+
+                    ← PREVIOUS
+
+                </strong>
+
+                <span>
+
+                    முந்தைய பக்கம்
+
+                </span>
+
+            </a>
+
+
+            <div class="global-current-page">
+
+                05 / 16
+
+            </div>
+
+
+            <a
+                href="06.html"
+                class="global-nav-button next"
+                id="nextButton"
+            >
+
+                <strong>
+
+                    NEXT →
+
+                </strong>
+
+                <span>
+
+                    அடுத்த பக்கம்
+
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+
+        <!-- =====================================================
+             SAVE & CONTINUE
+             ===================================================== -->
+
+        <div class="save-section">
+
+
+            <button
+                type="button"
+                id="saveContinueButton"
+                class="save-button"
+            >
+
+                SAVE &amp; CONTINUE →
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =====================================================
+             GLOBAL FOOTER
+             ===================================================== -->
+
+        <footer class="global-footer">
+
+
+            <p class="footer-tagline">
+
+                EVERY DREAM HAS A PATH™
+
+            </p>
+
+
+            <p class="footer-club">
+
+                CTM PATH™ MILLIONAIRES™ CLUB
+
+            </p>
+
+
+        </footer>
+
+
+    </main>
+
+
+
+    <!-- =========================================================
+         PAGE 05 JAVASCRIPT
+         ========================================================= -->
+
+    <script
+        src="js/page05.js"
+        defer
+    ></script>
+
+
+</body>
+
+</html>
