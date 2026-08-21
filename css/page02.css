@@ -2671,3 +2671,355 @@ svg {
 
 }
 
+
+/* ============================================================
+   52. FROZEN PAGE 01 SHELL — PAGE 02
+   ============================================================
+   Page 01 is the visual master. These rules intentionally
+   override the earlier Page 02 shell so the top and bottom
+   remain visually consistent across Pages 01–16.
+*/
+
+.page02 {
+    max-width: 1540px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 5.5vw 60px !important;
+}
+
+.page-header {
+    min-height: 250px !important;
+    padding: 52px 5.5vw 30px !important;
+    position: relative !important;
+    display: block !important;
+    border-bottom: 0 !important;
+}
+
+.page-header::after {
+    content: "" !important;
+    position: absolute !important;
+    left: 2.7vw !important;
+    right: 2.7vw !important;
+    bottom: 0 !important;
+    height: 2px !important;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        #f4c542 20%,
+        #19c8c2 50%,
+        #f4c542 80%,
+        transparent 100%
+    ) !important;
+}
+
+.header-brand {
+    position: absolute !important;
+    left: 5.5vw !important;
+    top: 52px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    text-decoration: none !important;
+}
+
+.header-brand-mark {
+    width: 72px !important;
+    height: 72px !important;
+    flex: 0 0 72px !important;
+    object-fit: contain !important;
+    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.35)) !important;
+}
+
+.header-brand-name {
+    color: #f5f1e8 !important;
+    font-family: var(--font-ui) !important;
+    font-size: 17px !important;
+    font-weight: 800 !important;
+    line-height: 1.05 !important;
+    letter-spacing: 0.04em !important;
+}
+
+.header-brand-name strong {
+    display: block !important;
+    font-size: 20px !important;
+    line-height: 1.05 !important;
+}
+
+.page-marker {
+    position: absolute !important;
+    top: 104px !important;
+    right: 5.5vw !important;
+    margin: 0 !important;
+    color: #f4c542 !important;
+    font-family: var(--font-ui) !important;
+    font-size: 17px !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.28em !important;
+    text-transform: uppercase !important;
+}
+
+.page-navigation {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) !important;
+    align-items: center !important;
+    gap: 24px !important;
+    margin-top: 70px !important;
+    padding-top: 0 !important;
+    border-top: 0 !important;
+}
+
+.nav-button {
+    width: 100% !important;
+    min-height: 82px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 16px !important;
+    padding: 16px 28px !important;
+    border: 1px solid transparent !important;
+    border-radius: 24px !important;
+    color: #ffffff !important;
+    font-family: var(--font-tamil) !important;
+    font-size: 1rem !important;
+    font-weight: 800 !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.30) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease !important;
+}
+
+.nav-button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 22px 45px rgba(0, 0, 0, 0.36) !important;
+    filter: brightness(1.06) !important;
+}
+
+.nav-button:active {
+    transform: translateY(0) !important;
+}
+
+.nav-button:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.82) !important;
+    outline-offset: 3px !important;
+}
+
+.nav-back {
+    justify-self: stretch !important;
+    border-color: rgba(255, 151, 55, 0.70) !important;
+    background: linear-gradient(135deg, #e88724, #d65a45) !important;
+}
+
+.nav-back:hover {
+    background: linear-gradient(135deg, #f19a2e, #df6048) !important;
+}
+
+.nav-forward {
+    justify-self: stretch !important;
+    border-color: rgba(41, 196, 125, 0.72) !important;
+    background: linear-gradient(135deg, #08784a, #29c47d) !important;
+}
+
+.nav-forward:hover {
+    background: linear-gradient(135deg, #09945b, #38d58c) !important;
+}
+
+.nav-arrow {
+    flex: 0 0 auto !important;
+    font-family: var(--font-ui) !important;
+    font-size: 1.75rem !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+}
+
+.nav-text {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+.nav-ta {
+    font-family: var(--font-tamil) !important;
+    font-size: 1.05rem !important;
+    font-weight: 800 !important;
+    line-height: 1.45 !important;
+}
+
+.nav-en {
+    margin-top: 2px !important;
+    font-family: var(--font-ui) !important;
+    font-size: 0.68rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.12em !important;
+    line-height: 1.35 !important;
+}
+
+.navigation-progress {
+    min-width: 96px !important;
+    color: #f4c542 !important;
+    font-family: var(--font-ui) !important;
+    font-size: 1.45rem !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.12em !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+}
+
+.navigation-progress span {
+    color: #f4c542 !important;
+}
+
+.page-footer {
+    margin-top: 52px !important;
+    padding: 28px 20px 42px !important;
+    text-align: center !important;
+    border-top: 0 !important;
+}
+
+.footer-tagline {
+    color: #f4c542 !important;
+    font-family: var(--font-ui) !important;
+    font-size: 0.72rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.25em !important;
+}
+
+.footer-brand {
+    margin-top: 6px !important;
+    color: #8491aa !important;
+    font-family: var(--font-ui) !important;
+    font-size: 0.68rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.14em !important;
+}
+
+.page-status {
+    min-height: 28px !important;
+    margin: 22px auto 0 !important;
+    text-align: center !important;
+    font-family: var(--font-tamil) !important;
+    font-size: 0.90rem !important;
+    line-height: 1.6 !important;
+}
+
+.page-status.success {
+    color: var(--green-bright) !important;
+}
+
+.page-status.warning {
+    color: var(--orange-bright) !important;
+}
+
+.page-status.error {
+    color: var(--red-bright) !important;
+}
+
+/* ============================================================
+   53. FROZEN SHELL RESPONSIVE RULES
+   ============================================================
+*/
+
+@media (max-width: 900px) {
+    .page02 {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+
+    .page-header {
+        min-height: 180px !important;
+        padding: 28px 24px 24px !important;
+    }
+
+    .header-brand {
+        left: 24px !important;
+        top: 28px !important;
+    }
+
+    .header-brand-mark {
+        width: 58px !important;
+        height: 58px !important;
+        flex-basis: 58px !important;
+    }
+
+    .header-brand-name {
+        font-size: 14px !important;
+    }
+
+    .header-brand-name strong {
+        font-size: 16px !important;
+    }
+
+    .page-marker {
+        top: 82px !important;
+        right: 24px !important;
+        font-size: 13px !important;
+    }
+
+    .page-navigation {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+    }
+
+    .navigation-progress {
+        order: -1 !important;
+    }
+
+    .nav-button {
+        min-height: 72px !important;
+    }
+}
+
+@media (max-width: 560px) {
+    .page02 {
+        padding-left: 18px !important;
+        padding-right: 18px !important;
+        padding-bottom: 42px !important;
+    }
+
+    .page-header {
+        min-height: 150px !important;
+        padding: 20px 18px !important;
+    }
+
+    .header-brand {
+        left: 18px !important;
+        top: 20px !important;
+        gap: 9px !important;
+    }
+
+    .header-brand-mark {
+        width: 50px !important;
+        height: 50px !important;
+        flex-basis: 50px !important;
+    }
+
+    .header-brand-name {
+        font-size: 12px !important;
+    }
+
+    .header-brand-name strong {
+        font-size: 14px !important;
+    }
+
+    .page-marker {
+        top: 72px !important;
+        right: 18px !important;
+        font-size: 10px !important;
+        letter-spacing: 0.20em !important;
+    }
+
+    .nav-button {
+        min-height: 68px !important;
+        border-radius: 18px !important;
+        padding: 12px 16px !important;
+    }
+
+    .nav-ta {
+        font-size: 0.92rem !important;
+    }
+
+    .navigation-progress {
+        font-size: 1.15rem !important;
+    }
+}
