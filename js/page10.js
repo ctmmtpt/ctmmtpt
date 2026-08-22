@@ -7,7 +7,6 @@
 (function () {
     "use strict";
 
-
     /* =========================================================
        PAGE GUARD
        ========================================================= */
@@ -18,7 +17,6 @@
         return;
     }
 
-
     /* =========================================================
        CONFIGURATION
        ========================================================= */
@@ -28,35 +26,27 @@
         page10Action: "ctmPathPage10Action"
     };
 
-
     /* =========================================================
        DOM READY
        ========================================================= */
 
     function ready(callback) {
-
         if (document.readyState === "loading") {
-
             document.addEventListener(
                 "DOMContentLoaded",
                 callback,
                 { once: true }
             );
-
         } else {
-
             callback();
-
         }
     }
-
 
     /* =========================================================
        SCROLL CONTROL
        ========================================================= */
 
     function scrollToTop() {
-
         window.scrollTo({
             top: 0,
             left: 0,
@@ -64,28 +54,22 @@
         });
     }
 
-
     function configureScrollRestoration() {
-
         if ("scrollRestoration" in history) {
-
             try {
                 history.scrollRestoration = "manual";
             } catch (error) {
-                /* Ignore browser limitations. */
+                /* Browser limitation — intentionally ignored. */
             }
         }
     }
-
 
     /* =========================================================
        PAGE ELEMENTS
        ========================================================= */
 
     function cacheElements() {
-
         return {
-
             howButton:
                 document.querySelector(
                     '[data-action="show-how"]'
@@ -120,63 +104,47 @@
                 document.querySelectorAll(
                     ".scale-node"
                 )
-
         };
     }
-
 
     /* =========================================================
        SESSION STORAGE
        ========================================================= */
 
     function saveState(key, value) {
-
         try {
-
             sessionStorage.setItem(
                 key,
                 value
             );
-
         } catch (error) {
-
             /*
-             * Session storage may be disabled.
-             * The page remains fully functional.
+             * Session storage may be unavailable.
+             * The page remains functional without it.
              */
-
         }
     }
 
-
     function getState(key) {
-
         try {
-
             return sessionStorage.getItem(
                 key
             );
-
         } catch (error) {
-
             return null;
-
         }
     }
-
 
     /* =========================================================
        MARK PAGE AS VISITED
        ========================================================= */
 
     function markPageVisited() {
-
         saveState(
             STORAGE_KEYS.page10Visited,
             "true"
         );
     }
-
 
     /* =========================================================
        NAVIGATION
@@ -185,7 +153,6 @@
     function setupNavigation(elements) {
 
         if (elements.nextButton) {
-
             elements.nextButton.addEventListener(
                 "click",
                 function () {
@@ -199,14 +166,11 @@
                         "ctmPathReturnScroll",
                         "0"
                     );
-
                 }
             );
         }
 
-
         if (elements.previousButton) {
-
             elements.previousButton.addEventListener(
                 "click",
                 function () {
@@ -215,14 +179,12 @@
                         "ctmPathReturnScroll",
                         "0"
                     );
-
                 }
             );
         }
 
-
         /*
-         * Any internal page link should begin
+         * Any internal HTML page link begins
          * the destination at the top.
          */
 
@@ -230,7 +192,6 @@
             document.querySelectorAll(
                 "a[href$='.html']"
             );
-
 
         pageLinks.forEach(
             function (link) {
@@ -243,14 +204,12 @@
                             "ctmPathReturnScroll",
                             "0"
                         );
-
                     }
                 );
 
             }
         );
     }
-
 
     /* =========================================================
        RESTORE SCROLL POSITION
@@ -263,27 +222,24 @@
                 "ctmPathReturnScroll"
             );
 
-
         if (returnPosition === "0") {
 
             try {
-
                 sessionStorage.removeItem(
                     "ctmPathReturnScroll"
                 );
-
             } catch (error) {
                 /* Ignore storage limitations. */
             }
 
             scrollToTop();
-
             return;
         }
 
-
         /*
          * Always open Page 10 from the top.
+         * Two animation frames allow the browser to
+         * complete initial layout first.
          */
 
         requestAnimationFrame(
@@ -291,16 +247,13 @@
 
                 requestAnimationFrame(
                     function () {
-
                         scrollToTop();
-
                     }
                 );
 
             }
         );
     }
-
 
     /* =========================================================
        HOW BUTTON
@@ -312,40 +265,24 @@
             return;
         }
 
-
         elements.howButton.addEventListener(
             "click",
             function () {
-
-                /*
-                 * Record the participant's expression
-                 * of interest.
-                 */
 
                 saveState(
                     STORAGE_KEYS.page10Action,
                     "show-how"
                 );
 
-
-                /*
-                 * Add a temporary visual state.
-                 */
-
                 elements.howButton.classList.add(
                     "is-activated"
                 );
 
-
                 /*
-                 * If Page 11 exists, continue the journey.
-                 * Otherwise gracefully fall back to the
-                 * Page 11 navigation button.
+                 * Continue the guided journey.
                  */
 
-                const page11 =
-                    "11.html";
-
+                const page11 = "11.html";
 
                 setTimeout(
                     function () {
@@ -356,11 +293,9 @@
                     },
                     220
                 );
-
             }
         );
     }
-
 
     /* =========================================================
        KEYBOARD ACCESS
@@ -375,16 +310,14 @@
                 const active =
                     document.activeElement;
 
-
                 const tag =
                     active
                         ? active.tagName.toLowerCase()
                         : "";
 
-
                 /*
-                 * Do not intercept keyboard commands
-                 * while the user is typing.
+                 * Never intercept navigation shortcuts
+                 * while the visitor is entering information.
                  */
 
                 if (
@@ -392,11 +325,8 @@
                     tag === "textarea" ||
                     tag === "select"
                 ) {
-
                     return;
-
                 }
-
 
                 /*
                  * ALT + RIGHT → next page
@@ -407,18 +337,13 @@
                     event.key === "ArrowRight"
                 ) {
 
-                    if (
-                        elements.nextButton
-                    ) {
+                    if (elements.nextButton) {
 
                         event.preventDefault();
 
                         elements.nextButton.click();
-
                     }
-
                 }
-
 
                 /*
                  * ALT + LEFT → previous page
@@ -429,18 +354,13 @@
                     event.key === "ArrowLeft"
                 ) {
 
-                    if (
-                        elements.previousButton
-                    ) {
+                    if (elements.previousButton) {
 
                         event.preventDefault();
 
                         elements.previousButton.click();
-
                     }
-
                 }
-
 
                 /*
                  * ENTER / SPACE on focused CTA.
@@ -458,13 +378,10 @@
                     event.preventDefault();
 
                     elements.howButton.click();
-
                 }
-
             }
         );
     }
-
 
     /* =========================================================
        INTERSECTION OBSERVER
@@ -472,42 +389,28 @@
 
     function setupRevealAnimations(elements) {
 
-        /*
-         * Respect users who have requested reduced motion.
-         */
-
         const reducedMotion =
             window.matchMedia &&
             window.matchMedia(
                 "(prefers-reduced-motion: reduce)"
             ).matches;
 
-
         if (reducedMotion) {
-
             revealImmediately();
-
             return;
-
         }
-
 
         if (
             !("IntersectionObserver" in window)
         ) {
-
             revealImmediately();
-
             return;
-
         }
-
 
         const revealTargets = [];
 
-
         /*
-         * Hero sections.
+         * Main sections.
          */
 
         document
@@ -526,13 +429,11 @@
                     revealTargets.push(
                         element
                     );
-
                 }
             );
 
-
         /*
-         * Individual visual cards.
+         * System nodes.
          */
 
         elements.systemNodes.forEach(
@@ -541,10 +442,12 @@
                 revealTargets.push(
                     element
                 );
-
             }
         );
 
+        /*
+         * Market statistics.
+         */
 
         elements.marketStats.forEach(
             function (element) {
@@ -552,10 +455,12 @@
                 revealTargets.push(
                     element
                 );
-
             }
         );
 
+        /*
+         * Trial cards.
+         */
 
         elements.trialCards.forEach(
             function (element) {
@@ -563,10 +468,12 @@
                 revealTargets.push(
                     element
                 );
-
             }
         );
 
+        /*
+         * Scale nodes.
+         */
 
         elements.scaleNodes.forEach(
             function (element) {
@@ -574,10 +481,8 @@
                 revealTargets.push(
                     element
                 );
-
             }
         );
-
 
         revealTargets.forEach(
             function (element) {
@@ -585,14 +490,15 @@
                 element.classList.add(
                     "reveal-ready"
                 );
-
             }
         );
 
-
         const observer =
             new IntersectionObserver(
-                function (entries, observerInstance) {
+                function (
+                    entries,
+                    observerInstance
+                ) {
 
                     entries.forEach(
                         function (entry) {
@@ -600,24 +506,18 @@
                             if (
                                 !entry.isIntersecting
                             ) {
-
                                 return;
-
                             }
-
 
                             entry.target.classList.add(
                                 "is-visible"
                             );
 
-
                             observerInstance.unobserve(
                                 entry.target
                             );
-
                         }
                     );
-
                 },
                 {
                     threshold: 0.14,
@@ -626,18 +526,15 @@
                 }
             );
 
-
         revealTargets.forEach(
             function (element) {
 
                 observer.observe(
                     element
                 );
-
             }
         );
     }
-
 
     /* =========================================================
        FALLBACK REVEAL
@@ -655,11 +552,221 @@
                     element.classList.add(
                         "is-visible"
                     );
-
                 }
             );
     }
 
+    /* =========================================================
+       CUSTOMER ECONOMICS AUDIT
+       ========================================================= */
+
+    /*
+     * The existing Page 10 presentation uses fixed narrative
+     * values. We must NOT invent a different financial model.
+     *
+     * This optional calculation layer activates only if the
+     * HTML explicitly provides these data attributes:
+     *
+     * data-economics-customers
+     * data-economics-value
+     * data-economics-months
+     * data-economics-output
+     *
+     * Formula:
+     *
+     * CUSTOMER BASE × CUSTOMER VALUE × TIME
+     *
+     * The resulting figure is a MODELLED POSSIBILITY.
+     * It is never presented by this script as guaranteed
+     * revenue, income, performance, or outcome.
+     */
+
+    function parsePositiveNumber(value) {
+
+        const number =
+            Number(
+                String(value)
+                    .replace(/,/g, "")
+                    .replace(/₹/g, "")
+                    .trim()
+            );
+
+        return Number.isFinite(number) &&
+            number > 0
+            ? number
+            : null;
+    }
+
+    function formatNumber(
+        value,
+        maximumFractionDigits
+    ) {
+
+        return new Intl.NumberFormat(
+            "en-IN",
+            {
+                maximumFractionDigits:
+                    maximumFractionDigits || 0
+            }
+        ).format(value);
+    }
+
+    function setupEconomicsControls() {
+
+        const customersInput =
+            document.querySelector(
+                "[data-economics-customers]"
+            );
+
+        const valueInput =
+            document.querySelector(
+                "[data-economics-value]"
+            );
+
+        const monthsInput =
+            document.querySelector(
+                "[data-economics-months]"
+            );
+
+        const output =
+            document.querySelector(
+                "[data-economics-output]"
+            );
+
+        /*
+         * Current Page 10 does not contain these optional
+         * controls. In that case this function intentionally
+         * does nothing.
+         */
+
+        if (
+            !customersInput ||
+            !valueInput ||
+            !monthsInput ||
+            !output
+        ) {
+            return;
+        }
+
+        function calculate() {
+
+            const customers =
+                parsePositiveNumber(
+                    customersInput.value
+                );
+
+            const value =
+                parsePositiveNumber(
+                    valueInput.value
+                );
+
+            const months =
+                parsePositiveNumber(
+                    monthsInput.value
+                );
+
+            const controls = [
+                customersInput,
+                valueInput,
+                monthsInput
+            ];
+
+            controls.forEach(
+                function (control) {
+
+                    control.setCustomValidity(
+                        ""
+                    );
+                }
+            );
+
+            if (!customers) {
+
+                customersInput.setCustomValidity(
+                    "Enter a customer count greater than zero."
+                );
+            }
+
+            if (!value) {
+
+                valueInput.setCustomValidity(
+                    "Enter a customer value greater than zero."
+                );
+            }
+
+            if (!months) {
+
+                monthsInput.setCustomValidity(
+                    "Enter a time period greater than zero."
+                );
+            }
+
+            if (
+                !customers ||
+                !value ||
+                !months
+            ) {
+
+                output.textContent =
+                    "Enter valid values to model the possibility.";
+
+                output.dataset.valid =
+                    "false";
+
+                return;
+            }
+
+            const result =
+                customers *
+                value *
+                months;
+
+            if (
+                !Number.isFinite(result) ||
+                result <= 0
+            ) {
+
+                output.textContent =
+                    "Enter valid values to model the possibility.";
+
+                output.dataset.valid =
+                    "false";
+
+                return;
+            }
+
+            output.textContent =
+                "₹" +
+                formatNumber(
+                    result,
+                    0
+                );
+
+            output.dataset.valid =
+                "true";
+        }
+
+        [
+            customersInput,
+            valueInput,
+            monthsInput
+        ].forEach(
+            function (input) {
+
+                input.addEventListener(
+                    "input",
+                    calculate
+                );
+
+                input.addEventListener(
+                    "change",
+                    calculate
+                );
+            }
+        );
+
+        calculate();
+    }
 
     /* =========================================================
        NUMBER EMPHASIS
@@ -668,9 +775,9 @@
     function setupNumberEmphasis(elements) {
 
         /*
-         * Add semantic data attributes to the key
-         * numerical statements so CSS/analytics can
-         * identify them consistently.
+         * Add semantic data attributes to key numerical
+         * statements so CSS and analytics can identify
+         * them consistently.
          */
 
         const revenue =
@@ -678,71 +785,56 @@
                 ".revenue-number"
             );
 
-
         if (revenue) {
 
             revenue.dataset.metric =
                 "monthly-revenue-potential";
-
         }
-
 
         const customerNumber =
             document.querySelector(
                 ".revenue-question-card strong"
             );
 
-
         if (customerNumber) {
 
             customerNumber.dataset.metric =
                 "target-customer-base";
-
         }
-
 
         const trialCustomer =
             document.querySelector(
                 ".trial-card:first-child strong"
             );
 
-
         if (trialCustomer) {
 
             trialCustomer.dataset.metric =
                 "trial-customer-base";
-
         }
-
 
         const trialDays =
             document.querySelector(
                 ".trial-card:nth-child(3) strong"
             );
 
-
         if (trialDays) {
 
             trialDays.dataset.metric =
                 "trial-duration";
-
         }
-
 
         const trialRevenue =
             document.querySelector(
                 ".trial-card-income strong"
             );
 
-
         if (trialRevenue) {
 
             trialRevenue.dataset.metric =
                 "trial-revenue-target";
-
         }
     }
-
 
     /* =========================================================
        MARKET STAT INTERACTION
@@ -758,7 +850,6 @@
                     "0"
                 );
 
-
                 stat.addEventListener(
                     "focus",
                     function () {
@@ -766,10 +857,8 @@
                         stat.classList.add(
                             "is-focused"
                         );
-
                     }
                 );
-
 
                 stat.addEventListener(
                     "blur",
@@ -778,10 +867,8 @@
                         stat.classList.remove(
                             "is-focused"
                         );
-
                     }
                 );
-
 
                 stat.addEventListener(
                     "mouseenter",
@@ -790,10 +877,8 @@
                         stat.classList.add(
                             "is-hovered"
                         );
-
                     }
                 );
-
 
                 stat.addEventListener(
                     "mouseleave",
@@ -802,14 +887,11 @@
                         stat.classList.remove(
                             "is-hovered"
                         );
-
                     }
                 );
-
             }
         );
     }
-
 
     /* =========================================================
        TRIAL CARD INTERACTION
@@ -825,7 +907,6 @@
                     "0"
                 );
 
-
                 card.addEventListener(
                     "focus",
                     function () {
@@ -833,10 +914,8 @@
                         card.classList.add(
                             "is-focused"
                         );
-
                     }
                 );
-
 
                 card.addEventListener(
                     "blur",
@@ -845,14 +924,11 @@
                         card.classList.remove(
                             "is-focused"
                         );
-
                     }
                 );
-
             }
         );
     }
-
 
     /* =========================================================
        SYSTEM FLOW INTERACTION
@@ -870,10 +946,8 @@
                         node.classList.add(
                             "is-active"
                         );
-
                     }
                 );
-
 
                 node.addEventListener(
                     "mouseleave",
@@ -882,14 +956,11 @@
                         node.classList.remove(
                             "is-active"
                         );
-
                     }
                 );
-
             }
         );
     }
-
 
     /* =========================================================
        SCALE FLOW INTERACTION
@@ -907,10 +978,8 @@
                         node.classList.add(
                             "is-active"
                         );
-
                     }
                 );
-
 
                 node.addEventListener(
                     "mouseleave",
@@ -919,14 +988,11 @@
                         node.classList.remove(
                             "is-active"
                         );
-
                     }
                 );
-
             }
         );
     }
-
 
     /* =========================================================
        IMAGE FALLBACK
@@ -938,7 +1004,6 @@
             document.querySelectorAll(
                 "img"
             );
-
 
         images.forEach(
             function (image) {
@@ -956,27 +1021,21 @@
                                 .fallbackAttempted ===
                             "true"
                         ) {
-
                             return;
-
                         }
-
 
                         image.dataset
                             .fallbackAttempted =
                             "true";
-
 
                         const source =
                             image.getAttribute(
                                 "src"
                             ) || "";
 
-
                         /*
                          * Support the two common CTM
-                         * logo filename variants used
-                         * elsewhere in the journey.
+                         * logo filename variants.
                          */
 
                         if (
@@ -994,16 +1053,12 @@
 
                             image.src =
                                 "assets/ctmmtptlogo.svg";
-
                         }
-
                     }
                 );
-
             }
         );
     }
-
 
     /* =========================================================
        ACCESSIBILITY
@@ -1011,23 +1066,13 @@
 
     function setupAccessibility(elements) {
 
-        /*
-         * CTA.
-         */
-
         if (elements.howButton) {
 
             elements.howButton.setAttribute(
                 "aria-label",
                 "Yes — show me how"
             );
-
         }
-
-
-        /*
-         * Page navigation.
-         */
 
         if (elements.previousButton) {
 
@@ -1035,9 +1080,7 @@
                 "aria-label",
                 "Go to Page 09"
             );
-
         }
-
 
         if (elements.nextButton) {
 
@@ -1045,13 +1088,11 @@
                 "aria-label",
                 "Go to Page 11"
             );
-
         }
 
-
         /*
-         * Make decorative arrows inaccessible
-         * to screen readers where appropriate.
+         * Decorative elements remain hidden from
+         * assistive technology.
          */
 
         document
@@ -1068,11 +1109,9 @@
                         "aria-hidden",
                         "true"
                     );
-
                 }
             );
     }
-
 
     /* =========================================================
        CURRENT PAGE MARKER
@@ -1085,17 +1124,14 @@
                 ".nav-current"
             );
 
-
         if (current) {
 
             current.setAttribute(
                 "aria-current",
                 "page"
             );
-
         }
     }
-
 
     /* =========================================================
        PAGE READY
@@ -1109,11 +1145,9 @@
                 body.classList.add(
                     "page-ready"
                 );
-
             }
         );
     }
-
 
     /* =========================================================
        BROWSER PAGESHOW
@@ -1126,11 +1160,9 @@
             function () {
 
                 restoreScrollPosition();
-
             }
         );
     }
-
 
     /* =========================================================
        PREVENT HASH SCROLL
@@ -1138,27 +1170,21 @@
 
     function preventUnexpectedHashScroll() {
 
-        if (
-            window.location.hash
-        ) {
+        if (window.location.hash) {
 
             /*
-             * Page 10 is designed as a guided
-             * full-page journey. Ignore accidental
-             * browser hash restoration.
+             * Page 10 is a guided full-page journey.
+             * Ignore accidental browser hash restoration.
              */
 
             requestAnimationFrame(
                 function () {
 
                     scrollToTop();
-
                 }
             );
-
         }
     }
-
 
     /* =========================================================
        INITIALIZE
@@ -1170,7 +1196,6 @@
 
         const elements =
             cacheElements();
-
 
         markPageVisited();
 
@@ -1191,6 +1216,8 @@
         setupRevealAnimations(
             elements
         );
+
+        setupEconomicsControls();
 
         setupNumberEmphasis(
             elements
@@ -1226,7 +1253,6 @@
 
         markPageReady();
     }
-
 
     /* =========================================================
        START
