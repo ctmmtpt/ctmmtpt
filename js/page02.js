@@ -6,20 +6,29 @@
 
    PAGE 02 PURPOSE
    ------------------------------------------------------------
+   SELF-RECOGNITION
+
    Captures:
-
    1. Status of each of the 12 Basic Life Needs
-      - FULLY FULFILLED
-      - PARTIALLY FULFILLED
-      - NOT YET FULFILLED
-
-   2. One highest-priority life need.
+   2. One highest-priority life need
 
    Navigation:
       /01 ← Previous
       /02 ← Current
       /03 → Next
 
+   UX PRINCIPLES
+   ------------------------------------------------------------
+   • Every interaction gives immediate feedback.
+   • Every answer is saved locally immediately.
+   • Backend saving is defensive and non-blocking.
+   • Navigation is guarded against accidental double clicks.
+   • Validation moves the visitor to the exact place needing
+     attention.
+   • Page transitions intentionally begin at the top.
+   • Native buttons, links and selects remain keyboard accessible.
+   • No framework.
+   • No external dependency.
    ============================================================ */
 
 
@@ -43,6 +52,9 @@ const PAGE02_CONFIG = {
 
     PRIORITY_STORAGE_KEY: 'ctmPage02Priority',
 
+    NAVIGATION_SCROLL_KEY:
+        'ctmPage02NavigationScroll',
+
     BACKEND_URL:
         'https://script.google.com/macros/s/AKfycbx9eJru7EJYUpReeLv4Sym9wDVLgE_ruSw_ZUJ4ycDoneUKlkI_fcsJ2UJmKM7W_PXtEg/exec',
 
@@ -50,7 +62,16 @@ const PAGE02_CONFIG = {
         'save_answer',
 
     ACTION_SAVE_PROGRESS:
-        'save_progress'
+        'save_progress',
+
+    SAVE_TIMEOUT_MS:
+        10000,
+
+    NAVIGATION_DELAY_MS:
+        350,
+
+    ATTENTION_DURATION_MS:
+        1400
 };
 
 
@@ -220,7 +241,13 @@ let page02Priority = '';
 
 let page02Saving = false;
 
+let page02Initialized = false;
+
 let page02DOM = {};
+
+let page02AttentionTimer = null;
+
+let page02NavigationTimer = null;
 
 
 /* ============================================================
@@ -229,7 +256,15 @@ let page02DOM = {};
 
 function initPage02() {
 
+    if (page02Initialized) {
+        return;
+    }
+
+    page02Initialized = true;
+
     cachePage02DOM();
+
+    restorePage02State();
 
     attachStatusHandlers();
 
@@ -237,15 +272,13 @@ function initPage02() {
 
     attachNavigationHandlers();
 
-    restorePage02State();
-
     updatePage02UI();
 
-    exposePage02DebugAPI();
+    preparePage02Accessibility();
 
-    console.log(
-        'CTM PATH™ Page 02 initialised.'
-    );
+    handleIncomingNavigationScroll();
+
+    exposePage02DebugAPI();
 
 }
 
@@ -414,6 +447,16 @@ function attachStatusHandlers() {
     page02DOM.statusButtons.forEach(
         button => {
 
+            if (
+                button.dataset.page02Bound ===
+                'true'
+            ) {
+                return;
+            }
+
+            button.dataset.page02Bound =
+                'true';
+
             button.addEventListener(
                 'click',
                 event => {
@@ -426,6 +469,39 @@ function attachStatusHandlers() {
 
                 }
             );
+
+            /*
+             * Defensive keyboard support for unusual markup.
+             * Native buttons already support Enter / Space.
+             */
+
+            if (
+                !isNativeInteractiveElement(
+                    button
+                )
+            ) {
+
+                button.addEventListener(
+                    'keydown',
+                    event => {
+
+                        if (
+                            event.key === 'Enter' ||
+                            event.key === ' '
+                        ) {
+
+                            event.preventDefault();
+
+                            handleStatusSelection(
+                                button
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
 
         }
     );
@@ -444,7 +520,9 @@ function handleStatusSelection(button) {
             '[data-need]'
         );
 
-    if (!card) return;
+    if (!card) {
+        return;
+    }
 
     const needId =
         normalizeNeedId(
@@ -475,6 +553,11 @@ function handleStatusSelection(button) {
 
     updatePage02UI();
 
+    /*
+     * Backend persistence is deliberately fire-and-forget.
+     * The visitor should never wait after selecting an answer.
+     */
+
     saveAnswerToBackend(
         needId,
         status
@@ -489,7 +572,9 @@ function handleStatusSelection(button) {
 
 function normalizeNeedId(value) {
 
-    if (!value) return '';
+    if (!value) {
+        return '';
+    }
 
     const raw =
         String(value)
@@ -513,7 +598,8 @@ function normalizeNeedId(value) {
     if (
         !Number.isFinite(number) ||
         number < 1 ||
-        number > PAGE02_CONFIG.TOTAL_NEEDS
+        number >
+            PAGE02_CONFIG.TOTAL_NEEDS
     ) {
         return raw;
     }
@@ -533,7 +619,9 @@ function normalizeNeedId(value) {
 
 function normalizeStatus(value) {
 
-    if (!value) return '';
+    if (!value) {
+        return '';
+    }
 
     const status =
         String(value)
@@ -589,7 +677,9 @@ function updateCardSelection(
     selectedStatus
 ) {
 
-    if (!card) return;
+    if (!card) {
+        return;
+    }
 
     const buttons =
         Array.from(
@@ -621,6 +711,23 @@ function updateCardSelection(
                     ? 'true'
                     : 'false'
             );
+
+            /*
+             * Keep a lightweight state hook available
+             * for styling and QA.
+             */
+
+            if (selected) {
+
+                button.dataset.page02Selected =
+                    'true';
+
+            }
+            else {
+
+                delete button.dataset.page02Selected;
+
+            }
 
         }
     );
@@ -654,7 +761,19 @@ function attachPriorityHandler() {
     const select =
         page02DOM.prioritySelect;
 
-    if (!select) return;
+    if (!select) {
+        return;
+    }
+
+    if (
+        select.dataset.page02Bound ===
+        'true'
+    ) {
+        return;
+    }
+
+    select.dataset.page02Bound =
+        'true';
 
     select.addEventListener(
         'change',
@@ -676,17 +795,23 @@ function attachPriorityHandler() {
 
 function handlePriorityChange(value) {
 
-    page02Priority =
+    const normalized =
         normalizeNeedId(
             value
         );
 
     if (
-        !page02Priority ||
-        !isValidNeedId(
-            page02Priority
+        normalized &&
+        isValidNeedId(
+            normalized
         )
     ) {
+
+        page02Priority =
+            normalized;
+
+    }
+    else {
 
         page02Priority =
             String(
@@ -695,10 +820,22 @@ function handlePriorityChange(value) {
 
     }
 
-    localStorage.setItem(
-        PAGE02_CONFIG.PRIORITY_STORAGE_KEY,
-        page02Priority
-    );
+    try {
+
+        localStorage.setItem(
+            PAGE02_CONFIG.PRIORITY_STORAGE_KEY,
+            page02Priority
+        );
+
+    }
+    catch (error) {
+
+        console.warn(
+            'CTM PATH™ Page 02 priority local save failed:',
+            error
+        );
+
+    }
 
     updatePriorityConfirmation();
 
@@ -716,7 +853,9 @@ function updatePriorityConfirmation() {
     const element =
         page02DOM.priorityConfirmation;
 
-    if (!element) return;
+    if (!element) {
+        return;
+    }
 
     const need =
         findNeed(
@@ -727,6 +866,11 @@ function updatePriorityConfirmation() {
 
         element.classList.remove(
             'visible'
+        );
+
+        element.setAttribute(
+            'aria-hidden',
+            'true'
         );
 
         return;
@@ -770,6 +914,11 @@ function updatePriorityConfirmation() {
         'visible'
     );
 
+    element.setAttribute(
+        'aria-hidden',
+        'false'
+    );
+
 }
 
 
@@ -779,13 +928,24 @@ function updatePriorityConfirmation() {
 
 function updatePage02UI() {
 
-    updateAllCardStates();
+    /*
+     * Batch DOM updates into the browser's next paint.
+     * This avoids unnecessary repeated layout work.
+     */
 
-    updateSnapshotCounts();
+    requestAnimationFrame(
+        () => {
 
-    updateCompletionProgress();
+            updateAllCardStates();
 
-    updatePriorityConfirmation();
+            updateSnapshotCounts();
+
+            updateCompletionProgress();
+
+            updatePriorityConfirmation();
+
+        }
+    );
 
 }
 
@@ -838,9 +998,11 @@ function calculatePage02Snapshot() {
         need => {
 
             const status =
-                page02Answers[
-                    need.id
-                ];
+                normalizeStatus(
+                    page02Answers[
+                        need.id
+                    ]
+                );
 
             if (
                 status ===
@@ -949,6 +1111,11 @@ function updateCompletionProgress() {
         page02DOM.completionBar.style.width =
             percentage + '%';
 
+        page02DOM.completionBar.setAttribute(
+            'aria-valuenow',
+            String(percentage)
+        );
+
     }
 
     if (
@@ -1038,6 +1205,10 @@ function savePage02Summary() {
     const snapshot =
         calculatePage02Snapshot();
 
+    const completed =
+        snapshot.answered ===
+        snapshot.total;
+
     const summary = {
 
         pageNumber:
@@ -1066,13 +1237,10 @@ function savePage02Summary() {
         priority:
             page02Priority,
 
-        completed:
-            snapshot.answered ===
-            snapshot.total,
+        completed,
 
         completedAt:
-            snapshot.answered ===
-            snapshot.total
+            completed
                 ? new Date().toISOString()
                 : null
 
@@ -1108,14 +1276,14 @@ function savePage02Summary() {
 
 function restorePage02State() {
 
-    const storedAnswers =
-        localStorage.getItem(
-            PAGE02_CONFIG.STORAGE_KEY
-        );
+    try {
 
-    if (storedAnswers) {
+        const storedAnswers =
+            localStorage.getItem(
+                PAGE02_CONFIG.STORAGE_KEY
+            );
 
-        try {
+        if (storedAnswers) {
 
             const parsed =
                 JSON.parse(
@@ -1163,30 +1331,53 @@ function restorePage02State() {
             }
 
         }
-        catch (error) {
 
-            console.warn(
-                'CTM PATH™ Page 02 answers could not be restored:',
-                error
+    }
+    catch (error) {
+
+        console.warn(
+            'CTM PATH™ Page 02 answers could not be restored:',
+            error
+        );
+
+    }
+
+
+    try {
+
+        const storedPriority =
+            localStorage.getItem(
+                PAGE02_CONFIG.PRIORITY_STORAGE_KEY
             );
+
+        if (storedPriority) {
+
+            const normalized =
+                normalizeNeedId(
+                    storedPriority
+                );
+
+            page02Priority =
+                isValidNeedId(
+                    normalized
+                )
+                    ? normalized
+                    : String(
+                        storedPriority
+                    ).trim();
 
         }
 
     }
+    catch (error) {
 
-    const storedPriority =
-        localStorage.getItem(
-            PAGE02_CONFIG.PRIORITY_STORAGE_KEY
+        console.warn(
+            'CTM PATH™ Page 02 priority could not be restored:',
+            error
         );
 
-    if (storedPriority) {
-
-        page02Priority =
-            String(
-                storedPriority
-            ).trim();
-
     }
+
 
     if (
         page02DOM.prioritySelect &&
@@ -1228,15 +1419,13 @@ function validatePage02() {
         need => {
 
             const status =
-                page02Answers[
-                    need.id
-                ];
+                normalizeStatus(
+                    page02Answers[
+                        need.id
+                    ]
+                );
 
-            if (
-                !normalizeStatus(
-                    status
-                )
-            ) {
+            if (!status) {
 
                 missing.push(
                     need
@@ -1275,7 +1464,9 @@ function showValidationMessage(
         !validation ||
         validation.valid
     ) {
+
         return;
+
     }
 
     const firstMissing =
@@ -1290,26 +1481,8 @@ function showValidationMessage(
 
         if (card) {
 
-            card.scrollIntoView(
-                {
-                    behavior: 'smooth',
-                    block: 'center'
-                }
-            );
-
-            card.classList.add(
-                'needs-attention'
-            );
-
-            setTimeout(
-                () => {
-
-                    card.classList.remove(
-                        'needs-attention'
-                    );
-
-                },
-                1200
+            focusAndReveal(
+                card
             );
 
         }
@@ -1325,51 +1498,20 @@ function showValidationMessage(
 
 
 /* ============================================================
-   25. NAVIGATION
+   25. NAVIGATION HANDLERS
    ============================================================ */
 
 function attachNavigationHandlers() {
 
-    if (
-        page02DOM.previousButton
-    ) {
+    bindNavigationElement(
+        page02DOM.previousButton,
+        'previous'
+    );
 
-        page02DOM.previousButton.addEventListener(
-            'click',
-            event => {
-
-                if (
-                    page02DOM.previousButton.tagName
-                        .toLowerCase() ===
-                    'a'
-                ) {
-                    return;
-                }
-
-                event.preventDefault();
-
-                savePage02Summary();
-
-                window.location.href =
-                    PAGE02_CONFIG.PREVIOUS_PAGE;
-
-            }
-        );
-
-    }
-
-
-    if (
-        page02DOM.nextButton
-    ) {
-
-        page02DOM.nextButton.addEventListener(
-            'click',
-            handlePage02Continue
-        );
-
-    }
-
+    bindNavigationElement(
+        page02DOM.nextButton,
+        'next'
+    );
 
     if (
         page02DOM.saveContinue &&
@@ -1377,17 +1519,32 @@ function attachNavigationHandlers() {
         page02DOM.nextButton
     ) {
 
-        page02DOM.saveContinue.addEventListener(
-            'click',
-            handlePage02Continue
-        );
+        if (
+            page02DOM.saveContinue.dataset.page02Bound !==
+            'true'
+        ) {
+
+            page02DOM.saveContinue.dataset.page02Bound =
+                'true';
+
+            page02DOM.saveContinue.addEventListener(
+                'click',
+                handlePage02Continue
+            );
+
+        }
 
     }
 
 
     if (
-        page02DOM.form
+        page02DOM.form &&
+        page02DOM.form.dataset.page02Bound !==
+        'true'
     ) {
+
+        page02DOM.form.dataset.page02Bound =
+            'true';
 
         page02DOM.form.addEventListener(
             'submit',
@@ -1408,7 +1565,100 @@ function attachNavigationHandlers() {
 
 
 /* ============================================================
-   26. CONTINUE TO PAGE 03
+   26. BIND NAVIGATION ELEMENT
+   ============================================================ */
+
+function bindNavigationElement(
+    element,
+    direction
+) {
+
+    if (!element) {
+        return;
+    }
+
+    if (
+        element.dataset.page02Bound ===
+        'true'
+    ) {
+        return;
+    }
+
+    element.dataset.page02Bound =
+        'true';
+
+    element.addEventListener(
+        'click',
+        event => {
+
+            /*
+             * Disabled state for anchor elements.
+             */
+
+            if (
+                element.dataset.page02Disabled ===
+                'true'
+            ) {
+
+                event.preventDefault();
+
+                return;
+
+            }
+
+            if (
+                direction === 'previous'
+            ) {
+
+                handlePreviousNavigation(
+                    event,
+                    element
+                );
+
+                return;
+
+            }
+
+            handlePage02Continue(
+                event
+            );
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   27. PREVIOUS NAVIGATION
+   ============================================================ */
+
+function handlePreviousNavigation(
+    event,
+    element
+) {
+
+    if (event) {
+        event.preventDefault();
+    }
+
+    if (page02Saving) {
+        return;
+    }
+
+    savePage02Answers();
+
+    savePage02Summary();
+
+    navigateToPage(
+        PAGE02_CONFIG.PREVIOUS_PAGE
+    );
+
+}
+
+
+/* ============================================================
+   28. CONTINUE TO PAGE 03
    ============================================================ */
 
 async function handlePage02Continue(
@@ -1416,23 +1666,19 @@ async function handlePage02Continue(
 ) {
 
     if (event) {
-
         event.preventDefault();
-
     }
 
     if (page02Saving) {
-
         return;
-
     }
+
 
     const validation =
         validatePage02();
 
-    if (
-        !validation.valid
-    ) {
+
+    if (!validation.valid) {
 
         showValidationMessage(
             validation
@@ -1441,6 +1687,7 @@ async function handlePage02Continue(
         return;
 
     }
+
 
     if (
         !page02Priority ||
@@ -1460,13 +1707,8 @@ async function handlePage02Continue(
             page02DOM.prioritySelect
         ) {
 
-            page02DOM.prioritySelect.focus();
-
-            page02DOM.prioritySelect.scrollIntoView(
-                {
-                    behavior: 'smooth',
-                    block: 'center'
-                }
+            focusAndReveal(
+                page02DOM.prioritySelect
             );
 
         }
@@ -1475,10 +1717,12 @@ async function handlePage02Continue(
 
     }
 
+
     const summary =
         savePage02Summary();
 
     savePage02Answers();
+
 
     page02Saving = true;
 
@@ -1486,33 +1730,74 @@ async function handlePage02Continue(
         true
     );
 
+
     setPage02Status(
         'உங்கள் பதில்கள் பாதுகாக்கப்படுகின்றன...',
         'loading'
     );
 
+
     try {
 
-        await saveAllAnswersToBackend();
+        const answerResult =
+            await saveAllAnswersToBackend();
 
-        await savePageProgressToBackend(
-            summary
-        );
+        const progressResult =
+            await savePageProgressToBackend(
+                summary
+            );
 
-        setPage02Status(
-            '✓ மதிப்பீடு பாதுகாக்கப்பட்டது / Assessment saved',
-            'success'
-        );
 
-        setTimeout(
-            () => {
+        /*
+         * Local storage is already authoritative for the
+         * current device. Backend failures are surfaced but
+         * should not erase the visitor's completed work.
+         */
 
-                window.location.href =
-                    PAGE02_CONFIG.NEXT_PAGE;
+        const backendSucceeded =
+            (
+                answerResult &&
+                (
+                    answerResult.success !== false
+                )
+            ) &&
+            (
+                progressResult &&
+                (
+                    progressResult.success !== false
+                )
+            );
 
-            },
-            350
-        );
+
+        if (!backendSucceeded) {
+
+            setPage02Status(
+                'உங்கள் பதில்கள் இந்த சாதனத்தில் பாதுகாக்கப்பட்டுள்ளன. அடுத்த பக்கத்திற்குச் செல்கிறோம்...',
+                'success'
+            );
+
+        }
+        else {
+
+            setPage02Status(
+                '✓ மதிப்பீடு பாதுகாக்கப்பட்டது / Assessment saved',
+                'success'
+            );
+
+        }
+
+
+        page02NavigationTimer =
+            window.setTimeout(
+                () => {
+
+                    navigateToPage(
+                        PAGE02_CONFIG.NEXT_PAGE
+                    );
+
+                },
+                PAGE02_CONFIG.NAVIGATION_DELAY_MS
+            );
 
     }
     catch (error) {
@@ -1521,6 +1806,14 @@ async function handlePage02Continue(
             'CTM PATH™ Page 02 save error:',
             error
         );
+
+
+        /*
+         * The answers are already stored locally.
+         * Do not trap the visitor on the page.
+         */
+
+        savePage02Summary();
 
         setPage02Status(
             'உங்கள் பதில்கள் இந்த சாதனத்தில் பாதுகாக்கப்பட்டுள்ளன. அடுத்த பக்கத்திற்குச் செல்ல மீண்டும் முயற்சிக்கவும்.',
@@ -1539,7 +1832,137 @@ async function handlePage02Continue(
 
 
 /* ============================================================
-   27. SAVE ALL ANSWERS
+   29. NAVIGATE TO PAGE
+   ============================================================ */
+
+function navigateToPage(
+    target
+) {
+
+    if (!target) {
+        return;
+    }
+
+    try {
+
+        sessionStorage.setItem(
+            PAGE02_CONFIG.NAVIGATION_SCROLL_KEY,
+            'top'
+        );
+
+    }
+    catch (error) {
+
+        /*
+         * sessionStorage may be blocked in restrictive
+         * browsing environments. Navigation still proceeds.
+         */
+
+        console.warn(
+            'CTM PATH™ navigation scroll state unavailable:',
+            error
+        );
+
+    }
+
+
+    /*
+     * Resolve the target as a same-origin URL when possible.
+     * This preserves the existing production routing.
+     */
+
+    try {
+
+        const destination =
+            new URL(
+                target,
+                window.location.origin
+            );
+
+        window.location.assign(
+            destination.href
+        );
+
+    }
+    catch (error) {
+
+        console.warn(
+            'CTM PATH™ Page 02 navigation fallback:',
+            error
+        );
+
+        window.location.href =
+            target;
+
+    }
+
+}
+
+
+/* ============================================================
+   30. HANDLE INCOMING NAVIGATION SCROLL
+   ============================================================ */
+
+function handleIncomingNavigationScroll() {
+
+    let shouldScrollTop = false;
+
+    try {
+
+        shouldScrollTop =
+            sessionStorage.getItem(
+                PAGE02_CONFIG.NAVIGATION_SCROLL_KEY
+            ) === 'top';
+
+        sessionStorage.removeItem(
+            PAGE02_CONFIG.NAVIGATION_SCROLL_KEY
+        );
+
+    }
+    catch (error) {
+
+        shouldScrollTop = false;
+
+    }
+
+
+    if (!shouldScrollTop) {
+        return;
+    }
+
+
+    /*
+     * Wait for the browser to establish the new document layout.
+     */
+
+    requestAnimationFrame(
+        () => {
+
+            requestAnimationFrame(
+                () => {
+
+                    window.scrollTo(
+                        {
+                            top: 0,
+                            left: 0,
+                            behavior:
+                                prefersReducedMotion()
+                                    ? 'auto'
+                                    : 'smooth'
+                        }
+                    );
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   31. SAVE ALL ANSWERS
    ============================================================ */
 
 async function saveAllAnswersToBackend() {
@@ -1566,6 +1989,7 @@ async function saveAllAnswersToBackend() {
 
     }
 
+
     const requests =
         PAGE02_NEEDS.map(
             need => {
@@ -1581,10 +2005,12 @@ async function saveAllAnswersToBackend() {
             }
         );
 
+
     const results =
         await Promise.all(
             requests
         );
+
 
     return {
 
@@ -1603,7 +2029,7 @@ async function saveAllAnswersToBackend() {
 
 
 /* ============================================================
-   28. SAVE ONE ANSWER
+   32. SAVE ONE ANSWER
    ============================================================ */
 
 async function saveAnswerToBackend(
@@ -1616,6 +2042,7 @@ async function saveAnswerToBackend(
         visitorIdOverride ||
         getVisitorId();
 
+
     if (!visitorId) {
 
         return {
@@ -1624,16 +2051,28 @@ async function saveAnswerToBackend(
 
     }
 
+
     const need =
         findNeed(
             needId
         );
 
-    if (!need) {
+
+    const normalizedStatus =
+        normalizeStatus(
+            status
+        );
+
+
+    if (
+        !need ||
+        !normalizedStatus
+    ) {
 
         return false;
 
     }
+
 
     const payload = {
 
@@ -1656,52 +2095,52 @@ async function saveAnswerToBackend(
                 need.en,
 
             answer:
-                status,
+                normalizedStatus,
 
             score:
                 statusToScore(
-                    status
+                    normalizedStatus
                 ),
 
-            status,
+            status:
+                normalizedStatus,
 
             statusLabelTa:
                 getStatusLabelTa(
-                    status
+                    normalizedStatus
                 ),
 
             statusLabelEn:
                 getStatusLabelEn(
-                    status
+                    normalizedStatus
                 )
 
         }
 
     };
 
+
     try {
 
         const response =
-            await fetch(
+            await fetchWithTimeout(
                 PAGE02_CONFIG.BACKEND_URL,
                 {
-
                     method: 'POST',
 
                     headers: {
-
                         'Content-Type':
                             'text/plain;charset=utf-8'
-
                     },
 
                     body:
                         JSON.stringify(
                             payload
                         )
-
-                }
+                },
+                PAGE02_CONFIG.SAVE_TIMEOUT_MS
             );
+
 
         if (!response.ok) {
 
@@ -1712,16 +2151,18 @@ async function saveAnswerToBackend(
 
         }
 
+
         const text =
             await response.text();
 
+
         if (!text) {
-
             return true;
-
         }
 
+
         let result;
+
 
         try {
 
@@ -1733,13 +2174,15 @@ async function saveAnswerToBackend(
         }
         catch (parseError) {
 
-            console.warn(
-                'Page 02 backend returned non-JSON response.'
-            );
+            /*
+             * Google Apps Script may return a successful
+             * non-JSON response. Treat HTTP success as success.
+             */
 
             return true;
 
         }
+
 
         if (
             result &&
@@ -1753,12 +2196,18 @@ async function saveAnswerToBackend(
 
         }
 
+
         return true;
 
     }
     catch (error) {
 
-        console.error(
+        /*
+         * Individual answer failure must never interrupt
+         * the visitor's journey.
+         */
+
+        console.warn(
             'CTM PATH™ Page 02 answer save failed:',
             error
         );
@@ -1771,7 +2220,7 @@ async function saveAnswerToBackend(
 
 
 /* ============================================================
-   29. SAVE PAGE PROGRESS
+   33. SAVE PAGE PROGRESS
    ============================================================ */
 
 async function savePageProgressToBackend(
@@ -1781,13 +2230,16 @@ async function savePageProgressToBackend(
     const visitorId =
         getVisitorId();
 
+
     if (!visitorId) {
 
         return {
+            success: false,
             skipped: true
         };
 
     }
+
 
     const payload = {
 
@@ -1837,29 +2289,28 @@ async function savePageProgressToBackend(
 
     };
 
+
     try {
 
         const response =
-            await fetch(
+            await fetchWithTimeout(
                 PAGE02_CONFIG.BACKEND_URL,
                 {
-
                     method: 'POST',
 
                     headers: {
-
                         'Content-Type':
                             'text/plain;charset=utf-8'
-
                     },
 
                     body:
                         JSON.stringify(
                             payload
                         )
-
-                }
+                },
+                PAGE02_CONFIG.SAVE_TIMEOUT_MS
             );
+
 
         if (!response.ok) {
 
@@ -1870,17 +2321,23 @@ async function savePageProgressToBackend(
 
         }
 
-        return true;
+
+        return {
+            success: true
+        };
 
     }
     catch (error) {
 
-        console.error(
+        console.warn(
             'CTM PATH™ Page 02 progress save failed:',
             error
         );
 
-        return false;
+        return {
+            success: false,
+            error
+        };
 
     }
 
@@ -1888,7 +2345,7 @@ async function savePageProgressToBackend(
 
 
 /* ============================================================
-   30. SAVE PRIORITY
+   34. SAVE PRIORITY
    ============================================================ */
 
 async function savePriorityToBackend() {
@@ -1896,27 +2353,22 @@ async function savePriorityToBackend() {
     const visitorId =
         getVisitorId();
 
+
     if (!visitorId) {
-
         return;
-
     }
+
 
     const need =
         findNeed(
             page02Priority
         );
 
+
     if (!need) {
-
         return;
-
     }
 
-    localStorage.setItem(
-        PAGE02_CONFIG.PRIORITY_STORAGE_KEY,
-        page02Priority
-    );
 
     const payload = {
 
@@ -1951,27 +2403,25 @@ async function savePriorityToBackend() {
 
     };
 
+
     try {
 
-        await fetch(
+        await fetchWithTimeout(
             PAGE02_CONFIG.BACKEND_URL,
             {
-
                 method: 'POST',
 
                 headers: {
-
                     'Content-Type':
                         'text/plain;charset=utf-8'
-
                 },
 
                 body:
                     JSON.stringify(
                         payload
                     )
-
-            }
+            },
+            PAGE02_CONFIG.SAVE_TIMEOUT_MS
         );
 
     }
@@ -1988,10 +2438,77 @@ async function savePriorityToBackend() {
 
 
 /* ============================================================
-   31. STATUS → SCORE
+   35. FETCH WITH TIMEOUT
    ============================================================ */
 
-function statusToScore(status) {
+async function fetchWithTimeout(
+    url,
+    options,
+    timeoutMs
+) {
+
+    const controller =
+        typeof AbortController !==
+        'undefined'
+            ? new AbortController()
+            : null;
+
+
+    let timeoutId = null;
+
+
+    if (controller) {
+
+        options =
+            {
+                ...options,
+                signal:
+                    controller.signal
+            };
+
+        timeoutId =
+            window.setTimeout(
+                () => {
+
+                    controller.abort();
+
+                },
+                timeoutMs
+            );
+
+    }
+
+
+    try {
+
+        return await fetch(
+            url,
+            options
+        );
+
+    }
+    finally {
+
+        if (timeoutId !== null) {
+
+            window.clearTimeout(
+                timeoutId
+            );
+
+        }
+
+    }
+
+}
+
+
+/* ============================================================
+   36. STATUS → SCORE
+   ============================================================ */
+
+function statusToScore(
+    status
+) {
 
     switch (
         normalizeStatus(
@@ -2021,10 +2538,12 @@ function statusToScore(status) {
 
 
 /* ============================================================
-   32. STATUS LABEL — TAMIL
+   37. STATUS LABEL — TAMIL
    ============================================================ */
 
-function getStatusLabelTa(status) {
+function getStatusLabelTa(
+    status
+) {
 
     switch (
         normalizeStatus(
@@ -2054,10 +2573,12 @@ function getStatusLabelTa(status) {
 
 
 /* ============================================================
-   33. STATUS LABEL — ENGLISH
+   38. STATUS LABEL — ENGLISH
    ============================================================ */
 
-function getStatusLabelEn(status) {
+function getStatusLabelEn(
+    status
+) {
 
     switch (
         normalizeStatus(
@@ -2087,10 +2608,12 @@ function getStatusLabelEn(status) {
 
 
 /* ============================================================
-   34. FIND NEED
+   39. FIND NEED
    ============================================================ */
 
-function findNeed(needId) {
+function findNeed(
+    needId
+) {
 
     const normalized =
         normalizeNeedId(
@@ -2110,10 +2633,12 @@ function findNeed(needId) {
 
 
 /* ============================================================
-   35. FIND CARD
+   40. FIND CARD
    ============================================================ */
 
-function findCardByNeedId(needId) {
+function findCardByNeedId(
+    needId
+) {
 
     const normalized =
         normalizeNeedId(
@@ -2135,10 +2660,12 @@ function findCardByNeedId(needId) {
 
 
 /* ============================================================
-   36. VALID NEED ID
+   41. VALID NEED ID
    ============================================================ */
 
-function isValidNeedId(needId) {
+function isValidNeedId(
+    needId
+) {
 
     return Boolean(
         findNeed(
@@ -2150,23 +2677,32 @@ function isValidNeedId(needId) {
 
 
 /* ============================================================
-   37. VISITOR ID
+   42. VISITOR ID
    ============================================================ */
 
 function getVisitorId() {
 
-    return (
-        localStorage.getItem(
-            'ctmVisitorId'
-        ) ||
-        ''
-    ).trim();
+    try {
+
+        return (
+            localStorage.getItem(
+                'ctmVisitorId'
+            ) ||
+            ''
+        ).trim();
+
+    }
+    catch (error) {
+
+        return '';
+
+    }
 
 }
 
 
 /* ============================================================
-   38. PAGE STATUS
+   43. PAGE STATUS
    ============================================================ */
 
 function setPage02Status(
@@ -2176,6 +2712,7 @@ function setPage02Status(
 
     const element =
         page02DOM.pageStatus;
+
 
     if (!element) {
 
@@ -2188,8 +2725,10 @@ function setPage02Status(
 
     }
 
+
     element.textContent =
         message;
+
 
     element.className =
         'page-status ' +
@@ -2198,11 +2737,27 @@ function setPage02Status(
             ''
         );
 
+
+    /*
+     * Accessibility:
+     * status messages are announced without stealing focus.
+     */
+
+    element.setAttribute(
+        'role',
+        'status'
+    );
+
+    element.setAttribute(
+        'aria-live',
+        'polite'
+    );
+
 }
 
 
 /* ============================================================
-   39. DISABLE / ENABLE NAVIGATION
+   44. DISABLE / ENABLE NAVIGATION
    ============================================================ */
 
 function setNavigationDisabled(
@@ -2210,24 +2765,31 @@ function setNavigationDisabled(
 ) {
 
     const buttons = [
-
         page02DOM.saveContinue,
-
         page02DOM.nextButton,
-
         page02DOM.previousButton
-
     ];
 
-    buttons.forEach(
+
+    const uniqueButtons =
+        Array.from(
+            new Set(
+                buttons.filter(
+                    Boolean
+                )
+            )
+        );
+
+
+    uniqueButtons.forEach(
         button => {
 
-            if (!button) return;
+            const tagName =
+                button.tagName.toLowerCase();
+
 
             if (
-                button.tagName
-                    .toLowerCase() ===
-                'button'
+                tagName === 'button'
             ) {
 
                 button.disabled =
@@ -2235,10 +2797,9 @@ function setNavigationDisabled(
 
             }
 
+
             if (
-                button.tagName
-                    .toLowerCase() ===
-                'a'
+                tagName === 'a'
             ) {
 
                 if (disabled) {
@@ -2251,6 +2812,11 @@ function setNavigationDisabled(
                         'true'
                     );
 
+                    button.setAttribute(
+                        'tabindex',
+                        '-1'
+                    );
+
                 }
                 else {
 
@@ -2258,6 +2824,10 @@ function setNavigationDisabled(
 
                     button.removeAttribute(
                         'aria-disabled'
+                    );
+
+                    button.removeAttribute(
+                        'tabindex'
                     );
 
                 }
@@ -2271,7 +2841,7 @@ function setNavigationDisabled(
 
 
 /* ============================================================
-   40. SAFE TEXT UPDATE
+   45. SAFE TEXT UPDATE
    ============================================================ */
 
 function setElementText(
@@ -2279,7 +2849,9 @@ function setElementText(
     value
 ) {
 
-    if (!element) return;
+    if (!element) {
+        return;
+    }
 
     element.textContent =
         String(
@@ -2290,7 +2862,287 @@ function setElementText(
 
 
 /* ============================================================
-   41. DEBUG / QA API
+   46. FOCUS + REVEAL
+   ============================================================ */
+
+function focusAndReveal(
+    element
+) {
+
+    if (!element) {
+        return;
+    }
+
+
+    const reduced =
+        prefersReducedMotion();
+
+
+    try {
+
+        element.scrollIntoView(
+            {
+                behavior:
+                    reduced
+                        ? 'auto'
+                        : 'smooth',
+
+                block:
+                    'center',
+
+                inline:
+                    'nearest'
+            }
+        );
+
+    }
+    catch (error) {
+
+        element.scrollIntoView();
+
+    }
+
+
+    /*
+     * Add the existing attention hook used by Page 02 CSS.
+     */
+
+    if (
+        element.classList
+    ) {
+
+        element.classList.add(
+            'needs-attention'
+        );
+
+        if (
+            page02AttentionTimer
+        ) {
+
+            window.clearTimeout(
+                page02AttentionTimer
+            );
+
+        }
+
+        page02AttentionTimer =
+            window.setTimeout(
+                () => {
+
+                    element.classList.remove(
+                        'needs-attention'
+                    );
+
+                },
+                PAGE02_CONFIG.ATTENTION_DURATION_MS
+            );
+
+    }
+
+
+    /*
+     * Only focus naturally focusable elements.
+     * Avoid making cards artificially tabbable.
+     */
+
+    if (
+        isFocusableElement(
+            element
+        )
+    ) {
+
+        window.setTimeout(
+            () => {
+
+                try {
+
+                    element.focus(
+                        {
+                            preventScroll: true
+                        }
+                    );
+
+                }
+                catch (error) {
+
+                    element.focus();
+
+                }
+
+            },
+            reduced
+                ? 0
+                : 120
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   47. ACCESSIBILITY PREPARATION
+   ============================================================ */
+
+function preparePage02Accessibility() {
+
+    /*
+     * Status controls should expose their current state.
+     */
+
+    page02DOM.statusButtons.forEach(
+        button => {
+
+            if (
+                !button.hasAttribute(
+                    'aria-pressed'
+                )
+            ) {
+
+                button.setAttribute(
+                    'aria-pressed',
+                    'false'
+                );
+
+            }
+
+        }
+    );
+
+
+    /*
+     * Progress bar accessibility.
+     */
+
+    if (
+        page02DOM.completionBar
+    ) {
+
+        page02DOM.completionBar.setAttribute(
+            'role',
+            'progressbar'
+        );
+
+        page02DOM.completionBar.setAttribute(
+            'aria-valuemin',
+            '0'
+        );
+
+        page02DOM.completionBar.setAttribute(
+            'aria-valuemax',
+            '100'
+        );
+
+    }
+
+
+    /*
+     * Priority confirmation starts hidden when there
+     * is no current selection.
+     */
+
+    if (
+        page02DOM.priorityConfirmation
+    ) {
+
+        const hasPriority =
+            Boolean(
+                findNeed(
+                    page02Priority
+                )
+            );
+
+        page02DOM.priorityConfirmation.setAttribute(
+            'aria-hidden',
+            hasPriority
+                ? 'false'
+                : 'true'
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   48. NATIVE INTERACTIVE ELEMENT TEST
+   ============================================================ */
+
+function isNativeInteractiveElement(
+    element
+) {
+
+    if (!element) {
+        return false;
+    }
+
+    const tag =
+        element.tagName.toLowerCase();
+
+    return (
+        tag === 'button' ||
+        tag === 'a' ||
+        tag === 'input' ||
+        tag === 'select' ||
+        tag === 'textarea'
+    );
+
+}
+
+
+/* ============================================================
+   49. FOCUSABLE ELEMENT TEST
+   ============================================================ */
+
+function isFocusableElement(
+    element
+) {
+
+    if (!element) {
+        return false;
+    }
+
+    const tag =
+        element.tagName.toLowerCase();
+
+    return (
+        tag === 'button' ||
+        tag === 'a' ||
+        tag === 'input' ||
+        tag === 'select' ||
+        tag === 'textarea'
+    );
+
+}
+
+
+/* ============================================================
+   50. REDUCED MOTION
+   ============================================================ */
+
+function prefersReducedMotion() {
+
+    try {
+
+        return (
+            window.matchMedia &&
+            window.matchMedia(
+                '(prefers-reduced-motion: reduce)'
+            ).matches
+        );
+
+    }
+    catch (error) {
+
+        return false;
+
+    }
+
+}
+
+
+/* ============================================================
+   51. DEBUG / QA API
    ============================================================ */
 
 function exposePage02DebugAPI() {
@@ -2330,17 +3182,31 @@ function exposePage02DebugAPI() {
 
             page02Priority = '';
 
-            localStorage.removeItem(
-                PAGE02_CONFIG.STORAGE_KEY
-            );
 
-            localStorage.removeItem(
-                PAGE02_CONFIG.SUMMARY_STORAGE_KEY
-            );
+            try {
 
-            localStorage.removeItem(
-                PAGE02_CONFIG.PRIORITY_STORAGE_KEY
-            );
+                localStorage.removeItem(
+                    PAGE02_CONFIG.STORAGE_KEY
+                );
+
+                localStorage.removeItem(
+                    PAGE02_CONFIG.SUMMARY_STORAGE_KEY
+                );
+
+                localStorage.removeItem(
+                    PAGE02_CONFIG.PRIORITY_STORAGE_KEY
+                );
+
+            }
+            catch (error) {
+
+                console.warn(
+                    'CTM PATH™ Page 02 clear failed:',
+                    error
+                );
+
+            }
+
 
             if (
                 page02DOM.prioritySelect
@@ -2350,6 +3216,13 @@ function exposePage02DebugAPI() {
                     '';
 
             }
+
+
+            setPage02Status(
+                '',
+                ''
+            );
+
 
             updatePage02UI();
 
@@ -2366,6 +3239,7 @@ function exposePage02DebugAPI() {
                 ) ||
                 PAGE02_STATUS.FULL;
 
+
             PAGE02_NEEDS.forEach(
                 need => {
 
@@ -2377,7 +3251,10 @@ function exposePage02DebugAPI() {
                 }
             );
 
+
             savePage02Answers();
+
+            savePage02Summary();
 
             updatePage02UI();
 
@@ -2399,6 +3276,7 @@ function exposePage02DebugAPI() {
                     status
                 );
 
+
             if (
                 !isValidNeedId(
                     normalizedNeed
@@ -2414,6 +3292,7 @@ function exposePage02DebugAPI() {
 
             }
 
+
             if (!normalizedStatus) {
 
                 console.warn(
@@ -2425,14 +3304,40 @@ function exposePage02DebugAPI() {
 
             }
 
+
             page02Answers[
                 normalizedNeed
             ] =
                 normalizedStatus;
 
+
             savePage02Answers();
 
             updatePage02UI();
+
+        },
+
+
+        validate() {
+
+            return validatePage02();
+
+        },
+
+
+        goNext() {
+
+            handlePage02Continue();
+
+        },
+
+
+        goPrevious() {
+
+            handlePreviousNavigation(
+                null,
+                page02DOM.previousButton
+            );
 
         }
 
@@ -2442,7 +3347,7 @@ function exposePage02DebugAPI() {
 
 
 /* ============================================================
-   42. INITIALISE
+   52. INITIALISE
    ============================================================ */
 
 if (
@@ -2452,7 +3357,10 @@ if (
 
     document.addEventListener(
         'DOMContentLoaded',
-        initPage02
+        initPage02,
+        {
+            once: true
+        }
     );
 
 }
