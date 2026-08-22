@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ta">
 
@@ -9,6 +8,16 @@
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="CTM PATH™ MILLIONAIRES™ — ஒரு முழுமையான மற்றும் நிறைவான வாழ்க்கையை நோக்கிய உங்கள் தனிப்பட்ட பயணம்."
+    >
+
+    <meta
+        name="theme-color"
+        content="#081C3A"
     >
 
     <title>
@@ -26,15 +35,21 @@
 <body>
 
     <!-- =====================================================
-         BRAND HEADER
+         CTM PATH™ MILLIONAIRES™
+         JOURNEY HEADER
          ===================================================== -->
 
-    <header class="site-header">
+    <header
+        class="site-header"
+        aria-label="CTM PATH™ MILLIONAIRES™ journey header"
+    >
+
+        <!-- BRAND IDENTITY -->
 
         <a
             href="index.html"
             class="brand-logo"
-            aria-label="CTM PATH™ Millionaires™"
+            aria-label="CTM PATH™ Millionaires™ — Home"
         >
 
             <img
@@ -44,32 +59,101 @@
 
         </a>
 
-        <!-- PRIMARY IDENTITY -->
 
-        <div class="brand-tamil">
-            உம்பர் நற்பவி
+        <div class="brand-identity">
+
+            <div class="brand-name">
+                CTM PATH™ MILLIONAIRES™
+            </div>
+
+            <div class="brand-tamil">
+                உம்பர் நற்பவி
+            </div>
+
+        </div>
+
+
+        <!-- JOURNEY POSITION -->
+
+        <div
+            class="journey-position"
+            aria-label="Journey position"
+        >
+
+            <span class="journey-position-current">
+                00
+            </span>
+
+            <span
+                class="journey-position-divider"
+                aria-hidden="true"
+            >
+                /
+            </span>
+
+            <span class="journey-position-total">
+                16
+            </span>
+
         </div>
 
     </header>
 
 
     <!-- =====================================================
-         MAIN
+         JOURNEY PROGRESS
+         ===================================================== -->
+
+    <div
+        class="journey-progress"
+        aria-label="Journey progress"
+        role="progressbar"
+        aria-valuemin="0"
+        aria-valuemax="16"
+        aria-valuenow="0"
+    >
+
+        <span
+            class="journey-progress-gold"
+            aria-hidden="true"
+        ></span>
+
+        <span
+            class="journey-progress-teal"
+            aria-hidden="true"
+        ></span>
+
+    </div>
+
+
+    <!-- =====================================================
+         MAIN JOURNEY
          ===================================================== -->
 
     <main class="welcome-page">
 
-        <section class="welcome-card">
+        <section
+            class="welcome-card"
+            aria-labelledby="welcomeTitle"
+        >
 
 
             <!-- =================================================
-                 JOURNEY INDICATOR
+                 JOURNEY LABEL
                  ================================================= -->
 
             <div class="journey-indicator">
 
-                <span>
+                <span class="journey-indicator-number">
+                    00
+                </span>
+
+                <span class="journey-indicator-label">
                     WELCOME
+                </span>
+
+                <span class="journey-indicator-tamil">
+                    வரவேற்பு
                 </span>
 
             </div>
@@ -82,9 +166,19 @@
             <div class="welcome-content">
 
 
+                <!-- EYEBROW -->
+
+                <p class="hero-eyebrow">
+                    CTM PATH™ MILLIONAIRES™
+                </p>
+
+
                 <!-- PRIMARY TITLE — TAMIL -->
 
-                <h1 class="hero-title-tamil">
+                <h1
+                    id="welcomeTitle"
+                    class="hero-title-tamil"
+                >
 
                     பதினாறும் பெற்று
                     <br>
@@ -102,7 +196,7 @@
                 </p>
 
 
-                <!-- SHORT EXPLANATION -->
+                <!-- PRIMARY MESSAGE — TAMIL -->
 
                 <p class="hero-message-tamil">
 
@@ -113,6 +207,8 @@
                 </p>
 
 
+                <!-- PRIMARY MESSAGE — ENGLISH -->
+
                 <p class="hero-message-english">
 
                     Discover where you are today —
@@ -121,28 +217,139 @@
                 </p>
 
 
-                <div class="welcome-divider"></div>
+                <!-- JOURNEY ORIENTATION -->
+
+                <div
+                    class="journey-introduction"
+                    aria-label="What you will discover"
+                >
+
+                    <div class="journey-introduction-heading">
+
+                        <span class="journey-introduction-tamil">
+                            இந்தப் பயணத்தில் நீங்கள் கண்டறிவது
+                        </span>
+
+                        <span class="journey-introduction-english">
+                            WHAT YOU WILL DISCOVER
+                        </span>
+
+                    </div>
+
+
+                    <div class="journey-discoveries">
+
+
+                        <div class="journey-discovery">
+
+                            <span
+                                class="journey-discovery-number"
+                                aria-hidden="true"
+                            >
+                                01
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    நீங்கள் இன்று எங்கே இருக்கிறீர்கள்
+                                </strong>
+
+                                <span>
+                                    WHERE YOU ARE TODAY
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="journey-discovery">
+
+                            <span
+                                class="journey-discovery-number"
+                                aria-hidden="true"
+                            >
+                                02
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    நீங்கள் உருவாக்க விரும்பும் வாழ்க்கை
+                                </strong>
+
+                                <span>
+                                    THE LIFE YOU WANT TO CREATE
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="journey-discovery">
+
+                            <span
+                                class="journey-discovery-number"
+                                aria-hidden="true"
+                            >
+                                03
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    அடுத்ததாக நீங்கள் எடுக்க வேண்டிய பாதை
+                                </strong>
+
+                                <span>
+                                    THE PATH FORWARD
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="welcome-divider"
+                    aria-hidden="true"
+                ></div>
 
 
             </div>
 
 
             <!-- =================================================
-                 KYC SECTION
+                 STEP 01 — REGISTRATION
                  ================================================= -->
 
-            <section class="kyc-section">
+            <section
+                class="kyc-section"
+                aria-labelledby="registrationTitle"
+            >
 
+
+                <!-- SECTION HEADING -->
 
                 <div class="section-heading">
 
-                    <span class="section-number">
+                    <span
+                        class="section-number"
+                        aria-hidden="true"
+                    >
                         01
                     </span>
 
                     <div>
 
-                        <h2>
+                        <h2 id="registrationTitle">
                             உங்கள் விவரங்களை பதிவு செய்யுங்கள்
                         </h2>
 
@@ -151,6 +358,28 @@
                         </p>
 
                     </div>
+
+                </div>
+
+
+                <!-- SECTION INTRODUCTION -->
+
+                <div class="section-introduction">
+
+                    <p class="section-introduction-tamil">
+
+                        இந்தப் பயணம் உங்களுக்கானது.
+                        உங்கள் அடிப்படை விவரங்களை பதிவு செய்து
+                        உங்கள் தனிப்பட்ட பயணத்தைத் தொடங்குங்கள்.
+
+                    </p>
+
+                    <p class="section-introduction-english">
+
+                        A few basic details are all we need
+                        to begin your personal journey.
+
+                    </p>
 
                 </div>
 
@@ -173,9 +402,11 @@
 
                         <label for="fullName">
 
-                            உங்கள் பெயர்
+                            <span class="label-tamil">
+                                உங்கள் பெயர்
+                            </span>
 
-                            <span>
+                            <span class="label-english">
                                 / YOUR NAME
                             </span>
 
@@ -189,12 +420,14 @@
                             placeholder="Enter your full name"
                             autocomplete="name"
                             required
+                            aria-required="true"
                         >
 
 
                         <small
                             class="field-error"
                             id="fullNameError"
+                            aria-live="polite"
                         ></small>
 
                     </div>
@@ -208,9 +441,11 @@
 
                         <label for="mobile">
 
-                            WhatsApp எண்
+                            <span class="label-tamil">
+                                WhatsApp எண்
+                            </span>
 
-                            <span>
+                            <span class="label-english">
                                 / WHATSAPP NUMBER
                             </span>
 
@@ -225,12 +460,14 @@
                             autocomplete="tel"
                             inputmode="tel"
                             required
+                            aria-required="true"
                         >
 
 
                         <small
                             class="field-error"
                             id="mobileError"
+                            aria-live="polite"
                         ></small>
 
                     </div>
@@ -244,9 +481,11 @@
 
                         <label for="email">
 
-                            மின்னஞ்சல்
+                            <span class="label-tamil">
+                                மின்னஞ்சல்
+                            </span>
 
-                            <span>
+                            <span class="label-english">
                                 / EMAIL ADDRESS
                             </span>
 
@@ -260,12 +499,14 @@
                             placeholder="Enter your email address"
                             autocomplete="email"
                             required
+                            aria-required="true"
                         >
 
 
                         <small
                             class="field-error"
                             id="emailError"
+                            aria-live="polite"
                         ></small>
 
                     </div>
@@ -279,9 +520,11 @@
 
                         <label for="district">
 
-                            மாவட்டம்
+                            <span class="label-tamil">
+                                மாவட்டம்
+                            </span>
 
-                            <span>
+                            <span class="label-english">
                                 / DISTRICT
                             </span>
 
@@ -295,12 +538,14 @@
                             placeholder="Enter your district"
                             autocomplete="address-level2"
                             required
+                            aria-required="true"
                         >
 
 
                         <small
                             class="field-error"
                             id="districtError"
+                            aria-live="polite"
                         ></small>
 
                     </div>
@@ -314,9 +559,11 @@
 
                         <label for="state">
 
-                            மாநிலம்
+                            <span class="label-tamil">
+                                மாநிலம்
+                            </span>
 
-                            <span>
+                            <span class="label-english">
                                 / STATE
                             </span>
 
@@ -338,24 +585,38 @@
                          CONSENT
                          ================================================= -->
 
-                    <label class="consent-row">
+                    <label
+                        class="consent-row"
+                        for="consent"
+                    >
 
                         <input
                             type="checkbox"
                             id="consent"
+                            name="consent"
                             required
+                            aria-required="true"
                         >
 
 
-                        <span>
+                        <span class="consent-copy">
 
-                            எனது தகவல்களை இந்தப் பயணத்திற்காக
-                            பயன்படுத்த நான் சம்மதிக்கிறேன்.
+                            <span class="consent-tamil">
 
-                            <br>
+                                எனது தகவல்களை இந்தப் பயணத்திற்காக
+                                பயன்படுத்த நான் சம்மதிக்கிறேன்.
 
-                            I agree to provide these details
-                            for this journey.
+                            </span>
+
+                            <span
+                                class="consent-english"
+                                lang="en"
+                            >
+
+                                I agree to provide these details
+                                for this journey.
+
+                            </span>
 
                         </span>
 
@@ -370,17 +631,19 @@
                         id="formStatus"
                         class="form-status"
                         aria-live="polite"
+                        role="status"
                     ></div>
 
 
                     <!-- =================================================
-                         BEGIN JOURNEY
+                         PRIMARY CTA
                          ================================================= -->
 
                     <button
                         type="submit"
                         id="beginButton"
                         class="begin-button"
+                        aria-label="Begin my CTM PATH™ journey"
                     >
 
                         <span class="button-tamil">
@@ -388,11 +651,32 @@
                         </span>
 
 
-                        <span class="button-english">
+                        <span
+                            class="button-english"
+                            lang="en"
+                        >
                             BEGIN MY JOURNEY →
                         </span>
 
                     </button>
+
+
+                    <!-- CTA REASSURANCE -->
+
+                    <p class="cta-reassurance">
+
+                        <span class="cta-reassurance-tamil">
+                            உங்கள் பயணத்தின் முதல் படி.
+                        </span>
+
+                        <span
+                            class="cta-reassurance-english"
+                            lang="en"
+                        >
+                            YOUR FIRST STEP STARTS HERE.
+                        </span>
+
+                    </p>
 
 
                 </form>
@@ -401,14 +685,88 @@
 
 
             <!-- =================================================
-                 MINIMAL FOOTER
+                 JOURNEY CLOSURE / BOTTOM BRANDING
                  ================================================= -->
 
-            <footer class="welcome-footer">
+            <footer
+                class="welcome-footer"
+                aria-label="Journey navigation"
+            >
 
-                <p>
-                    EVERY DREAM HAS A PATH™
-                </p>
+
+                <!-- PREVIOUS — NOT AVAILABLE ON INDEX -->
+
+                <div
+                    class="journey-nav journey-nav-placeholder"
+                    aria-hidden="true"
+                ></div>
+
+
+                <!-- CURRENT POSITION -->
+
+                <div class="journey-footer-center">
+
+                    <span class="journey-footer-tamil">
+                        உங்கள் பயணம்
+                    </span>
+
+                    <span
+                        class="journey-footer-english"
+                        lang="en"
+                    >
+                        YOUR JOURNEY
+                    </span>
+
+                    <strong class="journey-footer-position">
+                        00 / 16
+                    </strong>
+
+                </div>
+
+
+                <!-- NEXT -->
+
+                <a
+                    href="page01.html"
+                    class="journey-nav journey-nav-next"
+                    aria-label="Continue to Page 1"
+                >
+
+                    <span class="journey-nav-tamil">
+                        அடுத்து
+                    </span>
+
+                    <span
+                        class="journey-nav-english"
+                        lang="en"
+                    >
+                        NEXT
+                    </span>
+
+                    <span
+                        class="journey-nav-arrow"
+                        aria-hidden="true"
+                    >
+                        →
+                    </span>
+
+                </a>
+
+
+                <!-- BRAND CLOSURE -->
+
+                <div class="welcome-footer-brand">
+
+                    <p class="footer-tagline">
+                        EVERY DREAM HAS A PATH™
+                    </p>
+
+                    <p class="footer-brand">
+                        CTM PATH™ MILLIONAIRES™ CLUB
+                    </p>
+
+                </div>
+
 
             </footer>
 
