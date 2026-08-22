@@ -1,7 +1,6 @@
 /* ============================================================
    CTM PATH™ MILLIONAIRES™
    PAGE 03 — JAVASCRIPT
-   ============================================================
 
    FILE:
    js/page03.js
@@ -15,6 +14,14 @@
    NAVIGATION:
    BACK → 02.html
    NEXT → 04.html
+
+   PRINCIPLES:
+   - Vanilla JavaScript only
+   - Defensive event handling
+   - Persistent state
+   - No unnecessary animation
+   - No duplicate event listeners
+   - Preserve existing scoring model
    ============================================================ */
 
 (function () {
@@ -44,7 +51,11 @@
             16,
 
         TOTAL_QUESTIONS:
-            6
+            6,
+
+        SAVE_FEEDBACK_DURATION:
+            1400
+
     };
 
 
@@ -72,6 +83,7 @@
 
             resultElement:
                 "resultDignity"
+
         },
 
 
@@ -93,6 +105,7 @@
 
             resultElement:
                 "resultIdentity"
+
         },
 
 
@@ -114,9 +127,24 @@
 
             resultElement:
                 "resultAuthority"
+
         }
 
     };
+
+
+    /* ============================================================
+       INTERNAL STATE
+       ============================================================ */
+
+    let state =
+        createInitialState();
+
+    let initialized =
+        false;
+
+    let saveFeedbackTimer =
+        null;
 
 
     /* ============================================================
@@ -151,12 +179,10 @@
 
             development:
                 ""
+
         };
+
     }
-
-
-    let state =
-        createInitialState();
 
 
     /* ============================================================
@@ -164,6 +190,12 @@
        ============================================================ */
 
     function init() {
+
+        if (initialized) {
+            return;
+        }
+
+        initialized = true;
 
         loadState();
 
@@ -189,19 +221,16 @@
         try {
 
             const saved =
-                localStorage.getItem(
+                window.localStorage.getItem(
                     CONFIG.STORAGE_KEY
                 );
-
 
             if (!saved) {
                 return;
             }
 
-
             const parsed =
                 JSON.parse(saved);
-
 
             if (
                 !parsed ||
@@ -211,6 +240,10 @@
             }
 
 
+            /* ----------------------------------------------------
+               ANSWERS
+               ---------------------------------------------------- */
+
             if (
                 parsed.answers &&
                 typeof parsed.answers === "object"
@@ -218,21 +251,21 @@
 
                 Object.keys(
                     state.answers
-                ).forEach(function (key) {
+                ).forEach(function (questionId) {
+
+                    const rawValue =
+                        parsed.answers[questionId];
 
                     if (
-                        parsed.answers[key] ===
-                        undefined
+                        rawValue === null ||
+                        rawValue === undefined ||
+                        rawValue === ""
                     ) {
                         return;
                     }
 
-
                     const value =
-                        Number(
-                            parsed.answers[key]
-                        );
-
+                        Number(rawValue);
 
                     if (
                         Number.isFinite(value) &&
@@ -240,21 +273,29 @@
                         value <= 10
                     ) {
 
-                        state.answers[key] =
+                        state.answers[questionId] =
                             value;
+
                     }
 
                 });
+
             }
 
 
+            /* ----------------------------------------------------
+               DEVELOPMENT AREA
+               ---------------------------------------------------- */
+
             if (
                 typeof parsed.development ===
-                "string"
+                "string" &&
+                DIMENSIONS[parsed.development]
             ) {
 
                 state.development =
                     parsed.development;
+
             }
 
         }
@@ -276,6 +317,9 @@
 
     function saveState() {
 
+        const scores =
+            calculateScores();
+
         const payload = {
 
             page:
@@ -288,11 +332,11 @@
                 state.development,
 
             scores:
-                calculateScores(),
+                scores,
 
             overallScore:
                 calculateOverallScore(
-                    calculateScores()
+                    scores
                 ),
 
             updatedAt:
@@ -303,10 +347,12 @@
 
         try {
 
-            localStorage.setItem(
+            window.localStorage.setItem(
                 CONFIG.STORAGE_KEY,
                 JSON.stringify(payload)
             );
+
+            return true;
 
         }
         catch (error) {
@@ -316,7 +362,38 @@
                 error
             );
 
+            return false;
+
         }
+
+    }
+
+
+    /* ============================================================
+       VALIDATION
+       ============================================================ */
+
+    function isValidQuestionId(
+        questionId
+    ) {
+
+        return Object.prototype.hasOwnProperty.call(
+            state.answers,
+            questionId
+        );
+
+    }
+
+
+    function isValidScore(
+        score
+    ) {
+
+        return (
+            Number.isFinite(score) &&
+            score >= 1 &&
+            score <= 10
+        );
 
     }
 
@@ -332,8 +409,18 @@
                 ".score-option"
             );
 
-
         buttons.forEach(function (button) {
+
+            if (
+                button.dataset.page03Bound ===
+                "true"
+            ) {
+                return;
+            }
+
+            button.dataset.page03Bound =
+                "true";
+
 
             button.addEventListener(
                 "click",
@@ -344,7 +431,6 @@
                             ".question-block"
                         );
 
-
                     if (!questionBlock) {
                         return;
                     }
@@ -353,7 +439,6 @@
                     const questionId =
                         questionBlock.dataset.question;
 
-
                     const score =
                         Number(
                             button.dataset.score
@@ -361,10 +446,10 @@
 
 
                     if (
-                        !questionId ||
-                        !Number.isFinite(score) ||
-                        score < 1 ||
-                        score > 10
+                        !isValidQuestionId(
+                            questionId
+                        ) ||
+                        !isValidScore(score)
                     ) {
                         return;
                     }
@@ -408,9 +493,8 @@
                     questionId
                 ];
 
-
             if (
-                !Number.isFinite(score)
+                !isValidScore(score)
             ) {
                 return;
             }
@@ -420,7 +504,6 @@
                 document.querySelector(
                     `[data-question="${questionId}"]`
                 );
-
 
             if (!questionBlock) {
                 return;
@@ -445,6 +528,11 @@
         questionBlock,
         selectedScore
     ) {
+
+        if (!questionBlock) {
+            return;
+        }
+
 
         const buttons =
             questionBlock.querySelectorAll(
@@ -565,6 +653,7 @@
                 ] = null;
 
                 return;
+
             }
 
 
@@ -575,9 +664,7 @@
                         value
                     ) {
 
-                        return (
-                            sum + value
-                        );
+                        return sum + value;
 
                     },
                     0
@@ -609,6 +696,14 @@
     function calculateOverallScore(
         scores
     ) {
+
+        if (
+            !scores ||
+            typeof scores !== "object"
+        ) {
+            return null;
+        }
+
 
         const values = [
 
@@ -644,9 +739,7 @@
                     value
                 ) {
 
-                    return (
-                        sum + value
-                    );
+                    return sum + value;
 
                 },
                 0
@@ -730,12 +823,15 @@
                 dimensionKey
             ];
 
+        if (!dimension) {
+            return;
+        }
+
 
         const element =
             document.getElementById(
                 dimension.scoreElement
             );
-
 
         if (!element) {
             return;
@@ -751,12 +847,12 @@
                 "";
 
             return;
+
         }
 
 
         element.textContent =
             formatScore(score);
-
 
         element.className =
             getScoreClass(score);
@@ -778,12 +874,15 @@
                 dimensionKey
             ];
 
+        if (!dimension) {
+            return;
+        }
+
 
         const element =
             document.getElementById(
                 dimension.resultElement
             );
-
 
         if (!element) {
             return;
@@ -799,12 +898,12 @@
                 "";
 
             return;
+
         }
 
 
         element.textContent =
             formatScore(score);
-
 
         element.className =
             getScoreClass(score);
@@ -819,6 +918,16 @@
     function getScoreClass(
         score
     ) {
+
+        if (
+            typeof score !== "number" ||
+            !Number.isFinite(score)
+        ) {
+
+            return "";
+
+        }
+
 
         if (score <= 3) {
 
@@ -848,7 +957,8 @@
     ) {
 
         if (
-            typeof score !== "number"
+            typeof score !== "number" ||
+            !Number.isFinite(score)
         ) {
 
             return "—";
@@ -884,6 +994,17 @@
 
         buttons.forEach(function (button) {
 
+            if (
+                button.dataset.page03Bound ===
+                "true"
+            ) {
+                return;
+            }
+
+            button.dataset.page03Bound =
+                "true";
+
+
             button.addEventListener(
                 "click",
                 function () {
@@ -893,9 +1014,8 @@
 
 
                     if (
-                        !DIMENSIONS[
-                            dimension
-                        ]
+                        !dimension ||
+                        !DIMENSIONS[dimension]
                     ) {
 
                         return;
@@ -957,6 +1077,16 @@
         scores
     ) {
 
+        if (
+            !scores ||
+            typeof scores !== "object"
+        ) {
+
+            return null;
+
+        }
+
+
         const available =
             Object.keys(
                 DIMENSIONS
@@ -964,7 +1094,8 @@
 
                 return (
                     typeof scores[key] ===
-                    "number"
+                    "number" &&
+                    Number.isFinite(scores[key])
                 );
 
             });
@@ -986,9 +1117,7 @@
             ) {
 
                 if (!lowest) {
-
                     return current;
-
                 }
 
 
@@ -1025,6 +1154,12 @@
             );
 
 
+        /*
+         * If the user has not manually selected
+         * a development area, show the lowest-scoring
+         * dimension as the suggested area.
+         */
+
         if (!lowest) {
 
             renderDevelopmentMessage();
@@ -1034,15 +1169,7 @@
         }
 
 
-        /*
-         * If the user has not manually selected
-         * a development area, recommend the
-         * lowest-scoring dimension.
-         */
-
-        if (
-            !state.development
-        ) {
+        if (!state.development) {
 
             renderDevelopmentMessage(
                 lowest
@@ -1121,15 +1248,13 @@
        NAVIGATION
        ============================================================
 
-       LOCKED GLOBAL NAVIGATION
-
        Page 03:
        BACK → 02.html
        NEXT → 04.html
 
-       The HTML anchors already carry the correct href.
-       JavaScript additionally saves the current state
-       before allowing navigation.
+       Existing HTML href values remain authoritative.
+
+       JavaScript saves state immediately before navigation.
        ============================================================ */
 
     function bindNavigation() {
@@ -1139,12 +1264,10 @@
                 "previousButton"
             );
 
-
         const next =
             document.getElementById(
                 "nextButton"
             );
-
 
         const save =
             document.getElementById(
@@ -1153,49 +1276,38 @@
 
 
         /* --------------------------------------------------------
-           PREVIOUS → PAGE 02
+           PREVIOUS
            -------------------------------------------------------- */
 
-        if (previous) {
-
-            previous.addEventListener(
-                "click",
-                function (event) {
-
-                    saveState();
+        bindNavigationButton(
+            previous,
+            CONFIG.PREVIOUS_PAGE
+        );
 
 
-                    /*
-                     * If this is an anchor, allow its
-                     * frozen href to perform navigation.
-                     */
+        /* --------------------------------------------------------
+           NEXT
+           -------------------------------------------------------- */
 
-                    if (
-                        previous.tagName.toLowerCase() ===
-                        "a"
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    event.preventDefault();
-
-                    window.location.href =
-                        CONFIG.PREVIOUS_PAGE;
-
-                }
-            );
-
-        }
+        bindNavigationButton(
+            next,
+            CONFIG.NEXT_PAGE
+        );
 
 
         /* --------------------------------------------------------
            SAVE
            -------------------------------------------------------- */
 
-        if (save) {
+        if (
+            save &&
+            save.dataset.page03Bound !==
+            "true"
+        ) {
+
+            save.dataset.page03Bound =
+                "true";
+
 
             save.addEventListener(
                 "click",
@@ -1210,44 +1322,69 @@
 
         }
 
-
-        /* --------------------------------------------------------
-           NEXT → PAGE 04
-           -------------------------------------------------------- */
-
-        if (next) {
-
-            next.addEventListener(
-                "click",
-                function (event) {
-
-                    saveState();
+    }
 
 
-                    /*
-                     * If this is an anchor, allow its
-                     * frozen href to perform navigation.
-                     */
+    /* ============================================================
+       NAVIGATION BUTTON HELPER
+       ============================================================ */
 
-                    if (
-                        next.tagName.toLowerCase() ===
-                        "a"
-                    ) {
+    function bindNavigationButton(
+        element,
+        fallbackPage
+    ) {
 
-                        return;
+        if (!element) {
+            return;
+        }
 
-                    }
+
+        if (
+            element.dataset.page03Bound ===
+            "true"
+        ) {
+            return;
+        }
+
+        element.dataset.page03Bound =
+            "true";
 
 
-                    event.preventDefault();
+        element.addEventListener(
+            "click",
+            function (event) {
 
-                    window.location.href =
-                        CONFIG.NEXT_PAGE;
+                saveState();
+
+
+                /*
+                 * If the existing element is an anchor,
+                 * preserve its frozen href and normal
+                 * browser navigation behavior.
+                 */
+
+                if (
+                    element.tagName.toLowerCase() ===
+                    "a"
+                ) {
+
+                    return;
 
                 }
-            );
 
-        }
+
+                event.preventDefault();
+
+
+                if (fallbackPage) {
+
+                    window.location.href =
+                        fallbackPage;
+
+                }
+
+            }
+        );
 
     }
 
@@ -1269,23 +1406,53 @@
         }
 
 
-        const original =
+        if (
+            saveFeedbackTimer !== null
+        ) {
+
+            window.clearTimeout(
+                saveFeedbackTimer
+            );
+
+        }
+
+
+        const originalHTML =
+            button.dataset.originalHtml ||
             button.innerHTML;
 
 
-        button.innerHTML =
+        button.dataset.originalHtml =
+            originalHTML;
+
+
+        button.textContent =
             "✓ SAVED";
 
 
-        window.setTimeout(
-            function () {
-
-                button.innerHTML =
-                    original;
-
-            },
-            1400
+        button.setAttribute(
+            "aria-live",
+            "polite"
         );
+
+
+        saveFeedbackTimer =
+            window.setTimeout(
+                function () {
+
+                    button.innerHTML =
+                        originalHTML;
+
+                    button.removeAttribute(
+                        "aria-live"
+                    );
+
+                    saveFeedbackTimer =
+                        null;
+
+                },
+                CONFIG.SAVE_FEEDBACK_DURATION
+            );
 
     }
 
@@ -1334,7 +1501,6 @@
                 const scores =
                     calculateScores();
 
-
                 return calculateOverallScore(
                     scores
                 );
@@ -1349,7 +1515,7 @@
         save:
             function () {
 
-                saveState();
+                return saveState();
 
             },
 
@@ -1365,9 +1531,23 @@
                     createInitialState();
 
 
+                if (
+                    saveFeedbackTimer !== null
+                ) {
+
+                    window.clearTimeout(
+                        saveFeedbackTimer
+                    );
+
+                    saveFeedbackTimer =
+                        null;
+
+                }
+
+
                 try {
 
-                    localStorage.removeItem(
+                    window.localStorage.removeItem(
                         CONFIG.STORAGE_KEY
                     );
 
