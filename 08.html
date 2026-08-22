@@ -41,7 +41,7 @@
 
     </header>
 
-    <div class="global-divider">
+    <div class="global-divider" aria-hidden="true">
         <span></span>
         <span></span>
         <span></span>
@@ -56,13 +56,16 @@
         <!-- =====================================================
              OPENING — THE MONEY QUESTION
              ===================================================== -->
-        <section class="money-hero">
+        <section
+            class="money-hero"
+            aria-labelledby="money-question-title"
+        >
 
             <div class="money-kicker">
                 THE MONEY QUESTION™
             </div>
 
-            <h1>
+            <h1 id="money-question-title">
                 உங்கள் வாழ்க்கைக்கு<br>
                 எவ்வளவு வருமானம் வேண்டும்?
             </h1>
@@ -73,11 +76,13 @@
 
             <p class="money-hero-lead">
                 ஒரு எண்ணைத் தேர்வு செய்யுங்கள்.<br>
-                அது உங்கள் வாழ்க்கையை மாற்றக்கூடிய எண்ணாக இருக்கட்டும்.
+                அது உங்கள் வாழ்க்கைக்கு முக்கியமான மாற்றத்தை
+                ஏற்படுத்தக்கூடிய எண்ணாக இருக்கட்டும்.
             </p>
 
             <p class="money-hero-lead-en">
-                Choose a number that could genuinely change your life.
+                Choose a number that could genuinely change
+                what is possible for the life you want.
             </p>
 
         </section>
@@ -86,9 +91,12 @@
         <!-- =====================================================
              STEP 01 — DESIRED INCOME
              ===================================================== -->
-        <section class="money-step money-step-income">
+        <section
+            class="money-step money-step-income"
+            aria-labelledby="income-step-title"
+        >
 
-            <div class="step-marker">
+            <div class="step-marker" aria-hidden="true">
                 <span>01</span>
                 <small>DESIRE</small>
             </div>
@@ -99,7 +107,7 @@
                     YOUR NUMBER
                 </div>
 
-                <h2>
+                <h2 id="income-step-title">
                     உங்கள் எதிர்பார்க்கும்<br>
                     மாத வருமானம் என்ன?
                 </h2>
@@ -108,31 +116,56 @@
                     What monthly income do you really want?
                 </p>
 
-                <div class="income-options">
+                <div
+                    class="income-options"
+                    role="group"
+                    aria-label="Choose your desired monthly income"
+                >
 
-                    <button type="button" class="income-option">
+                    <button
+                        type="button"
+                        class="income-option"
+                        aria-label="Desired monthly income ₹50,000"
+                    >
                         ₹50,000
                     </button>
 
-                    <button type="button" class="income-option">
+                    <button
+                        type="button"
+                        class="income-option"
+                        aria-label="Desired monthly income ₹1,00,000"
+                    >
                         ₹1,00,000
                     </button>
 
-                    <button type="button" class="income-option">
+                    <button
+                        type="button"
+                        class="income-option"
+                        aria-label="Desired monthly income ₹2,00,000"
+                    >
                         ₹2,00,000
                     </button>
 
-                    <button type="button" class="income-option">
+                    <button
+                        type="button"
+                        class="income-option"
+                        aria-label="Desired monthly income ₹5,00,000"
+                    >
                         ₹5,00,000
                     </button>
 
-                    <button type="button" class="income-option">
+                    <button
+                        type="button"
+                        class="income-option"
+                        aria-label="Desired monthly income ₹10,00,000 or more"
+                    >
                         ₹10,00,000+
                     </button>
 
                     <button
                         type="button"
                         class="income-option income-custom"
+                        aria-label="Enter my own desired monthly income"
                     >
                         என் சொந்த எண்
                     </button>
@@ -146,7 +179,8 @@
                     </label>
 
                     <div class="money-input-wrap">
-                        <span>₹</span>
+
+                        <span aria-hidden="true">₹</span>
 
                         <input
                             type="number"
@@ -156,11 +190,14 @@
                             step="1000"
                             placeholder="0"
                             inputmode="numeric"
+                            autocomplete="off"
+                            aria-label="Enter your desired monthly income"
                         >
 
                         <span class="per-month">
                             / MONTH
                         </span>
+
                     </div>
 
                 </div>
@@ -173,9 +210,12 @@
         <!-- =====================================================
              STEP 02 — NORMAL INVESTMENT
              ===================================================== -->
-        <section class="money-step money-step-investment">
+        <section
+            class="money-step money-step-investment"
+            aria-labelledby="investment-step-title"
+        >
 
-            <div class="step-marker">
+            <div class="step-marker" aria-hidden="true">
                 <span>02</span>
                 <small>REALITY</small>
             </div>
@@ -186,7 +226,7 @@
                     THE NORMAL QUESTION
                 </div>
 
-                <h2>
+                <h2 id="investment-step-title">
                     அந்த வருமானத்தை உருவாக்க<br>
                     நீங்கள் எவ்வளவு முதலீடு செய்ய வேண்டும்?
                 </h2>
@@ -196,7 +236,10 @@
                     to create that income?
                 </p>
 
-                <div class="investment-context">
+                <div
+                    class="investment-context"
+                    aria-label="Factors to consider"
+                >
 
                     <div class="context-item">
                         <span>CAPITAL</span>
@@ -233,7 +276,7 @@
 
                     <div class="money-input-wrap large">
 
-                        <span>₹</span>
+                        <span aria-hidden="true">₹</span>
 
                         <input
                             type="number"
@@ -243,6 +286,8 @@
                             step="10000"
                             placeholder="0"
                             inputmode="numeric"
+                            autocomplete="off"
+                            aria-label="Your estimate of normal business investment"
                         >
 
                     </div>
@@ -259,6 +304,18 @@
                         your desired monthly income.
                     </p>
 
+                    <p class="investment-note">
+                        இது உங்கள் சொந்த மதிப்பீடு மட்டுமே.
+                        இது எந்தவொரு வருமானத்திற்கும் அல்லது
+                        முதலீட்டு முடிவிற்கும் உத்தரவாதம் அல்ல.
+                    </p>
+
+                    <p class="investment-note english">
+                        This is your own estimate only.
+                        It is not a promise, projection, or guarantee
+                        of income or outcome.
+                    </p>
+
                 </div>
 
             </div>
@@ -269,19 +326,22 @@
         <!-- =====================================================
              STEP 03 — THE 10% POSSIBILITY
              ===================================================== -->
-        <section class="ten-percent-section">
+        <section
+            class="ten-percent-section"
+            aria-labelledby="ten-percent-title"
+        >
 
             <div class="possibility-kicker">
                 NOW IMAGINE...
             </div>
 
-            <h2>
+            <h2 id="ten-percent-title">
                 நீங்கள் நினைத்த முதலீட்டின்<br>
                 <span>10%</span> மட்டும் போதுமானதாக இருந்தால்?
             </h2>
 
             <p class="possibility-en">
-                WHAT IF YOU NEEDED ONLY 10%?
+                WHAT IF THE ENTRY POINT WERE ONLY 10%?
             </p>
 
             <div class="ten-percent-visual">
@@ -302,7 +362,10 @@
 
                 </div>
 
-                <div class="visual-arrow">
+                <div
+                    class="visual-arrow"
+                    aria-hidden="true"
+                >
                     →
                 </div>
 
@@ -325,13 +388,25 @@
             </div>
 
             <p class="possibility-message">
-                அதே வருமான இலக்கு.<br>
-                radically different entry point.
+                நீங்கள் நினைத்த தொகையின்<br>
+                ஒரு சிறிய பகுதியை வைத்து தொடங்கும்
+                ஒரு வாய்ப்பை கற்பனை செய்து பாருங்கள்.
             </p>
 
             <p class="possibility-message-en">
-                The same income goal.<br>
-                A radically different entry point.
+                Imagine a hypothetical entry point equal to
+                10% of the amount you estimated.
+            </p>
+
+            <p class="possibility-disclaimer">
+                10% என்பது இங்கு ஒரு விளக்கத்திற்கான
+                hypothetical example மட்டுமே.
+                அது எந்த வருமானத்தையும் உறுதி செய்யாது.
+            </p>
+
+            <p class="possibility-disclaimer english">
+                The 10% figure is a hypothetical illustration only.
+                It does not guarantee, predict, or imply any income outcome.
             </p>
 
         </section>
@@ -340,36 +415,48 @@
         <!-- =====================================================
              STEP 04 — THE DECISION
              ===================================================== -->
-        <section class="decision-section">
+        <section
+            class="decision-section"
+            aria-labelledby="decision-title"
+        >
 
             <div class="decision-kicker">
                 THE DECISION™
             </div>
 
-            <h2>
+            <h2 id="decision-title">
                 ஒரு அமைப்பு உங்கள்<br>
                 எதிர்பார்க்கும் வருமானத்தை உருவாக்க,
             </h2>
 
             <p class="decision-highlight">
                 நீங்கள் நினைத்த முதலீட்டின்<br>
-                <strong>10%</strong> மட்டும் போதுமானதாக இருந்தால்...
+                <strong>10%</strong> அளவிலான தொடக்கப் புள்ளி
+                இருந்தால்...
             </p>
 
             <div class="decision-question">
 
-                <div class="question-line"></div>
+                <div
+                    class="question-line"
+                    aria-hidden="true"
+                ></div>
 
                 <span>
                     WOULD YOU BUILD IT?
                 </span>
 
-                <div class="question-line"></div>
+                <div
+                    class="question-line"
+                    aria-hidden="true"
+                ></div>
 
             </div>
 
             <p class="decision-tamil">
-                <strong>அந்த அமைப்பை நீங்கள் கட்டமைக்கத் தொடங்குவீர்களா?</strong>
+                <strong>
+                    அந்த அமைப்பை நீங்கள் கட்டமைக்கத் தொடங்குவீர்களா?
+                </strong>
             </p>
 
             <p class="decision-support">
@@ -378,12 +465,17 @@
                 <strong>கட்டமைப்பது.</strong>
             </p>
 
-            <div class="decision-buttons">
+            <div
+                class="decision-buttons"
+                role="group"
+                aria-label="Your decision"
+            >
 
                 <button
                     type="button"
                     class="decision-button decision-yes"
                     data-decision="yes"
+                    aria-label="Yes, I would build it"
                 >
                     <span>YES</span>
                     <small>நான் கட்டமைப்பேன்</small>
@@ -393,6 +485,7 @@
                     type="button"
                     class="decision-button decision-not-yet"
                     data-decision="not-yet"
+                    aria-label="Not yet, I need to think about it"
                 >
                     <span>NOT YET</span>
                     <small>இன்னும் சிந்திக்கிறேன்</small>
@@ -400,15 +493,33 @@
 
             </div>
 
+            <p class="decision-disclaimer">
+                இந்தக் கேள்வி ஒரு முடிவு எடுக்க உங்களை
+                அழுத்துவதற்காக அல்ல. உங்கள் தயார்நிலையை
+                நேர்மையாகப் பார்க்கும் ஒரு checkpoint மட்டுமே.
+            </p>
+
+            <p class="decision-disclaimer english">
+                This question is not a pressure to decide.
+                It is simply a checkpoint to help you honestly
+                consider your readiness to build.
+            </p>
+
         </section>
 
 
         <!-- =====================================================
              CORE MESSAGE
              ===================================================== -->
-        <section class="core-message">
+        <section
+            class="core-message"
+            aria-labelledby="core-message-title"
+        >
 
-            <div class="core-line"></div>
+            <div
+                class="core-line"
+                aria-hidden="true"
+            ></div>
 
             <p>
                 கேள்வி இனி
@@ -416,17 +527,22 @@
                 என்பதல்ல.
             </p>
 
-            <p class="core-large">
+            <p
+                class="core-large"
+                id="core-message-title"
+            >
                 அந்த வருமானத்தை உருவாக்கக்கூடிய<br>
-                <strong>அமைப்பை கட்டமைக்க<br>
-                நான் தயாரா?</strong>
+                <strong>
+                    அமைப்பை கட்டமைக்க<br>
+                    நான் தயாரா?
+                </strong>
             </p>
 
             <p class="core-en">
                 The question is no longer whether you want more income.
                 <br>
                 The question is whether you are willing to build
-                the system that can create it.
+                a system that could support the income goal you have chosen.
             </p>
 
         </section>
@@ -435,7 +551,10 @@
         <!-- =====================================================
              FINAL STATEMENT
              ===================================================== -->
-        <section class="money-closing">
+        <section
+            class="money-closing"
+            aria-labelledby="money-closing-title"
+        >
 
             <div class="closing-grid">
 
@@ -459,7 +578,7 @@
 
             </div>
 
-            <h2>
+            <h2 id="money-closing-title">
                 YOUR NUMBER.<br>
                 YOUR DECISION.<br>
                 YOUR SYSTEM.
@@ -482,7 +601,10 @@
                 class="nav-button nav-previous"
                 aria-label="Go to Page 07"
             >
-                <span class="nav-arrow">←</span>
+                <span
+                    class="nav-arrow"
+                    aria-hidden="true"
+                >←</span>
 
                 <span class="nav-text">
                     <strong>முந்தைய பக்கம்</strong>
@@ -491,7 +613,11 @@
             </a>
 
 
-            <div class="nav-current">
+            <div
+                class="nav-current"
+                aria-current="page"
+                aria-label="Current page 08 of 16"
+            >
                 <span>08</span>
                 <small>/ 16</small>
             </div>
@@ -507,7 +633,10 @@
                     <small>NEXT</small>
                 </span>
 
-                <span class="nav-arrow">→</span>
+                <span
+                    class="nav-arrow"
+                    aria-hidden="true"
+                >→</span>
             </a>
 
         </div>
@@ -533,7 +662,3 @@
 
 </body>
 </html>
-'''
-
-print(html)
-
