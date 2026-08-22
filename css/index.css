@@ -1,349 +1,1218 @@
-
 /* ============================================================
    CTM PATH™ MILLIONAIRES™
-   INDEX PAGE
-   PREMIUM DESIGN SYSTEM
+   INDEX / GATEWAY EXPERIENCE
+   PAGE-SPECIFIC CSS
    ============================================================ */
 
 
 /* ============================================================
-   RESET
+   01. DESIGN TOKENS
    ============================================================ */
 
-* {
+:root {
+
+    /* Core surfaces */
+
+    --ctm-navy-950: #07172F;
+    --ctm-navy-900: #081C3A;
+    --ctm-navy-850: #0A2143;
+    --ctm-navy-800: #10294B;
+
+    --ctm-charcoal: #111315;
+
+    /* Glass */
+
+    --ctm-glass:
+        rgba(255, 255, 255, 0.045);
+
+    --ctm-glass-strong:
+        rgba(255, 255, 255, 0.065);
+
+    --ctm-glass-soft:
+        rgba(255, 255, 255, 0.025);
+
+    --ctm-border:
+        rgba(255, 255, 255, 0.105);
+
+    --ctm-border-strong:
+        rgba(255, 255, 255, 0.16);
+
+    /* Brand */
+
+    --ctm-teal: #16A6A0;
+    --ctm-teal-bright: #25C3BA;
+    --ctm-teal-deep: #087C78;
+
+    --ctm-emerald: #08784A;
+    --ctm-emerald-light: #14965F;
+
+    --ctm-gold: #C8A951;
+    --ctm-gold-soft: #D9BF73;
+    --ctm-gold-faint:
+        rgba(200, 169, 81, 0.16);
+
+    /* Typography */
+
+    --ctm-white: #FFFFFF;
+    --ctm-ivory: #F5F2E9;
+
+    --ctm-text-primary:
+        rgba(255, 255, 255, 0.96);
+
+    --ctm-text-secondary:
+        rgba(255, 255, 255, 0.72);
+
+    --ctm-text-muted:
+        rgba(255, 255, 255, 0.52);
+
+    --ctm-text-faint:
+        rgba(255, 255, 255, 0.36);
+
+    /* Feedback */
+
+    --ctm-error: #E77474;
+    --ctm-error-bg:
+        rgba(231, 116, 116, 0.08);
+
+    --ctm-success: #43C98A;
+    --ctm-success-bg:
+        rgba(67, 201, 138, 0.08);
+
+    /* Geometry */
+
+    --radius-sm: 10px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+    --radius-2xl: 32px;
+
+    /* Shadows */
+
+    --shadow-soft:
+        0 18px 55px rgba(0, 0, 0, 0.20);
+
+    --shadow-card:
+        0 28px 80px rgba(0, 0, 0, 0.30);
+
+    --shadow-cta:
+        0 18px 42px rgba(8, 120, 74, 0.22);
+
+    /* Layout */
+
+    --page-max: 1180px;
+    --content-max: 860px;
+    --form-max: 720px;
+
+    --page-padding: clamp(20px, 4vw, 56px);
+
+    /* Motion */
+
+    --ease-premium:
+        cubic-bezier(0.22, 1, 0.36, 1);
+
+    --transition-fast:
+        180ms ease;
+
+    --transition-normal:
+        250ms ease;
+
+}
+
+
+/* ============================================================
+   02. RESET
+   ============================================================ */
+
+*,
+*::before,
+*::after {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
 
 html {
+    min-width: 320px;
+    background: var(--ctm-navy-950);
+    color-scheme: dark;
     scroll-behavior: smooth;
 }
 
 
 body {
-
+    min-width: 320px;
     min-height: 100vh;
-
-    font-family:
-        Arial,
-        "Noto Sans Tamil",
-        "Latha",
-        sans-serif;
-
-    color: #f5f1e8;
+    margin: 0;
 
     background:
         radial-gradient(
             circle at 50% 0%,
-            rgba(26, 55, 95, 0.30),
-            transparent 45%
+            rgba(22, 166, 160, 0.075),
+            transparent 34%
         ),
         linear-gradient(
-            135deg,
-            #050817 0%,
-            #080b1d 50%,
-            #11102b 100%
+            180deg,
+            var(--ctm-navy-950) 0%,
+            var(--ctm-charcoal) 100%
         );
+
+    color: var(--ctm-text-primary);
+
+    font-family:
+        "Noto Sans Tamil",
+        "Nirmala UI",
+        "Latha",
+        "Tamil Sangam MN",
+        sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 
     overflow-x: hidden;
 }
 
 
-/* ============================================================
-   SITE HEADER
-   ============================================================ */
+img {
+    display: block;
+    max-width: 100%;
+}
 
-.site-header {
 
-    position: fixed;
+button,
+input {
+    font: inherit;
+}
 
-    top: 0;
-    left: 0;
 
-    width: 100%;
-    height: 100px;
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
 
-    display: flex;
 
-    align-items: center;
-    justify-content: center;
+button {
+    border: 0;
+}
 
-    padding: 12px 24px;
 
-    z-index: 1000;
+a {
+    color: inherit;
+}
 
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(5, 8, 23, 0.98),
-            rgba(5, 8, 23, 0.88),
-            rgba(5, 8, 23, 0)
-        );
+
+::selection {
+    background: rgba(22, 166, 160, 0.28);
+    color: var(--ctm-white);
 }
 
 
 /* ============================================================
-   BRAND LOGO — TOP LEFT
+   03. ACCESSIBILITY
    ============================================================ */
 
-.brand-logo {
+:focus-visible {
+    outline: 3px solid var(--ctm-teal-bright);
+    outline-offset: 4px;
+}
+
+
+input:focus-visible,
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid var(--ctm-teal-bright);
+    outline-offset: 3px;
+}
+
+
+/* ============================================================
+   04. TOP BRAND HEADER
+   ============================================================ */
+
+.site-header {
+
+    position: relative;
+
+    width: min(
+        calc(100% - (var(--page-padding) * 2)),
+        var(--page-max)
+    );
+
+    min-height: 92px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        auto minmax(0, 1fr) auto;
+
+    align-items: center;
+
+    gap: 24px;
+
+    padding: 20px 0;
+
+    border-bottom: 1px solid var(--ctm-border);
+}
+
+
+.site-header::after {
+
+    content: "";
 
     position: absolute;
 
-    top: 18px;
-    left: 28px;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent 0%,
+            var(--ctm-gold) 18%,
+            var(--ctm-teal) 52%,
+            var(--ctm-gold) 82%,
+            transparent 100%
+        );
+
+    opacity: 0.72;
+}
+
+
+/* Logo */
+
+.brand-logo {
 
     display: inline-flex;
 
     align-items: center;
-
     justify-content: center;
 
-    width: 145px;
-    height: 65px;
+    width: 58px;
+    height: 58px;
+
+    border-radius: 16px;
 
     text-decoration: none;
+
+    transition:
+        transform var(--transition-normal),
+        background-color var(--transition-normal);
+}
+
+
+.brand-logo:hover {
+
+    transform: translateY(-1px);
+
+    background:
+        rgba(255, 255, 255, 0.035);
 }
 
 
 .brand-logo img {
 
-    display: block;
-
-    width: 145px;
-
-    height: 65px;
+    width: 100%;
+    height: 100%;
 
     object-fit: contain;
-
-    object-position: left center;
 }
 
 
-/* ============================================================
-   PRIMARY TAMIL IDENTITY — TOP CENTRE
-   ============================================================ */
+/* Brand identity */
 
-.brand-tamil {
+.brand-identity {
 
-    position: relative;
+    min-width: 0;
 
-    color: #18b7b0;
+    display: flex;
+    flex-direction: column;
 
-    font-size: 1.35rem;
+    align-items: flex-start;
 
-    font-weight: 700;
+    justify-content: center;
+
+    gap: 3px;
+}
+
+
+.brand-name {
+
+    color: var(--ctm-text-primary);
+
+    font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size:
+        clamp(0.72rem, 1vw, 0.86rem);
+
+    font-weight: 800;
+
+    letter-spacing:
+        0.16em;
 
     line-height: 1.2;
 
-    letter-spacing: 0.06em;
+    white-space: nowrap;
+}
 
-    text-align: center;
+
+.brand-tamil {
+
+    color: var(--ctm-gold-soft);
+
+    font-size:
+        clamp(0.82rem, 1vw, 0.95rem);
+
+    font-weight: 600;
+
+    line-height: 1.4;
+}
+
+
+/* Journey position */
+
+.journey-position {
+
+    display: inline-flex;
+
+    align-items: baseline;
+
+    gap: 6px;
+
+    min-width: 78px;
+
+    justify-content: flex-end;
+
+    font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
     white-space: nowrap;
+}
 
-    text-shadow:
-        0 0 18px
-        rgba(24, 183, 176, 0.18);
+
+.journey-position-current {
+
+    color: var(--ctm-gold-soft);
+
+    font-size: 1.15rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+}
+
+
+.journey-position-divider {
+
+    color: var(--ctm-text-faint);
+
+    font-size: 0.9rem;
+}
+
+
+.journey-position-total {
+
+    color: var(--ctm-text-muted);
+
+    font-size: 0.78rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
 }
 
 
 /* ============================================================
-   MAIN PAGE
+   05. JOURNEY PROGRESS
+   ============================================================ */
+
+.journey-progress {
+
+    position: relative;
+
+    width: min(
+        calc(100% - (var(--page-padding) * 2)),
+        var(--page-max)
+    );
+
+    height: 3px;
+
+    margin: 0 auto;
+
+    background:
+        rgba(255, 255, 255, 0.055);
+
+    overflow: hidden;
+}
+
+
+.journey-progress-gold,
+.journey-progress-teal {
+
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+
+    display: block;
+
+    transform-origin: left center;
+}
+
+
+.journey-progress-gold {
+
+    left: 0;
+
+    width: 22%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--ctm-gold),
+            var(--ctm-gold-soft)
+        );
+
+    opacity: 0.82;
+}
+
+
+.journey-progress-teal {
+
+    left: 22%;
+
+    width: 10%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--ctm-teal-deep),
+            var(--ctm-teal)
+        );
+
+    opacity: 0.9;
+}
+
+
+/* ============================================================
+   06. MAIN PAGE
    ============================================================ */
 
 .welcome-page {
 
-    min-height: 100vh;
+    width: min(
+        calc(100% - (var(--page-padding) * 2)),
+        var(--page-max)
+    );
 
-    display: flex;
-
-    justify-content: center;
+    margin: 0 auto;
 
     padding:
-        125px
-        20px
-        55px;
+        clamp(28px, 5vw, 68px)
+        0
+        clamp(32px, 6vw, 76px);
 }
 
-
-/* ============================================================
-   MAIN CARD
-   ============================================================ */
 
 .welcome-card {
 
+    position: relative;
+
     width: 100%;
 
-    max-width: 1160px;
-
-    padding:
-        58px
-        70px
-        48px;
+    overflow: hidden;
 
     border:
-        1px solid
-        rgba(202, 153, 39, 0.40);
+        1px solid var(--ctm-border);
 
-    border-radius: 28px;
+    border-radius:
+        var(--radius-2xl);
 
     background:
-
         linear-gradient(
             145deg,
-            rgba(12, 16, 40, 0.97),
-            rgba(8, 10, 29, 0.97)
+            rgba(255, 255, 255, 0.055),
+            rgba(255, 255, 255, 0.018)
         );
 
     box-shadow:
+        var(--shadow-card);
 
-        0 30px 80px
-        rgba(0, 0, 0, 0.45);
+    backdrop-filter:
+        blur(20px);
 
+    -webkit-backdrop-filter:
+        blur(20px);
+}
+
+
+.welcome-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -180px;
+    left: 50%;
+
+    width: 520px;
+    height: 360px;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(22, 166, 160, 0.09),
+            transparent 68%
+        );
+
+    pointer-events: none;
+}
+
+
+.welcome-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: inherit;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.045);
+
+    pointer-events: none;
 }
 
 
 /* ============================================================
-   JOURNEY INDICATOR
+   07. JOURNEY INDICATOR
    ============================================================ */
 
 .journey-indicator {
 
+    position: relative;
+    z-index: 1;
+
     display: flex;
 
-    justify-content: center;
+    align-items: center;
 
-    margin-bottom: 42px;
+    gap: 10px;
+
+    width: min(
+        calc(100% - 48px),
+        var(--content-max)
+    );
+
+    margin: 0 auto;
+
+    padding:
+        28px
+        0
+        18px;
+
+    border-bottom:
+        1px solid var(--ctm-border);
 }
 
 
-.journey-indicator span {
+.journey-indicator-number {
 
     display: inline-flex;
 
     align-items: center;
-
     justify-content: center;
 
-    padding:
-        9px
-        27px;
+    min-width: 38px;
+    height: 28px;
+
+    padding: 0 8px;
 
     border:
         1px solid
-        #c9982e;
+        rgba(200, 169, 81, 0.42);
 
-    border-radius: 30px;
+    border-radius: 999px;
 
-    color: #f6c94f;
+    color: var(--ctm-gold-soft);
 
-    font-size: 12px;
+    font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
-    font-weight: 700;
+    font-size: 0.68rem;
 
-    letter-spacing: 3px;
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+}
+
+
+.journey-indicator-label {
+
+    color: var(--ctm-text-primary);
+
+    font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size: 0.72rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.18em;
+}
+
+
+.journey-indicator-tamil {
+
+    color: var(--ctm-text-muted);
+
+    font-size: 0.82rem;
+
+    font-weight: 500;
 }
 
 
 /* ============================================================
-   HERO CONTENT
+   08. HERO
    ============================================================ */
 
 .welcome-content {
+
+    position: relative;
+    z-index: 1;
+
+    width: min(
+        calc(100% - 48px),
+        var(--content-max)
+    );
+
+    margin: 0 auto;
+
+    padding:
+        clamp(52px, 7vw, 92px)
+        0
+        0;
 
     text-align: center;
 }
 
 
-/* ============================================================
-   PRIMARY TAMIL TITLE
-   ============================================================ */
+.hero-eyebrow {
 
-.hero-title-tamil {
+    margin: 0 0 22px;
 
-    max-width: 1050px;
-
-    margin:
-        0
-        auto;
-
-    color: #f6c94f;
+    color: var(--ctm-teal-bright);
 
     font-family:
-        Georgia,
-        "Noto Serif Tamil",
-        "Times New Roman",
-        serif;
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
-    font-size:
-        clamp(
-            42px,
-            6vw,
-            78px
-        );
+    font-size: 0.68rem;
 
     font-weight: 800;
 
-    line-height: 1.25;
+    letter-spacing: 0.28em;
 
-    letter-spacing: 0;
+    line-height: 1.4;
 
-    text-shadow:
+    text-transform: uppercase;
+}
 
-        0 4px 18px
-        rgba(246, 201, 79, 0.18);
+
+.hero-title-tamil {
+
+    max-width: 780px;
+
+    margin:
+        0 auto;
+
+    color: var(--ctm-ivory);
+
+    font-size:
+        clamp(2.45rem, 6vw, 5.1rem);
+
+    font-weight: 700;
+
+    letter-spacing:
+        -0.035em;
+
+    line-height:
+        1.22;
+
+    text-wrap: balance;
+}
+
+
+.hero-title-english {
+
+    margin:
+        18px auto 0;
+
+    color: var(--ctm-gold-soft);
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(0.92rem, 1.5vw, 1.18rem);
+
+    font-weight: 500;
+
+    letter-spacing:
+        0.15em;
+
+    line-height: 1.6;
+
+    text-transform: uppercase;
+}
+
+
+.hero-message-tamil {
+
+    max-width: 640px;
+
+    margin:
+        32px auto 0;
+
+    color: var(--ctm-text-primary);
+
+    font-size:
+        clamp(1.12rem, 2vw, 1.38rem);
+
+    font-weight: 500;
+
+    line-height:
+        1.85;
+
+    text-wrap: balance;
+}
+
+
+.hero-message-english {
+
+    max-width: 620px;
+
+    margin:
+        10px auto 0;
+
+    color: var(--ctm-text-secondary);
+
+    font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size:
+        clamp(0.88rem, 1.2vw, 1rem);
+
+    font-weight: 400;
+
+    line-height: 1.7;
 }
 
 
 /* ============================================================
-   ENGLISH SECONDARY TITLE
+   09. DISCOVERY / WHAT YOU WILL DISCOVER
    ============================================================ */
 
-.hero-title-english {
+.journey-introduction {
 
-    margin-top: 24px;
+    max-width: 760px;
 
-    color: #19aaa8;
+    margin:
+        48px auto 0;
 
-    font-size:
-        clamp(
-            17px,
-            2.2vw,
-            25px
-        );
+    padding:
+        28px;
+
+    border:
+        1px solid var(--ctm-border);
+
+    border-radius:
+        var(--radius-xl);
+
+    background:
+        rgba(255, 255, 255, 0.028);
+
+    text-align: left;
+}
+
+
+.journey-introduction-heading {
+
+    display: flex;
+
+    align-items: baseline;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-bottom: 20px;
+
+    border-bottom:
+        1px solid var(--ctm-border);
+}
+
+
+.journey-introduction-tamil {
+
+    color: var(--ctm-ivory);
+
+    font-size: 1rem;
 
     font-weight: 700;
 
-    letter-spacing: 0.10em;
+    line-height: 1.6;
+}
+
+
+.journey-introduction-english {
+
+    flex: 0 0 auto;
+
+    color: var(--ctm-teal-bright);
+
+    font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size: 0.64rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.16em;
+}
+
+
+.journey-discoveries {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 0;
+
+    margin-top: 4px;
+}
+
+
+.journey-discovery {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 14px;
+
+    min-width: 0;
+
+    padding:
+        22px 18px 6px;
+
+    border-right:
+        1px solid var(--ctm-border);
+}
+
+
+.journey-discovery:first-child {
+    padding-left: 0;
+}
+
+
+.journey-discovery:last-child {
+
+    padding-right: 0;
+
+    border-right: 0;
+}
+
+
+.journey-discovery-number {
+
+    flex: 0 0 auto;
+
+    color: var(--ctm-gold);
+
+    font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size: 0.65rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+}
+
+
+.journey-discovery strong {
+
+    display: block;
+
+    color: var(--ctm-text-primary);
+
+    font-size: 0.88rem;
+
+    font-weight: 700;
+
+    line-height: 1.55;
+}
+
+
+.journey-discovery span:not(
+    .journey-discovery-number
+) {
+
+    display: block;
+
+    margin-top: 5px;
+
+    color: var(--ctm-text-muted);
+
+    font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size: 0.58rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
 
     line-height: 1.5;
 }
 
 
 /* ============================================================
-   TAMIL HERO MESSAGE
+   10. HERO DIVIDER
    ============================================================ */
 
-.hero-message-tamil {
+.welcome-divider {
 
-    max-width: 850px;
+    width: 100%;
+
+    height: 1px;
 
     margin:
-        34px
+        clamp(44px, 6vw, 72px)
         auto
-        8px;
+        0;
 
-    color: #f5f1e8;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--ctm-gold) 28%,
+            var(--ctm-teal) 50%,
+            var(--ctm-gold) 72%,
+            transparent
+        );
+
+    opacity: 0.42;
+}
+
+
+/* ============================================================
+   11. REGISTRATION SECTION
+   ============================================================ */
+
+.kyc-section {
+
+    position: relative;
+    z-index: 1;
+
+    width: min(
+        calc(100% - 48px),
+        var(--form-max)
+    );
+
+    margin:
+        clamp(48px, 7vw, 78px)
+        auto
+        0;
+
+    padding:
+        clamp(28px, 4vw, 48px);
+
+    border:
+        1px solid var(--ctm-border);
+
+    border-radius:
+        var(--radius-xl);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.055),
+            rgba(255, 255, 255, 0.018)
+        );
+
+    box-shadow:
+        var(--shadow-soft);
+
+    backdrop-filter:
+        blur(20px);
+
+    -webkit-backdrop-filter:
+        blur(20px);
+}
+
+
+/* ============================================================
+   12. SECTION HEADING
+   ============================================================ */
+
+.section-heading {
+
+    display: grid;
+
+    grid-template-columns: auto minmax(0, 1fr);
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding-bottom: 26px;
+
+    border-bottom:
+        1px solid var(--ctm-border);
+}
+
+
+.section-number {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+
+    border:
+        1px solid
+        rgba(200, 169, 81, 0.48);
+
+    border-radius: 15px;
+
+    color: var(--ctm-gold-soft);
+
+    font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size: 0.76rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+
+    background:
+        rgba(200, 169, 81, 0.055);
+}
+
+
+.section-heading h2 {
+
+    margin: 0;
+
+    color: var(--ctm-ivory);
 
     font-size:
-        clamp(
-            18px,
-            2vw,
-            24px
-        );
+        clamp(1.25rem, 2vw, 1.65rem);
+
+    font-weight: 700;
+
+    line-height: 1.55;
+}
+
+
+.section-heading p {
+
+    margin: 4px 0 0;
+
+    color: var(--ctm-teal-bright);
+
+    font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size: 0.64rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.15em;
+}
+
+
+/* ============================================================
+   13. FORM INTRODUCTION
+   ============================================================ */
+
+.section-introduction {
+
+    margin:
+        24px 0 30px;
+
+    padding:
+        18px 20px;
+
+    border-left:
+        2px solid var(--ctm-teal);
+
+    background:
+        rgba(22, 166, 160, 0.035);
+}
+
+
+.section-introduction p {
+    margin: 0;
+}
+
+
+.section-introduction-tamil {
+
+    color: var(--ctm-text-primary);
+
+    font-size: 0.98rem;
 
     font-weight: 500;
 
@@ -351,240 +1220,139 @@ body {
 }
 
 
-/* ============================================================
-   ENGLISH HERO MESSAGE
-   ============================================================ */
+.section-introduction-english {
 
-.hero-message-english {
+    margin-top: 6px !important;
 
-    max-width: 760px;
-
-    margin:
-        0
-        auto;
-
-    color: #aeb5c4;
-
-    font-size: 16px;
-
-    line-height: 1.7;
-}
-
-
-/* ============================================================
-   HERO DIVIDER
-   ============================================================ */
-
-.welcome-divider {
-
-    width: 100px;
-
-    height: 2px;
-
-    margin:
-        34px
-        auto
-        0;
-
-    background:
-
-        linear-gradient(
-            90deg,
-            transparent,
-            #c9982e,
-            transparent
-        );
-}
-
-
-/* ============================================================
-   KYC SECTION
-   ============================================================ */
-
-.kyc-section {
-
-    margin-top: 50px;
-
-    padding-top: 42px;
-
-    border-top:
-        1px solid
-        rgba(255, 255, 255, 0.08);
-}
-
-
-/* ============================================================
-   SECTION HEADING
-   ============================================================ */
-
-.section-heading {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 18px;
-
-    margin-bottom: 30px;
-}
-
-
-.section-number {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    width: 48px;
-    height: 48px;
-
-    flex-shrink: 0;
-
-    border:
-        1px solid
-        #c9982e;
-
-    border-radius: 50%;
-
-    color: #f6c94f;
-
-    font-size: 14px;
-
-    font-weight: 700;
-}
-
-
-.section-heading h2 {
-
-    color: #f5f1e8;
+    color: var(--ctm-text-muted);
 
     font-family:
-        "Noto Sans Tamil",
+        "Inter",
+        "Segoe UI",
         Arial,
         sans-serif;
 
-    font-size: 21px;
+    font-size: 0.78rem;
 
-    font-weight: 700;
-
-    line-height: 1.5;
-}
-
-
-.section-heading p {
-
-    margin-top: 5px;
-
-    color: #8d918f;
-
-    font-size: 11px;
-
-    letter-spacing: 2px;
+    line-height: 1.6;
 }
 
 
 /* ============================================================
-   KYC FORM
+   14. FORM
    ============================================================ */
 
 #kycForm {
 
-    display: grid;
+    display: flex;
 
-    grid-template-columns:
-        repeat(2, 1fr);
+    flex-direction: column;
 
-    gap: 22px;
+    gap: 20px;
 }
 
-
-/* ============================================================
-   FORM GROUP
-   ============================================================ */
 
 .form-group {
 
     display: flex;
 
     flex-direction: column;
+
+    gap: 9px;
 }
 
 
 .form-group label {
 
-    margin-bottom: 9px;
+    display: flex;
 
-    color: #e8e4db;
+    align-items: baseline;
 
-    font-size: 14px;
+    flex-wrap: wrap;
 
-    font-weight: 600;
+    gap: 6px;
+
+    color: var(--ctm-text-primary);
+
+    font-size: 0.94rem;
+
+    font-weight: 700;
 
     line-height: 1.5;
 }
 
 
-.form-group label span {
+.label-english {
 
-    color: #858a88;
+    color: var(--ctm-text-muted);
 
-    font-size: 11px;
+    font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
-    font-weight: 400;
+    font-size: 0.61rem;
 
-    letter-spacing: 0.02em;
+    font-weight: 800;
+
+    letter-spacing: 0.10em;
 }
 
 
 /* ============================================================
-   FORM INPUT
+   15. INPUTS
    ============================================================ */
 
 .form-group input {
 
     width: 100%;
 
-    min-height: 52px;
+    min-height: 56px;
 
     padding:
-        14px
-        16px;
+        14px 17px;
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.13);
+        rgba(255, 255, 255, 0.12);
 
-    border-radius: 10px;
+    border-radius:
+        12px;
 
     outline: none;
 
     background:
-        rgba(255, 255, 255, 0.045);
+        rgba(4, 17, 35, 0.60);
 
-    color: #ffffff;
+    color:
+        var(--ctm-text-primary);
 
     font-family:
-        Arial,
         "Noto Sans Tamil",
+        "Nirmala UI",
+        "Latha",
         sans-serif;
 
-    font-size: 15px;
+    font-size: 0.98rem;
+
+    line-height: 1.5;
+
+    box-shadow:
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.025);
 
     transition:
-
-        border-color 0.2s ease,
-
-        background 0.2s ease,
-
-        box-shadow 0.2s ease;
+        border-color var(--transition-fast),
+        background-color var(--transition-fast),
+        box-shadow var(--transition-fast);
 }
 
 
 .form-group input::placeholder {
 
-    color: #777d7b;
+    color:
+        rgba(255, 255, 255, 0.38);
 
     opacity: 1;
 }
@@ -593,140 +1361,603 @@ body {
 .form-group input:hover {
 
     border-color:
-        rgba(201, 152, 46, 0.35);
+        rgba(255, 255, 255, 0.20);
 }
 
 
 .form-group input:focus {
 
-    border-color: #c9982e;
+    border-color:
+        var(--ctm-teal);
 
     background:
-        rgba(255, 255, 255, 0.07);
+        rgba(4, 17, 35, 0.78);
 
     box-shadow:
-
         0 0 0 3px
-        rgba(201, 152, 46, 0.08);
+        rgba(22, 166, 160, 0.10),
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.03);
 }
 
 
 /* ============================================================
-   INVALID INPUT
-   ============================================================ */
-
-.form-group input.input-error {
-
-    border-color:
-        #e88d8d;
-}
-
-
-/* ============================================================
-   FIELD ERROR
+   16. ERROR STATES
    ============================================================ */
 
 .field-error {
 
-    min-height: 16px;
+    min-height: 0;
 
-    margin-top: 5px;
+    margin: 0;
 
-    color: #e88d8d;
+    color:
+        var(--ctm-error);
 
-    font-size: 11px;
+    font-family:
+        "Inter",
+        "Noto Sans Tamil",
+        sans-serif;
+
+    font-size: 0.72rem;
+
+    line-height: 1.5;
+}
+
+
+.form-group input[aria-invalid="true"],
+.form-group input.is-invalid,
+.form-group input.error {
+
+    border-color:
+        rgba(231, 116, 116, 0.78);
+
+    background:
+        var(--ctm-error-bg);
+}
+
+
+/* ============================================================
+   17. CONSENT
+   ============================================================ */
+
+.consent-row {
+
+    display: grid;
+
+    grid-template-columns: 22px minmax(0, 1fr);
+
+    align-items: start;
+
+    gap: 12px;
+
+    margin-top: 4px;
+
+    padding:
+        16px;
+
+    border:
+        1px solid var(--ctm-border);
+
+    border-radius:
+        14px;
+
+    background:
+        rgba(255, 255, 255, 0.022);
+
+    cursor: pointer;
+
+    transition:
+        border-color var(--transition-fast),
+        background-color var(--transition-fast);
+}
+
+
+.consent-row:hover {
+
+    border-color:
+        rgba(22, 166, 160, 0.32);
+
+    background:
+        rgba(22, 166, 160, 0.035);
+}
+
+
+.consent-row input {
+
+    width: 19px;
+    height: 19px;
+
+    margin: 2px 0 0;
+
+    accent-color:
+        var(--ctm-teal);
+
+    cursor: pointer;
+}
+
+
+.consent-copy {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    color: var(--ctm-text-secondary);
+
+    font-size: 0.78rem;
+
+    line-height: 1.65;
+}
+
+
+.consent-tamil {
+
+    color: var(--ctm-text-primary);
+
+    font-weight: 500;
+}
+
+
+.consent-english {
+
+    color: var(--ctm-text-muted);
+
+    font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size: 0.68rem;
+
+    line-height: 1.5;
+}
+
+
+/* ============================================================
+   18. FORM STATUS
+   ============================================================ */
+
+.form-status {
+
+    min-height: 0;
+
+    margin: -4px 0 0;
+
+    color:
+        var(--ctm-text-secondary);
+
+    font-family:
+        "Inter",
+        "Noto Sans Tamil",
+        sans-serif;
+
+    font-size: 0.78rem;
+
+    line-height: 1.6;
+
+    text-align: center;
+}
+
+
+.form-status:empty {
+    display: none;
+}
+
+
+.form-status.error {
+
+    padding: 12px 14px;
+
+    border:
+        1px solid
+        rgba(231, 116, 116, 0.28);
+
+    border-radius:
+        10px;
+
+    color:
+        var(--ctm-error);
+
+    background:
+        var(--ctm-error-bg);
+}
+
+
+.form-status.success {
+
+    padding: 12px 14px;
+
+    border:
+        1px solid
+        rgba(67, 201, 138, 0.28);
+
+    border-radius:
+        10px;
+
+    color:
+        var(--ctm-success);
+
+    background:
+        var(--ctm-success-bg);
+}
+
+
+/* ============================================================
+   19. PRIMARY CTA
+   ============================================================ */
+
+.begin-button {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    width: 100%;
+
+    min-height: 68px;
+
+    margin-top: 4px;
+
+    padding:
+        13px 28px;
+
+    border:
+        1px solid
+        rgba(22, 166, 160, 0.30);
+
+    border-radius:
+        15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--ctm-emerald),
+            var(--ctm-emerald-light)
+        );
+
+    color:
+        var(--ctm-white);
+
+    cursor: pointer;
+
+    box-shadow:
+        var(--shadow-cta);
+
+    overflow: hidden;
+
+    transition:
+        transform var(--transition-normal),
+        box-shadow var(--transition-normal),
+        filter var(--transition-normal),
+        border-color var(--transition-normal);
+}
+
+
+.begin-button::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            110deg,
+            transparent 20%,
+            rgba(255, 255, 255, 0.08) 50%,
+            transparent 80%
+        );
+
+    transform:
+        translateX(-110%);
+
+    transition:
+        transform 600ms var(--ease-premium);
+
+    pointer-events: none;
+}
+
+
+.begin-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    border-color:
+        rgba(37, 195, 186, 0.50);
+
+    box-shadow:
+        0 24px 52px
+        rgba(8, 120, 74, 0.30);
+
+    filter:
+        brightness(1.055);
+}
+
+
+.begin-button:hover::before {
+
+    transform:
+        translateX(110%);
+}
+
+
+.begin-button:active {
+
+    transform:
+        translateY(0);
+
+    box-shadow:
+        0 12px 30px
+        rgba(8, 120, 74, 0.22);
+}
+
+
+.begin-button:disabled,
+.begin-button[aria-disabled="true"] {
+
+    opacity: 0.55;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+
+    filter: none;
+}
+
+
+.button-tamil {
+
+    position: relative;
+    z-index: 1;
+
+    font-size:
+        clamp(1rem, 1.8vw, 1.14rem);
+
+    font-weight: 700;
+
+    line-height: 1.45;
+}
+
+
+.button-english {
+
+    position: relative;
+    z-index: 1;
+
+    margin-top: 2px;
+
+    font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size: 0.68rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.13em;
 
     line-height: 1.4;
 }
 
 
 /* ============================================================
-   CONSENT
+   20. CTA REASSURANCE
    ============================================================ */
 
-.consent-row {
+.cta-reassurance {
 
-    grid-column: 1 / -1;
+    margin:
+        -4px 0 0;
 
-    display: flex;
+    text-align: center;
+}
 
-    align-items: flex-start;
 
-    gap: 12px;
+.cta-reassurance-tamil {
 
-    margin-top: 5px;
+    display: block;
 
-    color: #aeb2b0;
+    color: var(--ctm-text-muted);
+
+    font-size: 0.76rem;
+
+    line-height: 1.5;
+}
+
+
+.cta-reassurance-english {
+
+    display: block;
+
+    margin-top: 2px;
+
+    color: var(--ctm-text-faint);
 
     font-family:
-        "Noto Sans Tamil",
+        "Inter",
+        "Segoe UI",
         Arial,
         sans-serif;
 
-    font-size: 12px;
+    font-size: 0.57rem;
 
-    line-height: 1.8;
+    font-weight: 700;
 
-    cursor: pointer;
-}
-
-
-.consent-row input {
-
-    width: 18px;
-    height: 18px;
-
-    flex-shrink: 0;
-
-    margin-top: 3px;
-
-    accent-color: #c9982e;
-
-    cursor: pointer;
+    letter-spacing: 0.12em;
 }
 
 
 /* ============================================================
-   FORM STATUS
+   21. BOTTOM JOURNEY BRANDING
    ============================================================ */
 
-.form-status {
+.welcome-footer {
 
-    grid-column: 1 / -1;
+    position: relative;
+    z-index: 1;
 
-    min-height: 24px;
+    width: min(
+        calc(100% - 48px),
+        var(--content-max)
+    );
 
-    padding:
-        2px
+    margin:
+        clamp(50px, 7vw, 78px)
+        auto
         0;
 
-    text-align: center;
+    padding:
+        24px 0 34px;
 
-    font-size: 13px;
+    border-top:
+        1px solid var(--ctm-border);
 
-    line-height: 1.6;
+    display: grid;
+
+    grid-template-columns:
+        minmax(100px, 1fr)
+        auto
+        minmax(100px, 1fr);
+
+    align-items: center;
+
+    gap: 20px;
 }
 
 
-.form-status.error {
+/* Navigation */
 
-    color: #e88d8d;
+.journey-nav {
+
+    min-height: 58px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding:
+        10px 14px;
+
+    border:
+        1px solid var(--ctm-border);
+
+    border-radius:
+        14px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    color: var(--ctm-text-primary);
+
+    text-decoration: none;
+
+    transition:
+        transform var(--transition-normal),
+        border-color var(--transition-normal),
+        background-color var(--transition-normal);
 }
 
 
-.form-status.success {
+.journey-nav-next {
 
-    color: #55c7ad;
+    justify-self: end;
 }
 
 
-/* ============================================================
-   BEGIN JOURNEY BUTTON
-   ============================================================ */
+.journey-nav:hover {
 
-.begin-button {
+    transform:
+        translateY(-2px);
 
-    grid-column: 1 / -1;
+    border-color:
+        rgba(22, 166, 160, 0.40);
+
+    background:
+        rgba(22, 166, 160, 0.045);
+}
+
+
+.journey-nav-placeholder {
+
+    visibility: hidden;
+
+    pointer-events: none;
+}
+
+
+.journey-nav-tamil {
+
+    display: block;
+
+    color: var(--ctm-text-primary);
+
+    font-size: 0.78rem;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+}
+
+
+.journey-nav-english {
+
+    display: block;
+
+    margin-top: 2px;
+
+    color: var(--ctm-text-muted);
+
+    font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size: 0.57rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+}
+
+
+.journey-nav-arrow {
+
+    color:
+        var(--ctm-teal-bright);
+
+    font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size: 1.3rem;
+
+    line-height: 1;
+}
+
+
+/* Current */
+
+.journey-footer-center {
 
     display: flex;
 
@@ -736,592 +1967,786 @@ body {
 
     justify-content: center;
 
-    gap: 5px;
+    min-width: 116px;
 
-    width: 100%;
+    text-align: center;
+}
 
-    min-height: 78px;
 
-    margin-top: 8px;
+.journey-footer-tamil {
 
-    padding:
-        16px
-        25px;
+    color:
+        var(--ctm-text-secondary);
 
-    border: none;
+    font-size: 0.72rem;
 
-    border-radius: 12px;
+    font-weight: 600;
 
-    cursor: pointer;
+    line-height: 1.4;
+}
 
-    background:
 
-        linear-gradient(
-            135deg,
-            #c9982e,
-            #f6c94f
-        );
+.journey-footer-english {
 
-    color: #080b18;
+    margin-top: 2px;
+
+    color:
+        var(--ctm-text-faint);
 
     font-family:
+        "Inter",
+        "Segoe UI",
         Arial,
-        "Noto Sans Tamil",
         sans-serif;
+
+    font-size: 0.53rem;
 
     font-weight: 800;
 
-    box-shadow:
-
-        0 12px 30px
-        rgba(201, 152, 46, 0.22);
-
-    transition:
-
-        transform 0.2s ease,
-
-        box-shadow 0.2s ease,
-
-        filter 0.2s ease;
+    letter-spacing: 0.14em;
 }
 
 
-.begin-button:hover {
+.journey-footer-position {
 
-    transform:
-        translateY(-2px);
+    margin-top: 7px;
 
-    box-shadow:
-
-        0 16px 36px
-        rgba(201, 152, 46, 0.32);
-
-    filter:
-        brightness(1.04);
-}
-
-
-.begin-button:active {
-
-    transform:
-        translateY(0);
-}
-
-
-.begin-button:disabled {
-
-    opacity: 0.6;
-
-    cursor: wait;
-
-    transform: none;
-
-    box-shadow:
-        none;
-}
-
-
-/* ============================================================
-   BUTTON TAMIL
-   ============================================================ */
-
-.button-tamil {
+    color:
+        var(--ctm-gold-soft);
 
     font-family:
-        "Noto Sans Tamil",
+        "Inter",
+        "Segoe UI",
         Arial,
         sans-serif;
 
-    font-size: 16px;
+    font-size: 0.82rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.13em;
+}
+
+
+/* Footer brand closure */
+
+.welcome-footer-brand {
+
+    grid-column: 1 / -1;
+
+    padding-top:
+        22px;
+
+    text-align: center;
+
+    border-top:
+        1px solid var(--ctm-border);
+}
+
+
+.footer-tagline {
+
+    margin: 0;
+
+    color:
+        var(--ctm-gold-soft);
+
+    font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size:
+        clamp(0.62rem, 1vw, 0.72rem);
+
+    font-weight: 800;
+
+    letter-spacing:
+        0.24em;
+
+    line-height: 1.5;
+}
+
+
+.footer-brand {
+
+    margin:
+        7px 0 0;
+
+    color:
+        var(--ctm-text-muted);
+
+    font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size: 0.55rem;
+
+    font-weight: 700;
+
+    letter-spacing:
+        0.16em;
 
     line-height: 1.5;
 }
 
 
 /* ============================================================
-   BUTTON ENGLISH
-   ============================================================ */
-
-.button-english {
-
-    font-size: 11px;
-
-    letter-spacing: 2px;
-
-    line-height: 1.4;
-}
-
-
-/* ============================================================
-   FOOTER
-   ============================================================ */
-
-.welcome-footer {
-
-    margin-top: 45px;
-
-    padding-top: 25px;
-
-    border-top:
-        1px solid
-        rgba(255, 255, 255, 0.07);
-
-    text-align: center;
-}
-
-
-.welcome-footer p {
-
-    color: #f6c94f;
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    letter-spacing: 3px;
-}
-
-
-/* ============================================================
-   RESPONSIVE — TABLET
+   22. TABLET
    ============================================================ */
 
 @media (max-width: 900px) {
 
-    .welcome-card {
-
-        max-width: 900px;
-
-        padding:
-            50px
-            45px
-            42px;
+    .site-header {
+        min-height: 82px;
     }
 
 
-    .hero-title-tamil {
+    .welcome-page {
+        padding-top: 36px;
+    }
 
-        font-size:
-            clamp(
-                38px,
-                6vw,
-                60px
-            );
+
+    .journey-discoveries {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 0;
+    }
+
+
+    .journey-discovery,
+    .journey-discovery:first-child,
+    .journey-discovery:last-child {
+
+        padding:
+            17px 0;
+
+        border-right: 0;
+
+        border-bottom:
+            1px solid var(--ctm-border);
+    }
+
+
+    .journey-discovery:last-child {
+        border-bottom: 0;
+    }
+
+
+    .journey-introduction-heading {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 7px;
     }
 
 }
 
 
 /* ============================================================
-   RESPONSIVE — MOBILE
+   23. MOBILE
    ============================================================ */
 
-@media (max-width: 700px) {
+@media (max-width: 640px) {
 
-    /* --------------------------------------------------------
-       HEADER
-       -------------------------------------------------------- */
+    :root {
+
+        --page-padding: 16px;
+
+    }
+
+
+    body {
+
+        background:
+            linear-gradient(
+                180deg,
+                var(--ctm-navy-950) 0%,
+                var(--ctm-charcoal) 100%
+            );
+
+    }
+
 
     .site-header {
 
-        height: 82px;
+        width:
+            calc(100% - 32px);
+
+        min-height: 76px;
+
+        grid-template-columns:
+            auto minmax(0, 1fr) auto;
+
+        gap: 12px;
 
         padding:
-            8px
-            14px;
+            15px 0;
     }
 
 
     .brand-logo {
 
-        top: 10px;
+        width: 46px;
+        height: 46px;
 
-        left: 14px;
-
-        width: 82px;
-
-        height: 54px;
+        border-radius: 12px;
     }
 
 
-    .brand-logo img {
+    .brand-name {
 
-        width: 82px;
+        max-width: 210px;
 
-        height: 54px;
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+        font-size: 0.62rem;
+
+        letter-spacing: 0.10em;
     }
 
 
     .brand-tamil {
 
-        font-size: 1.05rem;
-
-        letter-spacing: 0.04em;
+        font-size: 0.75rem;
     }
 
 
-    /* --------------------------------------------------------
-       MAIN
-       -------------------------------------------------------- */
+    .journey-position {
+
+        min-width: 54px;
+
+        gap: 4px;
+    }
+
+
+    .journey-position-current {
+        font-size: 0.92rem;
+    }
+
+
+    .journey-position-total {
+        font-size: 0.66rem;
+    }
+
+
+    .journey-progress {
+
+        width:
+            calc(100% - 32px);
+
+        height: 2px;
+    }
+
 
     .welcome-page {
 
+        width:
+            calc(100% - 32px);
+
         padding:
-            100px
-            12px
-            30px;
+            22px 0 42px;
     }
 
-
-    /* --------------------------------------------------------
-       CARD
-       -------------------------------------------------------- */
 
     .welcome-card {
 
-        padding:
-            35px
-            20px
-            30px;
-
-        border-radius: 20px;
+        border-radius:
+            22px;
     }
 
-
-    /* --------------------------------------------------------
-       JOURNEY INDICATOR
-       -------------------------------------------------------- */
 
     .journey-indicator {
 
-        margin-bottom: 32px;
-    }
-
-
-    .journey-indicator span {
+        width:
+            calc(100% - 32px);
 
         padding:
-            8px
-            20px;
-
-        font-size: 10px;
-
-        letter-spacing: 2.5px;
+            20px 0 15px;
     }
 
 
-    /* --------------------------------------------------------
-       HERO
-       -------------------------------------------------------- */
+    .journey-indicator-label {
+
+        font-size: 0.62rem;
+
+        letter-spacing: 0.14em;
+    }
+
+
+    .journey-indicator-tamil {
+
+        font-size: 0.73rem;
+    }
+
+
+    .welcome-content {
+
+        width:
+            calc(100% - 32px);
+
+        padding-top:
+            42px;
+    }
+
+
+    .hero-eyebrow {
+
+        margin-bottom: 18px;
+
+        font-size: 0.56rem;
+
+        letter-spacing: 0.20em;
+    }
+
 
     .hero-title-tamil {
 
         font-size:
-            clamp(
-                32px,
-                9vw,
-                48px
-            );
+            clamp(2.05rem, 10vw, 3.1rem);
 
-        line-height: 1.35;
+        line-height: 1.3;
     }
 
 
     .hero-title-english {
 
-        margin-top: 18px;
+        margin-top: 13px;
 
-        font-size: 15px;
+        font-size: 0.72rem;
 
-        letter-spacing: 0.07em;
+        letter-spacing: 0.10em;
+
+        line-height: 1.6;
     }
 
 
     .hero-message-tamil {
 
-        margin-top: 25px;
+        margin-top: 24px;
 
-        font-size: 17px;
+        font-size: 1rem;
 
-        line-height: 1.8;
+        line-height: 1.9;
     }
 
 
     .hero-message-english {
 
-        font-size: 14px;
+        margin-top: 8px;
+
+        font-size: 0.78rem;
+
+        line-height: 1.65;
+    }
+
+
+    .journey-introduction {
+
+        margin-top: 34px;
+
+        padding: 20px;
+
+        border-radius: 18px;
+    }
+
+
+    .journey-introduction-tamil {
+
+        font-size: 0.88rem;
 
         line-height: 1.7;
     }
 
 
-    /* --------------------------------------------------------
-       KYC
-       -------------------------------------------------------- */
+    .journey-introduction-english {
 
-    .kyc-section {
+        font-size: 0.55rem;
 
-        margin-top: 40px;
-
-        padding-top: 32px;
+        letter-spacing: 0.12em;
     }
 
 
-    .section-heading {
+    .journey-discovery {
 
-        gap: 12px;
+        gap: 11px;
 
-        margin-bottom: 24px;
+        padding:
+            16px 0;
     }
 
 
-    .section-number {
+    .journey-discovery strong {
 
-        width: 42px;
-        height: 42px;
+        font-size: 0.82rem;
 
-        font-size: 12px;
+        line-height: 1.6;
     }
 
 
-    .section-heading h2 {
+    .journey-discovery span:not(
+        .journey-discovery-number
+    ) {
 
-        font-size: 17px;
+        font-size: 0.53rem;
 
         line-height: 1.5;
     }
 
 
-    .section-heading p {
+    .welcome-divider {
 
-        font-size: 9px;
-
-        letter-spacing: 1.5px;
+        margin-top: 38px;
     }
 
 
-    /* --------------------------------------------------------
-       FORM
-       -------------------------------------------------------- */
+    .kyc-section {
 
-    #kycForm {
+        width:
+            calc(100% - 32px);
 
-        grid-template-columns: 1fr;
-
-        gap: 18px;
-    }
-
-
-    .consent-row,
-    .form-status,
-    .begin-button {
-
-        grid-column: 1;
-    }
-
-
-    .form-group input {
-
-        min-height: 50px;
-
-        font-size: 14px;
-    }
-
-
-    .consent-row {
-
-        font-size: 11px;
-
-        line-height: 1.7;
-    }
-
-
-    /* --------------------------------------------------------
-       BUTTON
-       -------------------------------------------------------- */
-
-    .begin-button {
-
-        min-height: 72px;
+        margin-top: 38px;
 
         padding:
-            14px
-            18px;
+            22px 18px;
+
+        border-radius: 18px;
     }
 
 
-    .button-tamil {
+    .section-heading {
 
-        font-size: 14px;
+        gap: 13px;
+
+        padding-bottom: 20px;
     }
 
 
-    .button-english {
+    .section-number {
 
-        font-size: 10px;
+        width: 40px;
+        height: 40px;
 
-        letter-spacing: 1.7px;
-    }
+        border-radius: 12px;
 
-
-    /* --------------------------------------------------------
-       FOOTER
-       -------------------------------------------------------- */
-
-    .welcome-footer {
-
-        margin-top: 35px;
-
-        padding-top: 20px;
-    }
-
-
-    .welcome-footer p {
-
-        font-size: 9px;
-
-        letter-spacing: 2.5px;
-    }
-
-}
-
-
-/* ============================================================
-   RESPONSIVE — SMALL MOBILE
-   ============================================================ */
-
-@media (max-width: 420px) {
-
-    .site-header {
-
-        height: 76px;
-    }
-
-
-    .brand-logo {
-
-        left: 10px;
-
-        width: 68px;
-
-        height: 48px;
-    }
-
-
-    .brand-logo img {
-
-        width: 68px;
-
-        height: 48px;
-    }
-
-
-    .brand-tamil {
-
-        font-size: 0.95rem;
-
-        letter-spacing: 0.02em;
-    }
-
-
-    .welcome-page {
-
-        padding:
-            92px
-            9px
-            25px;
-    }
-
-
-    .welcome-card {
-
-        padding:
-            30px
-            16px
-            26px;
-    }
-
-
-    .hero-title-tamil {
-
-        font-size: 30px;
-
-        line-height: 1.4;
-    }
-
-
-    .hero-title-english {
-
-        font-size: 13px;
-
-        letter-spacing: 0.05em;
-    }
-
-
-    .hero-message-tamil {
-
-        font-size: 15px;
-    }
-
-
-    .hero-message-english {
-
-        font-size: 13px;
+        font-size: 0.66rem;
     }
 
 
     .section-heading h2 {
 
-        font-size: 15px;
+        font-size: 1.04rem;
+
+        line-height: 1.65;
     }
 
 
     .section-heading p {
 
-        font-size: 8px;
+        font-size: 0.54rem;
+
+        letter-spacing: 0.10em;
+    }
+
+
+    .section-introduction {
+
+        margin:
+            20px 0 24px;
+
+        padding:
+            14px 15px;
+    }
+
+
+    .section-introduction-tamil {
+
+        font-size: 0.84rem;
+
+        line-height: 1.85;
+    }
+
+
+    .section-introduction-english {
+
+        font-size: 0.68rem;
+    }
+
+
+    #kycForm {
+
+        gap: 17px;
+    }
+
+
+    .form-group {
+
+        gap: 7px;
+    }
+
+
+    .form-group label {
+
+        font-size: 0.84rem;
+    }
+
+
+    .label-english {
+
+        font-size: 0.54rem;
+    }
+
+
+    .form-group input {
+
+        min-height: 54px;
+
+        padding:
+            13px 14px;
+
+        font-size: 0.88rem;
+    }
+
+
+    .consent-row {
+
+        grid-template-columns:
+            20px minmax(0, 1fr);
+
+        gap: 10px;
+
+        padding: 13px;
+    }
+
+
+    .consent-copy {
+
+        font-size: 0.72rem;
+
+        line-height: 1.7;
+    }
+
+
+    .consent-english {
+
+        font-size: 0.61rem;
+    }
+
+
+    .begin-button {
+
+        min-height: 64px;
+
+        padding:
+            11px 18px;
+
+        border-radius: 13px;
     }
 
 
     .button-tamil {
 
-        font-size: 13px;
+        font-size: 0.94rem;
     }
 
 
     .button-english {
 
-        font-size: 9px;
+        font-size: 0.59rem;
 
-        letter-spacing: 1.4px;
+        letter-spacing: 0.10em;
+    }
+
+
+    .cta-reassurance-tamil {
+
+        font-size: 0.68rem;
+    }
+
+
+    .cta-reassurance-english {
+
+        font-size: 0.50rem;
+
+        letter-spacing: 0.08em;
+    }
+
+
+    .welcome-footer {
+
+        width:
+            calc(100% - 32px);
+
+        margin-top: 40px;
+
+        padding:
+            20px 0 26px;
+
+        grid-template-columns:
+            1fr auto;
+
+        gap: 14px;
+    }
+
+
+    .journey-footer-center {
+
+        grid-column: 1 / -1;
+
+        grid-row: 1;
+
+        order: 1;
+    }
+
+
+    .journey-nav-next {
+
+        grid-column: 2;
+
+        grid-row: 2;
+
+        order: 3;
+
+        min-height: 50px;
+    }
+
+
+    .journey-nav-placeholder {
+
+        grid-column: 1;
+
+        grid-row: 2;
+
+        order: 2;
+    }
+
+
+    .journey-nav-tamil {
+
+        font-size: 0.70rem;
+    }
+
+
+    .journey-nav-english {
+
+        font-size: 0.50rem;
+    }
+
+
+    .journey-nav-arrow {
+
+        font-size: 1.1rem;
+    }
+
+
+    .welcome-footer-brand {
+
+        grid-column: 1 / -1;
+
+        grid-row: 3;
+
+        order: 4;
+
+        padding-top: 18px;
+    }
+
+
+    .footer-tagline {
+
+        font-size: 0.53rem;
+
+        letter-spacing: 0.16em;
+    }
+
+
+    .footer-brand {
+
+        font-size: 0.47rem;
+
+        letter-spacing: 0.10em;
+
+        line-height: 1.6;
     }
 
 }
 
 
 /* ============================================================
-   ACCESSIBILITY
+   24. VERY SMALL MOBILE
    ============================================================ */
 
-.begin-button:focus-visible,
-.form-group input:focus-visible,
-.consent-row input:focus-visible {
+@media (max-width: 380px) {
 
-    outline:
-        2px solid
-        #f6c94f;
+    .brand-name {
 
-    outline-offset: 3px;
+        max-width: 165px;
+
+        font-size: 0.56rem;
+    }
+
+
+    .brand-tamil {
+
+        font-size: 0.68rem;
+    }
+
+
+    .journey-position {
+
+        min-width: 48px;
+    }
+
+
+    .journey-position-current {
+
+        font-size: 0.82rem;
+    }
+
+
+    .hero-title-tamil {
+
+        font-size: 1.9rem;
+    }
+
+
+    .journey-introduction {
+
+        padding: 17px;
+    }
+
+
+    .kyc-section {
+
+        padding:
+            19px 15px;
+    }
+
+
+    .journey-nav {
+
+        padding:
+            8px 10px;
+    }
+
 }
 
 
 /* ============================================================
-   REDUCED MOTION
+   25. REDUCED MOTION
    ============================================================ */
 
 @media (prefers-reduced-motion: reduce) {
 
     html {
-
         scroll-behavior: auto;
     }
 
@@ -1330,11 +2755,115 @@ body {
     *::before,
     *::after {
 
-        transition-duration: 0.01ms !important;
-
         animation-duration: 0.01ms !important;
 
         animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+
+        scroll-behavior: auto !important;
+    }
+
+
+    .begin-button:hover,
+    .journey-nav:hover,
+    .brand-logo:hover {
+
+        transform: none;
+    }
+
+
+    .begin-button::before {
+
+        display: none;
+    }
+
+}
+
+
+/* ============================================================
+   26. HIGH CONTRAST / FORCED COLORS
+   ============================================================ */
+
+@media (forced-colors: active) {
+
+    .site-header,
+    .welcome-card,
+    .kyc-section,
+    .journey-introduction,
+    .consent-row,
+    .journey-nav {
+
+        border:
+            1px solid CanvasText;
+    }
+
+
+    .begin-button {
+
+        border:
+            1px solid ButtonText;
+
+        background:
+            ButtonFace;
+
+        color:
+            ButtonText;
+    }
+
+
+    .begin-button:disabled {
+
+        opacity: 1;
+    }
+
+}
+
+
+/* ============================================================
+   27. PRINT
+   ============================================================ */
+
+@media print {
+
+    body {
+
+        background: #FFFFFF;
+
+        color: #000000;
+    }
+
+
+    .site-header,
+    .journey-progress,
+    .welcome-card,
+    .kyc-section {
+
+        box-shadow: none;
+
+        background: #FFFFFF;
+
+        color: #000000;
+    }
+
+
+    .journey-progress,
+    .journey-footer-brand,
+    .welcome-footer {
+
+        border-color: #CCCCCC;
+    }
+
+
+    .begin-button {
+
+        background: #FFFFFF;
+
+        color: #000000;
+
+        border: 1px solid #000000;
+
+        box-shadow: none;
     }
 
 }
