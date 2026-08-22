@@ -4409,6 +4409,436 @@ a {
 }
 
 
+
+/* ============================================================
+   25A. PREMIUM JOURNEY REFINEMENT
+   PAGE 05 — MOVEMENT → POSSIBILITY
+   ============================================================ */
+
+/* Keep the page visually continuous without making the
+   journey feel like a collection of unrelated cards. */
+.page05 {
+    padding-bottom: 54px;
+}
+
+.page05 > section {
+    position: relative;
+}
+
+.hero-section {
+    padding-top: 76px;
+    padding-bottom: 72px;
+}
+
+.hero-section::after {
+    content: "";
+    display: block;
+    width: min(360px, 62vw);
+    height: 1px;
+    margin: 46px auto 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(245, 196, 61, 0.62) 25%,
+        rgba(8, 183, 173, 0.9) 50%,
+        rgba(245, 196, 61, 0.62) 75%,
+        transparent
+    );
+}
+
+/* Give the central life calculation a clearer sense of
+   progression while retaining the existing component. */
+.time-life-section {
+    position: relative;
+    isolation: isolate;
+    margin-bottom: 68px;
+    padding: 62px 40px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(16, 41, 54, 0.98),
+            rgba(7, 24, 34, 0.98)
+        );
+}
+
+.time-life-section::before {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border: 1px solid rgba(8, 183, 173, 0.08);
+    border-radius: calc(var(--radius-large) - 10px);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.life-form-card {
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+.life-calculate-button {
+    min-height: 64px;
+    box-shadow: 0 12px 30px rgba(245, 196, 61, 0.06);
+}
+
+.life-calculate-button:focus-visible,
+.save-button:focus-visible,
+.global-nav-button:focus-visible,
+.answer-option:focus-visible,
+.dob-field input:focus-visible {
+    outline: 3px solid rgba(8, 183, 173, 0.72);
+    outline-offset: 3px;
+}
+
+/* The reveal is the emotional hinge of Page 05. */
+.life-reveal {
+    position: relative;
+    margin-bottom: 74px;
+    padding: 72px 40px;
+    background:
+        linear-gradient(
+            160deg,
+            rgba(13, 32, 44, 0.99),
+            rgba(5, 13, 20, 0.99)
+        );
+    border-color: rgba(8, 183, 173, 0.18);
+}
+
+.life-reveal::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: min(460px, 72%);
+    height: 1px;
+    transform: translateX(-50%);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--gold),
+        var(--teal),
+        transparent
+    );
+}
+
+.remaining-years strong {
+    text-shadow: 0 0 28px rgba(57, 216, 149, 0.08);
+}
+
+/* A quieter transition out of diagnosis and into possibility. */
+.thats-all-section {
+    margin-bottom: 78px;
+    padding-top: 68px;
+    padding-bottom: 68px;
+}
+
+.thats-all-section > strong {
+    color: var(--teal-light);
+}
+
+.no-time-section {
+    margin-bottom: 76px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(168, 60, 50, 0.10),
+            rgba(42, 20, 22, 0.32)
+        );
+}
+
+/* The job diagnosis should feel honest, not punitive. */
+.job-pain-section {
+    margin-bottom: 76px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(34, 27, 28, 0.84),
+            rgba(12, 20, 27, 0.98)
+        );
+}
+
+/* The business section is the visual opening toward
+   possibility: teal first, gold only at the destination. */
+.business-pleasure-section {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 76px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(8, 127, 80, 0.13),
+            rgba(6, 28, 25, 0.76)
+        );
+    border-color: rgba(24, 184, 120, 0.24);
+}
+
+.business-pleasure-section::after {
+    content: "";
+    position: absolute;
+    right: 8%;
+    bottom: 0;
+    width: 180px;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(245, 196, 61, 0.55)
+    );
+}
+
+.business-circle,
+.system-box,
+.business-branches > div,
+.business-expansion strong {
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.business-circle:hover,
+.system-box:hover,
+.business-branches > div:hover,
+.business-expansion strong:hover {
+    transform: translateY(-2px);
+}
+
+/* Make the comparison communicate a path rather than
+   two competing sales choices. */
+.job-business-section {
+    margin-bottom: 76px;
+}
+
+.job-business-grid {
+    gap: 22px;
+}
+
+.job-card,
+.business-card {
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16);
+}
+
+.business-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.business-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 42%;
+    height: 2px;
+    background: var(--teal);
+}
+
+.comparison-equation {
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* The question should feel like an invitation to consider
+   a different path, not a forced conclusion. */
+.life-business-question {
+    margin-bottom: 76px;
+    padding-top: 78px;
+    padding-bottom: 78px;
+}
+
+.choice-statement {
+    border-color: rgba(8, 183, 173, 0.14);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.10);
+}
+
+.moment-of-truth {
+    margin-bottom: 76px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(245, 196, 61, 0.055),
+            rgba(8, 183, 173, 0.035)
+        );
+}
+
+/* Assessment is the clarity mechanism. Reduce visual noise
+   and make selection states unmistakably actionable. */
+.assessment-introduction {
+    margin-bottom: 28px;
+    border-color: rgba(8, 183, 173, 0.14);
+}
+
+.scoring-scale {
+    margin-bottom: 32px;
+}
+
+.assessment-card {
+    padding: 38px;
+    border-color: rgba(255, 255, 255, 0.075);
+    box-shadow:
+        0 18px 50px rgba(0, 0, 0, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.018);
+}
+
+.assessment-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 28px;
+    right: 28px;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(8, 183, 173, 0.35),
+        transparent
+    );
+}
+
+.answer-option {
+    min-height: 74px;
+    border-color: rgba(255, 255, 255, 0.075);
+}
+
+.answer-option:hover {
+    transform: translateY(-1px);
+    border-color: rgba(8, 183, 173, 0.34);
+    background: rgba(8, 183, 173, 0.045);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+}
+
+.answer-option:focus-visible {
+    border-color: var(--teal);
+    background: rgba(8, 183, 173, 0.055);
+}
+
+.answer-option.selected,
+.answer-option[aria-checked="true"] {
+    border-color: rgba(8, 183, 173, 0.62);
+    background: rgba(8, 183, 173, 0.075);
+    box-shadow:
+        inset 3px 0 0 var(--teal),
+        0 10px 26px rgba(0, 0, 0, 0.12);
+}
+
+/* Score reveal = clarity, not hype. */
+.score-reveal {
+    margin-top: 76px;
+    margin-bottom: 72px;
+    padding: 66px 40px;
+    background:
+        linear-gradient(
+            155deg,
+            rgba(13, 32, 44, 0.99),
+            rgba(7, 22, 31, 0.99)
+        );
+    border-color: rgba(8, 183, 173, 0.24);
+}
+
+.score-reveal::before {
+    content: "";
+    display: block;
+    width: 120px;
+    height: 2px;
+    margin: -8px auto 28px;
+    background: linear-gradient(
+        90deg,
+        var(--gold),
+        var(--teal)
+    );
+}
+
+.business-interpretation strong {
+    color: var(--teal-light);
+}
+
+/* Final reflection gets enough breathing room without creating
+   an empty dead zone. */
+.final-life-question {
+    margin-bottom: 76px;
+    padding-top: 72px;
+    padding-bottom: 72px;
+}
+
+.final-question-divider {
+    width: 110px;
+    background: linear-gradient(
+        90deg,
+        var(--gold),
+        var(--teal)
+    );
+}
+
+/* Bottom navigation remains structurally identical but gains
+   a calmer, more premium interaction treatment. */
+.global-navigation {
+    margin-top: 8px;
+    margin-bottom: 24px;
+}
+
+.global-nav-button {
+    min-height: 88px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    box-shadow:
+        0 14px 36px rgba(0, 0, 0, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.global-nav-button.previous {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(240, 154, 50, 0.90),
+            rgba(217, 85, 66, 0.92)
+        );
+}
+
+.global-nav-button.next {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(8, 120, 79, 0.95),
+            rgba(24, 184, 120, 0.92)
+        );
+}
+
+.global-nav-button:hover {
+    filter: brightness(1.04);
+}
+
+.global-current-page {
+    padding: 10px 8px;
+}
+
+.save-button {
+    min-height: 52px;
+}
+
+.save-button:focus-visible {
+    border-color: var(--teal);
+}
+
+/* Keep the footer compact and intentional. */
+.global-footer {
+    padding-top: 2px;
+}
+
+/* Prevent decorative motion from becoming distracting. */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 /* ============================================================
    26. RESPONSIVE — TABLET
    ============================================================ */
