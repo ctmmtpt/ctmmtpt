@@ -2702,3 +2702,532 @@ body.page-10 {
         transition: none;
     }
 }
+
+/* =========================================================
+   PAGE 10 — PREMIUM CUSTOMER ECONOMICS UPGRADE
+   Appended override layer.
+   Preserves existing selectors and page architecture.
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   ECONOMIC MESSAGE — MAKE THE MODEL LEGIBLE FIRST
+   --------------------------------------------------------- */
+
+.page-10 .revenue-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.page-10 .revenue-section::after {
+    content:
+        "CUSTOMERS   ×   VALUE   ×   TIME   =   BUSINESS POSSIBILITY";
+    display: block;
+    max-width: 900px;
+    margin: 42px auto 0;
+    padding: 18px 22px;
+    border-top: 1px solid var(--p10-border-teal);
+    border-bottom: 1px solid var(--p10-border-gold);
+    color: var(--p10-ivory);
+    font-family: Arial, sans-serif;
+    font-size: clamp(12px, 1.05vw, 16px);
+    font-weight: 900;
+    line-height: 1.5;
+    letter-spacing: 0.16em;
+    text-align: center;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(8, 201, 206, 0.035),
+            rgba(244, 179, 33, 0.035),
+            rgba(8, 201, 206, 0.035)
+        );
+}
+
+/* The formula is a planning model, not an income claim. */
+.page-10 .revenue-section::before {
+    content:
+        "A WAY TO THINK ABOUT CUSTOMER ECONOMICS";
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--p10-muted-dark);
+    font-family: Arial, sans-serif;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 0.22em;
+    white-space: nowrap;
+}
+
+
+/* ---------------------------------------------------------
+   PREMIUM NUMBER HIERARCHY
+   --------------------------------------------------------- */
+
+.page-10 .revenue-number {
+    position: relative;
+    z-index: 1;
+    margin-top: 35px;
+}
+
+.page-10 .revenue-unit {
+    position: relative;
+    z-index: 1;
+}
+
+.page-10 .revenue-section h2 {
+    max-width: 760px;
+}
+
+.page-10 .revenue-en {
+    max-width: 700px;
+}
+
+.page-10 .revenue-question-card {
+    position: relative;
+}
+
+.page-10 .revenue-question-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 18%;
+    right: 18%;
+    height: 1px;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--p10-teal),
+            transparent
+        );
+}
+
+
+/* ---------------------------------------------------------
+   CUSTOMER ECONOMICS PANEL
+   Existing .customer-system-section is reused deliberately.
+   --------------------------------------------------------- */
+
+.page-10 .customer-system-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.page-10 .customer-system-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(8, 201, 206, 0.025),
+            transparent 32%,
+            transparent 68%,
+            rgba(244, 179, 33, 0.025)
+        );
+}
+
+.page-10 .customer-system-section > * {
+    position: relative;
+    z-index: 1;
+}
+
+
+/* ---------------------------------------------------------
+   SYSTEM FLOW — DATA VISUALIZATION
+   --------------------------------------------------------- */
+
+.page-10 .system-flow {
+    position: relative;
+}
+
+.page-10 .system-node {
+    position: relative;
+    overflow: hidden;
+    min-height: 205px;
+    transition:
+        border-color 180ms ease,
+        transform 180ms ease,
+        background 180ms ease;
+}
+
+.page-10 .system-node::after {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    right: -55px;
+    bottom: -65px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.045);
+}
+
+.page-10 .system-node-center {
+    transform: translateY(-8px);
+}
+
+.page-10 .system-node:hover {
+    transform: translateY(-3px);
+}
+
+.page-10 .system-node-center:hover {
+    transform: translateY(-11px);
+}
+
+.page-10 .system-arrow {
+    position: relative;
+    z-index: 2;
+    min-width: 30px;
+    text-align: center;
+    color: var(--p10-teal);
+}
+
+.page-10 .system-node-revenue strong {
+    font-size: clamp(30px, 2.7vw, 46px);
+}
+
+
+/* ---------------------------------------------------------
+   MARKET NUMBERS — CONTEXT, NOT PROMISE
+   --------------------------------------------------------- */
+
+.page-10 .market-stat {
+    position: relative;
+    overflow: hidden;
+}
+
+.page-10 .market-stat::after {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.035);
+    border-radius: 13px;
+    pointer-events: none;
+}
+
+.page-10 .market-divider {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* ---------------------------------------------------------
+   DIGITAL QUESTION — SHIFT FROM "MONEY" TO "SYSTEM"
+   --------------------------------------------------------- */
+
+.page-10 .digital-question {
+    position: relative;
+    overflow: hidden;
+}
+
+.page-10 .digital-question::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background:
+        linear-gradient(
+            180deg,
+            var(--p10-gold),
+            var(--p10-teal)
+        );
+}
+
+.page-10 .digital-answer {
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* ---------------------------------------------------------
+   100 / 90 / TARGET
+   Keep the existing structure but make the distinction clear.
+   --------------------------------------------------------- */
+
+.page-10 .trial-section {
+    position: relative;
+}
+
+.page-10 .trial-flow {
+    position: relative;
+}
+
+.page-10 .trial-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.page-10 .trial-card:first-child {
+    border-color: var(--p10-border-teal);
+    background:
+        rgba(8, 201, 206, 0.035);
+}
+
+.page-10 .trial-card:nth-child(3) {
+    border-color: var(--p10-border);
+}
+
+.page-10 .trial-card-income {
+    border-width: 1px;
+    border-color: var(--p10-border-gold);
+    background:
+        rgba(244, 179, 33, 0.035);
+    box-shadow: none;
+}
+
+.page-10 .trial-card-income::after {
+    content: "ILLUSTRATIVE TARGET";
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    transform: translateX(-50%);
+    color: var(--p10-muted-dark);
+    font-family: Arial, sans-serif;
+    font-size: 7px;
+    font-weight: 900;
+    letter-spacing: 0.13em;
+    white-space: nowrap;
+}
+
+.page-10 .trial-card-income small {
+    margin-bottom: 10px;
+}
+
+.page-10 .trial-message {
+    border-color: var(--p10-border-gold);
+}
+
+
+/* ---------------------------------------------------------
+   SCALE — CUSTOMER BASE → SYSTEM → POSSIBILITY
+   --------------------------------------------------------- */
+
+.page-10 .scale-section {
+    position: relative;
+}
+
+.page-10 .scale-node {
+    position: relative;
+    min-height: 190px;
+}
+
+.page-10 .scale-node:first-child {
+    border-color: var(--p10-border-teal);
+    background:
+        rgba(8, 201, 206, 0.025);
+}
+
+.page-10 .scale-node:nth-of-type(3) {
+    border-color: var(--p10-border-teal);
+    background:
+        rgba(8, 201, 206, 0.025);
+}
+
+.page-10 .scale-node-final {
+    border-width: 1px;
+    border-color: var(--p10-border-gold);
+    background:
+        rgba(244, 179, 33, 0.035);
+    box-shadow: none;
+}
+
+.page-10 .scale-node-final strong {
+    color: var(--p10-gold-light);
+    font-size: clamp(31px, 3vw, 50px);
+}
+
+.page-10 .scale-arrow {
+    color: var(--p10-teal);
+}
+
+
+/* ---------------------------------------------------------
+   CLOSING CTA — CALM, QUALIFIED, NON-AGGRESSIVE
+   --------------------------------------------------------- */
+
+.page-10 .people-closing {
+    position: relative;
+}
+
+.page-10 .how-button {
+    min-width: min(430px, 100%);
+    border-color: var(--p10-teal);
+    background:
+        linear-gradient(
+            135deg,
+            var(--p10-gold),
+            #d99b16
+        );
+    box-shadow:
+        0 14px 40px rgba(0, 0, 0, 0.22);
+}
+
+.page-10 .how-button:hover,
+.page-10 .how-button:focus-visible {
+    border-color: var(--p10-teal-light);
+    background: var(--p10-gold-light);
+    box-shadow:
+        0 18px 48px rgba(0, 0, 0, 0.28);
+}
+
+.page-10 .how-button:focus-visible {
+    outline:
+        2px solid var(--p10-teal-light);
+    outline-offset: 4px;
+}
+
+
+/* ---------------------------------------------------------
+   TOP / BOTTOM BRANDING — KEEP PROPORTIONS CONSISTENT
+   --------------------------------------------------------- */
+
+.page-10 .global-header {
+    min-height: 220px;
+}
+
+.page-10 .global-divider {
+    height: 3px;
+}
+
+.page-10 .global-footer {
+    border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.page-10 .global-footer-brand {
+    border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+
+/* ---------------------------------------------------------
+   RESPONSIVE FORMULA
+   --------------------------------------------------------- */
+
+@media (max-width: 1100px) {
+
+    .page-10 .revenue-section::after {
+        font-size: 11px;
+        letter-spacing: 0.11em;
+    }
+
+    .page-10 .system-node-center {
+        transform: none;
+    }
+
+    .page-10 .system-node-center:hover {
+        transform: translateY(-3px);
+    }
+
+    .page-10 .system-node {
+        min-height: 155px;
+    }
+
+    .page-10 .scale-node {
+        min-height: 155px;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .page-10 .global-header {
+        min-height: auto;
+    }
+
+    .page-10 .page10-main {
+        padding-top: 54px;
+    }
+
+    .page-10 .revenue-section {
+        padding-top: 62px;
+    }
+
+    .page-10 .revenue-section::before {
+        top: 17px;
+        font-size: 7px;
+        letter-spacing: 0.14em;
+    }
+
+    .page-10 .revenue-section::after {
+        margin-top: 32px;
+        padding: 14px 10px;
+        font-size: 8px;
+        line-height: 1.7;
+        letter-spacing: 0.07em;
+    }
+
+    .page-10 .revenue-number {
+        margin-top: 27px;
+    }
+
+    .page-10 .customer-system-section {
+        padding-top: 54px;
+        padding-bottom: 54px;
+    }
+
+    .page-10 .system-node,
+    .page-10 .scale-node {
+        min-height: 135px;
+    }
+
+    .page-10 .system-node-center {
+        transform: none;
+    }
+
+    .page-10 .system-node:hover,
+    .page-10 .system-node-center:hover {
+        transform: none;
+    }
+
+    .page-10 .trial-card-income {
+        border-width: 1px;
+    }
+
+    .page-10 .trial-card-income::after {
+        font-size: 6px;
+    }
+
+    .page-10 .how-button {
+        min-height: 88px;
+    }
+}
+
+
+@media (max-width: 420px) {
+
+    .page-10 .revenue-section::before {
+        font-size: 6px;
+    }
+
+    .page-10 .revenue-section::after {
+        font-size: 7px;
+        letter-spacing: 0.045em;
+    }
+
+    .page-10 .system-node,
+    .page-10 .scale-node {
+        min-height: 125px;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   REDUCED MOTION
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .page-10 .system-node {
+        transition: none;
+    }
+
+    .page-10 .system-node:hover,
+    .page-10 .system-node-center:hover {
+        transform: none;
+    }
+}
+
