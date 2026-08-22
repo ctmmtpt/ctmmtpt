@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ta">
 
@@ -16,6 +15,11 @@
         content="CTM PATH™ MILLIONAIRES™ — Page 03: Human Birth Is Rare"
     >
 
+    <meta
+        name="theme-color"
+        content="#081C3A"
+    >
+
     <title>
         CTM PATH™ MILLIONAIRES™ — 03
     </title>
@@ -27,16 +31,22 @@
         href="css/page03.css"
     >
 
+
     <!-- =========================================================
-         FROZEN GLOBAL CTM PATH™ PAGE SHELL
-         IDENTICAL TO PAGE 01 / PAGE 02
+         PAGE 03 — GLOBAL JOURNEY SHELL
          ========================================================= -->
     <style>
+
         .page03 {
             max-width: 1540px;
             margin: 34px auto 0;
             padding: 0 28px 70px;
         }
+
+
+        /* =====================================================
+           TOP BRANDING
+           ===================================================== */
 
         .page-header {
             min-height: 250px;
@@ -53,7 +63,15 @@
             right: 2.7vw;
             bottom: 0;
             height: 2px;
-            background: linear-gradient(90deg, transparent 0%, #f4c542 20%, #19c8c2 50%, #f4c542 80%, transparent 100%);
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    #f4c542 20%,
+                    #19c8c2 50%,
+                    #f4c542 80%,
+                    transparent 100%
+                );
         }
 
         .header-brand {
@@ -71,12 +89,20 @@
             height: 72px;
             flex: 0 0 72px;
             object-fit: contain;
-            filter: drop-shadow(0 8px 18px rgba(0,0,0,.35));
+            filter:
+                drop-shadow(
+                    0 8px 18px
+                    rgba(0, 0, 0, .35)
+                );
         }
 
         .header-brand-name {
             color: #f5f1e8;
-            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+            font-family:
+                "Inter",
+                "Segoe UI",
+                Arial,
+                sans-serif;
             font-size: 17px;
             font-weight: 800;
             line-height: 1.05;
@@ -89,22 +115,40 @@
             line-height: 1.05;
         }
 
+        .header-brand:focus-visible {
+            outline: 3px solid rgba(25, 200, 194, .85);
+            outline-offset: 7px;
+            border-radius: 8px;
+        }
+
         .page-top {
             position: absolute;
             top: 104px;
             right: 5.5vw;
             margin: 0;
             color: #f4c542;
-            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+            font-family:
+                "Inter",
+                "Segoe UI",
+                Arial,
+                sans-serif;
             font-size: 17px;
             font-weight: 900;
             letter-spacing: .28em;
             text-transform: uppercase;
         }
 
+
+        /* =====================================================
+           JOURNEY NAVIGATION
+           ===================================================== */
+
         .page-navigation {
             display: grid;
-            grid-template-columns: minmax(0,1fr) auto minmax(0,1fr);
+            grid-template-columns:
+                minmax(0, 1fr)
+                auto
+                minmax(0, 1fr);
             align-items: center;
             gap: 24px;
             margin-top: 70px;
@@ -123,18 +167,29 @@
             border: 1px solid transparent;
             border-radius: 24px;
             color: #fff;
-            font-family: "Noto Sans Tamil", "Nirmala UI", "Latha", sans-serif;
+            font-family:
+                "Noto Sans Tamil",
+                "Nirmala UI",
+                "Latha",
+                sans-serif;
             font-size: 1rem;
             font-weight: 800;
             text-align: center;
             text-decoration: none;
-            box-shadow: 0 16px 38px rgba(0,0,0,.30);
-            transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+            box-shadow:
+                0 16px 38px
+                rgba(0, 0, 0, .30);
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease,
+                filter .2s ease;
         }
 
         .nav-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 22px 45px rgba(0,0,0,.36);
+            box-shadow:
+                0 22px 45px
+                rgba(0, 0, 0, .36);
             filter: brightness(1.06);
         }
 
@@ -145,19 +200,35 @@
 
         .nav-back {
             justify-self: stretch;
-            border-color: rgba(255,151,55,.70);
-            background: linear-gradient(135deg,#e88724,#d65a45);
+            border-color:
+                rgba(255,151,55,.70);
+            background:
+                linear-gradient(
+                    135deg,
+                    #e88724,
+                    #d65a45
+                );
         }
 
         .nav-forward {
             justify-self: stretch;
-            border-color: rgba(41,196,125,.72);
-            background: linear-gradient(135deg,#08784a,#29c47d);
+            border-color:
+                rgba(41,196,125,.72);
+            background:
+                linear-gradient(
+                    135deg,
+                    #08784a,
+                    #29c47d
+                );
         }
 
         .nav-arrow {
             flex: 0 0 auto;
-            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+            font-family:
+                "Inter",
+                "Segoe UI",
+                Arial,
+                sans-serif;
             font-size: 1.75rem;
             font-weight: 700;
             line-height: 1;
@@ -172,7 +243,11 @@
         }
 
         .nav-ta {
-            font-family: "Noto Sans Tamil", "Nirmala UI", "Latha", sans-serif;
+            font-family:
+                "Noto Sans Tamil",
+                "Nirmala UI",
+                "Latha",
+                sans-serif;
             font-size: 1.05rem;
             font-weight: 800;
             line-height: 1.45;
@@ -180,7 +255,11 @@
 
         .nav-en {
             margin-top: 2px;
-            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+            font-family:
+                "Inter",
+                "Segoe UI",
+                Arial,
+                sans-serif;
             font-size: .68rem;
             font-weight: 800;
             letter-spacing: .12em;
@@ -190,13 +269,22 @@
         .navigation-progress {
             min-width: 96px;
             color: #f4c542;
-            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+            font-family:
+                "Inter",
+                "Segoe UI",
+                Arial,
+                sans-serif;
             font-size: 1.45rem;
             font-weight: 900;
             letter-spacing: .12em;
             text-align: center;
             white-space: nowrap;
         }
+
+
+        /* =====================================================
+           FOOTER BRANDING
+           ===================================================== */
 
         .page-footer {
             margin-top: 52px;
@@ -207,7 +295,11 @@
 
         .footer-tagline {
             color: #f4c542;
-            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+            font-family:
+                "Inter",
+                "Segoe UI",
+                Arial,
+                sans-serif;
             font-size: .72rem;
             font-weight: 800;
             letter-spacing: .25em;
@@ -216,35 +308,141 @@
         .footer-brand {
             margin-top: 6px;
             color: #8491aa;
-            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+            font-family:
+                "Inter",
+                "Segoe UI",
+                Arial,
+                sans-serif;
             font-size: .68rem;
             font-weight: 600;
             letter-spacing: .14em;
         }
 
-        @media (max-width:900px) {
-            .page-header { min-height:180px; padding:28px 24px 24px; }
-            .header-brand { left:24px; top:28px; }
-            .header-brand-mark { width:58px; height:58px; flex-basis:58px; }
-            .header-brand-name { font-size:14px; }
-            .header-brand-name strong { font-size:16px; }
-            .page-top { top:82px; right:24px; font-size:13px; }
-            .page-navigation { grid-template-columns:1fr; gap:14px; }
-            .navigation-progress { order:-1; }
-            .nav-button { min-height:72px; }
+
+        /* =====================================================
+           RESPONSIVE JOURNEY SHELL
+           ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .page-header {
+                min-height: 180px;
+                padding: 28px 24px 24px;
+            }
+
+            .header-brand {
+                left: 24px;
+                top: 28px;
+            }
+
+            .header-brand-mark {
+                width: 58px;
+                height: 58px;
+                flex-basis: 58px;
+            }
+
+            .header-brand-name {
+                font-size: 14px;
+            }
+
+            .header-brand-name strong {
+                font-size: 16px;
+            }
+
+            .page-top {
+                top: 82px;
+                right: 24px;
+                font-size: 13px;
+            }
+
+            .page-navigation {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .navigation-progress {
+                order: -1;
+            }
+
+            .nav-button {
+                min-height: 72px;
+            }
+
         }
 
-        @media (max-width:560px) {
-            .page-header { min-height:150px; padding:20px 18px; }
-            .header-brand { left:18px; top:20px; gap:9px; }
-            .header-brand-mark { width:50px; height:50px; flex-basis:50px; }
-            .header-brand-name { font-size:12px; }
-            .header-brand-name strong { font-size:14px; }
-            .page-top { top:72px; right:18px; font-size:10px; letter-spacing:.20em; }
-            .nav-button { min-height:68px; border-radius:18px; padding:12px 16px; }
-            .nav-ta { font-size:.92rem; }
-            .navigation-progress { font-size:1.15rem; }
+
+        @media (max-width: 560px) {
+
+            .page03 {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .page-header {
+                min-height: 150px;
+                padding: 20px 18px;
+            }
+
+            .header-brand {
+                left: 18px;
+                top: 20px;
+                gap: 9px;
+            }
+
+            .header-brand-mark {
+                width: 50px;
+                height: 50px;
+                flex-basis: 50px;
+            }
+
+            .header-brand-name {
+                font-size: 12px;
+            }
+
+            .header-brand-name strong {
+                font-size: 14px;
+            }
+
+            .page-top {
+                top: 72px;
+                right: 18px;
+                font-size: 10px;
+                letter-spacing: .20em;
+            }
+
+            .nav-button {
+                min-height: 68px;
+                border-radius: 18px;
+                padding: 12px 16px;
+            }
+
+            .nav-ta {
+                font-size: .92rem;
+            }
+
+            .navigation-progress {
+                font-size: 1.15rem;
+            }
+
         }
+
+
+        /* =====================================================
+           REDUCED MOTION
+           ===================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .nav-button {
+                transition: none;
+            }
+
+            .nav-button:hover {
+                transform: none;
+            }
+
+        }
+
     </style>
 
 </head>
@@ -252,28 +450,50 @@
 
 <body>
 
-<header class="page-header" aria-label="CTM PATH™ Millionaires™ global header">
 
-    <a href="/" class="header-brand" aria-label="Return to CTM PATH™ Millionaires™">
-        <img
-            src="assets/CTMMTPTLogo.svg"
-            alt="CTM PATH™ MILLIONAIRES™"
-            class="header-brand-mark"
+    <!-- ========================================================
+         GLOBAL TOP BRANDING
+         ======================================================== -->
+
+    <header
+        class="page-header"
+        aria-label="CTM PATH™ Millionaires™ global header"
+    >
+
+        <a
+            href="/"
+            class="header-brand"
+            aria-label="Return to CTM PATH™ Millionaires™"
         >
 
-        <span class="header-brand-name">
-            <strong>CTM PATH</strong>
-            MILLIONAIRES
-        </span>
-    </a>
+            <img
+                src="assets/CTMMTPTLogo.svg"
+                alt="CTM PATH™ MILLIONAIRES™"
+                class="header-brand-mark"
+            >
 
-    <div class="page-top">PAGE 03 / 16</div>
+            <span class="header-brand-name">
+                <strong>CTM PATH</strong>
+                MILLIONAIRES
+            </span>
 
-</header>
+        </a>
 
-    <!-- =====================================================
+
+        <div
+            class="page-top"
+            aria-label="Journey position"
+        >
+            PAGE 03 / 16
+        </div>
+
+    </header>
+
+
+
+    <!-- ========================================================
          PAGE WRAPPER
-         ===================================================== -->
+         ======================================================== -->
 
     <main
         id="page03"
@@ -281,17 +501,23 @@
     >
 
 
-        <!-- =================================================
-             HERO
-             ================================================= -->
+        <!-- ====================================================
+             HERO — EMOTIONAL STAKES
+             ==================================================== -->
 
-        <section class="hero-section">
+        <section
+            class="hero-section"
+            aria-labelledby="page03-title"
+        >
 
-            <div class="hero-icon">
+            <div
+                class="hero-icon"
+                aria-hidden="true"
+            >
 
                 <svg
                     viewBox="0 0 120 120"
-                    aria-hidden="true"
+                    focusable="false"
                 >
 
                     <circle
@@ -301,20 +527,22 @@
                     />
 
                     <path
-                        d="M60 18
-                           L66 43
-                           L92 34
-                           L72 52
-                           L96 64
-                           L70 66
-                           L76 94
-                           L60 73
-                           L44 94
-                           L50 66
-                           L24 64
-                           L48 52
-                           L28 34
-                           L54 43 Z"
+                        d="
+                            M60 18
+                            L66 43
+                            L92 34
+                            L72 52
+                            L96 64
+                            L70 66
+                            L76 94
+                            L60 73
+                            L44 94
+                            L50 66
+                            L24 64
+                            L48 52
+                            L28 34
+                            L54 43 Z
+                        "
                     />
 
                     <circle
@@ -333,17 +561,13 @@
             </p>
 
 
-            <h1>
-
+            <h1 id="page03-title">
                 மனித வாழ்க்கையின் மகத்துவம்
-
             </h1>
 
 
             <div class="hero-tamil">
-
                 அரிது அரிது மானிடராய் பிறத்தல் அரிது
-
             </div>
 
 
@@ -361,7 +585,10 @@
             </p>
 
 
-            <div class="journey-introduction">
+            <div
+                class="journey-introduction"
+                aria-label="Journey focus"
+            >
 
                 <span>
                     இந்தப் பயணத்தில் உங்கள் வாழ்க்கையின்
@@ -382,13 +609,19 @@
 
 
 
-        <!-- =================================================
+        <!-- ====================================================
              TRANSFORMATION PATH
-             ================================================= -->
+             ==================================================== -->
 
-        <section class="transformation-path">
+        <section
+            class="transformation-path"
+            aria-label="Three levels of transformation"
+        >
 
-            <div class="path-line"></div>
+            <div
+                class="path-line"
+                aria-hidden="true"
+            ></div>
 
 
             <div class="path-item">
@@ -445,16 +678,19 @@
 
 
 
-        <!-- =================================================
-             ASSESSMENT
-             ================================================= -->
+        <!-- ====================================================
+             DIAGNOSTIC ASSESSMENT
+             ==================================================== -->
 
-        <section class="assessment-section">
+        <section
+            class="assessment-section"
+            aria-label="Life transformation assessment"
+        >
 
 
-            <!-- =============================================
-                 01 DIGNITY
-                 ============================================= -->
+            <!-- =================================================
+                 01 — DIGNITY
+                 ================================================= -->
 
             <article
                 class="dimension-card dignity-card"
@@ -468,11 +704,14 @@
                     </div>
 
 
-                    <div class="dimension-icon">
+                    <div
+                        class="dimension-icon"
+                        aria-hidden="true"
+                    >
 
                         <svg
                             viewBox="0 0 100 100"
-                            aria-hidden="true"
+                            focusable="false"
                         >
 
                             <circle
@@ -482,16 +721,18 @@
                             />
 
                             <path
-                                d="M50 24
-                                   L56 43
-                                   L76 43
-                                   L60 55
-                                   L66 75
-                                   L50 63
-                                   L34 75
-                                   L40 55
-                                   L24 43
-                                   L44 43 Z"
+                                d="
+                                    M50 24
+                                    L56 43
+                                    L76 43
+                                    L60 55
+                                    L66 75
+                                    L50 63
+                                    L34 75
+                                    L40 55
+                                    L24 43
+                                    L44 43 Z
+                                "
                             />
 
                         </svg>
@@ -515,16 +756,12 @@
 
 
                 <p class="dimension-statement">
-
                     தன்னை மதித்து, தன்னம்பிக்கையுடன் வாழ்.
-
                 </p>
 
 
                 <p class="dimension-statement-en">
-
                     Respect yourself and live with self-confidence.
-
                 </p>
 
 
@@ -540,6 +777,7 @@
                     மதிப்பை அளிக்கிறீர்களா?
 
                 </div>
+
 
 
                 <!-- QUESTION 01 -->
@@ -574,81 +812,71 @@
                             type="button"
                             class="score-option"
                             data-score="1"
-                        >
-                            1
-                        </button>
+                            aria-label="Dignity Question 1 — 1 out of 10"
+                        >1</button>
 
                         <button
                             type="button"
                             class="score-option"
                             data-score="2"
-                        >
-                            2
-                        </button>
+                            aria-label="Dignity Question 1 — 2 out of 10"
+                        >2</button>
 
                         <button
                             type="button"
                             class="score-option"
                             data-score="3"
-                        >
-                            3
-                        </button>
+                            aria-label="Dignity Question 1 — 3 out of 10"
+                        >3</button>
 
                         <button
                             type="button"
                             class="score-option"
                             data-score="4"
-                        >
-                            4
-                        </button>
+                            aria-label="Dignity Question 1 — 4 out of 10"
+                        >4</button>
 
                         <button
                             type="button"
                             class="score-option"
                             data-score="5"
-                        >
-                            5
-                        </button>
+                            aria-label="Dignity Question 1 — 5 out of 10"
+                        >5</button>
 
                         <button
                             type="button"
                             class="score-option"
                             data-score="6"
-                        >
-                            6
-                        </button>
+                            aria-label="Dignity Question 1 — 6 out of 10"
+                        >6</button>
 
                         <button
                             type="button"
                             class="score-option"
                             data-score="7"
-                        >
-                            7
-                        </button>
+                            aria-label="Dignity Question 1 — 7 out of 10"
+                        >7</button>
 
                         <button
                             type="button"
                             class="score-option"
                             data-score="8"
-                        >
-                            8
-                        </button>
+                            aria-label="Dignity Question 1 — 8 out of 10"
+                        >8</button>
 
                         <button
                             type="button"
                             class="score-option"
                             data-score="9"
-                        >
-                            9
-                        </button>
+                            aria-label="Dignity Question 1 — 9 out of 10"
+                        >9</button>
 
                         <button
                             type="button"
                             class="score-option"
                             data-score="10"
-                        >
-                            10
-                        </button>
+                            aria-label="Dignity Question 1 — 10 out of 10"
+                        >10</button>
 
                     </div>
 
@@ -686,16 +914,75 @@
                         aria-label="Dignity Question 2"
                     >
 
-                        <button type="button" class="score-option" data-score="1">1</button>
-                        <button type="button" class="score-option" data-score="2">2</button>
-                        <button type="button" class="score-option" data-score="3">3</button>
-                        <button type="button" class="score-option" data-score="4">4</button>
-                        <button type="button" class="score-option" data-score="5">5</button>
-                        <button type="button" class="score-option" data-score="6">6</button>
-                        <button type="button" class="score-option" data-score="7">7</button>
-                        <button type="button" class="score-option" data-score="8">8</button>
-                        <button type="button" class="score-option" data-score="9">9</button>
-                        <button type="button" class="score-option" data-score="10">10</button>
+                        <button
+                            type="button"
+                            class="score-option"
+                            data-score="1"
+                            aria-label="Dignity Question 2 — 1 out of 10"
+                        >1</button>
+
+                        <button
+                            type="button"
+                            class="score-option"
+                            data-score="2"
+                            aria-label="Dignity Question 2 — 2 out of 10"
+                        >2</button>
+
+                        <button
+                            type="button"
+                            class="score-option"
+                            data-score="3"
+                            aria-label="Dignity Question 2 — 3 out of 10"
+                        >3</button>
+
+                        <button
+                            type="button"
+                            class="score-option"
+                            data-score="4"
+                            aria-label="Dignity Question 2 — 4 out of 10"
+                        >4</button>
+
+                        <button
+                            type="button"
+                            class="score-option"
+                            data-score="5"
+                            aria-label="Dignity Question 2 — 5 out of 10"
+                        >5</button>
+
+                        <button
+                            type="button"
+                            class="score-option"
+                            data-score="6"
+                            aria-label="Dignity Question 2 — 6 out of 10"
+                        >6</button>
+
+                        <button
+                            type="button"
+                            class="score-option"
+                            data-score="7"
+                            aria-label="Dignity Question 2 — 7 out of 10"
+                        >7</button>
+
+                        <button
+                            type="button"
+                            class="score-option"
+                            data-score="8"
+                            aria-label="Dignity Question 2 — 8 out of 10"
+                        >8</button>
+
+                        <button
+                            type="button"
+                            class="score-option"
+                            data-score="9"
+                            aria-label="Dignity Question 2 — 9 out of 10"
+                        >9</button>
+
+                        <button
+                            type="button"
+                            class="score-option"
+                            data-score="10"
+                            aria-label="Dignity Question 2 — 10 out of 10"
+                        >10</button>
 
                     </div>
 
@@ -722,9 +1009,9 @@
 
 
 
-            <!-- =============================================
-                 02 IDENTITY
-                 ============================================= -->
+            <!-- =================================================
+                 02 — IDENTITY
+                 ================================================= -->
 
             <article
                 class="dimension-card identity-card"
@@ -738,11 +1025,14 @@
                     </div>
 
 
-                    <div class="dimension-icon">
+                    <div
+                        class="dimension-icon"
+                        aria-hidden="true"
+                    >
 
                         <svg
                             viewBox="0 0 100 100"
-                            aria-hidden="true"
+                            focusable="false"
                         >
 
                             <circle
@@ -752,9 +1042,11 @@
                             />
 
                             <path
-                                d="M22 82
-                                   Q22 57 50 57
-                                   Q78 57 78 82"
+                                d="
+                                    M22 82
+                                    Q22 57 50 57
+                                    Q78 57 78 82
+                                "
                             />
 
                             <circle
@@ -808,6 +1100,7 @@
                 </div>
 
 
+
                 <!-- QUESTION 03 -->
 
                 <div
@@ -838,16 +1131,16 @@
                         aria-label="Identity Question 1"
                     >
 
-                        <button type="button" class="score-option" data-score="1">1</button>
-                        <button type="button" class="score-option" data-score="2">2</button>
-                        <button type="button" class="score-option" data-score="3">3</button>
-                        <button type="button" class="score-option" data-score="4">4</button>
-                        <button type="button" class="score-option" data-score="5">5</button>
-                        <button type="button" class="score-option" data-score="6">6</button>
-                        <button type="button" class="score-option" data-score="7">7</button>
-                        <button type="button" class="score-option" data-score="8">8</button>
-                        <button type="button" class="score-option" data-score="9">9</button>
-                        <button type="button" class="score-option" data-score="10">10</button>
+                        <button type="button" class="score-option" data-score="1" aria-label="Identity Question 1 — 1 out of 10">1</button>
+                        <button type="button" class="score-option" data-score="2" aria-label="Identity Question 1 — 2 out of 10">2</button>
+                        <button type="button" class="score-option" data-score="3" aria-label="Identity Question 1 — 3 out of 10">3</button>
+                        <button type="button" class="score-option" data-score="4" aria-label="Identity Question 1 — 4 out of 10">4</button>
+                        <button type="button" class="score-option" data-score="5" aria-label="Identity Question 1 — 5 out of 10">5</button>
+                        <button type="button" class="score-option" data-score="6" aria-label="Identity Question 1 — 6 out of 10">6</button>
+                        <button type="button" class="score-option" data-score="7" aria-label="Identity Question 1 — 7 out of 10">7</button>
+                        <button type="button" class="score-option" data-score="8" aria-label="Identity Question 1 — 8 out of 10">8</button>
+                        <button type="button" class="score-option" data-score="9" aria-label="Identity Question 1 — 9 out of 10">9</button>
+                        <button type="button" class="score-option" data-score="10" aria-label="Identity Question 1 — 10 out of 10">10</button>
 
                     </div>
 
@@ -887,16 +1180,16 @@
                         aria-label="Identity Question 2"
                     >
 
-                        <button type="button" class="score-option" data-score="1">1</button>
-                        <button type="button" class="score-option" data-score="2">2</button>
-                        <button type="button" class="score-option" data-score="3">3</button>
-                        <button type="button" class="score-option" data-score="4">4</button>
-                        <button type="button" class="score-option" data-score="5">5</button>
-                        <button type="button" class="score-option" data-score="6">6</button>
-                        <button type="button" class="score-option" data-score="7">7</button>
-                        <button type="button" class="score-option" data-score="8">8</button>
-                        <button type="button" class="score-option" data-score="9">9</button>
-                        <button type="button" class="score-option" data-score="10">10</button>
+                        <button type="button" class="score-option" data-score="1" aria-label="Identity Question 2 — 1 out of 10">1</button>
+                        <button type="button" class="score-option" data-score="2" aria-label="Identity Question 2 — 2 out of 10">2</button>
+                        <button type="button" class="score-option" data-score="3" aria-label="Identity Question 2 — 3 out of 10">3</button>
+                        <button type="button" class="score-option" data-score="4" aria-label="Identity Question 2 — 4 out of 10">4</button>
+                        <button type="button" class="score-option" data-score="5" aria-label="Identity Question 2 — 5 out of 10">5</button>
+                        <button type="button" class="score-option" data-score="6" aria-label="Identity Question 2 — 6 out of 10">6</button>
+                        <button type="button" class="score-option" data-score="7" aria-label="Identity Question 2 — 7 out of 10">7</button>
+                        <button type="button" class="score-option" data-score="8" aria-label="Identity Question 2 — 8 out of 10">8</button>
+                        <button type="button" class="score-option" data-score="9" aria-label="Identity Question 2 — 9 out of 10">9</button>
+                        <button type="button" class="score-option" data-score="10" aria-label="Identity Question 2 — 10 out of 10">10</button>
 
                     </div>
 
@@ -923,9 +1216,9 @@
 
 
 
-            <!-- =============================================
-                 03 AUTHORITY
-                 ============================================= -->
+            <!-- =================================================
+                 03 — AUTHORITY
+                 ================================================= -->
 
             <article
                 class="dimension-card authority-card"
@@ -939,24 +1232,29 @@
                     </div>
 
 
-                    <div class="dimension-icon">
+                    <div
+                        class="dimension-icon"
+                        aria-hidden="true"
+                    >
 
                         <svg
                             viewBox="0 0 100 100"
-                            aria-hidden="true"
+                            focusable="false"
                         >
 
                             <path
-                                d="M50 15
-                                   L60 37
-                                   L84 40
-                                   L66 56
-                                   L71 80
-                                   L50 68
-                                   L29 80
-                                   L34 56
-                                   L16 40
-                                   L40 37 Z"
+                                d="
+                                    M50 15
+                                    L60 37
+                                    L84 40
+                                    L66 56
+                                    L71 80
+                                    L50 68
+                                    L29 80
+                                    L34 56
+                                    L16 40
+                                    L40 37 Z
+                                "
                             />
 
                             <circle
@@ -1014,6 +1312,7 @@
                 </div>
 
 
+
                 <!-- QUESTION 05 -->
 
                 <div
@@ -1045,16 +1344,16 @@
                         aria-label="Authority Question 1"
                     >
 
-                        <button type="button" class="score-option" data-score="1">1</button>
-                        <button type="button" class="score-option" data-score="2">2</button>
-                        <button type="button" class="score-option" data-score="3">3</button>
-                        <button type="button" class="score-option" data-score="4">4</button>
-                        <button type="button" class="score-option" data-score="5">5</button>
-                        <button type="button" class="score-option" data-score="6">6</button>
-                        <button type="button" class="score-option" data-score="7">7</button>
-                        <button type="button" class="score-option" data-score="8">8</button>
-                        <button type="button" class="score-option" data-score="9">9</button>
-                        <button type="button" class="score-option" data-score="10">10</button>
+                        <button type="button" class="score-option" data-score="1" aria-label="Authority Question 1 — 1 out of 10">1</button>
+                        <button type="button" class="score-option" data-score="2" aria-label="Authority Question 1 — 2 out of 10">2</button>
+                        <button type="button" class="score-option" data-score="3" aria-label="Authority Question 1 — 3 out of 10">3</button>
+                        <button type="button" class="score-option" data-score="4" aria-label="Authority Question 1 — 4 out of 10">4</button>
+                        <button type="button" class="score-option" data-score="5" aria-label="Authority Question 1 — 5 out of 10">5</button>
+                        <button type="button" class="score-option" data-score="6" aria-label="Authority Question 1 — 6 out of 10">6</button>
+                        <button type="button" class="score-option" data-score="7" aria-label="Authority Question 1 — 7 out of 10">7</button>
+                        <button type="button" class="score-option" data-score="8" aria-label="Authority Question 1 — 8 out of 10">8</button>
+                        <button type="button" class="score-option" data-score="9" aria-label="Authority Question 1 — 9 out of 10">9</button>
+                        <button type="button" class="score-option" data-score="10" aria-label="Authority Question 1 — 10 out of 10">10</button>
 
                     </div>
 
@@ -1093,16 +1392,16 @@
                         aria-label="Authority Question 2"
                     >
 
-                        <button type="button" class="score-option" data-score="1">1</button>
-                        <button type="button" class="score-option" data-score="2">2</button>
-                        <button type="button" class="score-option" data-score="3">3</button>
-                        <button type="button" class="score-option" data-score="4">4</button>
-                        <button type="button" class="score-option" data-score="5">5</button>
-                        <button type="button" class="score-option" data-score="6">6</button>
-                        <button type="button" class="score-option" data-score="7">7</button>
-                        <button type="button" class="score-option" data-score="8">8</button>
-                        <button type="button" class="score-option" data-score="9">9</button>
-                        <button type="button" class="score-option" data-score="10">10</button>
+                        <button type="button" class="score-option" data-score="1" aria-label="Authority Question 2 — 1 out of 10">1</button>
+                        <button type="button" class="score-option" data-score="2" aria-label="Authority Question 2 — 2 out of 10">2</button>
+                        <button type="button" class="score-option" data-score="3" aria-label="Authority Question 2 — 3 out of 10">3</button>
+                        <button type="button" class="score-option" data-score="4" aria-label="Authority Question 2 — 4 out of 10">4</button>
+                        <button type="button" class="score-option" data-score="5" aria-label="Authority Question 2 — 5 out of 10">5</button>
+                        <button type="button" class="score-option" data-score="6" aria-label="Authority Question 2 — 6 out of 10">6</button>
+                        <button type="button" class="score-option" data-score="7" aria-label="Authority Question 2 — 7 out of 10">7</button>
+                        <button type="button" class="score-option" data-score="8" aria-label="Authority Question 2 — 8 out of 10">8</button>
+                        <button type="button" class="score-option" data-score="9" aria-label="Authority Question 2 — 9 out of 10">9</button>
+                        <button type="button" class="score-option" data-score="10" aria-label="Authority Question 2 — 10 out of 10">10</button>
 
                     </div>
 
@@ -1131,18 +1430,21 @@
 
 
 
-        <!-- =================================================
+        <!-- ====================================================
              TRANSFORMATION SCORE
-             ================================================= -->
+             ==================================================== -->
 
-        <section class="result-section">
+        <section
+            class="result-section"
+            aria-labelledby="result-title"
+        >
 
             <div class="section-kicker">
                 YOUR TRANSFORMATION SCORE
             </div>
 
 
-            <h2>
+            <h2 id="result-title">
                 உங்கள் வாழ்க்கையின் அடுத்த உயர்வு எது?
             </h2>
 
@@ -1150,7 +1452,10 @@
             <div class="result-grid">
 
 
-                <div class="result-card dignity-result">
+                <div
+                    class="result-card dignity-result"
+                    aria-label="Dignity result"
+                >
 
                     <span class="result-label">
                         மதிப்பு
@@ -1167,7 +1472,10 @@
                 </div>
 
 
-                <div class="result-card identity-result">
+                <div
+                    class="result-card identity-result"
+                    aria-label="Identity result"
+                >
 
                     <span class="result-label">
                         அடையாளம்
@@ -1184,7 +1492,10 @@
                 </div>
 
 
-                <div class="result-card authority-result">
+                <div
+                    class="result-card authority-result"
+                    aria-label="Authority result"
+                >
 
                     <span class="result-label">
                         அதிகாரம்
@@ -1210,7 +1521,11 @@
                 </p>
 
 
-                <div class="development-choice-group">
+                <div
+                    class="development-choice-group"
+                    role="group"
+                    aria-label="Choose the level that needs the most development"
+                >
 
                     <button
                         type="button"
@@ -1253,11 +1568,14 @@
 
 
 
-        <!-- =================================================
+        <!-- ====================================================
              CLOSING MESSAGE
-             ================================================= -->
+             ==================================================== -->
 
-        <section class="closing-section">
+        <section
+            class="closing-section"
+            aria-label="Page 03 closing reflection"
+        >
 
             <div class="closing-card">
 
@@ -1319,37 +1637,79 @@
 
 
 
-        <!-- =====================================================
-             FROZEN GLOBAL NAVIGATION
-             BACK → PAGE 02 | NEXT → PAGE 04
-             ===================================================== -->
+        <!-- ====================================================
+             GLOBAL JOURNEY NAVIGATION
+             PAGE 02 → PAGE 03 → PAGE 04
+             ==================================================== -->
 
-        <nav class="page-navigation" aria-label="Journey navigation">
+        <nav
+            class="page-navigation"
+            aria-label="Journey navigation"
+        >
 
             <a
                 class="nav-button nav-back"
                 href="02.html"
                 id="previousButton"
+                aria-label="முந்தைய பக்கம் — Previous page"
             >
-                <span class="nav-arrow">←</span>
-                <span class="nav-text">
-                    <span class="nav-ta">முந்தைய பக்கம்</span>
-                    <span class="nav-en">PREVIOUS</span>
+
+                <span
+                    class="nav-arrow"
+                    aria-hidden="true"
+                >
+                    ←
                 </span>
+
+                <span class="nav-text">
+
+                    <span class="nav-ta">
+                        முந்தைய பக்கம்
+                    </span>
+
+                    <span class="nav-en">
+                        PREVIOUS
+                    </span>
+
+                </span>
+
             </a>
 
-            <div class="navigation-progress">03 / 16</div>
+
+            <div
+                class="navigation-progress"
+                aria-label="Page 3 of 16"
+            >
+                03 / 16
+            </div>
+
 
             <a
                 class="nav-button nav-forward"
                 href="04.html"
                 id="nextButton"
+                aria-label="அடுத்த பக்கம் — Next page"
             >
+
                 <span class="nav-text">
-                    <span class="nav-ta">அடுத்த பக்கம்</span>
-                    <span class="nav-en">NEXT</span>
+
+                    <span class="nav-ta">
+                        அடுத்த பக்கம்
+                    </span>
+
+                    <span class="nav-en">
+                        NEXT
+                    </span>
+
                 </span>
-                <span class="nav-arrow">→</span>
+
+                <span
+                    class="nav-arrow"
+                    aria-hidden="true"
+                >
+                    →
+                </span>
+
             </a>
 
         </nav>
@@ -1358,40 +1718,33 @@
     </main>
 
 
-<footer class="page-footer">
-    <div class="footer-tagline">EVERY DREAM HAS A PATH™</div>
-    <div class="footer-brand">CTM PATH™ MILLIONAIRES™ CLUB</div>
-</footer>
+
+    <!-- ========================================================
+         GLOBAL BOTTOM BRANDING
+         ======================================================== -->
+
+    <footer class="page-footer">
+
+        <div class="footer-tagline">
+            EVERY DREAM HAS A PATH™
+        </div>
+
+        <div class="footer-brand">
+            CTM PATH™ MILLIONAIRES™ CLUB
+        </div>
+
+    </footer>
 
 
-    <!-- PAGE JAVASCRIPT -->
+
+    <!-- ========================================================
+         PAGE JAVASCRIPT
+         ======================================================== -->
 
     <script
         src="js/page03.js"
     ></script>
 
-    <script>
-        (function () {
-            const previous = document.getElementById('previousButton');
-            const next = document.getElementById('nextButton');
-
-            if (previous) {
-                previous.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    event.stopImmediatePropagation();
-                    window.location.href = '02.html';
-                }, true);
-            }
-
-            if (next) {
-                next.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    event.stopImmediatePropagation();
-                    window.location.href = '04.html';
-                }, true);
-            }
-        })();
-    </script>
 
 </body>
 
