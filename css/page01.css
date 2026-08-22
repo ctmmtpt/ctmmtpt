@@ -36,11 +36,11 @@
        BRAND
        ----------------------------------------------------- */
 
-    --gold: #f4c542;
-    --gold-soft: #d9a92e;
+    --gold: #c8a85a;
+    --gold-soft: #a88945;
 
-    --teal: #19c8c2;
-    --teal-soft: #83e7e2;
+    --teal: #20c7c2;
+    --teal-soft: #8bded9;
 
 
     /* -----------------------------------------------------
@@ -133,18 +133,17 @@ body {
     min-height: 100vh;
 
     background:
-
         radial-gradient(
             circle at 50% 0%,
-            rgba(25, 200, 194, 0.07),
-            transparent 34%
+            rgba(32, 199, 194, 0.045),
+            transparent 30%
         ),
 
         linear-gradient(
-            135deg,
-            #050c18 0%,
-            var(--bg-main) 48%,
-            #090d1d 100%
+            145deg,
+            #06101d 0%,
+            var(--bg-main) 52%,
+            #080e1b 100%
         );
 
     color: var(--ivory);
@@ -206,12 +205,12 @@ a {
 
     width: 100%;
 
-    min-height: 190px;
+    min-height: 172px;
 
     padding:
-        34px
+        30px
         72px
-        26px;
+        22px;
 
     display: flex;
 
@@ -268,9 +267,9 @@ a {
 
 .universal-page-header .brand-logo {
 
-    width: 64px;
+    width: 60px;
 
-    height: 64px;
+    height: 60px;
 
     display: block;
 
@@ -466,7 +465,7 @@ a {
     text-align: center;
 
     padding:
-        30px 24px 42px;
+        34px 24px 46px;
 }
 
 
@@ -486,9 +485,9 @@ a {
 
     font-size:
         clamp(
-            2.5rem,
-            5vw,
-            4.5rem
+            2.35rem,
+            4.6vw,
+            4rem
         );
 
     font-weight: 800;
@@ -498,12 +497,12 @@ a {
     letter-spacing: 0.01em;
 
     text-shadow:
-        0 6px 28px
+        0 8px 30px
         rgba(
-            244,
-            197,
-            66,
-            0.13
+            200,
+            168,
+            90,
+            0.10
         );
 }
 
@@ -513,7 +512,7 @@ a {
     margin:
         20px auto 0;
 
-    max-width: 1050px;
+    max-width: 900px;
 
     color: var(--ivory);
 
@@ -573,10 +572,10 @@ a {
 
 .intro-message {
 
-    max-width: 920px;
+    max-width: 820px;
 
     margin:
-        28px auto 0;
+        30px auto 0;
 }
 
 
@@ -590,14 +589,14 @@ a {
 
     font-size:
         clamp(
-            1.05rem,
-            2vw,
-            1.35rem
+            1.08rem,
+            1.7vw,
+            1.32rem
         );
 
     font-weight: 500;
 
-    line-height: 1.9;
+    line-height: 1.95;
 }
 
 
@@ -749,15 +748,15 @@ a {
 
     gap: 24px;
 
-    padding: 30px;
+    padding: 30px 32px;
 
     border:
         1px solid
         rgba(
-            25,
-            200,
+            32,
+            199,
             194,
-            0.22
+            0.18
         );
 
     border-radius: 24px;
@@ -771,12 +770,12 @@ a {
 
     box-shadow:
         0 18px 55px
-        rgba(0, 0, 0, 0.28);
+        rgba(0, 0, 0, 0.24);
 
     transition:
-        transform 0.2s ease,
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
+        transform 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease;
 }
 
 
@@ -787,10 +786,10 @@ a {
 
     border-color:
         rgba(
-            25,
-            200,
+            32,
+            199,
             194,
-            0.42
+            0.34
         );
 
     box-shadow:
@@ -1806,26 +1805,27 @@ a {
 
     border-color:
         rgba(
-            255,
-            151,
-            55,
-            0.65
+            200,
+            168,
+            90,
+            0.34
         );
 
     background:
-        linear-gradient(
-            135deg,
-            var(--orange),
-            var(--red)
+        rgba(
+            255,
+            255,
+            255,
+            0.025
         );
 
     box-shadow:
         0 14px 32px
         rgba(
-            214,
-            90,
-            69,
-            0.16
+            0,
+            0,
+            0,
+            0.18
         );
 }
 
@@ -1833,10 +1833,19 @@ a {
 .navigation-back:hover {
 
     background:
-        linear-gradient(
-            135deg,
-            #f19a2e,
-            #df6048
+        rgba(
+            200,
+            168,
+            90,
+            0.08
+        );
+
+    border-color:
+        rgba(
+            200,
+            168,
+            90,
+            0.58
         );
 }
 
@@ -1850,26 +1859,27 @@ a {
 
     border-color:
         rgba(
-            41,
-            196,
-            125,
-            0.70
+            32,
+            199,
+            194,
+            0.48
         );
 
     background:
-        linear-gradient(
-            135deg,
-            var(--green-dark),
-            var(--green-bright)
+        rgba(
+            32,
+            199,
+            194,
+            0.08
         );
 
     box-shadow:
         0 14px 32px
         rgba(
-            24,
-            166,
-            106,
-            0.16
+            0,
+            0,
+            0,
+            0.18
         );
 }
 
@@ -1877,10 +1887,19 @@ a {
 .navigation-next:hover {
 
     background:
-        linear-gradient(
-            135deg,
-            #09945b,
-            #38d58c
+        rgba(
+            32,
+            199,
+            194,
+            0.15
+        );
+
+    border-color:
+        rgba(
+            32,
+            199,
+            194,
+            0.72
         );
 }
 
@@ -2053,9 +2072,9 @@ a {
         100%;
 
     padding:
-        44px
+        38px
         20px
-        54px;
+        48px;
 
     text-align:
         center;
@@ -2610,8 +2629,55 @@ a {
         animation-duration:
             0.01ms !important;
 
+        animation-delay:
+            0ms !important;
+
         animation-iteration-count:
             1 !important;
     }
 
+}
+
+
+/* =========================================================
+   PAGE 01 — SUBTLE PREMIUM MOTION
+   CSS-only enhancement; no JavaScript dependency.
+   ========================================================= */
+
+.page-intro,
+.rating-introduction,
+.selvam-card,
+.life-score-section,
+.universal-page-navigation {
+
+    animation:
+        page01Reveal
+        0.65s
+        ease-out
+        both;
+}
+
+.rating-introduction {
+    animation-delay: 80ms;
+}
+
+.selvam-card:nth-child(2) {
+    animation-delay: 40ms;
+}
+
+.selvam-card:nth-child(3) {
+    animation-delay: 60ms;
+}
+
+@keyframes page01Reveal {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
