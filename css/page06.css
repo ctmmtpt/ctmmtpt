@@ -1,7 +1,7 @@
 /* =========================================================
    CTM PATH™ MILLIONAIRES™ — PAGE 06
-   COMPLETE PAGE-SPECIFIC REPLACEMENT
-   Premium dark / royal-blue / teal / muted-gold system
+   FOUNDER / GUIDE PRESENTATION
+   Premium • Dignified • Human • Trustworthy
    ========================================================= */
 
 :root {
@@ -9,16 +9,27 @@
     --p06-bg-deep: #041321;
     --p06-panel: #0a2235;
     --p06-panel-2: #0d2a40;
+
     --p06-ivory: #f5f0e7;
     --p06-muted: #b9c5ca;
+    --p06-muted-soft: rgba(185, 197, 202, 0.72);
+
     --p06-teal: #09c8cf;
     --p06-teal-soft: #6ce1df;
+
     --p06-gold: #f4b321;
     --p06-gold-soft: #ffd166;
+
     --p06-line: rgba(244, 179, 33, 0.42);
     --p06-border: rgba(255, 255, 255, 0.09);
+    --p06-border-soft: rgba(255, 255, 255, 0.065);
+
     --p06-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+    --p06-shadow-soft: 0 18px 50px rgba(0, 0, 0, 0.22);
+
+    --p06-radius: 24px;
 }
+
 
 /* ---------------------------------------------------------
    PAGE FOUNDATION
@@ -33,8 +44,17 @@ body.page-06 {
     margin: 0;
     min-height: 100vh;
     background:
-        radial-gradient(circle at 50% 8%, rgba(12, 73, 101, 0.18), transparent 34%),
-        linear-gradient(180deg, #061a2b 0%, #071d30 46%, #041522 100%);
+        radial-gradient(
+            circle at 50% 8%,
+            rgba(12, 73, 101, 0.16),
+            transparent 34%
+        ),
+        linear-gradient(
+            180deg,
+            #061a2b 0%,
+            #071d30 46%,
+            #041522 100%
+        );
     color: var(--p06-ivory);
     font-family:
         "Noto Sans Tamil",
@@ -60,6 +80,13 @@ body.page-06 {
     text-decoration: none;
 }
 
+.page-06 a:focus-visible,
+.page-06 button:focus-visible {
+    outline: 2px solid var(--p06-teal);
+    outline-offset: 4px;
+}
+
+
 /* ---------------------------------------------------------
    GLOBAL HEADER
    --------------------------------------------------------- */
@@ -74,7 +101,11 @@ body.page-06 {
     justify-content: space-between;
     gap: 40px;
     background:
-        linear-gradient(180deg, rgba(3, 15, 27, 0.34), rgba(3, 15, 27, 0)),
+        linear-gradient(
+            180deg,
+            rgba(3, 15, 27, 0.34),
+            rgba(3, 15, 27, 0)
+        ),
         transparent;
 }
 
@@ -122,6 +153,7 @@ body.page-06 {
     white-space: nowrap;
 }
 
+
 /* ---------------------------------------------------------
    GOLD / TEAL DIVIDER
    --------------------------------------------------------- */
@@ -148,6 +180,7 @@ body.page-06 {
     background: var(--p06-teal);
 }
 
+
 /* ---------------------------------------------------------
    MAIN CONTAINER
    --------------------------------------------------------- */
@@ -158,19 +191,20 @@ body.page-06 {
     padding: 112px 0 120px;
 }
 
+
 /* ---------------------------------------------------------
    INTRODUCTION
    --------------------------------------------------------- */
 
 .page-06 .page06-intro {
-    max-width: 1180px;
-    margin: 0 auto 130px;
+    max-width: 1080px;
+    margin: 0 auto 126px;
     text-align: center;
 }
 
 .page-06 .page06-kicker {
-    min-height: 86px;
-    margin: 0 auto 34px;
+    min-height: 76px;
+    margin: 0 auto 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -178,17 +212,22 @@ body.page-06 {
 
 .page-06 .page06-kicker .umbar-avai-logo {
     display: block;
-    width: min(290px, 32vw);
-    height: 86px;
+    width: min(260px, 32vw);
+    height: 76px;
     object-fit: contain;
     object-position: center;
-    filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.28));
+    opacity: 0.9;
+    filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.24));
+}
+
+.page-06 .page06-intro .section-label {
+    margin-bottom: 22px;
 }
 
 .page-06 .page06-intro h1 {
     margin: 0;
     color: var(--p06-ivory);
-    font-size: clamp(48px, 5.25vw, 88px);
+    font-size: clamp(46px, 5vw, 80px);
     font-weight: 900;
     line-height: 1.25;
     letter-spacing: -0.025em;
@@ -196,52 +235,65 @@ body.page-06 {
 }
 
 .page-06 .page06-subtitle {
-    margin: 36px 0 0;
+    margin: 30px 0 0;
     color: var(--p06-teal);
     font-family: Arial, sans-serif;
-    font-size: clamp(17px, 1.45vw, 25px);
+    font-size: clamp(15px, 1.3vw, 21px);
     font-weight: 900;
-    letter-spacing: 0.34em;
+    letter-spacing: 0.32em;
     line-height: 1.4;
 }
 
 .page-06 .page06-lead {
-    margin: 34px auto 0;
-    max-width: 900px;
+    margin: 32px auto 0;
+    max-width: 850px;
     color: var(--p06-ivory);
-    font-size: clamp(22px, 1.8vw, 31px);
-    font-weight: 700;
-    line-height: 1.65;
+    font-size: clamp(21px, 1.7vw, 29px);
+    font-weight: 650;
+    line-height: 1.7;
 }
 
 .page-06 .page06-lead-en {
-    max-width: 820px;
-    margin: 16px auto 0;
+    max-width: 780px;
+    margin: 14px auto 0;
     color: var(--p06-muted);
     font-family: Arial, sans-serif;
-    font-size: clamp(16px, 1.15vw, 20px);
-    line-height: 1.6;
+    font-size: clamp(15px, 1.1vw, 19px);
+    line-height: 1.65;
 }
 
+
 /* ---------------------------------------------------------
-   RAPHAEL RAJ PROFILE
+   RAPHAEL RAJ — FOUNDER / GUIDE PROFILE
    --------------------------------------------------------- */
 
 .page-06 .raphael-profile {
     width: 100%;
     display: grid;
-    grid-template-columns: minmax(330px, 0.78fr) minmax(0, 1.42fr);
-    gap: clamp(48px, 6vw, 100px);
+    grid-template-columns:
+        minmax(320px, 0.72fr)
+        minmax(0, 1.45fr);
+    gap: clamp(50px, 6vw, 100px);
     align-items: center;
-    padding: 76px clamp(32px, 5vw, 78px);
-    margin-bottom: 125px;
+
+    padding: 72px clamp(32px, 5vw, 78px);
+    margin-bottom: 124px;
+
     background:
-        linear-gradient(135deg, rgba(255,255,255,0.035), rgba(255,255,255,0.012)),
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.035),
+            rgba(255, 255, 255, 0.012)
+        ),
         var(--p06-panel);
+
     border: 1px solid var(--p06-border);
-    border-radius: 28px;
+    border-radius: var(--p06-radius);
     box-shadow: var(--p06-shadow);
 }
+
+
+/* Portrait column */
 
 .page-06 .raphael-image-column {
     display: flex;
@@ -251,24 +303,59 @@ body.page-06 {
 
 .page-06 .raphael-image-frame {
     position: relative;
-    width: min(100%, 480px);
+    width: min(100%, 440px);
     aspect-ratio: 4 / 5;
     overflow: hidden;
-    border: 1px solid rgba(244, 179, 33, 0.36);
-    border-radius: 20px;
+
     background: #030b12;
+
+    border:
+        1px solid
+        rgba(244, 179, 33, 0.30);
+
+    border-radius: 18px;
+
     box-shadow:
-        0 0 0 8px rgba(244, 179, 33, 0.035),
-        0 28px 60px rgba(0, 0, 0, 0.38);
+        0 0 0 7px rgba(244, 179, 33, 0.025),
+        0 28px 60px rgba(0, 0, 0, 0.34);
+
+    transition:
+        border-color 220ms ease,
+        box-shadow 220ms ease,
+        transform 220ms ease;
+}
+
+.page-06 .raphael-image-frame::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.02) 40%,
+            rgba(0, 0, 0, 0.18) 100%
+        );
 }
 
 .page-06 .raphael-image-frame::after {
     content: "";
     position: absolute;
+    z-index: 2;
     inset: 0;
     pointer-events: none;
-    border: 1px solid rgba(255,255,255,0.06);
+
+    border: 1px solid rgba(255, 255, 255, 0.055);
     border-radius: inherit;
+}
+
+.page-06 .raphael-image-frame:hover {
+    border-color: rgba(244, 179, 33, 0.46);
+    box-shadow:
+        0 0 0 7px rgba(244, 179, 33, 0.035),
+        0 30px 64px rgba(0, 0, 0, 0.40);
 }
 
 .page-06 .raphael-image {
@@ -279,80 +366,101 @@ body.page-06 {
     object-position: center top;
 }
 
+
+/* Portrait identification */
+
 .page-06 .raphael-caption {
-    margin-top: 20px;
+    margin-top: 18px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 5px;
+
     font-family: Arial, sans-serif;
     text-align: center;
 }
 
 .page-06 .raphael-caption strong {
     color: var(--p06-gold);
-    font-size: 15px;
+    font-size: 12px;
+    font-weight: 900;
     letter-spacing: 0.28em;
 }
 
 .page-06 .raphael-caption span {
     color: var(--p06-ivory);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 800;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.15em;
 }
+
+
+/* Profile content */
 
 .page-06 .raphael-content {
     min-width: 0;
 }
 
 .page-06 .profile-label {
-    margin-bottom: 16px;
+    display: inline-block;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+
     color: var(--p06-gold);
     font-family: Arial, sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 900;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.28em;
+
+    border-bottom: 1px solid rgba(244, 179, 33, 0.34);
 }
 
 .page-06 .raphael-content h2 {
     margin: 0;
     color: var(--p06-ivory);
-    font-size: clamp(40px, 4vw, 64px);
+    font-size: clamp(40px, 4vw, 62px);
     font-weight: 900;
-    line-height: 1.22;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
 }
 
 .page-06 .profile-tagline {
-    margin: 20px 0 28px;
+    margin: 18px 0 28px;
     color: var(--p06-teal);
     font-family: Arial, sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 900;
-    letter-spacing: 0.28em;
+    letter-spacing: 0.26em;
 }
 
 .page-06 .profile-introduction {
+    max-width: 820px;
     margin: 0;
     color: var(--p06-ivory);
-    font-size: clamp(20px, 1.5vw, 25px);
+    font-size: clamp(19px, 1.45vw, 24px);
     font-weight: 600;
-    line-height: 1.75;
+    line-height: 1.78;
 }
 
 .page-06 .profile-introduction-en {
-    margin: 17px 0 34px;
+    max-width: 790px;
+    margin: 16px 0 34px;
     color: var(--p06-muted);
     font-family: Arial, sans-serif;
-    font-size: 17px;
+    font-size: 16px;
     line-height: 1.7;
 }
 
+
+/* Experience highlights */
+
 .page-06 .profile-highlight {
     display: grid;
-    grid-template-columns: 54px minmax(0, 1fr);
-    gap: 20px;
-    padding: 24px 0;
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 18px;
+
+    padding: 23px 0;
+
     border-top: 1px solid var(--p06-border);
 }
 
@@ -361,94 +469,124 @@ body.page-06 {
 }
 
 .page-06 .highlight-icon {
-    width: 46px;
-    height: 46px;
+    width: 44px;
+    height: 44px;
+
     display: grid;
     place-items: center;
-    border: 1px solid rgba(244, 179, 33, 0.5);
+
+    border:
+        1px solid
+        rgba(244, 179, 33, 0.45);
+
     border-radius: 50%;
+
     color: var(--p06-gold);
     font-family: Arial, sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 900;
 }
 
 .page-06 .profile-highlight h3 {
-    margin: 0 0 8px;
+    margin: 0 0 7px;
     color: var(--p06-ivory);
-    font-size: clamp(19px, 1.4vw, 24px);
+    font-size: clamp(18px, 1.35vw, 23px);
     font-weight: 900;
-    line-height: 1.4;
+    line-height: 1.45;
 }
 
 .page-06 .profile-highlight p {
     margin: 0;
     color: var(--p06-muted);
-    font-size: 16px;
-    line-height: 1.7;
+    font-size: 15px;
+    line-height: 1.75;
 }
 
 .page-06 .profile-highlight p.english {
     margin-top: 6px;
     font-family: Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.55;
+    font-size: 13px;
+    line-height: 1.6;
 }
+
 
 /* ---------------------------------------------------------
    CONTRIBUTION SECTION
    --------------------------------------------------------- */
 
 .page-06 .contribution-section {
-    margin-bottom: 125px;
+    margin-bottom: 124px;
 }
 
 .page-06 .section-heading {
-    margin-bottom: 54px;
+    max-width: 900px;
+    margin: 0 auto 52px;
     text-align: center;
 }
 
 .page-06 .section-heading > span {
     display: block;
-    margin-bottom: 18px;
+    margin-bottom: 17px;
     color: var(--p06-gold);
     font-family: Arial, sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 900;
-    letter-spacing: 0.32em;
+    letter-spacing: 0.3em;
 }
 
 .page-06 .section-heading h2 {
     margin: 0;
     color: var(--p06-ivory);
-    font-size: clamp(38px, 3.7vw, 61px);
+    font-size: clamp(36px, 3.6vw, 58px);
     font-weight: 900;
-    line-height: 1.35;
+    line-height: 1.38;
 }
 
 .page-06 .section-heading p {
-    margin: 20px 0 0;
+    margin: 18px 0 0;
     color: var(--p06-muted);
     font-family: Arial, sans-serif;
-    font-size: 16px;
-    letter-spacing: 0.05em;
+    font-size: 15px;
+    letter-spacing: 0.04em;
 }
+
+
+/* Contribution cards */
 
 .page-06 .contribution-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 24px;
+    gap: 22px;
 }
 
 .page-06 .contribution-card {
     position: relative;
-    min-height: 360px;
-    padding: 36px 32px 34px;
+    min-height: 350px;
+    padding: 34px 30px 32px;
     overflow: hidden;
-    background: linear-gradient(145deg, var(--p06-panel-2), var(--p06-panel));
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(13, 42, 64, 0.94),
+            rgba(10, 34, 53, 0.98)
+        );
+
     border: 1px solid var(--p06-border);
-    border-radius: 22px;
-    box-shadow: 0 18px 50px rgba(0,0,0,0.22);
+    border-radius: 20px;
+
+    box-shadow: var(--p06-shadow-soft);
+
+    transition:
+        transform 220ms ease,
+        border-color 220ms ease,
+        box-shadow 220ms ease;
+}
+
+.page-06 .contribution-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(9, 200, 207, 0.24);
+    box-shadow: 0 22px 56px rgba(0, 0, 0, 0.28);
 }
 
 .page-06 .contribution-card::before {
@@ -456,57 +594,59 @@ body.page-06 {
     position: absolute;
     top: 0;
     left: 0;
-    width: 70px;
-    height: 3px;
+    width: 64px;
+    height: 2px;
     background: var(--p06-gold);
 }
 
 .page-06 .card-number {
     position: absolute;
-    top: 28px;
-    right: 28px;
-    color: rgba(244, 179, 33, 0.25);
+    top: 25px;
+    right: 26px;
+
+    color: rgba(244, 179, 33, 0.20);
     font-family: Arial, sans-serif;
-    font-size: 42px;
+    font-size: 38px;
     font-weight: 900;
 }
 
 .page-06 .card-icon {
-    margin-bottom: 22px;
-    font-size: 34px;
+    margin-bottom: 20px;
+    font-size: 30px;
     line-height: 1;
 }
 
 .page-06 .contribution-card h3 {
-    margin: 0 0 8px;
+    margin: 0 0 7px;
     color: var(--p06-ivory);
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 900;
-    line-height: 1.4;
+    line-height: 1.45;
 }
 
 .page-06 .contribution-card h4 {
-    margin: 0 0 20px;
+    margin: 0 0 19px;
     color: var(--p06-teal);
     font-family: Arial, sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 900;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.17em;
 }
 
 .page-06 .contribution-card p {
     margin: 0;
     color: var(--p06-muted);
-    font-size: 16px;
-    line-height: 1.75;
+    font-size: 15px;
+    line-height: 1.78;
 }
 
 .page-06 .contribution-card p.english {
-    margin-top: 12px;
+    margin-top: 11px;
     font-family: Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 13px;
+    line-height: 1.62;
 }
+
 
 /* ---------------------------------------------------------
    UMBAR AVAI MOVEMENT
@@ -514,70 +654,81 @@ body.page-06 {
 
 .page-06 .umbar-avai-section {
     display: grid;
-    grid-template-columns: 150px minmax(0, 1fr);
-    gap: 50px;
+    grid-template-columns: 140px minmax(0, 1fr);
+    gap: 46px;
     align-items: center;
-    margin-bottom: 110px;
-    padding: 70px clamp(32px, 6vw, 88px);
+
+    margin-bottom: 108px;
+    padding: 66px clamp(32px, 6vw, 88px);
+
     background:
-        linear-gradient(120deg, rgba(9, 200, 207, 0.055), rgba(244, 179, 33, 0.035)),
+        linear-gradient(
+            120deg,
+            rgba(9, 200, 207, 0.045),
+            rgba(244, 179, 33, 0.028)
+        ),
         var(--p06-panel);
-    border-top: 1px solid rgba(9, 200, 207, 0.25);
-    border-bottom: 1px solid rgba(244, 179, 33, 0.25);
+
+    border-top: 1px solid rgba(9, 200, 207, 0.22);
+    border-bottom: 1px solid rgba(244, 179, 33, 0.22);
 }
 
 .page-06 .umbar-avai-mark {
-    width: 126px;
-    height: 126px;
+    width: 116px;
+    height: 116px;
+
     display: grid;
     place-items: center;
-    border: 1px solid rgba(244, 179, 33, 0.45);
+
+    border: 1px solid rgba(244, 179, 33, 0.40);
     border-radius: 50%;
+
     color: var(--p06-gold);
     font-family: Georgia, serif;
-    font-size: 62px;
+    font-size: 56px;
     font-weight: 700;
 }
 
 .page-06 .section-label {
-    margin-bottom: 14px;
+    margin-bottom: 13px;
     color: var(--p06-teal);
     font-family: Arial, sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 900;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.28em;
 }
 
 .page-06 .umbar-avai-content h2 {
     margin: 0;
     color: var(--p06-gold);
     font-family: Arial, sans-serif;
-    font-size: clamp(28px, 2.4vw, 40px);
+    font-size: clamp(27px, 2.35vw, 39px);
     font-weight: 900;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.11em;
 }
 
 .page-06 .umbar-avai-content h3 {
-    margin: 14px 0 16px;
+    margin: 13px 0 15px;
     color: var(--p06-ivory);
-    font-size: clamp(24px, 2vw, 34px);
-    line-height: 1.5;
+    font-size: clamp(23px, 1.9vw, 32px);
+    line-height: 1.52;
 }
 
 .page-06 .umbar-avai-content p {
     max-width: 980px;
     margin: 0;
     color: var(--p06-muted);
-    font-size: 17px;
-    line-height: 1.75;
+    font-size: 16px;
+    line-height: 1.78;
 }
 
 .page-06 .umbar-avai-content p.english {
-    margin-top: 10px;
+    margin-top: 9px;
     font-family: Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 13px;
+    line-height: 1.62;
 }
+
 
 /* ---------------------------------------------------------
    THREE PILLARS
@@ -587,18 +738,22 @@ body.page-06 {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0;
-    margin-bottom: 120px;
+
+    margin-bottom: 116px;
+
     border-top: 1px solid var(--p06-border);
     border-bottom: 1px solid var(--p06-border);
 }
 
 .page-06 .pillar {
-    min-height: 180px;
-    padding: 34px 28px;
+    min-height: 170px;
+    padding: 32px 26px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     text-align: center;
 }
 
@@ -607,10 +762,10 @@ body.page-06 {
 }
 
 .page-06 .pillar span {
-    margin-bottom: 13px;
+    margin-bottom: 12px;
     color: var(--p06-gold);
     font-family: Arial, sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 900;
     letter-spacing: 0.18em;
 }
@@ -618,57 +773,65 @@ body.page-06 {
 .page-06 .pillar strong {
     color: var(--p06-ivory);
     font-family: Arial, sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 900;
-    letter-spacing: 0.13em;
+    letter-spacing: 0.12em;
 }
 
 .page-06 .pillar small {
-    margin-top: 9px;
+    margin-top: 8px;
     color: var(--p06-muted);
-    font-size: 15px;
+    font-size: 14px;
 }
+
 
 /* ---------------------------------------------------------
    CLOSING MESSAGE
    --------------------------------------------------------- */
 
 .page-06 .page06-closing {
-    max-width: 1050px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 30px 0 20px;
+    padding: 28px 0 18px;
     text-align: center;
 }
 
 .page-06 .closing-line {
-    width: 110px;
-    height: 3px;
-    margin: 0 auto 34px;
-    background: linear-gradient(90deg, var(--p06-gold), var(--p06-teal));
+    width: 100px;
+    height: 2px;
+    margin: 0 auto 30px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--p06-gold),
+            var(--p06-teal)
+        );
 }
 
 .page-06 .page06-closing h2 {
     margin: 0;
     color: var(--p06-ivory);
-    font-size: clamp(34px, 3.2vw, 52px);
+    font-size: clamp(33px, 3.1vw, 50px);
     font-weight: 900;
-    line-height: 1.45;
+    line-height: 1.46;
 }
 
 .page-06 .page06-closing p {
-    margin: 24px auto 0;
+    margin: 22px auto 0;
     color: var(--p06-ivory);
-    font-size: clamp(20px, 1.6vw, 27px);
-    line-height: 1.65;
+    font-size: clamp(19px, 1.55vw, 26px);
+    line-height: 1.68;
 }
 
 .page-06 .page06-closing p.english {
-    margin-top: 10px;
+    margin-top: 9px;
     color: var(--p06-muted);
     font-family: Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
+    font-size: 15px;
+    line-height: 1.62;
 }
+
 
 /* ---------------------------------------------------------
    GLOBAL FOOTER / NAVIGATION
@@ -678,15 +841,18 @@ body.page-06 {
     position: relative;
     margin-top: 30px;
     padding: 0 clamp(36px, 6vw, 108px) 58px;
+
     background: #041321;
-    border-top: 1px solid rgba(255,255,255,0.07);
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .page-06 .page-navigation {
     min-height: 126px;
+
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
+
     gap: 30px;
 }
 
@@ -695,9 +861,12 @@ body.page-06 {
     align-items: center;
     gap: 18px;
     width: fit-content;
+
     padding: 15px 18px;
+
     border: 1px solid transparent;
     border-radius: 12px;
+
     transition:
         transform 180ms ease,
         border-color 180ms ease,
@@ -707,7 +876,12 @@ body.page-06 {
 .page-06 .nav-button:hover {
     transform: translateY(-2px);
     border-color: rgba(9, 200, 207, 0.28);
-    background: rgba(255,255,255,0.025);
+    background: rgba(255, 255, 255, 0.025);
+}
+
+.page-06 .nav-button:focus-visible {
+    border-color: var(--p06-teal);
+    background: rgba(9, 200, 207, 0.05);
 }
 
 .page-06 .nav-next {
@@ -744,9 +918,11 @@ body.page-06 {
 
 .page-06 .nav-current {
     min-width: 90px;
+
     display: flex;
     align-items: baseline;
     justify-content: center;
+
     color: var(--p06-gold);
     font-family: Arial, sans-serif;
 }
@@ -765,7 +941,7 @@ body.page-06 {
 
 .page-06 .global-footer-brand {
     padding-top: 24px;
-    border-top: 1px solid rgba(255,255,255,0.07);
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
     text-align: center;
 }
 
@@ -779,18 +955,20 @@ body.page-06 {
 
 .page-06 .footer-brand {
     margin-top: 9px;
-    color: rgba(245,240,231,0.65);
+    color: rgba(245, 240, 231, 0.65);
     font-family: Arial, sans-serif;
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 0.12em;
 }
 
+
 /* ---------------------------------------------------------
    LARGE DESKTOP
    --------------------------------------------------------- */
 
 @media (min-width: 1500px) {
+
     .page-06 .global-header {
         min-height: 310px;
         padding-top: 78px;
@@ -812,16 +990,22 @@ body.page-06 {
     }
 
     .page-06 .page06-kicker .umbar-avai-logo {
-        width: 320px;
-        height: 96px;
+        width: 300px;
+        height: 90px;
+    }
+
+    .page-06 .raphael-image-frame {
+        width: min(100%, 470px);
     }
 }
+
 
 /* ---------------------------------------------------------
    TABLET
    --------------------------------------------------------- */
 
 @media (max-width: 1050px) {
+
     .page-06 .global-header {
         min-height: 190px;
         padding: 48px 42px 45px;
@@ -852,22 +1036,36 @@ body.page-06 {
 
     .page-06 .raphael-profile {
         grid-template-columns: 1fr;
+        gap: 48px;
     }
 
     .page-06 .raphael-image-frame {
         width: min(100%, 400px);
     }
 
+    .page-06 .raphael-content {
+        max-width: 760px;
+        margin: 0 auto;
+    }
+
     .page-06 .contribution-grid {
         grid-template-columns: 1fr;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .page-06 .contribution-card {
+        min-height: 0;
     }
 }
+
 
 /* ---------------------------------------------------------
    MOBILE
    --------------------------------------------------------- */
 
 @media (max-width: 700px) {
+
     .page-06 .global-header {
         min-height: auto;
         padding: 28px 22px 30px;
@@ -906,128 +1104,257 @@ body.page-06 {
 
     .page-06 .page06-main {
         width: calc(100% - 36px);
-        padding: 62px 0 80px;
+        padding: 58px 0 76px;
     }
 
     .page-06 .page06-intro {
-        margin-bottom: 80px;
+        margin-bottom: 76px;
     }
 
     .page-06 .page06-kicker {
-        min-height: 58px;
-        margin-bottom: 22px;
+        min-height: 56px;
+        margin-bottom: 20px;
     }
 
     .page-06 .page06-kicker .umbar-avai-logo {
-        width: 210px;
-        height: 58px;
+        width: 205px;
+        height: 56px;
+    }
+
+    .page-06 .page06-intro .section-label {
+        margin-bottom: 17px;
+        font-size: 9px;
+        letter-spacing: 0.20em;
+        line-height: 1.5;
     }
 
     .page-06 .page06-intro h1 {
-        font-size: clamp(34px, 9.5vw, 52px);
-        line-height: 1.3;
+        font-size: clamp(33px, 9.4vw, 50px);
+        line-height: 1.34;
     }
 
     .page-06 .page06-subtitle {
-        margin-top: 22px;
-        font-size: 11px;
-        letter-spacing: 0.22em;
+        margin-top: 21px;
+        font-size: 10px;
+        letter-spacing: 0.19em;
     }
 
     .page-06 .page06-lead {
-        margin-top: 24px;
+        margin-top: 22px;
         font-size: 18px;
-        line-height: 1.7;
+        line-height: 1.75;
     }
 
     .page-06 .page06-lead-en {
         font-size: 13px;
+        line-height: 1.65;
     }
 
+
+    /* Founder profile */
+
     .page-06 .raphael-profile {
-        gap: 42px;
-        padding: 30px 22px;
+        gap: 40px;
+        padding: 28px 20px 32px;
         border-radius: 18px;
-        margin-bottom: 80px;
+        margin-bottom: 78px;
     }
 
     .page-06 .raphael-image-frame {
-        width: min(100%, 330px);
+        width: min(100%, 315px);
+        border-radius: 16px;
+    }
+
+    .page-06 .raphael-caption {
+        margin-top: 15px;
+    }
+
+    .page-06 .raphael-caption strong {
+        font-size: 10px;
+    }
+
+    .page-06 .raphael-caption span {
+        font-size: 12px;
+    }
+
+    .page-06 .profile-label {
+        margin-bottom: 11px;
+        font-size: 10px;
+        letter-spacing: 0.22em;
     }
 
     .page-06 .raphael-content h2 {
-        font-size: 35px;
+        font-size: 34px;
+        line-height: 1.28;
+    }
+
+    .page-06 .profile-tagline {
+        margin: 15px 0 23px;
+        font-size: 10px;
+        letter-spacing: 0.20em;
+        line-height: 1.5;
     }
 
     .page-06 .profile-introduction {
-        font-size: 18px;
+        font-size: 17px;
+        line-height: 1.82;
     }
 
     .page-06 .profile-introduction-en {
+        margin-top: 13px;
+        margin-bottom: 28px;
         font-size: 13px;
+        line-height: 1.68;
     }
 
     .page-06 .profile-highlight {
-        grid-template-columns: 42px minmax(0, 1fr);
-        gap: 12px;
-        padding: 20px 0;
+        grid-template-columns: 40px minmax(0, 1fr);
+        gap: 11px;
+        padding: 19px 0;
     }
 
     .page-06 .highlight-icon {
-        width: 38px;
-        height: 38px;
-        font-size: 11px;
+        width: 37px;
+        height: 37px;
+        font-size: 10px;
     }
 
     .page-06 .profile-highlight h3 {
-        font-size: 18px;
+        font-size: 17px;
+        line-height: 1.5;
     }
 
     .page-06 .profile-highlight p {
         font-size: 14px;
+        line-height: 1.78;
+    }
+
+    .page-06 .profile-highlight p.english {
+        font-size: 12px;
+    }
+
+
+    /* Contributions */
+
+    .page-06 .contribution-section {
+        margin-bottom: 82px;
+    }
+
+    .page-06 .section-heading {
+        margin-bottom: 38px;
+    }
+
+    .page-06 .section-heading > span {
+        font-size: 9px;
+        letter-spacing: 0.22em;
     }
 
     .page-06 .section-heading h2 {
-        font-size: 32px;
+        font-size: 30px;
+        line-height: 1.48;
+    }
+
+    .page-06 .section-heading p {
+        margin-top: 14px;
+        font-size: 12px;
+        line-height: 1.55;
+    }
+
+    .page-06 .contribution-grid {
+        gap: 14px;
     }
 
     .page-06 .contribution-card {
         min-height: 0;
-        padding: 30px 24px;
+        padding: 28px 22px 26px;
+        border-radius: 17px;
     }
+
+    .page-06 .card-number {
+        top: 22px;
+        right: 21px;
+        font-size: 32px;
+    }
+
+    .page-06 .card-icon {
+        margin-bottom: 18px;
+        font-size: 28px;
+    }
+
+    .page-06 .contribution-card h3 {
+        font-size: 22px;
+    }
+
+    .page-06 .contribution-card h4 {
+        margin-bottom: 17px;
+        font-size: 10px;
+        letter-spacing: 0.13em;
+    }
+
+    .page-06 .contribution-card p {
+        font-size: 14px;
+        line-height: 1.8;
+    }
+
+    .page-06 .contribution-card p.english {
+        font-size: 12px;
+    }
+
+
+    /* Umbar Avai */
 
     .page-06 .umbar-avai-section {
         grid-template-columns: 1fr;
-        gap: 26px;
-        padding: 42px 25px;
+        gap: 24px;
+
+        margin-bottom: 78px;
+        padding: 40px 22px;
+
         text-align: center;
     }
 
     .page-06 .umbar-avai-mark {
-        width: 94px;
-        height: 94px;
+        width: 90px;
+        height: 90px;
         margin: 0 auto;
-        font-size: 46px;
+        font-size: 44px;
+    }
+
+    .page-06 .umbar-avai-content .section-label {
+        font-size: 9px;
+        letter-spacing: 0.22em;
     }
 
     .page-06 .umbar-avai-content h2 {
-        font-size: 25px;
+        font-size: 24px;
+        letter-spacing: 0.08em;
     }
 
     .page-06 .umbar-avai-content h3 {
-        font-size: 21px;
+        font-size: 20px;
+        line-height: 1.55;
     }
 
     .page-06 .umbar-avai-content p {
         font-size: 14px;
+        line-height: 1.8;
     }
+
+    .page-06 .umbar-avai-content p.english {
+        font-size: 12px;
+    }
+
+
+    /* Three pillars */
 
     .page-06 .three-pillars {
         grid-template-columns: 1fr;
+        margin-bottom: 82px;
     }
 
     .page-06 .pillar {
-        min-height: 135px;
+        min-height: 128px;
+        padding: 28px 20px;
     }
 
     .page-06 .pillar + .pillar {
@@ -1035,13 +1362,54 @@ body.page-06 {
         border-top: 1px solid var(--p06-border);
     }
 
+    .page-06 .pillar span {
+        margin-bottom: 10px;
+        font-size: 10px;
+    }
+
+    .page-06 .pillar strong {
+        font-size: 12px;
+    }
+
+    .page-06 .pillar small {
+        margin-top: 7px;
+        font-size: 13px;
+    }
+
+
+    /* Closing */
+
+    .page-06 .page06-closing {
+        padding: 22px 0 12px;
+    }
+
+    .page-06 .closing-line {
+        width: 80px;
+        margin-bottom: 25px;
+    }
+
+    .page-06 .page06-closing .section-label {
+        font-size: 9px;
+        letter-spacing: 0.20em;
+    }
+
     .page-06 .page06-closing h2 {
-        font-size: 29px;
+        font-size: 28px;
+        line-height: 1.5;
     }
 
     .page-06 .page06-closing p {
-        font-size: 18px;
+        margin-top: 18px;
+        font-size: 17px;
+        line-height: 1.75;
     }
+
+    .page-06 .page06-closing p.english {
+        font-size: 12px;
+    }
+
+
+    /* Footer */
 
     .page-06 .global-footer {
         padding: 0 22px 36px;
@@ -1056,6 +1424,7 @@ body.page-06 {
     .page-06 .nav-button {
         gap: 8px;
         padding: 10px 5px;
+        border-radius: 9px;
     }
 
     .page-06 .nav-arrow {
@@ -1085,19 +1454,77 @@ body.page-06 {
 
     .page-06 .footer-brand {
         font-size: 8px;
+        letter-spacing: 0.09em;
     }
 }
+
+
+/* ---------------------------------------------------------
+   VERY SMALL MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 420px) {
+
+    .page-06 .global-header {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .page-06 .global-logo {
+        width: 50px;
+        height: 50px;
+    }
+
+    .page-06 .global-brand-name {
+        font-size: 14px;
+    }
+
+    .page-06 .global-page-number {
+        font-size: 9px;
+        letter-spacing: 0.11em;
+    }
+
+    .page-06 .page06-main {
+        width: calc(100% - 28px);
+    }
+
+    .page-06 .raphael-profile {
+        padding-left: 17px;
+        padding-right: 17px;
+    }
+
+    .page-06 .page-navigation {
+        gap: 4px;
+    }
+
+    .page-06 .nav-button {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .page-06 .nav-text strong {
+        font-size: 11px;
+    }
+
+    .page-06 .nav-arrow {
+        font-size: 18px;
+    }
+}
+
 
 /* ---------------------------------------------------------
    REDUCED MOTION
    --------------------------------------------------------- */
 
 @media (prefers-reduced-motion: reduce) {
+
     .page-06 {
         scroll-behavior: auto;
     }
 
-    .page-06 .nav-button {
+    .page-06 .nav-button,
+    .page-06 .raphael-image-frame,
+    .page-06 .contribution-card {
         transition: none;
     }
 }
