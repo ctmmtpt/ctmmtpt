@@ -41,7 +41,6 @@
 'use strict';
 
 
-
 /* ================================================================
    CONFIGURATION
    ================================================================ */
@@ -62,6 +61,12 @@ const PAGE01_CONFIG = Object.freeze({
 
     INDEX_PAGE:
         '/',
+
+    SCROLL_BEHAVIOR:
+        'smooth',
+
+    TOP_SCROLL_BEHAVIOR:
+        'auto',
 
     TOTAL_SELVAMS:
         16,
@@ -107,7 +112,6 @@ const PAGE01_CONFIG = Object.freeze({
     })
 
 });
-
 
 
 /* ================================================================
@@ -233,7 +237,6 @@ const SELVAMS = Object.freeze([
 ]);
 
 
-
 /* ================================================================
    APPLICATION STATE
    ================================================================ */
@@ -258,7 +261,6 @@ const state = {
         false
 
 };
-
 
 
 /* ================================================================
@@ -291,6 +293,49 @@ const DOM = {
 };
 
 
+/* ================================================================
+   PAGE ENTRY / SCROLL MANAGEMENT
+   ---------------------------------------------------------------
+   Page 01 is a new chapter in the guided journey. Always enter
+   at the top of the page so browser history or a previous scroll
+   position cannot place the visitor in the middle of the experience.
+   ================================================================ */
+
+function resetPageScroll() {
+
+    try {
+
+        if ('scrollRestoration' in window.history) {
+
+            window.history.scrollRestoration =
+                'manual';
+
+        }
+
+    } catch (error) {
+
+        console.warn(
+            '[CTM PATH™] Could not set scroll restoration:',
+            error
+        );
+
+    }
+
+    window.scrollTo({
+
+        top:
+            0,
+
+        left:
+            0,
+
+        behavior:
+            PAGE01_CONFIG.TOP_SCROLL_BEHAVIOR
+
+    });
+
+}
+
 
 /* ================================================================
    INITIALIZATION
@@ -302,12 +347,38 @@ document.addEventListener(
 );
 
 
-
 function initializePage01() {
 
     if (state.initialized) {
         return;
     }
+
+    resetPageScroll();
+
+
+    /*
+     * A second frame handles browsers that restore scroll position
+     * after DOMContentLoaded.
+     */
+
+    window.requestAnimationFrame(
+        function () {
+
+            window.scrollTo({
+
+                top:
+                    0,
+
+                left:
+                    0,
+
+                behavior:
+                    PAGE01_CONFIG.TOP_SCROLL_BEHAVIOR
+
+            });
+
+        }
+    );
 
 
     cacheDOM();
@@ -331,7 +402,8 @@ function initializePage01() {
     calculateAndRender();
 
 
-    state.initialized = true;
+    state.initialized =
+        true;
 
 
     console.log(
@@ -339,7 +411,6 @@ function initializePage01() {
     );
 
 }
-
 
 
 /* ================================================================
@@ -394,7 +465,6 @@ function cacheDOM() {
         );
 
 }
-
 
 
 /* ================================================================
@@ -478,7 +548,6 @@ function validateDOM() {
 }
 
 
-
 /* ================================================================
    INITIALIZE SCORE STATE
    ================================================================ */
@@ -498,7 +567,6 @@ function initializeScoreState() {
 }
 
 
-
 /* ================================================================
    BIND SCORE BUTTONS
    ================================================================ */
@@ -507,6 +575,17 @@ function bindScoreButtons() {
 
     DOM.scoreGroups.forEach(
         function (group) {
+
+            if (
+                group.dataset.ctmBound === 'true'
+            ) {
+                return;
+            }
+
+
+            group.dataset.ctmBound =
+                'true';
+
 
             const field =
                 group.getAttribute(
@@ -556,7 +635,6 @@ function bindScoreButtons() {
     );
 
 }
-
 
 
 /* ================================================================
@@ -619,7 +697,6 @@ function handleScoreSelection(
 }
 
 
-
 /* ================================================================
    SCORE VALIDATION
    ================================================================ */
@@ -627,13 +704,18 @@ function handleScoreSelection(
 function isValidScore(score) {
 
     return (
+
         Number.isInteger(score) &&
-        score >= PAGE01_CONFIG.MIN_SCORE &&
-        score <= PAGE01_CONFIG.MAX_SCORE
+
+        score >=
+            PAGE01_CONFIG.MIN_SCORE &&
+
+        score <=
+            PAGE01_CONFIG.MAX_SCORE
+
     );
 
 }
-
 
 
 /* ================================================================
@@ -643,8 +725,13 @@ function isValidScore(score) {
 function getScoreRange(score) {
 
     if (
-        score >= PAGE01_CONFIG.SCORE_RANGES.LOW.min &&
-        score <= PAGE01_CONFIG.SCORE_RANGES.LOW.max
+
+        score >=
+            PAGE01_CONFIG.SCORE_RANGES.LOW.min &&
+
+        score <=
+            PAGE01_CONFIG.SCORE_RANGES.LOW.max
+
     ) {
 
         return PAGE01_CONFIG.SCORE_RANGES.LOW;
@@ -653,8 +740,13 @@ function getScoreRange(score) {
 
 
     if (
-        score >= PAGE01_CONFIG.SCORE_RANGES.MID.min &&
-        score <= PAGE01_CONFIG.SCORE_RANGES.MID.max
+
+        score >=
+            PAGE01_CONFIG.SCORE_RANGES.MID.min &&
+
+        score <=
+            PAGE01_CONFIG.SCORE_RANGES.MID.max
+
     ) {
 
         return PAGE01_CONFIG.SCORE_RANGES.MID;
@@ -663,8 +755,13 @@ function getScoreRange(score) {
 
 
     if (
-        score >= PAGE01_CONFIG.SCORE_RANGES.HIGH.min &&
-        score <= PAGE01_CONFIG.SCORE_RANGES.HIGH.max
+
+        score >=
+            PAGE01_CONFIG.SCORE_RANGES.HIGH.min &&
+
+        score <=
+            PAGE01_CONFIG.SCORE_RANGES.HIGH.max
+
     ) {
 
         return PAGE01_CONFIG.SCORE_RANGES.HIGH;
@@ -675,7 +772,6 @@ function getScoreRange(score) {
     return null;
 
 }
-
 
 
 /* ================================================================
@@ -727,13 +823,21 @@ function updateScoreButtons(
              */
 
             button.classList.remove(
+
                 'selected',
+
                 'score-low',
+
                 'score-medium',
+
                 'score-high',
+
                 'score-red',
+
                 'score-orange',
+
                 'score-green'
+
             );
 
 
@@ -744,10 +848,9 @@ function updateScoreButtons(
 
 
             /*
-             * IMPORTANT:
              * Remove old inline colour styles.
              *
-             * The new page01.css is the single
+             * The page01.css stylesheet is the single
              * visual authority.
              */
 
@@ -786,8 +889,11 @@ function updateScoreButtons(
                 if (range) {
 
                     button.classList.add(
+
                         range.className,
+
                         range.colourClass
+
                     );
 
                 }
@@ -804,7 +910,6 @@ function updateScoreButtons(
     );
 
 }
-
 
 
 /* ================================================================
@@ -841,12 +946,19 @@ function updateSelectedScoreDisplay(
 
 
     target.classList.remove(
+
         'score-low',
+
         'score-medium',
+
         'score-high',
+
         'score-red',
+
         'score-orange',
+
         'score-green'
+
     );
 
 
@@ -865,12 +977,14 @@ function updateSelectedScoreDisplay(
 
 
     target.classList.add(
+
         range.className,
+
         range.colourClass
+
     );
 
 }
-
 
 
 /* ================================================================
@@ -909,6 +1023,7 @@ function calculateAndRender() {
 
     state.rawTotal =
         answeredScores.reduce(
+
             function (
                 total,
                 score
@@ -917,7 +1032,9 @@ function calculateAndRender() {
                 return total + score;
 
             },
+
             0
+
         );
 
 
@@ -927,27 +1044,34 @@ function calculateAndRender() {
      */
 
     if (
+
         state.totalAnswered ===
         PAGE01_CONFIG.TOTAL_SELVAMS
+
     ) {
 
         state.lifeScore =
             roundToOneDecimal(
+
                 (
                     state.rawTotal /
                     PAGE01_CONFIG.RAW_MAX
                 ) *
                 PAGE01_CONFIG.LIFE_SCORE_MAX
+
             );
 
 
         state.averageScore =
             roundToOneDecimal(
+
                 state.rawTotal /
                 PAGE01_CONFIG.TOTAL_SELVAMS
+
             );
 
-    } else {
+    }
+    else {
 
         state.lifeScore =
             null;
@@ -966,7 +1090,6 @@ function calculateAndRender() {
 }
 
 
-
 /* ================================================================
    RENDER SUMMARY
    ================================================================ */
@@ -980,8 +1103,11 @@ function renderSummary() {
     if (DOM.totalScore) {
 
         DOM.totalScore.textContent =
+
             state.lifeScore === null
+
                 ? '—'
+
                 : formatScore(
                     state.lifeScore
                 );
@@ -996,8 +1122,11 @@ function renderSummary() {
     if (DOM.averageScore) {
 
         DOM.averageScore.textContent =
+
             state.averageScore === null
+
                 ? '—'
+
                 : formatScore(
                     state.averageScore
                 );
@@ -1005,7 +1134,6 @@ function renderSummary() {
     }
 
 }
-
 
 
 /* ================================================================
@@ -1025,20 +1153,25 @@ function updateContinueState() {
 
 
     DOM.continueButton.setAttribute(
+
         'aria-disabled',
+
         complete
             ? 'false'
             : 'true'
+
     );
 
 
     DOM.continueButton.classList.toggle(
+
         'navigation-disabled',
+
         !complete
+
     );
 
 }
-
 
 
 /* ================================================================
@@ -1053,21 +1186,32 @@ function bindNavigation() {
 
     if (DOM.backButton) {
 
-        DOM.backButton.addEventListener(
-            'click',
-            function (event) {
+        if (
+            DOM.backButton.dataset.ctmBound !==
+            'true'
+        ) {
 
-                event.preventDefault();
+            DOM.backButton.dataset.ctmBound =
+                'true';
 
 
-                saveScores();
+            DOM.backButton.addEventListener(
+                'click',
+                function (event) {
+
+                    event.preventDefault();
 
 
-                window.location.href =
-                    PAGE01_CONFIG.INDEX_PAGE;
+                    saveScores();
 
-            }
-        );
+
+                    window.location.href =
+                        PAGE01_CONFIG.INDEX_PAGE;
+
+                }
+            );
+
+        }
 
     }
 
@@ -1078,62 +1222,74 @@ function bindNavigation() {
 
     if (DOM.continueButton) {
 
-        DOM.continueButton.addEventListener(
-            'click',
-            function (event) {
+        if (
+            DOM.continueButton.dataset.ctmBound !==
+            'true'
+        ) {
 
-                event.preventDefault();
-
-
-                /*
-                 * Do not allow an incomplete
-                 * assessment to proceed.
-                 */
-
-                if (
-                    state.totalAnswered !==
-                    PAGE01_CONFIG.TOTAL_SELVAMS
-                ) {
-
-                    showIncompleteMessage();
+            DOM.continueButton.dataset.ctmBound =
+                'true';
 
 
-                    scrollToFirstUnanswered();
+            DOM.continueButton.addEventListener(
+                'click',
+                function (event) {
+
+                    event.preventDefault();
 
 
-                    return;
+                    /*
+                     * Do not allow an incomplete
+                     * assessment to proceed.
+                     */
+
+                    if (
+
+                        state.totalAnswered !==
+                        PAGE01_CONFIG.TOTAL_SELVAMS
+
+                    ) {
+
+                        showIncompleteMessage();
+
+
+                        scrollToFirstUnanswered();
+
+
+                        return;
+
+                    }
+
+
+                    /*
+                     * Save current state.
+                     */
+
+                    saveScores();
+
+
+                    /*
+                     * Save final Page 01 payload.
+                     */
+
+                    saveFinalAssessment();
+
+
+                    /*
+                     * Navigate to Page 02.
+                     */
+
+                    window.location.href =
+                        PAGE01_CONFIG.NEXT_PAGE;
 
                 }
+            );
 
-
-                /*
-                 * Save current state.
-                 */
-
-                saveScores();
-
-
-                /*
-                 * Save final Page 01 payload.
-                 */
-
-                saveFinalAssessment();
-
-
-                /*
-                 * Navigate to Page 02.
-                 */
-
-                window.location.href =
-                    PAGE01_CONFIG.NEXT_PAGE;
-
-            }
-        );
+        }
 
     }
 
 }
-
 
 
 /* ================================================================
@@ -1148,6 +1304,7 @@ function showIncompleteMessage() {
 
 
     const message =
+
         remaining === 1
 
             ? 'Please complete the remaining Selvam before continuing.'
@@ -1160,7 +1317,6 @@ function showIncompleteMessage() {
     );
 
 }
-
 
 
 /* ================================================================
@@ -1240,12 +1396,39 @@ function scrollToFirstUnanswered() {
 
 
     target.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
+
+        behavior:
+            PAGE01_CONFIG.SCROLL_BEHAVIOR,
+
+        block:
+            'center'
+
     });
 
-}
 
+    const firstScoreButton =
+        target.querySelector(
+            'button[data-score]'
+        );
+
+
+    if (firstScoreButton) {
+
+        window.setTimeout(
+            function () {
+
+                firstScoreButton.focus({
+                    preventScroll:
+                        true
+                });
+
+            },
+            250
+        );
+
+    }
+
+}
 
 
 /* ================================================================
@@ -1265,15 +1448,24 @@ function saveScores() {
     try {
 
         localStorage.setItem(
+
             PAGE01_CONFIG.STORAGE_KEY,
-            JSON.stringify(payload)
+
+            JSON.stringify(
+                payload
+            )
+
         );
 
-    } catch (error) {
+    }
+    catch (error) {
 
         console.error(
+
             '[CTM PATH™] Unable to save Page 01 local data:',
+
             error
+
         );
 
     }
@@ -1286,15 +1478,24 @@ function saveScores() {
     try {
 
         sessionStorage.setItem(
+
             PAGE01_CONFIG.STORAGE_KEY,
-            JSON.stringify(payload)
+
+            JSON.stringify(
+                payload
+            )
+
         );
 
-    } catch (error) {
+    }
+    catch (error) {
 
         console.warn(
+
             '[CTM PATH™] Unable to save Page 01 session data:',
+
             error
+
         );
 
     }
@@ -1312,7 +1513,6 @@ function saveScores() {
     return payload;
 
 }
-
 
 
 /* ================================================================
@@ -1341,15 +1541,24 @@ function saveFinalAssessment() {
     try {
 
         sessionStorage.setItem(
+
             PAGE01_CONFIG.FINAL_STORAGE_KEY,
-            JSON.stringify(payload)
+
+            JSON.stringify(
+                payload
+            )
+
         );
 
-    } catch (error) {
+    }
+    catch (error) {
 
         console.error(
+
             '[CTM PATH™] Unable to save final Page 01 session assessment:',
+
             error
+
         );
 
     }
@@ -1362,15 +1571,24 @@ function saveFinalAssessment() {
     try {
 
         localStorage.setItem(
+
             PAGE01_CONFIG.FINAL_STORAGE_KEY,
-            JSON.stringify(payload)
+
+            JSON.stringify(
+                payload
+            )
+
         );
 
-    } catch (error) {
+    }
+    catch (error) {
 
         console.error(
+
             '[CTM PATH™] Unable to save final Page 01 local assessment:',
+
             error
+
         );
 
     }
@@ -1389,7 +1607,6 @@ function saveFinalAssessment() {
 }
 
 
-
 /* ================================================================
    BUILD ASSESSMENT PAYLOAD
    ================================================================ */
@@ -1405,14 +1622,17 @@ function buildAssessmentPayload() {
             individualScores[
                 selvam.field
             ] =
+
                 isValidScore(
                     state.scores[
                         selvam.field
                     ]
                 )
+
                     ? state.scores[
                         selvam.field
                     ]
+
                     : null;
 
         }
@@ -1466,7 +1686,6 @@ function buildAssessmentPayload() {
 }
 
 
-
 /* ================================================================
    RESTORE SAVED SCORES
    ================================================================ */
@@ -1494,15 +1713,21 @@ function restoreSavedScores() {
         if (raw) {
 
             savedData =
-                JSON.parse(raw);
+                JSON.parse(
+                    raw
+                );
 
         }
 
-    } catch (error) {
+    }
+    catch (error) {
 
         console.warn(
+
             '[CTM PATH™] Could not read Page 01 local data:',
+
             error
+
         );
 
     }
@@ -1516,8 +1741,10 @@ function restoreSavedScores() {
      */
 
     if (
+
         !savedData ||
         !savedData.scores
+
     ) {
 
         try {
@@ -1531,15 +1758,21 @@ function restoreSavedScores() {
             if (raw) {
 
                 savedData =
-                    JSON.parse(raw);
+                    JSON.parse(
+                        raw
+                    );
 
             }
 
-        } catch (error) {
+        }
+        catch (error) {
 
             console.warn(
+
                 '[CTM PATH™] Could not read Page 01 session data:',
+
                 error
+
             );
 
         }
@@ -1552,8 +1785,10 @@ function restoreSavedScores() {
      */
 
     if (
+
         !savedData ||
         !savedData.scores
+
     ) {
 
         return;
@@ -1611,6 +1846,41 @@ function restoreSavedScores() {
 
 }
 
+
+/* ================================================================
+   PAGE EXIT SAFETY
+   ---------------------------------------------------------------
+   Persist current progress if the visitor leaves through browser
+   history, refresh, tab close, or another navigation path.
+   ================================================================ */
+
+window.addEventListener(
+    'pagehide',
+    function () {
+
+        try {
+
+            saveScores();
+
+        }
+        catch (error) {
+
+            console.warn(
+
+                '[CTM PATH™] Could not persist Page 01 before exit:',
+
+                error
+
+            );
+
+        }
+
+    },
+    {
+        capture:
+            true
+    }
+);
 
 
 /* ================================================================
@@ -1716,7 +1986,6 @@ window.CTMPathPage01API = {
 };
 
 
-
 /* ================================================================
    CLEAR ASSESSMENT
    ================================================================ */
@@ -1758,12 +2027,19 @@ function clearAssessment() {
 
 
                 target.classList.remove(
+
                     'score-low',
+
                     'score-medium',
+
                     'score-high',
+
                     'score-red',
+
                     'score-orange',
+
                     'score-green'
+
                 );
 
 
@@ -1807,11 +2083,15 @@ function clearAssessment() {
             PAGE01_CONFIG.FINAL_STORAGE_KEY
         );
 
-    } catch (error) {
+    }
+    catch (error) {
 
         console.warn(
+
             '[CTM PATH™] Could not clear localStorage:',
+
             error
+
         );
 
     }
@@ -1831,11 +2111,15 @@ function clearAssessment() {
             PAGE01_CONFIG.FINAL_STORAGE_KEY
         );
 
-    } catch (error) {
+    }
+    catch (error) {
 
         console.warn(
+
             '[CTM PATH™] Could not clear sessionStorage:',
+
             error
+
         );
 
     }
@@ -1851,7 +2135,8 @@ function clearAssessment() {
 
         delete window.CTMPathPage01Final;
 
-    } catch (error) {
+    }
+    catch (error) {
 
         window.CTMPathPage01 =
             null;
@@ -1871,7 +2156,6 @@ function clearAssessment() {
 }
 
 
-
 /* ================================================================
    UTILITY — ROUND TO ONE DECIMAL
    ================================================================ */
@@ -1888,15 +2172,16 @@ function roundToOneDecimal(value) {
 
 
     return Math.round(
+
         (
             value +
             Number.EPSILON
         ) *
         10
+
     ) / 10;
 
 }
-
 
 
 /* ================================================================
@@ -1942,7 +2227,6 @@ function formatScore(value) {
 }
 
 
-
 /* ================================================================
    UTILITY — ESCAPE ATTRIBUTE
    ================================================================ */
@@ -1950,9 +2234,12 @@ function formatScore(value) {
 function escapeAttribute(value) {
 
     if (
+
         window.CSS &&
+
         typeof window.CSS.escape ===
             'function'
+
     ) {
 
         return window.CSS.escape(
@@ -1968,17 +2255,18 @@ function escapeAttribute(value) {
      */
 
     return String(value)
+
         .replace(
             /\\/g,
             '\\\\'
         )
+
         .replace(
             /"/g,
             '\\"'
         );
 
 }
-
 
 
 /* ================================================================
@@ -1990,47 +2278,40 @@ window.addEventListener(
     function (event) {
 
         console.error(
+
             '[CTM PATH™] Page 01 JavaScript error:',
+
             event.error ||
             event.message
+
         );
 
     }
 );
 
 
+window.addEventListener(
+    'unhandledrejection',
+    function (event) {
+
+        console.error(
+
+            '[CTM PATH™] Page 01 unhandled promise rejection:',
+
+            event.reason
+
+        );
+
+    }
+);
+
 
 /* ================================================================
    DEVELOPMENT CONSOLE
+   ---------------------------------------------------------------
+   Intentionally quiet in production. Error monitoring above remains
+   active so genuine runtime failures can still be diagnosed.
    ================================================================ */
-
-console.log(
-    '[CTM PATH™] Page 01 scoring engine loaded.'
-);
-
-
-console.log(
-    '[CTM PATH™] Scoring:',
-    '1–3 RED | 4–7 ORANGE | 8–10 GREEN'
-);
-
-
-console.log(
-    '[CTM PATH™] Calculation:',
-    'Raw Total / 160 × 100 = Life Score / 100'
-);
-
-
-console.log(
-    '[CTM PATH™] Calculation:',
-    'Raw Total / 16 = Average / 10'
-);
-
-
-console.log(
-    '[CTM PATH™] Visual styling:',
-    'controlled by css/page01.css'
-);
 
 
 /* ================================================================
