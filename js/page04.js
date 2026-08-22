@@ -28,6 +28,10 @@
    NAVIGATION:
    PREVIOUS → 03.html
    NEXT     → 05.html
+
+   PRINCIPLE:
+   Preserve the existing assessment model.
+   Improve reliability, feedback and interaction only.
    ============================================================ */
 
 (function () {
@@ -67,37 +71,53 @@
 
     /* ============================================================
        SCORE MAP
+       DO NOT CHANGE
        ============================================================ */
 
-    const SCORE_MAP = {
+    const SCORE_MAP = Object.freeze({
 
         A: 2,
         B: 5,
         C: 8,
         D: 10
 
-    };
+    });
+
+
+    const VALID_SCORES =
+        new Set(
+            Object.values(SCORE_MAP)
+        );
 
 
     /* ============================================================
        STATE
        ============================================================ */
 
-    let state = {
+    let state = createInitialState();
 
-        answers: {
+    let initialized = false;
 
-            1: null,
-            2: null,
-            3: null,
-            4: null,
-            5: null
+    let saveConfirmationTimer = null;
 
-        },
 
-        transformations: []
+    function createInitialState() {
 
-    };
+        return {
+
+            answers: {
+                1: null,
+                2: null,
+                3: null,
+                4: null,
+                5: null
+            },
+
+            transformations: []
+
+        };
+
+    }
 
 
     /* ============================================================
@@ -105,6 +125,14 @@
        ============================================================ */
 
     function init() {
+
+        if (initialized) {
+            return;
+        }
+
+        initialized = true;
+
+        configureScrollRestoration();
 
         loadState();
 
@@ -124,6 +152,81 @@
 
 
     /* ============================================================
+       SCROLL RESTORATION
+       ============================================================ */
+
+    function configureScrollRestoration() {
+
+        try {
+
+            if (
+                "scrollRestoration" in history
+            ) {
+
+                history.scrollRestoration =
+                    "manual";
+
+            }
+
+        }
+        catch (error) {
+
+            /*
+             * Some browsers may restrict access to
+             * history.scrollRestoration.
+             * Nothing else is required here.
+             */
+
+        }
+
+    }
+
+
+    function scrollToTop() {
+
+        try {
+
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior:
+                    prefersReducedMotion()
+                        ? "auto"
+                        : "smooth"
+            });
+
+        }
+        catch (error) {
+
+            window.scrollTo(
+                0,
+                0
+            );
+
+        }
+
+    }
+
+
+    function prefersReducedMotion() {
+
+        try {
+
+            return window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            ).matches;
+
+        }
+        catch (error) {
+
+            return false;
+
+        }
+
+    }
+
+
+    /* ============================================================
        LOAD STATE
        ============================================================ */
 
@@ -136,15 +239,12 @@
                     CONFIG.STORAGE_KEY
                 );
 
-
             if (!saved) {
                 return;
             }
 
-
             const parsed =
                 JSON.parse(saved);
-
 
             if (
                 !parsed ||
@@ -156,34 +256,31 @@
             }
 
 
+            /* ----------------------------------------------------
+               ANSWERS
+               ---------------------------------------------------- */
+
             if (
                 parsed.answers &&
                 typeof parsed.answers === "object"
             ) {
 
                 for (
-                    let i = 1;
-                    i <= CONFIG.QUESTION_COUNT;
-                    i++
+                    let question = 1;
+                    question <= CONFIG.QUESTION_COUNT;
+                    question++
                 ) {
 
                     const value =
                         Number(
-                            parsed.answers[i]
+                            parsed.answers[question]
                         );
 
-
                     if (
-                        Number.isFinite(value) &&
-                        (
-                            value === 2 ||
-                            value === 5 ||
-                            value === 8 ||
-                            value === 10
-                        )
+                        VALID_SCORES.has(value)
                     ) {
 
-                        state.answers[i] =
+                        state.answers[question] =
                             value;
 
                     }
@@ -193,6 +290,10 @@
             }
 
 
+            /* ----------------------------------------------------
+               TRANSFORMATIONS
+               ---------------------------------------------------- */
+
             if (
                 Array.isArray(
                     parsed.transformations
@@ -200,7 +301,15 @@
             ) {
 
                 state.transformations =
-                    parsed.transformations.slice();
+                    parsed.transformations
+                        .filter(function (value) {
+
+                            return (
+                                typeof value === "string"
+                            );
+
+                        })
+                        .slice();
 
             }
 
@@ -226,12 +335,10 @@
         const total =
             calculateTotalScore();
 
-
         const average =
             calculateAverageScore(
                 total
             );
-
 
         const payload = {
 
@@ -295,65 +402,106 @@
 
         buttons.forEach(function (button) {
 
+            /*
+             * Defensive protection against accidental
+             * duplicate binding if init is ever called again.
+             */
+
+            if (
+                button.dataset.ctmBound === "true"
+            ) {
+
+                return;
+
+            }
+
+            button.dataset.ctmBound = "true";
+
+
             button.addEventListener(
                 "click",
                 function () {
 
-                    const question =
-                        Number(
-                            button.dataset.question
-                        );
-
-
-                    const value =
-                        Number(
-                            button.dataset.value
-                        );
-
-
-                    if (
-                        !Number.isFinite(question) ||
-                        question < 1 ||
-                        question > CONFIG.QUESTION_COUNT
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    if (
-                        !(
-                            value === 2 ||
-                            value === 5 ||
-                            value === 8 ||
-                            value === 10
-                        )
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    state.answers[question] =
-                        value;
-
-
-                    updateQuestionSelection(
-                        question,
-                        value
+                    handleAnswerSelection(
+                        button
                     );
-
-
-                    calculateAndRender();
-
-                    saveState();
 
                 }
             );
 
+
+            /*
+             * Ensure keyboard users can understand
+             * the current selection state.
+             */
+
+            button.setAttribute(
+                "aria-pressed",
+                button.classList.contains("selected")
+                    ? "true"
+                    : "false"
+            );
+
         });
+
+    }
+
+
+    function handleAnswerSelection(button) {
+
+        const question =
+            Number(
+                button.dataset.question
+            );
+
+        const value =
+            Number(
+                button.dataset.value
+            );
+
+
+        if (
+            !isValidQuestion(question)
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            !VALID_SCORES.has(value)
+        ) {
+
+            return;
+
+        }
+
+
+        state.answers[question] =
+            value;
+
+
+        updateQuestionSelection(
+            question,
+            value
+        );
+
+
+        calculateAndRender();
+
+        saveState();
+
+    }
+
+
+    function isValidQuestion(question) {
+
+        return (
+            Number.isInteger(question) &&
+            question >= 1 &&
+            question <= CONFIG.QUESTION_COUNT
+        );
 
     }
 
@@ -380,10 +528,21 @@
                     button.dataset.value
                 );
 
+            const selected =
+                buttonValue === value;
+
 
             button.classList.toggle(
                 "selected",
-                buttonValue === value
+                selected
+            );
+
+
+            button.setAttribute(
+                "aria-pressed",
+                selected
+                    ? "true"
+                    : "false"
             );
 
         });
@@ -439,6 +598,17 @@
 
 
         inputs.forEach(function (input) {
+
+            if (
+                input.dataset.ctmBound === "true"
+            ) {
+
+                return;
+
+            }
+
+            input.dataset.ctmBound = "true";
+
 
             input.addEventListener(
                 "change",
@@ -526,7 +696,7 @@
 
 
             if (
-                Number.isFinite(value)
+                VALID_SCORES.has(value)
             ) {
 
                 total += value;
@@ -554,7 +724,7 @@
                 state.answers
             ).filter(function (value) {
 
-                return Number.isFinite(
+                return VALID_SCORES.has(
                     Number(value)
                 );
 
@@ -590,7 +760,7 @@
             state.answers
         ).filter(function (value) {
 
-            return Number.isFinite(
+            return VALID_SCORES.has(
                 Number(value)
             );
 
@@ -615,6 +785,7 @@
 
     /* ============================================================
        MINDSET LEVEL
+       PRESERVE EXISTING THRESHOLDS
        ============================================================ */
 
     function getMindsetLevel(
@@ -729,7 +900,6 @@
         const total =
             calculateTotalScore();
 
-
         const average =
             calculateAverageScore(
                 total
@@ -740,16 +910,13 @@
             total
         );
 
-
         renderAverageScore(
             average
         );
 
-
         renderMindsetLevel(
             average
         );
-
 
         updateCompletionState();
 
@@ -833,7 +1000,6 @@
                 "averageScore"
             );
 
-
         const reveal =
             document.getElementById(
                 "averageScoreReveal"
@@ -884,6 +1050,11 @@
                 "active"
             );
 
+            step.setAttribute(
+                "aria-current",
+                "false"
+            );
+
         });
 
 
@@ -897,7 +1068,7 @@
             interpretation
         ) {
 
-            interpretation.textContent =
+            interpretation.innerHTML =
                 "";
 
         }
@@ -937,6 +1108,11 @@
                 "active"
             );
 
+            activeStep.setAttribute(
+                "aria-current",
+                "true"
+            );
+
         }
 
 
@@ -946,11 +1122,17 @@
 
             interpretation.innerHTML =
                 `
-                <strong>${escapeHtml(mindset.tamil)}</strong>
-                <br>
-                <span>${escapeHtml(mindset.title)}</span>
-                <br>
-                <small>${escapeHtml(mindset.description)}</small>
+                    <strong>
+                        ${escapeHtml(mindset.tamil)}
+                    </strong>
+                    <br>
+                    <span>
+                        ${escapeHtml(mindset.title)}
+                    </span>
+                    <br>
+                    <small>
+                        ${escapeHtml(mindset.description)}
+                    </small>
                 `;
 
         }
@@ -974,11 +1156,16 @@
         );
 
 
+        document.body.dataset.assessmentComplete =
+            complete
+                ? "true"
+                : "false";
+
+
         const next =
             document.getElementById(
                 "nextButton"
             );
-
 
         const saveContinue =
             document.getElementById(
@@ -993,6 +1180,13 @@
                 complete
             );
 
+            next.setAttribute(
+                "aria-disabled",
+                complete
+                    ? "false"
+                    : "true"
+            );
+
         }
 
 
@@ -1001,6 +1195,13 @@
             saveContinue.classList.toggle(
                 "ready",
                 complete
+            );
+
+            saveContinue.setAttribute(
+                "aria-disabled",
+                complete
+                    ? "false"
+                    : "true"
             );
 
         }
@@ -1019,12 +1220,10 @@
                 "previousButton"
             );
 
-
         const next =
             document.getElementById(
                 "nextButton"
             );
-
 
         const saveContinue =
             document.getElementById(
@@ -1036,7 +1235,12 @@
            PREVIOUS → 03.html
            -------------------------------------------------------- */
 
-        if (previous) {
+        if (
+            previous &&
+            previous.dataset.ctmBound !== "true"
+        ) {
+
+            previous.dataset.ctmBound = "true";
 
             previous.addEventListener(
                 "click",
@@ -1060,13 +1264,19 @@
            NEXT → 05.html
            -------------------------------------------------------- */
 
-        if (next) {
+        if (
+            next &&
+            next.dataset.ctmBound !== "true"
+        ) {
+
+            next.dataset.ctmBound = "true";
 
             next.addEventListener(
                 "click",
                 function (event) {
 
                     event.preventDefault();
+
 
                     if (
                         !isAssessmentComplete()
@@ -1097,11 +1307,19 @@
            SAVE & CONTINUE
            -------------------------------------------------------- */
 
-        if (saveContinue) {
+        if (
+            saveContinue &&
+            saveContinue.dataset.ctmBound !== "true"
+        ) {
+
+            saveContinue.dataset.ctmBound = "true";
 
             saveContinue.addEventListener(
                 "click",
-                function () {
+                function (event) {
+
+                    event.preventDefault();
+
 
                     if (
                         !isAssessmentComplete()
@@ -1136,8 +1354,20 @@
         url
     ) {
 
+        if (
+            typeof url !== "string" ||
+            !url.trim()
+        ) {
+
+            return;
+
+        }
+
+
         /*
-         * Ensure the page begins at the top after navigation.
+         * Preserve the existing session flag for pages
+         * that participate in the shared scroll-restoration
+         * behavior.
          */
 
         try {
@@ -1150,10 +1380,25 @@
         }
         catch (error) {
 
-            /* Ignore storage errors. */
+            /*
+             * Storage is optional.
+             */
 
         }
 
+
+        /*
+         * Prevent the current page from leaving the user
+         * visually stranded at a lower scroll position.
+         */
+
+        scrollToTop();
+
+
+        /*
+         * Use normal navigation so browser history and
+         * existing page routing remain unchanged.
+         */
 
         window.location.href =
             url;
@@ -1215,13 +1460,17 @@
         }
 
 
+        const behavior =
+            prefersReducedMotion()
+                ? "auto"
+                : "smooth";
+
+
         card.scrollIntoView({
 
-            behavior:
-                "smooth",
+            behavior: behavior,
 
-            block:
-                "center"
+            block: "center"
 
         });
 
@@ -1229,6 +1478,46 @@
         card.classList.add(
             "question-needs-answer"
         );
+
+
+        /*
+         * Move focus to the first answer belonging to
+         * the unanswered question when possible.
+         */
+
+        const firstAnswer =
+            card.querySelector(
+                ".answer-option"
+            );
+
+
+        if (
+            firstAnswer
+        ) {
+
+            window.setTimeout(
+                function () {
+
+                    try {
+
+                        firstAnswer.focus({
+                            preventScroll: true
+                        });
+
+                    }
+                    catch (error) {
+
+                        firstAnswer.focus();
+
+                    }
+
+                },
+                prefersReducedMotion()
+                    ? 0
+                    : 250
+            );
+
+        }
 
 
         window.setTimeout(
@@ -1269,25 +1558,26 @@
 
         message.innerHTML =
             `
-            <strong>
-                இன்னும் ${remaining} கேள்விகளுக்கு பதிலளிக்க வேண்டும்.
-            </strong>
-            <br>
-            <span>
-                Please answer all five questions before continuing.
-            </span>
+                <strong>
+                    இன்னும் ${remaining} கேள்விகளுக்கு பதிலளிக்க வேண்டும்.
+                </strong>
+                <br>
+                <span>
+                    Please answer all five questions before continuing.
+                </span>
             `;
 
 
-        message.scrollIntoView({
+        message.setAttribute(
+            "role",
+            "status"
+        );
 
-            behavior:
-                "smooth",
 
-            block:
-                "center"
-
-        });
+        message.setAttribute(
+            "aria-live",
+            "polite"
+        );
 
     }
 
@@ -1309,6 +1599,25 @@
         }
 
 
+        /*
+         * Cancel any previous confirmation timer so
+         * repeated saves cannot create stacked timers.
+         */
+
+        if (
+            saveConfirmationTimer
+        ) {
+
+            window.clearTimeout(
+                saveConfirmationTimer
+            );
+
+            saveConfirmationTimer =
+                null;
+
+        }
+
+
         const original =
             button.innerHTML;
 
@@ -1322,19 +1631,29 @@
         );
 
 
-        window.setTimeout(
-            function () {
-
-                button.innerHTML =
-                    original;
-
-                button.classList.remove(
-                    "saved"
-                );
-
-            },
-            1500
+        button.setAttribute(
+            "aria-live",
+            "polite"
         );
+
+
+        saveConfirmationTimer =
+            window.setTimeout(
+                function () {
+
+                    button.innerHTML =
+                        original;
+
+                    button.classList.remove(
+                        "saved"
+                    );
+
+                    saveConfirmationTimer =
+                        null;
+
+                },
+                1500
+            );
 
     }
 
@@ -1374,6 +1693,7 @@
 
     /* ============================================================
        PUBLIC API
+       Preserve existing external interface.
        ============================================================ */
 
     window.CTMPathPage04 = {
@@ -1439,21 +1759,22 @@
         reset:
             function () {
 
-                state = {
+                state =
+                    createInitialState();
 
-                    answers: {
 
-                        1: null,
-                        2: null,
-                        3: null,
-                        4: null,
-                        5: null
+                if (
+                    saveConfirmationTimer
+                ) {
 
-                    },
+                    window.clearTimeout(
+                        saveConfirmationTimer
+                    );
 
-                    transformations: []
+                    saveConfirmationTimer =
+                        null;
 
-                };
+                }
 
 
                 try {
@@ -1484,6 +1805,11 @@
                                 "selected"
                             );
 
+                            button.setAttribute(
+                                "aria-pressed",
+                                "false"
+                            );
+
                         }
                     );
 
@@ -1497,6 +1823,26 @@
 
                             input.checked =
                                 false;
+
+                        }
+                    );
+
+
+                document
+                    .querySelectorAll(
+                        ".ladder-step"
+                    )
+                    .forEach(
+                        function (step) {
+
+                            step.classList.remove(
+                                "active"
+                            );
+
+                            step.setAttribute(
+                                "aria-current",
+                                "false"
+                            );
 
                         }
                     );
