@@ -86,9 +86,32 @@ body.page-07 {
     text-decoration: none;
 }
 
+.page-07 h1,
+.page-07 h2,
+.page-07 h3,
+.page-07 p {
+    overflow-wrap: break-word;
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.page-07 :focus-visible {
+    outline: 2px solid var(--p07-teal);
+    outline-offset: 4px;
+}
+
+.page-07 .nav-button:focus-visible {
+    border-color: var(--p07-teal);
+    background: rgba(9, 200, 207, 0.06);
+}
+
 
 /* =========================================================
    GLOBAL HEADER
+   KEEP DIMENSIONS CONSISTENT WITH JOURNEY
    ========================================================= */
 
 .page-07 .global-header {
@@ -234,7 +257,7 @@ body.page-07 {
     max-width: 1160px;
 
     margin:
-        0 auto 125px;
+        0 auto 112px;
 
     text-align: center;
 }
@@ -324,6 +347,7 @@ body.page-07 {
 
 /* =========================================================
    FOUR LIFE CURRENCIES
+   PRIMARY VISUAL CENTERPIECE
    ========================================================= */
 
 .page-07 .life-currencies {
@@ -332,9 +356,36 @@ body.page-07 {
     grid-template-columns:
         repeat(4, minmax(0, 1fr));
 
-    gap: 20px;
+    gap: 18px;
 
     margin-bottom: 135px;
+
+    position: relative;
+}
+
+
+/* subtle visual anchor behind the four modules */
+.page-07 .life-currencies::before {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 70%;
+    height: 70%;
+
+    transform: translate(-50%, -50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(9, 200, 207, 0.055),
+            transparent 68%
+        );
+
+    pointer-events: none;
 }
 
 
@@ -344,11 +395,12 @@ body.page-07 {
 
 .page-07 .currency-card {
     position: relative;
+    z-index: 1;
 
-    min-height: 620px;
+    min-height: 650px;
 
     padding:
-        40px 30px 34px;
+        42px 30px 34px;
 
     overflow: hidden;
 
@@ -357,9 +409,10 @@ body.page-07 {
 
     background:
         linear-gradient(
-            145deg,
-            rgba(255,255,255,0.035),
-            rgba(255,255,255,0.008)
+            160deg,
+            rgba(255,255,255,0.045),
+            rgba(255,255,255,0.012) 48%,
+            rgba(0,0,0,0.08)
         ),
         var(--p07-panel);
 
@@ -378,13 +431,13 @@ body.page-07 {
 }
 
 .page-07 .currency-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-6px);
 
     border-color:
-        rgba(9, 200, 207, 0.28);
+        rgba(9, 200, 207, 0.38);
 
     box-shadow:
-        0 28px 65px rgba(0,0,0,0.34);
+        0 30px 70px rgba(0,0,0,0.38);
 }
 
 
@@ -409,6 +462,37 @@ body.page-07 {
             var(--p07-gold),
             var(--p07-teal)
         );
+}
+
+
+/* =========================================================
+   CARD AMBIENT ACCENT
+   ========================================================= */
+
+.page-07 .currency-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    right: -95px;
+    top: -95px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid rgba(9, 200, 207, 0.06);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(9, 200, 207, 0.06),
+            transparent 68%
+        );
+
+    pointer-events: none;
 }
 
 
@@ -443,7 +527,7 @@ body.page-07 {
     width: 66px;
     height: 66px;
 
-    margin-bottom: 28px;
+    margin-bottom: 27px;
 
     display: grid;
     place-items: center;
@@ -463,6 +547,19 @@ body.page-07 {
 
     background:
         rgba(244,179,33,0.035);
+
+    box-shadow:
+        0 0 0 7px rgba(244,179,33,0.018);
+
+    transition:
+        border-color 180ms ease,
+        color 180ms ease,
+        transform 180ms ease;
+}
+
+.page-07 .currency-card:hover .currency-icon {
+    border-color: rgba(244,179,33,0.58);
+    transform: translateY(-2px);
 }
 
 
@@ -489,7 +586,7 @@ body.page-07 {
 
 .page-07 .currency-card h3 {
     margin:
-        8px 0 26px;
+        8px 0 25px;
 
     color: var(--p07-teal);
 
@@ -540,7 +637,7 @@ body.page-07 {
 
 .page-07 .currency-card > p {
     margin:
-        24px 0 0;
+        23px 0 0;
 
     color: var(--p07-muted);
 
@@ -550,7 +647,9 @@ body.page-07 {
 }
 
 .page-07 .currency-card > p.english {
-    margin-top: 11px;
+    margin-top: 10px;
+
+    color: rgba(185,197,202,0.78);
 
     font-family: Arial, sans-serif;
 
@@ -565,9 +664,15 @@ body.page-07 {
    ========================================================= */
 
 .page-07 .currency-question {
+    position: relative;
+
     margin-top: auto;
 
-    padding-top: 27px;
+    padding:
+        22px 18px 0;
+
+    border-top:
+        1px solid var(--p07-border-teal);
 
     color: var(--p07-gold-soft);
 
@@ -576,6 +681,48 @@ body.page-07 {
     font-weight: 800;
 
     line-height: 1.65;
+}
+
+.page-07 .currency-question::before {
+    content: "REFLECT";
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--p07-teal);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.22em;
+}
+
+
+/* =========================================================
+   INDIVIDUAL CURRENCY ACCENTS
+   Restrained — no separate visual redesign.
+   ========================================================= */
+
+.page-07 .currency-money .currency-icon {
+    color: var(--p07-gold);
+}
+
+.page-07 .currency-time .currency-icon {
+    color: var(--p07-teal);
+    border-color: var(--p07-border-teal);
+}
+
+.page-07 .currency-people .currency-icon {
+    color: var(--p07-gold-soft);
+}
+
+.page-07 .currency-tasks .currency-icon {
+    color: var(--p07-teal-soft);
+    border-color: var(--p07-border-teal);
 }
 
 
@@ -641,6 +788,8 @@ body.page-07 {
 }
 
 .page-07 .system-heading p {
+    max-width: 760px;
+
     margin:
         16px auto 0;
 
@@ -693,6 +842,21 @@ body.page-07 {
 
     background:
         rgba(255,255,255,0.018);
+
+    transition:
+        border-color 180ms ease,
+        background 180ms ease,
+        transform 180ms ease;
+}
+
+.page-07 .flow-item:hover {
+    transform: translateY(-2px);
+
+    border-color:
+        var(--p07-border-teal);
+
+    background:
+        rgba(9,200,207,0.025);
 }
 
 .page-07 .flow-item span {
@@ -768,6 +932,9 @@ body.page-07 {
 
     background:
         rgba(244,179,33,0.045);
+
+    box-shadow:
+        0 14px 35px rgba(0,0,0,0.18);
 }
 
 .page-07 .system-result span {
@@ -802,13 +969,55 @@ body.page-07 {
 
 
 /* =========================================================
-   7-DAY AUDIT
+   7-DAY REALITY CHECK™
+   DIAGNOSTIC CHECKPOINT
    ========================================================= */
 
 .page-07 .seven-day-audit {
+    position: relative;
+
     margin-bottom: 130px;
 
+    padding:
+        72px 50px 60px;
+
     text-align: center;
+
+    border:
+        1px solid var(--p07-border-teal);
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(9,200,207,0.045),
+            rgba(255,255,255,0.012)
+        );
+
+    box-shadow:
+        0 22px 60px rgba(0,0,0,0.22);
+}
+
+.page-07 .seven-day-audit::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 50%;
+
+    width: 170px;
+    height: 3px;
+
+    transform: translateX(-50%);
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--p07-gold),
+            var(--p07-teal)
+        );
 }
 
 .page-07 .audit-kicker {
@@ -861,7 +1070,7 @@ body.page-07 {
     grid-template-columns:
         repeat(4, minmax(0, 1fr));
 
-    gap: 18px;
+    gap: 16px;
 }
 
 .page-07 .audit-item {
@@ -883,8 +1092,27 @@ body.page-07 {
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,0.03),
+            rgba(255,255,255,0.035),
             rgba(255,255,255,0.008)
+        );
+
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease;
+}
+
+.page-07 .audit-item:hover {
+    transform: translateY(-3px);
+
+    border-color:
+        var(--p07-border-teal);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(9,200,207,0.045),
+            rgba(255,255,255,0.01)
         );
 }
 
@@ -947,7 +1175,8 @@ body.page-07 {
 .page-07 .power-line {
     display: grid;
 
-    grid-template-columns: 55px minmax(0, 1fr);
+    grid-template-columns:
+        55px minmax(0, 1fr);
 
     gap: 20px;
 
@@ -1004,7 +1233,7 @@ body.page-07 {
         0 auto;
 
     padding:
-        30px 0 30px;
+        30px 0;
 
     text-align: center;
 }
@@ -1072,6 +1301,7 @@ body.page-07 {
 
 /* =========================================================
    GLOBAL FOOTER
+   EXACT JOURNEY TREATMENT
    ========================================================= */
 
 .page-07 .global-footer {
@@ -1111,6 +1341,8 @@ body.page-07 {
     gap: 18px;
 
     width: fit-content;
+
+    min-height: 48px;
 
     padding:
         15px 18px;
@@ -1273,11 +1505,15 @@ body.page-07 {
     }
 
     .page-07 .page07-hero {
-        margin-bottom: 150px;
+        margin-bottom: 140px;
     }
 
     .page-07 .currency-card {
-        min-height: 650px;
+        min-height: 675px;
+    }
+
+    .page-07 .currency-statement {
+        min-height: 150px;
     }
 }
 
@@ -1324,13 +1560,17 @@ body.page-07 {
         padding-top: 82px;
     }
 
+    .page-07 .page07-hero {
+        margin-bottom: 88px;
+    }
+
     .page-07 .life-currencies {
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
     }
 
     .page-07 .currency-card {
-        min-height: 560px;
+        min-height: 570px;
     }
 
     .page-07 .system-flow {
@@ -1347,6 +1587,11 @@ body.page-07 {
     .page-07 .audit-grid {
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
+    }
+
+    .page-07 .seven-day-audit {
+        padding-left: 36px;
+        padding-right: 36px;
     }
 }
 
@@ -1408,7 +1653,7 @@ body.page-07 {
     }
 
     .page-07 .page07-hero {
-        margin-bottom: 78px;
+        margin-bottom: 70px;
     }
 
     .page-07 .page07-kicker {
@@ -1450,10 +1695,12 @@ body.page-07 {
         font-size: 13px;
     }
 
+
+    /* FOUR MODULES */
     .page-07 .life-currencies {
         grid-template-columns: 1fr;
 
-        gap: 16px;
+        gap: 14px;
 
         margin-bottom: 82px;
     }
@@ -1465,6 +1712,10 @@ body.page-07 {
             32px 24px 30px;
 
         border-radius: 19px;
+    }
+
+    .page-07 .currency-card:hover {
+        transform: none;
     }
 
     .page-07 .currency-number {
@@ -1515,6 +1766,8 @@ body.page-07 {
         font-size: 15px;
     }
 
+
+    /* LIFE SYSTEM */
     .page-07 .life-system {
         margin-bottom: 82px;
 
@@ -1546,6 +1799,10 @@ body.page-07 {
         min-height: 125px;
     }
 
+    .page-07 .flow-item:hover {
+        transform: none;
+    }
+
     .page-07 .flow-item strong {
         font-size: 16px;
     }
@@ -1569,8 +1826,19 @@ body.page-07 {
         font-size: 18px;
     }
 
+
+    /* 7-DAY REALITY CHECK */
     .page-07 .seven-day-audit {
         margin-bottom: 82px;
+
+        padding:
+            50px 18px 36px;
+
+        border-radius: 19px;
+    }
+
+    .page-07 .seven-day-audit::before {
+        width: 110px;
     }
 
     .page-07 .audit-kicker {
@@ -1602,6 +1870,10 @@ body.page-07 {
             25px 20px;
     }
 
+    .page-07 .audit-item:hover {
+        transform: none;
+    }
+
     .page-07 .audit-item > span {
         width: 46px;
         height: 46px;
@@ -1615,6 +1887,8 @@ body.page-07 {
         font-size: 14px;
     }
 
+
+    /* POWER STATEMENTS */
     .page-07 .power-statements {
         margin-bottom: 85px;
     }
@@ -1639,6 +1913,8 @@ body.page-07 {
         line-height: 1.7;
     }
 
+
+    /* CLOSING */
     .page-07 .page07-closing h2 {
         font-size: 26px;
     }
@@ -1653,6 +1929,8 @@ body.page-07 {
         letter-spacing: 0.16em;
     }
 
+
+    /* FOOTER */
     .page-07 .global-footer {
         padding:
             0 22px 36px;
@@ -1670,8 +1948,14 @@ body.page-07 {
     .page-07 .nav-button {
         gap: 8px;
 
+        min-height: 48px;
+
         padding:
             10px 5px;
+    }
+
+    .page-07 .nav-button:hover {
+        transform: none;
     }
 
     .page-07 .nav-arrow {
@@ -1753,6 +2037,11 @@ body.page-07 {
             34px 18px;
     }
 
+    .page-07 .seven-day-audit {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
     .page-07 .page07-closing h2 {
         font-size: 23px;
     }
@@ -1774,6 +2063,9 @@ body.page-07 {
     }
 
     .page-07 .currency-card,
+    .page-07 .currency-icon,
+    .page-07 .flow-item,
+    .page-07 .audit-item,
     .page-07 .nav-button {
         transition: none;
     }
