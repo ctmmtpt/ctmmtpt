@@ -46,12 +46,16 @@
             <img
                 src="assets/CTMMTPTLogo.svg"
                 alt="CTM PATH™ MILLIONAIRES™"
+                decoding="async"
             >
 
         </a>
 
 
-        <div class="global-page-number">
+        <div
+            class="global-page-number"
+            aria-label="Journey progress: page 5 of 16"
+        >
 
             PAGE 05 / 16
 
@@ -68,7 +72,10 @@
          MAIN PAGE
          ========================================================= -->
 
-    <main class="page05">
+    <main
+        class="page05"
+        aria-label="CTM PATH™ MILLIONAIRES™ Page 05 — Time, Work & Business"
+    >
 
 
         <!-- =====================================================
@@ -1550,6 +1557,7 @@
         <form
             id="jobBusinessForm"
             class="job-business-form"
+            aria-label="Job versus Business mindset assessment"
             novalidate
         >
 
@@ -1561,6 +1569,7 @@
             <article
                 class="assessment-card"
                 data-question="1"
+                aria-labelledby="questionHeading1"
             >
 
 
@@ -1573,7 +1582,7 @@
 
                 <div class="question-heading">
 
-                    <h3>
+                    <h3 id="questionHeading1">
 
                         உங்கள் வருமானத்தின் அடிப்படை என்ன?
 
@@ -1763,6 +1772,7 @@
             <article
                 class="assessment-card"
                 data-question="2"
+                aria-labelledby="questionHeading2"
             >
 
 
@@ -1775,7 +1785,7 @@
 
                 <div class="question-heading">
 
-                    <h3>
+                    <h3 id="questionHeading2">
 
                         உங்கள் நேரத்தை நீங்கள் எப்படி
                         பயன்படுத்துகிறீர்கள்?
@@ -1966,6 +1976,7 @@
             <article
                 class="assessment-card"
                 data-question="3"
+                aria-labelledby="questionHeading3"
             >
 
 
@@ -1978,7 +1989,7 @@
 
                 <div class="question-heading">
 
-                    <h3>
+                    <h3 id="questionHeading3">
 
                         நீங்கள் மட்டும் வேலை செய்கிறீர்களா?
 
@@ -2167,6 +2178,7 @@
             <article
                 class="assessment-card"
                 data-question="4"
+                aria-labelledby="questionHeading4"
             >
 
 
@@ -2179,7 +2191,7 @@
 
                 <div class="question-heading">
 
-                    <h3>
+                    <h3 id="questionHeading4">
 
                         உங்கள் திறனை நீங்கள் எப்படிப் பார்க்கிறீர்கள்?
 
@@ -2369,6 +2381,7 @@
             <article
                 class="assessment-card"
                 data-question="5"
+                aria-labelledby="questionHeading5"
             >
 
 
@@ -2381,7 +2394,7 @@
 
                 <div class="question-heading">
 
-                    <h3>
+                    <h3 id="questionHeading5">
 
                         நீங்கள் எதைத் தேர்வு செய்கிறீர்கள்?
 
@@ -2591,6 +2604,19 @@
             </h2>
 
 
+            <p class="section-subtitle">
+
+                இந்த மதிப்பெண் ஒரு தீர்ப்பு அல்ல.
+                இது நீங்கள் இன்று எங்கே இருக்கிறீர்கள் என்பதைப் பார்க்கும் ஒரு தொடக்கம்.
+
+                <br>
+
+                THIS SCORE IS NOT A VERDICT.
+                IT IS A STARTING POINT FOR SEEING WHERE YOU ARE TODAY.
+
+            </p>
+
+
             <div class="score-display">
 
                 <strong id="totalScore">
@@ -2717,6 +2743,7 @@
                 href="04.html"
                 class="global-nav-button previous"
                 id="previousButton"
+                aria-label="Previous page — Page 04"
             >
 
                 <strong>
@@ -2734,7 +2761,11 @@
             </a>
 
 
-            <div class="global-current-page">
+            <div
+                class="global-current-page"
+                aria-current="page"
+                aria-label="Current page: 05 of 16"
+            >
 
                 05 / 16
 
@@ -2745,6 +2776,7 @@
                 href="06.html"
                 class="global-nav-button next"
                 id="nextButton"
+                aria-label="Next page — Page 06"
             >
 
                 <strong>
@@ -2777,6 +2809,7 @@
                 type="button"
                 id="saveContinueButton"
                 class="save-button"
+                aria-label="Save Page 05 assessment and continue"
             >
 
                 SAVE &amp; CONTINUE →
