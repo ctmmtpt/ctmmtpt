@@ -33,6 +33,7 @@
    10
    ============================================================ */
 
+
 (function () {
 
     "use strict";
@@ -176,6 +177,24 @@
 
     function init() {
 
+        /*
+         * Enter every page at the top of the guided journey.
+         * The page is deliberately reset immediately so that
+         * browser history or a previous page's scroll position
+         * cannot place the visitor in the middle of Page 05.
+         */
+
+        if ("scrollRestoration" in history) {
+            history.scrollRestoration = "manual";
+        }
+
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "auto"
+        });
+
+
         cacheElements();
 
         setupNavigation();
@@ -206,6 +225,11 @@
                 "04.html"
             );
 
+            elements.previousButton.setAttribute(
+                "aria-label",
+                "Previous page — Page 4"
+            );
+
         }
 
 
@@ -214,6 +238,11 @@
             elements.nextButton.setAttribute(
                 "href",
                 "06.html"
+            );
+
+            elements.nextButton.setAttribute(
+                "aria-label",
+                "Next page — Page 6"
             );
 
         }
@@ -248,6 +277,7 @@
                 return;
             }
 
+
             input.addEventListener(
                 "keydown",
                 function (event) {
@@ -279,11 +309,13 @@
                 10
             );
 
+
         const month =
             parseInt(
                 elements.birthMonth.value,
                 10
             );
+
 
         const year =
             parseInt(
@@ -641,16 +673,33 @@
         );
 
 
-        setTimeout(
+        /*
+         * The reveal should feel intentional rather than abrupt.
+         * Reduced-motion users receive an immediate scroll.
+         */
+
+        const prefersReducedMotion =
+            window.matchMedia &&
+            window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            ).matches;
+
+
+        window.setTimeout(
             function () {
 
                 elements.lifeReveal.scrollIntoView({
-                    behavior: "smooth",
+                    behavior:
+                        prefersReducedMotion
+                            ? "auto"
+                            : "smooth",
                     block: "center"
                 });
 
             },
-            150
+            prefersReducedMotion
+                ? 0
+                : 150
         );
 
     }
@@ -756,7 +805,9 @@
             !questionNumber ||
             !value
         ) {
+
             return;
+
         }
 
 
@@ -783,6 +834,7 @@
                 option.classList.remove(
                     "selected"
                 );
+
 
                 option.setAttribute(
                     "aria-pressed",
@@ -1450,6 +1502,14 @@
 
     function goToNextPage() {
 
+        /*
+         * Save once more immediately before navigation so the
+         * visitor never loses a completed Page 05 interaction.
+         */
+
+        saveAllData();
+
+
         window.location.href =
             "06.html";
 
@@ -1539,7 +1599,45 @@
 
 
     /* ========================================================
-       28. START
+       28. PAGE EXIT SAFETY
+       ======================================================== */
+
+    function persistBeforeExit() {
+
+        try {
+
+            saveAllData();
+
+        }
+
+        catch (error) {
+
+            /*
+             * Persistence must never block navigation or page
+             * teardown.
+             */
+
+            console.warn(
+                "Unable to persist Page 05 data before exit:",
+                error
+            );
+
+        }
+
+    }
+
+
+    window.addEventListener(
+        "pagehide",
+        persistBeforeExit,
+        {
+            passive: true
+        }
+    );
+
+
+    /* ========================================================
+       29. START
        ======================================================== */
 
     if (
