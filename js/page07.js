@@ -20,6 +20,19 @@
 
 
     /* ---------------------------------------------------------
+       INITIALIZATION GUARD
+       Prevent duplicate listeners if this script is loaded
+       more than once.
+       --------------------------------------------------------- */
+
+    if (page.dataset.page07Initialized === "true") {
+        return;
+    }
+
+    page.dataset.page07Initialized = "true";
+
+
+    /* ---------------------------------------------------------
        DOM READY
        --------------------------------------------------------- */
 
@@ -41,10 +54,16 @@
        --------------------------------------------------------- */
 
     function scrollToTop() {
+        const reducedMotion =
+            window.matchMedia &&
+            window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            ).matches;
+
         window.scrollTo({
             top: 0,
             left: 0,
-            behavior: "auto"
+            behavior: reducedMotion ? "auto" : "auto"
         });
     }
 
@@ -69,17 +88,20 @@
        --------------------------------------------------------- */
 
     function setupNavigation() {
-
         const links = document.querySelectorAll(
             ".page-navigation a[href]"
         );
 
         links.forEach(function (link) {
+            if (link.dataset.page07NavigationBound === "true") {
+                return;
+            }
+
+            link.dataset.page07NavigationBound = "true";
 
             link.addEventListener(
                 "click",
                 function () {
-
                     const href =
                         link.getAttribute("href");
 
@@ -109,29 +131,29 @@
        --------------------------------------------------------- */
 
     function restoreTopPosition() {
+        let shouldReset = false;
 
         try {
-
             const savedPosition =
                 sessionStorage.getItem(
                     "ctmPathReturnScroll"
                 );
 
             if (savedPosition === "0") {
-
                 sessionStorage.removeItem(
                     "ctmPathReturnScroll"
                 );
 
-                scrollToTop();
-
-                return;
+                shouldReset = true;
             }
-
         } catch (error) {
             /* Ignore storage errors. */
         }
 
+        if (shouldReset) {
+            scrollToTop();
+            return;
+        }
 
         /*
          * Prevent browsers from restoring Page 07 halfway down
@@ -139,15 +161,11 @@
          */
 
         requestAnimationFrame(function () {
-
             requestAnimationFrame(function () {
-
                 if (window.scrollY > 0) {
                     scrollToTop();
                 }
-
             });
-
         });
     }
 
@@ -157,7 +175,6 @@
        --------------------------------------------------------- */
 
     function markCurrentPage() {
-
         const current =
             document.querySelector(
                 ".nav-current"
@@ -179,32 +196,23 @@
        --------------------------------------------------------- */
 
     function setupAccessibility() {
-
         const links =
             document.querySelectorAll(
                 ".page-navigation a"
             );
 
         links.forEach(function (link) {
-
-            if (
-                !link.hasAttribute(
-                    "aria-label"
-                )
-            ) {
-
+            if (!link.hasAttribute("aria-label")) {
                 const text =
                     link.textContent.trim();
 
                 if (text) {
-
                     link.setAttribute(
                         "aria-label",
                         text
                     );
                 }
             }
-
         });
     }
 
@@ -214,11 +222,9 @@
        --------------------------------------------------------- */
 
     function setupKeyboardNavigation() {
-
         document.addEventListener(
             "keydown",
             function (event) {
-
                 const activeElement =
                     document.activeElement;
 
@@ -237,7 +243,6 @@
                     return;
                 }
 
-
                 /*
                  * ALT + LEFT
                  * Previous page
@@ -247,18 +252,17 @@
                     event.altKey &&
                     event.key === "ArrowLeft"
                 ) {
-
                     const previous =
                         document.querySelector(
                             ".nav-previous"
                         );
 
                     if (previous) {
-
                         event.preventDefault();
-
                         previous.click();
                     }
+
+                    return;
                 }
 
 
@@ -271,20 +275,16 @@
                     event.altKey &&
                     event.key === "ArrowRight"
                 ) {
-
                     const next =
                         document.querySelector(
                             ".nav-next"
                         );
 
                     if (next) {
-
                         event.preventDefault();
-
                         next.click();
                     }
                 }
-
             }
         );
     }
@@ -295,38 +295,72 @@
        --------------------------------------------------------- */
 
     function setupCurrencyCards() {
-
         const cards =
             document.querySelectorAll(
                 ".currency-card"
             );
 
         cards.forEach(function (card) {
+            if (card.dataset.page07CardBound === "true") {
+                return;
+            }
+
+            card.dataset.page07CardBound = "true";
+
+            /*
+             * Preserve the existing keyboard-accessible
+             * interaction model.
+             */
 
             card.setAttribute(
                 "tabindex",
                 "0"
             );
 
+            card.setAttribute(
+                "role",
+                "article"
+            );
+
             card.addEventListener(
                 "keydown",
                 function (event) {
-
                     if (
                         event.key === "Enter" ||
                         event.key === " "
                     ) {
-
                         event.preventDefault();
 
                         card.classList.toggle(
                             "is-focused"
                         );
                     }
-
                 }
             );
 
+
+            /*
+             * Keep the visual state synchronized with
+             * keyboard focus.
+             */
+
+            card.addEventListener(
+                "focus",
+                function () {
+                    card.classList.add(
+                        "is-focused"
+                    );
+                }
+            );
+
+            card.addEventListener(
+                "blur",
+                function () {
+                    card.classList.remove(
+                        "is-focused"
+                    );
+                }
+            );
         });
     }
 
@@ -336,18 +370,19 @@
        --------------------------------------------------------- */
 
     function setupImageFallbacks() {
-
         const images =
-            document.querySelectorAll(
-                "img"
-            );
+            document.querySelectorAll("img");
 
         images.forEach(function (image) {
+            if (image.dataset.page07ImageBound === "true") {
+                return;
+            }
+
+            image.dataset.page07ImageBound = "true";
 
             image.addEventListener(
                 "error",
                 function () {
-
                     if (
                         image.dataset
                             .fallbackAttempted === "true"
@@ -358,12 +393,8 @@
                     image.dataset
                         .fallbackAttempted = "true";
 
-
                     const source =
-                        image.getAttribute(
-                            "src"
-                        ) || "";
-
+                        image.getAttribute("src") || "";
 
                     /*
                      * Support both possible CTM logo
@@ -376,18 +407,14 @@
                         source ===
                             "assets/CTMMTPLogo.svg"
                     ) {
-
                         image.src =
                             source ===
                                 "assets/ctmmtptlogo.svg"
                                 ? "assets/CTMMTPLogo.svg"
                                 : "assets/ctmmtptlogo.svg";
-
                     }
-
                 }
             );
-
         });
     }
 
@@ -397,7 +424,6 @@
        --------------------------------------------------------- */
 
     function revealPage() {
-
         page.classList.add(
             "page-ready"
         );
@@ -409,7 +435,6 @@
        --------------------------------------------------------- */
 
     function initPage07() {
-
         configureScrollRestoration();
 
         setupNavigation();
@@ -444,9 +469,7 @@
     window.addEventListener(
         "pageshow",
         function () {
-
             try {
-
                 const savedPosition =
                     sessionStorage.getItem(
                         "ctmPathReturnScroll"
@@ -455,18 +478,15 @@
                 if (
                     savedPosition === "0"
                 ) {
-
                     sessionStorage.removeItem(
                         "ctmPathReturnScroll"
                     );
 
                     scrollToTop();
                 }
-
             } catch (error) {
                 /* Ignore storage errors. */
             }
-
         }
     );
 
