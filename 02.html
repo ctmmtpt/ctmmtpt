@@ -10,12 +10,12 @@
     >
 
     <title>
-        CTM PATH™ MILLIONAIRES™ — Page 02
+        CTM PATH™ MILLIONAIRES™ — Page 02 | உங்கள் வாழ்க்கையின் உண்மையான நிலை
     </title>
 
     <meta
         name="description"
-        content="CTM PATH™ MILLIONAIRES™ — Your 12 Basic Life Needs"
+        content="உங்கள் வாழ்க்கையில் உண்மையாக நிறைவேறியுள்ள 12 அடிப்படை தேவைகளை அமைதியாக அறிந்து கொள்ளுங்கள். — CTM PATH™ MILLIONAIRES™"
     >
 
     <!-- PAGE 02 CSS -->
@@ -490,6 +490,22 @@
 
         }
 
+        /* =========================================================
+           ACCESSIBILITY / MOTION SAFETY
+           ========================================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .nav-button {
+                transition: none;
+            }
+
+            .nav-button:hover {
+                transform: none;
+            }
+
+        }
+
     </style>
 
 </head>
@@ -524,7 +540,10 @@
     </a>
 
 
-    <div class="page-marker">
+    <div
+        class="page-marker"
+        aria-label="Journey position: Page 02 of 16"
+    >
         PAGE 02 / 16
     </div>
 
@@ -542,6 +561,7 @@
     <form
         id="assessmentForm"
         novalidate
+        aria-label="12 Basic Life Needs assessment"
     >
 
 
@@ -549,7 +569,10 @@
              HERO
              ===================================================== -->
 
-        <section class="hero-section">
+        <section
+            class="hero-section"
+            aria-labelledby="page02-title"
+        >
 
 
             <div class="hero-eyebrow">
@@ -557,14 +580,14 @@
             </div>
 
 
-            <h1>
+            <h1 id="page02-title">
 
                 <span class="ta">
-                    உங்கள் வாழ்க்கையில் இந்த 12 அடிப்படை தேவைகளில்...
+                    உங்கள் வாழ்க்கையில் உண்மையாக நிறைவேறியவை எத்தனை?
                 </span>
 
                 <span class="ta">
-                    எத்தனை முழுமையாக நிறைவேறியுள்ளன?
+                    நீங்கள் விரும்பும் வாழ்க்கையிலிருந்து இன்னும் எது தூரத்தில் உள்ளது?
                 </span>
 
             </h1>
@@ -578,16 +601,16 @@
             <div class="hero-copy">
 
                 <p class="ta">
-                    உங்கள் வாழ்க்கையின் 16 செல்வங்களை மதிப்பிட்டீர்கள்.
-                    இப்போது, உங்கள் அன்றாட வாழ்க்கையில் நீங்கள் உண்மையாக
-                    விரும்பும் 12 முக்கிய தேவைகளில் எத்தனை ஏற்கனவே
-                    நிறைவேறியுள்ளன என்பதைப் பார்ப்போம்.
+                    முந்தைய பக்கத்தில் உங்கள் வாழ்க்கையின் 16 செல்வங்களை
+                    நீங்கள் பார்த்தீர்கள். இப்போது இன்னும் நேர்மையாக ஒரு படி
+                    முன்னேறுவோம் — உங்கள் அன்றாட வாழ்க்கையில் முக்கியமான
+                    12 தேவைகளில் இன்று உண்மையாக எத்தனை நிறைவேறியுள்ளன?
                 </p>
 
 
                 <p class="en">
-                    Be honest. Don't choose what you wish were true.
-                    Choose what is actually true today.
+                    Look at your life as it is today — not as you wish it were.
+                    This is not about judgment. It is about seeing your starting point clearly.
                 </p>
 
             </div>
@@ -600,7 +623,10 @@
              INTRODUCTION TO THE 12 NEEDS
              ===================================================== -->
 
-        <section class="needs-introduction">
+        <section
+            class="needs-introduction"
+            aria-labelledby="needs-heading"
+        >
 
 
             <div class="section-number">
@@ -610,7 +636,7 @@
 
             <div class="section-heading">
 
-                <h2>
+                <h2 id="needs-heading">
                     உங்கள் வாழ்க்கையின் 12 அடிப்படை தேவைகள்
                 </h2>
 
@@ -621,12 +647,18 @@
             </div>
 
 
-            <div class="status-legend">
+            <div
+                class="status-legend"
+                aria-label="Fulfilment status legend"
+            >
 
 
                 <div class="legend-item legend-full">
 
-                    <span class="legend-dot"></span>
+                    <span
+                        class="legend-dot"
+                        aria-hidden="true"
+                    ></span>
 
                     <span class="ta">
                         முழுமையாக
@@ -641,7 +673,10 @@
 
                 <div class="legend-item legend-partial">
 
-                    <span class="legend-dot"></span>
+                    <span
+                        class="legend-dot"
+                        aria-hidden="true"
+                    ></span>
 
                     <span class="ta">
                         ஓரளவு
@@ -656,7 +691,10 @@
 
                 <div class="legend-item legend-none">
 
-                    <span class="legend-dot"></span>
+                    <span
+                        class="legend-dot"
+                        aria-hidden="true"
+                    ></span>
 
                     <span class="ta">
                         இன்னும் இல்லை
@@ -672,7 +710,8 @@
 
 
             <p class="instruction">
-                ஒவ்வொரு தேவைக்கும் இன்று உண்மையாக இருக்கும் நிலையை மட்டும் தேர்வு செய்யுங்கள்
+                ஒவ்வொரு தேவைக்கும் இன்று உண்மையாக இருக்கும் நிலையை மட்டும் தேர்வு செய்யுங்கள் —
+                <span class="en">choose what is true today.</span>
             </p>
 
         </section>
@@ -704,7 +743,10 @@
                         01
                     </div>
 
-                    <div class="need-icon" aria-hidden="true">
+                    <div
+                        class="need-icon"
+                        aria-hidden="true"
+                    >
                         <svg viewBox="0 0 80 80">
                             <path d="M12 37 40 14l28 23"/>
                             <path d="M20 34v32h40V34"/>
@@ -737,7 +779,11 @@
                     </p>
 
 
-                    <div class="status-options">
+                    <div
+                        class="status-options"
+                        role="group"
+                        aria-label="வீடு — HOME"
+                    >
 
                         <button
                             type="button"
@@ -745,7 +791,10 @@
                             data-status="full"
                             aria-pressed="false"
                         >
-                            <span class="status-symbol">✓</span>
+                            <span
+                                class="status-symbol"
+                                aria-hidden="true"
+                            >✓</span>
                             <span class="status-ta">முழுமையாக</span>
                             <span class="status-en">FULLY FULFILLED</span>
                         </button>
@@ -756,7 +805,10 @@
                             data-status="partial"
                             aria-pressed="false"
                         >
-                            <span class="status-symbol">◐</span>
+                            <span
+                                class="status-symbol"
+                                aria-hidden="true"
+                            >◐</span>
                             <span class="status-ta">ஓரளவு</span>
                             <span class="status-en">PARTIALLY FULFILLED</span>
                         </button>
@@ -767,7 +819,10 @@
                             data-status="none"
                             aria-pressed="false"
                         >
-                            <span class="status-symbol">○</span>
+                            <span
+                                class="status-symbol"
+                                aria-hidden="true"
+                            >○</span>
                             <span class="status-ta">இன்னும் இல்லை</span>
                             <span class="status-en">NOT YET FULFILLED</span>
                         </button>
@@ -795,7 +850,10 @@
                         02
                     </div>
 
-                    <div class="need-icon" aria-hidden="true">
+                    <div
+                        class="need-icon"
+                        aria-hidden="true"
+                    >
                         <svg viewBox="0 0 80 80">
                             <path d="M15 49h50v12H15z"/>
                             <path d="m22 49 7-18h22l7 18"/>
@@ -830,22 +888,41 @@
                     </p>
 
 
-                    <div class="status-options">
+                    <div
+                        class="status-options"
+                        role="group"
+                        aria-label="கார் — CAR"
+                    >
 
-                        <button type="button" class="status-option status-full" data-status="full" aria-pressed="false">
-                            <span class="status-symbol">✓</span>
+                        <button
+                            type="button"
+                            class="status-option status-full"
+                            data-status="full"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">✓</span>
                             <span class="status-ta">முழுமையாக</span>
                             <span class="status-en">FULLY FULFILLED</span>
                         </button>
 
-                        <button type="button" class="status-option status-partial" data-status="partial" aria-pressed="false">
-                            <span class="status-symbol">◐</span>
+                        <button
+                            type="button"
+                            class="status-option status-partial"
+                            data-status="partial"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">◐</span>
                             <span class="status-ta">ஓரளவு</span>
                             <span class="status-en">PARTIALLY FULFILLED</span>
                         </button>
 
-                        <button type="button" class="status-option status-none" data-status="none" aria-pressed="false">
-                            <span class="status-symbol">○</span>
+                        <button
+                            type="button"
+                            class="status-option status-none"
+                            data-status="none"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">○</span>
                             <span class="status-ta">இன்னும் இல்லை</span>
                             <span class="status-en">NOT YET FULFILLED</span>
                         </button>
@@ -873,7 +950,10 @@
                         03
                     </div>
 
-                    <div class="need-icon" aria-hidden="true">
+                    <div
+                        class="need-icon"
+                        aria-hidden="true"
+                    >
                         <svg viewBox="0 0 80 80">
                             <circle cx="24" cy="57" r="12"/>
                             <circle cx="57" cy="57" r="12"/>
@@ -908,22 +988,41 @@
                     </p>
 
 
-                    <div class="status-options">
+                    <div
+                        class="status-options"
+                        role="group"
+                        aria-label="பைக் — BIKE"
+                    >
 
-                        <button type="button" class="status-option status-full" data-status="full" aria-pressed="false">
-                            <span class="status-symbol">✓</span>
+                        <button
+                            type="button"
+                            class="status-option status-full"
+                            data-status="full"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">✓</span>
                             <span class="status-ta">முழுமையாக</span>
                             <span class="status-en">FULLY FULFILLED</span>
                         </button>
 
-                        <button type="button" class="status-option status-partial" data-status="partial" aria-pressed="false">
-                            <span class="status-symbol">◐</span>
+                        <button
+                            type="button"
+                            class="status-option status-partial"
+                            data-status="partial"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">◐</span>
                             <span class="status-ta">ஓரளவு</span>
                             <span class="status-en">PARTIALLY FULFILLED</span>
                         </button>
 
-                        <button type="button" class="status-option status-none" data-status="none" aria-pressed="false">
-                            <span class="status-symbol">○</span>
+                        <button
+                            type="button"
+                            class="status-option status-none"
+                            data-status="none"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">○</span>
                             <span class="status-ta">இன்னும் இல்லை</span>
                             <span class="status-en">NOT YET FULFILLED</span>
                         </button>
@@ -951,7 +1050,10 @@
                         04
                     </div>
 
-                    <div class="need-icon" aria-hidden="true">
+                    <div
+                        class="need-icon"
+                        aria-hidden="true"
+                    >
                         <svg viewBox="0 0 80 80">
                             <path d="m12 31 28-14 28 14-28 14z"/>
                             <path d="M22 37v14c10 8 26 8 36 0V37"/>
@@ -985,22 +1087,41 @@
                     </p>
 
 
-                    <div class="status-options">
+                    <div
+                        class="status-options"
+                        role="group"
+                        aria-label="குழந்தைகளின் கல்வி — CHILDREN'S EDUCATION"
+                    >
 
-                        <button type="button" class="status-option status-full" data-status="full" aria-pressed="false">
-                            <span class="status-symbol">✓</span>
+                        <button
+                            type="button"
+                            class="status-option status-full"
+                            data-status="full"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">✓</span>
                             <span class="status-ta">முழுமையாக</span>
                             <span class="status-en">FULLY FULFILLED</span>
                         </button>
 
-                        <button type="button" class="status-option status-partial" data-status="partial" aria-pressed="false">
-                            <span class="status-symbol">◐</span>
+                        <button
+                            type="button"
+                            class="status-option status-partial"
+                            data-status="partial"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">◐</span>
                             <span class="status-ta">ஓரளவு</span>
                             <span class="status-en">PARTIALLY FULFILLED</span>
                         </button>
 
-                        <button type="button" class="status-option status-none" data-status="none" aria-pressed="false">
-                            <span class="status-symbol">○</span>
+                        <button
+                            type="button"
+                            class="status-option status-none"
+                            data-status="none"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">○</span>
                             <span class="status-ta">இன்னும் இல்லை</span>
                             <span class="status-en">NOT YET FULFILLED</span>
                         </button>
@@ -1028,7 +1149,10 @@
                         05
                     </div>
 
-                    <div class="need-icon" aria-hidden="true">
+                    <div
+                        class="need-icon"
+                        aria-hidden="true"
+                    >
                         <svg viewBox="0 0 80 80">
                             <path d="m24 18 16 9 16-9"/>
                             <path d="m24 18 16 42 16-42"/>
@@ -1063,22 +1187,41 @@
                     </p>
 
 
-                    <div class="status-options">
+                    <div
+                        class="status-options"
+                        role="group"
+                        aria-label="நகை — JEWELLERY"
+                    >
 
-                        <button type="button" class="status-option status-full" data-status="full" aria-pressed="false">
-                            <span class="status-symbol">✓</span>
+                        <button
+                            type="button"
+                            class="status-option status-full"
+                            data-status="full"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">✓</span>
                             <span class="status-ta">முழுமையாக</span>
                             <span class="status-en">FULLY FULFILLED</span>
                         </button>
 
-                        <button type="button" class="status-option status-partial" data-status="partial" aria-pressed="false">
-                            <span class="status-symbol">◐</span>
+                        <button
+                            type="button"
+                            class="status-option status-partial"
+                            data-status="partial"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">◐</span>
                             <span class="status-ta">ஓரளவு</span>
                             <span class="status-en">PARTIALLY FULFILLED</span>
                         </button>
 
-                        <button type="button" class="status-option status-none" data-status="none" aria-pressed="false">
-                            <span class="status-symbol">○</span>
+                        <button
+                            type="button"
+                            class="status-option status-none"
+                            data-status="none"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">○</span>
                             <span class="status-ta">இன்னும் இல்லை</span>
                             <span class="status-en">NOT YET FULFILLED</span>
                         </button>
@@ -1106,7 +1249,10 @@
                         06
                     </div>
 
-                    <div class="need-icon" aria-hidden="true">
+                    <div
+                        class="need-icon"
+                        aria-hidden="true"
+                    >
                         <svg viewBox="0 0 80 80">
                             <circle cx="40" cy="40" r="27"/>
                             <path d="M31 32c2-5 15-6 18 0 2 5-2 8-9 9-7 1-11 4-9 9 3 7 16 7 19 0"/>
@@ -1140,22 +1286,41 @@
                     </p>
 
 
-                    <div class="status-options">
+                    <div
+                        class="status-options"
+                        role="group"
+                        aria-label="கடனில்லா வாழ்க்கை — DEBT-FREE LIFE"
+                    >
 
-                        <button type="button" class="status-option status-full" data-status="full" aria-pressed="false">
-                            <span class="status-symbol">✓</span>
+                        <button
+                            type="button"
+                            class="status-option status-full"
+                            data-status="full"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">✓</span>
                             <span class="status-ta">முழுமையாக</span>
                             <span class="status-en">FULLY FULFILLED</span>
                         </button>
 
-                        <button type="button" class="status-option status-partial" data-status="partial" aria-pressed="false">
-                            <span class="status-symbol">◐</span>
+                        <button
+                            type="button"
+                            class="status-option status-partial"
+                            data-status="partial"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">◐</span>
                             <span class="status-ta">ஓரளவு</span>
                             <span class="status-en">PARTIALLY FULFILLED</span>
                         </button>
 
-                        <button type="button" class="status-option status-none" data-status="none" aria-pressed="false">
-                            <span class="status-symbol">○</span>
+                        <button
+                            type="button"
+                            class="status-option status-none"
+                            data-status="none"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">○</span>
                             <span class="status-ta">இன்னும் இல்லை</span>
                             <span class="status-en">NOT YET FULFILLED</span>
                         </button>
@@ -1183,7 +1348,10 @@
                         07
                     </div>
 
-                    <div class="need-icon" aria-hidden="true">
+                    <div
+                        class="need-icon"
+                        aria-hidden="true"
+                    >
                         <svg viewBox="0 0 80 80">
                             <path d="M15 31h50v31H15z"/>
                             <path d="M24 31v-7h32v7"/>
@@ -1217,22 +1385,41 @@
                     </p>
 
 
-                    <div class="status-options">
+                    <div
+                        class="status-options"
+                        role="group"
+                        aria-label="சேமிப்பு — SAVINGS"
+                    >
 
-                        <button type="button" class="status-option status-full" data-status="full" aria-pressed="false">
-                            <span class="status-symbol">✓</span>
+                        <button
+                            type="button"
+                            class="status-option status-full"
+                            data-status="full"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">✓</span>
                             <span class="status-ta">முழுமையாக</span>
                             <span class="status-en">FULLY FULFILLED</span>
                         </button>
 
-                        <button type="button" class="status-option status-partial" data-status="partial" aria-pressed="false">
-                            <span class="status-symbol">◐</span>
+                        <button
+                            type="button"
+                            class="status-option status-partial"
+                            data-status="partial"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">◐</span>
                             <span class="status-ta">ஓரளவு</span>
                             <span class="status-en">PARTIALLY FULFILLED</span>
                         </button>
 
-                        <button type="button" class="status-option status-none" data-status="none" aria-pressed="false">
-                            <span class="status-symbol">○</span>
+                        <button
+                            type="button"
+                            class="status-option status-none"
+                            data-status="none"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">○</span>
                             <span class="status-ta">இன்னும் இல்லை</span>
                             <span class="status-en">NOT YET FULFILLED</span>
                         </button>
@@ -1260,7 +1447,10 @@
                         08
                     </div>
 
-                    <div class="need-icon" aria-hidden="true">
+                    <div
+                        class="need-icon"
+                        aria-hidden="true"
+                    >
                         <svg viewBox="0 0 80 80">
                             <circle cx="30" cy="29" r="9"/>
                             <circle cx="50" cy="29" r="9"/>
@@ -1295,22 +1485,41 @@
                     </p>
 
 
-                    <div class="status-options">
+                    <div
+                        class="status-options"
+                        role="group"
+                        aria-label="பெற்றோரை கவனித்தல் — CARING FOR PARENTS"
+                    >
 
-                        <button type="button" class="status-option status-full" data-status="full" aria-pressed="false">
-                            <span class="status-symbol">✓</span>
+                        <button
+                            type="button"
+                            class="status-option status-full"
+                            data-status="full"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">✓</span>
                             <span class="status-ta">முழுமையாக</span>
                             <span class="status-en">FULLY FULFILLED</span>
                         </button>
 
-                        <button type="button" class="status-option status-partial" data-status="partial" aria-pressed="false">
-                            <span class="status-symbol">◐</span>
+                        <button
+                            type="button"
+                            class="status-option status-partial"
+                            data-status="partial"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">◐</span>
                             <span class="status-ta">ஓரளவு</span>
                             <span class="status-en">PARTIALLY FULFILLED</span>
                         </button>
 
-                        <button type="button" class="status-option status-none" data-status="none" aria-pressed="false">
-                            <span class="status-symbol">○</span>
+                        <button
+                            type="button"
+                            class="status-option status-none"
+                            data-status="none"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">○</span>
                             <span class="status-ta">இன்னும் இல்லை</span>
                             <span class="status-en">NOT YET FULFILLED</span>
                         </button>
@@ -1338,7 +1547,10 @@
                         09
                     </div>
 
-                    <div class="need-icon" aria-hidden="true">
+                    <div
+                        class="need-icon"
+                        aria-hidden="true"
+                    >
                         <svg viewBox="0 0 80 80">
                             <circle cx="40" cy="40" r="27"/>
                             <path d="M13 40h54"/>
@@ -1374,22 +1586,41 @@
                     </p>
 
 
-                    <div class="status-options">
+                    <div
+                        class="status-options"
+                        role="group"
+                        aria-label="சுற்றுலா — TRAVEL"
+                    >
 
-                        <button type="button" class="status-option status-full" data-status="full" aria-pressed="false">
-                            <span class="status-symbol">✓</span>
+                        <button
+                            type="button"
+                            class="status-option status-full"
+                            data-status="full"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">✓</span>
                             <span class="status-ta">முழுமையாக</span>
                             <span class="status-en">FULLY FULFILLED</span>
                         </button>
 
-                        <button type="button" class="status-option status-partial" data-status="partial" aria-pressed="false">
-                            <span class="status-symbol">◐</span>
+                        <button
+                            type="button"
+                            class="status-option status-partial"
+                            data-status="partial"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">◐</span>
                             <span class="status-ta">ஓரளவு</span>
                             <span class="status-en">PARTIALLY FULFILLED</span>
                         </button>
 
-                        <button type="button" class="status-option status-none" data-status="none" aria-pressed="false">
-                            <span class="status-symbol">○</span>
+                        <button
+                            type="button"
+                            class="status-option status-none"
+                            data-status="none"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">○</span>
                             <span class="status-ta">இன்னும் இல்லை</span>
                             <span class="status-en">NOT YET FULFILLED</span>
                         </button>
@@ -1417,7 +1648,10 @@
                         10
                     </div>
 
-                    <div class="need-icon" aria-hidden="true">
+                    <div
+                        class="need-icon"
+                        aria-hidden="true"
+                    >
                         <svg viewBox="0 0 80 80">
                             <path d="M40 64S17 49 17 32c0-9 6-15 14-15 5 0 8 3 9 7 1-4 4-7 9-7 8 0 14 6 14 15 0 17-23 32-23 32Z"/>
                             <path d="M30 38h7l3-8 5 17 3-9h7"/>
@@ -1449,22 +1683,41 @@
                     </p>
 
 
-                    <div class="status-options">
+                    <div
+                        class="status-options"
+                        role="group"
+                        aria-label="மருத்துவம் — HEALTHCARE"
+                    >
 
-                        <button type="button" class="status-option status-full" data-status="full" aria-pressed="false">
-                            <span class="status-symbol">✓</span>
+                        <button
+                            type="button"
+                            class="status-option status-full"
+                            data-status="full"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">✓</span>
                             <span class="status-ta">முழுமையாக</span>
                             <span class="status-en">FULLY FULFILLED</span>
                         </button>
 
-                        <button type="button" class="status-option status-partial" data-status="partial" aria-pressed="false">
-                            <span class="status-symbol">◐</span>
+                        <button
+                            type="button"
+                            class="status-option status-partial"
+                            data-status="partial"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">◐</span>
                             <span class="status-ta">ஓரளவு</span>
                             <span class="status-en">PARTIALLY FULFILLED</span>
                         </button>
 
-                        <button type="button" class="status-option status-none" data-status="none" aria-pressed="false">
-                            <span class="status-symbol">○</span>
+                        <button
+                            type="button"
+                            class="status-option status-none"
+                            data-status="none"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">○</span>
                             <span class="status-ta">இன்னும் இல்லை</span>
                             <span class="status-en">NOT YET FULFILLED</span>
                         </button>
@@ -1492,7 +1745,10 @@
                         11
                     </div>
 
-                    <div class="need-icon" aria-hidden="true">
+                    <div
+                        class="need-icon"
+                        aria-hidden="true"
+                    >
                         <svg viewBox="0 0 80 80">
                             <circle cx="40" cy="40" r="27"/>
                             <path d="M40 24v32"/>
@@ -1527,22 +1783,41 @@
                     </p>
 
 
-                    <div class="status-options">
+                    <div
+                        class="status-options"
+                        role="group"
+                        aria-label="சமூக சேவை — SOCIAL SERVICE"
+                    >
 
-                        <button type="button" class="status-option status-full" data-status="full" aria-pressed="false">
-                            <span class="status-symbol">✓</span>
+                        <button
+                            type="button"
+                            class="status-option status-full"
+                            data-status="full"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">✓</span>
                             <span class="status-ta">முழுமையாக</span>
                             <span class="status-en">FULLY FULFILLED</span>
                         </button>
 
-                        <button type="button" class="status-option status-partial" data-status="partial" aria-pressed="false">
-                            <span class="status-symbol">◐</span>
+                        <button
+                            type="button"
+                            class="status-option status-partial"
+                            data-status="partial"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">◐</span>
                             <span class="status-ta">ஓரளவு</span>
                             <span class="status-en">PARTIALLY FULFILLED</span>
                         </button>
 
-                        <button type="button" class="status-option status-none" data-status="none" aria-pressed="false">
-                            <span class="status-symbol">○</span>
+                        <button
+                            type="button"
+                            class="status-option status-none"
+                            data-status="none"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">○</span>
                             <span class="status-ta">இன்னும் இல்லை</span>
                             <span class="status-en">NOT YET FULFILLED</span>
                         </button>
@@ -1570,7 +1845,10 @@
                         12
                     </div>
 
-                    <div class="need-icon" aria-hidden="true">
+                    <div
+                        class="need-icon"
+                        aria-hidden="true"
+                    >
                         <svg viewBox="0 0 80 80">
                             <path d="M25 30h30v26H25z"/>
                             <path d="M31 24h18"/>
@@ -1606,22 +1884,41 @@
                     </p>
 
 
-                    <div class="status-options">
+                    <div
+                        class="status-options"
+                        role="group"
+                        aria-label="பொழுதுபோக்கு — RECREATION"
+                    >
 
-                        <button type="button" class="status-option status-full" data-status="full" aria-pressed="false">
-                            <span class="status-symbol">✓</span>
+                        <button
+                            type="button"
+                            class="status-option status-full"
+                            data-status="full"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">✓</span>
                             <span class="status-ta">முழுமையாக</span>
                             <span class="status-en">FULLY FULFILLED</span>
                         </button>
 
-                        <button type="button" class="status-option status-partial" data-status="partial" aria-pressed="false">
-                            <span class="status-symbol">◐</span>
+                        <button
+                            type="button"
+                            class="status-option status-partial"
+                            data-status="partial"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">◐</span>
                             <span class="status-ta">ஓரளவு</span>
                             <span class="status-en">PARTIALLY FULFILLED</span>
                         </button>
 
-                        <button type="button" class="status-option status-none" data-status="none" aria-pressed="false">
-                            <span class="status-symbol">○</span>
+                        <button
+                            type="button"
+                            class="status-option status-none"
+                            data-status="none"
+                            aria-pressed="false"
+                        >
+                            <span class="status-symbol" aria-hidden="true">○</span>
                             <span class="status-ta">இன்னும் இல்லை</span>
                             <span class="status-en">NOT YET FULFILLED</span>
                         </button>
@@ -1641,7 +1938,10 @@
              LIFE NEEDS SNAPSHOT
              ===================================================== -->
 
-        <section class="needs-snapshot">
+        <section
+            class="needs-snapshot"
+            aria-labelledby="snapshot-heading"
+        >
 
 
             <div class="snapshot-heading">
@@ -1650,7 +1950,7 @@
                     YOUR LIFE NEEDS SNAPSHOT
                 </div>
 
-                <h2>
+                <h2 id="snapshot-heading">
                     உங்கள் வாழ்க்கையின் தேவைகளின் நிலவரம்
                 </h2>
 
@@ -1665,6 +1965,7 @@
                     <div
                         id="fullCount"
                         class="snapshot-count"
+                        aria-live="polite"
                     >
                         0
                     </div>
@@ -1689,6 +1990,7 @@
                     <div
                         id="partialCount"
                         class="snapshot-count"
+                        aria-live="polite"
                     >
                         0
                     </div>
@@ -1713,6 +2015,7 @@
                     <div
                         id="noneCount"
                         class="snapshot-count"
+                        aria-live="polite"
                     >
                         0
                     </div>
@@ -1761,6 +2064,11 @@
                     <div
                         id="completionBar"
                         class="completion-bar"
+                        role="progressbar"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-valuenow="0"
+                        aria-label="12 தேவைகளின் மதிப்பீட்டு முன்னேற்றம்"
                     ></div>
 
                 </div>
@@ -1780,7 +2088,10 @@
              PRIORITY
              ===================================================== -->
 
-        <section class="priority-section">
+        <section
+            class="priority-section"
+            aria-labelledby="priority-heading"
+        >
 
 
             <div class="priority-eyebrow">
@@ -1788,7 +2099,7 @@
             </div>
 
 
-            <h2>
+            <h2 id="priority-heading">
                 இப்போது உங்களுக்கு மிகவும் முக்கியமான தேவை எது?
             </h2>
 
@@ -1880,9 +2191,14 @@
             <div
                 id="priorityConfirmation"
                 class="priority-confirmation"
+                role="status"
+                aria-live="polite"
             >
 
-                <span class="confirmation-icon">
+                <span
+                    class="confirmation-icon"
+                    aria-hidden="true"
+                >
                     ✓
                 </span>
 
@@ -1906,9 +2222,15 @@
              CLOSING
              ===================================================== -->
 
-        <section class="closing-section">
+        <section
+            class="closing-section"
+            aria-labelledby="closing-heading"
+        >
 
-            <p class="closing-ta">
+            <p
+                class="closing-ta"
+                id="closing-heading"
+            >
                 நீங்கள் எதை விரும்புகிறீர்கள் என்பது முக்கியம்.
                 ஆனால் இன்று உங்கள் வாழ்க்கையில் உண்மையாக எது உள்ளது
                 என்பதைக் காண்பதே மாற்றத்தின் முதல் படி.
@@ -1951,9 +2273,13 @@
                 id="previousButton"
                 class="nav-button nav-back"
                 data-navigation="previous"
+                aria-label="முந்தைய பக்கம் — Previous page"
             >
 
-                <span class="nav-arrow">
+                <span
+                    class="nav-arrow"
+                    aria-hidden="true"
+                >
                     ←
                 </span>
 
@@ -1975,6 +2301,7 @@
             <div
                 class="navigation-progress"
                 aria-current="page"
+                aria-label="Current page 02 of 16"
             >
                 <span>02</span> / 16
             </div>
@@ -1984,6 +2311,7 @@
                 type="button"
                 id="nextButton"
                 class="nav-button nav-forward"
+                aria-label="அடுத்த பக்கம் — Next page"
                 data-navigation="next"
             >
 
@@ -1999,7 +2327,10 @@
 
                 </span>
 
-                <span class="nav-arrow">
+                <span
+                    class="nav-arrow"
+                    aria-hidden="true"
+                >
                     →
                 </span>
 
