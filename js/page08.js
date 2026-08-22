@@ -49,6 +49,7 @@
     let tenPercentDisplay;
 
     let decisionButtons;
+    let initialized = false;
 
 
     /* =========================================================
@@ -56,7 +57,6 @@
        ========================================================= */
 
     function formatCurrency(value) {
-
         const number = Number(value);
 
         if (!Number.isFinite(number) || number <= 0) {
@@ -64,6 +64,29 @@
         }
 
         return "₹" + Math.round(number).toLocaleString("en-IN");
+    }
+
+
+    function parsePositiveNumber(value) {
+        if (typeof value === "number") {
+            return Number.isFinite(value) && value > 0 ? value : 0;
+        }
+
+        const cleaned = String(value ?? "")
+            .replace(/₹/g, "")
+            .replace(/,/g, "")
+            .replace(/\s/g, "")
+            .trim();
+
+        if (!cleaned) {
+            return 0;
+        }
+
+        const number = Number(cleaned);
+
+        return Number.isFinite(number) && number > 0
+            ? number
+            : 0;
     }
 
 
@@ -134,6 +157,7 @@
                     } catch (error) {
                         /* Navigation still works. */
                     }
+
                 }
             );
 
@@ -323,7 +347,9 @@
 
                         if (customIncomeInput) {
 
-                            customIncomeInput.focus();
+                            customIncomeInput.focus({
+                                preventScroll: true
+                            });
 
                         }
 
@@ -420,13 +446,17 @@
             return;
         }
 
+        customIncomeInput.setAttribute(
+            "inputmode",
+            "numeric"
+        );
 
         customIncomeInput.addEventListener(
             "input",
             function () {
 
                 const value =
-                    Number(
+                    parsePositiveNumber(
                         customIncomeInput.value
                     );
 
@@ -480,19 +510,18 @@
 
 
                 const value =
-                    Number(
+                    parsePositiveNumber(
                         customIncomeInput.value
                     );
 
 
-                if (
-                    !Number.isFinite(value) ||
-                    value < 0
-                ) {
-
+                if (value <= 0) {
                     customIncomeInput.value = "";
-
+                    return;
                 }
+
+                customIncomeInput.value =
+                    String(Math.round(value));
 
             }
         );
@@ -525,6 +554,10 @@
             return;
         }
 
+        investmentInput.setAttribute(
+            "inputmode",
+            "numeric"
+        );
 
         investmentInput.addEventListener(
             "input",
@@ -566,7 +599,7 @@
 
 
         const investment =
-            Number(
+            parsePositiveNumber(
                 investmentInput.value
             );
 
@@ -594,6 +627,15 @@
             return;
         }
 
+
+        /*
+         * UNDERLYING FINANCIAL MODEL — UNCHANGED:
+         *
+         * 10% possibility = entered investment × 0.10.
+         *
+         * This is a calculation/illustration, not a guarantee
+         * of income, return, or outcome.
+         */
 
         const tenPercent =
             investment * 0.10;
@@ -630,6 +672,10 @@
             return;
         }
 
+        investmentInput.setAttribute(
+            "inputmode",
+            "numeric"
+        );
 
         investmentInput.addEventListener(
             "focus",
@@ -695,12 +741,22 @@
                                     "is-selected"
                                 );
 
+                                item.setAttribute(
+                                    "aria-pressed",
+                                    "false"
+                                );
+
                             }
                         );
 
 
                         button.classList.add(
                             "is-selected"
+                        );
+
+                        button.setAttribute(
+                            "aria-pressed",
+                            "true"
                         );
 
 
@@ -760,6 +816,11 @@
                         "is-selected"
                     );
 
+                    savedButton.setAttribute(
+                        "aria-pressed",
+                        "true"
+                    );
+
                 }
 
             }
@@ -792,7 +853,9 @@
                 const isFormField =
                     tagName === "input" ||
                     tagName === "textarea" ||
-                    tagName === "select";
+                    tagName === "select" ||
+                    tagName === "button" ||
+                    tagName === "a";
 
 
                 if (isFormField) {
@@ -938,6 +1001,12 @@
        ========================================================= */
 
     function initPage08() {
+
+        if (initialized) {
+            return;
+        }
+
+        initialized = true;
 
         configureScrollRestoration();
 
