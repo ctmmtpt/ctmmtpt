@@ -7,18 +7,23 @@
 (function () {
     "use strict";
 
-
     /* =========================================================
        PAGE GUARD
        ========================================================= */
 
-    if (!document.body) {
+    if (!document.body || !document.body.classList.contains("page-11")) {
         return;
     }
 
-    if (!document.body.classList.contains("page-11")) {
+    /*
+     * Prevent accidental double-initialisation if the script
+     * is loaded twice by the production page.
+     */
+    if (document.body.dataset.page11JsReady === "true") {
         return;
     }
+
+    document.body.dataset.page11JsReady = "true";
 
 
     /* =========================================================
@@ -28,7 +33,8 @@
     const STORAGE = {
         pageVisited: "ctmPathPage11Visited",
         lastAction: "ctmPathPage11LastAction",
-        returnScroll: "ctmPathReturnScroll"
+        returnScroll: "ctmPathReturnScroll",
+        selectedActivity: "ctmPathPage11SelectedActivity"
     };
 
 
@@ -43,6 +49,7 @@
         trialCards: ".trial-card",
         copyNodes: ".copy-node",
         scaleNodes: ".scale-node",
+        conversionNumbers: ".conversion-number",
 
         revealTargets:
             ".task-card, " +
@@ -57,25 +64,26 @@
 
 
     /* =========================================================
+       RUNTIME STATE
+       ========================================================= */
+
+    let progressFrame = 0;
+    let progressListenersBound = false;
+
+
+    /* =========================================================
        UTILITY — DOM READY
        ========================================================= */
 
     function ready(callback) {
-
-        if (
-            document.readyState === "loading"
-        ) {
-
+        if (document.readyState === "loading") {
             document.addEventListener(
                 "DOMContentLoaded",
                 callback,
                 { once: true }
             );
-
         } else {
-
             callback();
-
         }
     }
 
@@ -85,53 +93,34 @@
        ========================================================= */
 
     function saveState(key, value) {
-
         try {
-
             sessionStorage.setItem(
                 key,
                 String(value)
             );
-
         } catch (error) {
-
             /*
-             * Storage may be unavailable in
-             * private browsing or restricted contexts.
+             * Storage may be unavailable in private browsing
+             * or restricted contexts.
              */
-
         }
     }
 
 
     function readState(key) {
-
         try {
-
-            return sessionStorage.getItem(
-                key
-            );
-
+            return sessionStorage.getItem(key);
         } catch (error) {
-
             return null;
-
         }
     }
 
 
     function removeState(key) {
-
         try {
-
-            sessionStorage.removeItem(
-                key
-            );
-
+            sessionStorage.removeItem(key);
         } catch (error) {
-
             /* Ignore storage restrictions. */
-
         }
     }
 
@@ -140,52 +129,71 @@
        SCROLL
        ========================================================= */
 
-    function scrollTop() {
+    function prefersReducedMotion() {
+        return Boolean(
+            window.matchMedia &&
+            window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            ).matches
+        );
+    }
+
+
+    function scrollTop(behavior) {
+        const mode =
+            behavior === "smooth"
+                ? "smooth"
+                : "auto";
 
         window.scrollTo({
             top: 0,
             left: 0,
-            behavior: "auto"
+            behavior: mode
         });
     }
 
 
     function configureScrollRestoration() {
+        if (!("scrollRestoration" in history)) {
+            return;
+        }
 
-        if (
-            "scrollRestoration" in history
-        ) {
-
-            try {
-
-                history.scrollRestoration =
-                    "manual";
-
-            } catch (error) {
-
-                /* Browser does not permit modification. */
-
-            }
-
+        try {
+            history.scrollRestoration = "manual";
+        } catch (error) {
+            /*
+             * Browser does not permit modification.
+             */
         }
     }
 
 
     function forcePageTop() {
+        requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+                scrollTop("auto");
+            });
+        });
+    }
 
-        requestAnimationFrame(
-            function () {
 
-                requestAnimationFrame(
-                    function () {
+    function scrollElementIntoView(element) {
+        if (
+            !element ||
+            typeof element.scrollIntoView !== "function"
+        ) {
+            return;
+        }
 
-                        scrollTop();
+        element.scrollIntoView({
+            behavior:
+                prefersReducedMotion()
+                    ? "auto"
+                    : "smooth",
 
-                    }
-                );
-
-            }
-        );
+            block: "center",
+            inline: "nearest"
+        });
     }
 
 
@@ -194,9 +202,7 @@
        ========================================================= */
 
     function getElements() {
-
         return {
-
             nextButton:
                 document.querySelector(
                     SELECTORS.nextButton
@@ -242,11 +248,23 @@
                     SELECTORS.scaleNodes
                 ),
 
+            conversionNumbers:
+                document.querySelectorAll(
+                    SELECTORS.conversionNumbers
+                ),
+
             revealTargets:
                 document.querySelectorAll(
                     SELECTORS.revealTargets
-                )
+                ),
 
+            progressElements:
+                document.querySelectorAll(
+                    "[data-page-progress], " +
+                    "[data-progress-fill], " +
+                    ".global-progress-fill, " +
+                    ".progress-fill"
+                )
         };
     }
 
@@ -256,18 +274,29 @@
        ========================================================= */
 
     function markPageVisited() {
-
         saveState(
             STORAGE.pageVisited,
             "true"
         );
-
     }
 
 
     /* =========================================================
        NAVIGATION
        ========================================================= */
+
+    function rememberNavigation(action) {
+        saveState(
+            STORAGE.lastAction,
+            action
+        );
+
+        saveState(
+            STORAGE.returnScroll,
+            "0"
+        );
+    }
+
 
     function setupNavigation(elements) {
 
@@ -277,15 +306,7 @@
                 "click",
                 function () {
 
-                    saveState(
-                        STORAGE.lastAction,
-                        "next"
-                    );
-
-                    saveState(
-                        STORAGE.returnScroll,
-                        "0"
-                    );
+                    rememberNavigation("next");
 
                 }
             );
@@ -299,15 +320,7 @@
                 "click",
                 function () {
 
-                    saveState(
-                        STORAGE.lastAction,
-                        "previous"
-                    );
-
-                    saveState(
-                        STORAGE.returnScroll,
-                        "0"
-                    );
+                    rememberNavigation("previous");
 
                 }
             );
@@ -316,14 +329,12 @@
 
 
         /*
-         * Any direct HTML page navigation should
-         * begin at the top of the destination page.
+         * Any direct HTML page navigation should begin
+         * at the top of the destination page.
          */
 
         document
-            .querySelectorAll(
-                'a[href$=".html"]'
-            )
+            .querySelectorAll('a[href$=".html"]')
             .forEach(
                 function (link) {
 
@@ -331,9 +342,8 @@
                         "click",
                         function () {
 
-                            saveState(
-                                STORAGE.returnScroll,
-                                "0"
+                            rememberNavigation(
+                                "page-link"
                             );
 
                         }
@@ -360,14 +370,8 @@
             "click",
             function () {
 
-                saveState(
-                    STORAGE.lastAction,
+                rememberNavigation(
                     "show-system"
-                );
-
-                saveState(
-                    STORAGE.returnScroll,
-                    "0"
                 );
 
 
@@ -378,12 +382,6 @@
                 elements.continueButton.classList.add(
                     "is-activated"
                 );
-
-
-                /*
-                 * Navigation is handled naturally
-                 * by the href in 11.html.
-                 */
 
             }
         );
@@ -411,17 +409,21 @@
 
 
                 /*
-                 * Never interfere with form controls.
+                 * Never interfere with form controls
+                 * or editable content.
                  */
 
                 if (
                     tag === "input" ||
                     tag === "textarea" ||
-                    tag === "select"
+                    tag === "select" ||
+                    tag === "option" ||
+                    (
+                        active &&
+                        active.isContentEditable
+                    )
                 ) {
-
                     return;
-
                 }
 
 
@@ -432,18 +434,15 @@
 
                 if (
                     event.altKey &&
-                    event.key === "ArrowRight"
+                    event.key === "ArrowRight" &&
+                    elements.nextButton
                 ) {
 
-                    if (
-                        elements.nextButton
-                    ) {
+                    event.preventDefault();
 
-                        event.preventDefault();
+                    elements.nextButton.click();
 
-                        elements.nextButton.click();
-
-                    }
+                    return;
 
                 }
 
@@ -455,18 +454,15 @@
 
                 if (
                     event.altKey &&
-                    event.key === "ArrowLeft"
+                    event.key === "ArrowLeft" &&
+                    elements.previousButton
                 ) {
 
-                    if (
-                        elements.previousButton
-                    ) {
+                    event.preventDefault();
 
-                        event.preventDefault();
+                    elements.previousButton.click();
 
-                        elements.previousButton.click();
-
-                    }
+                    return;
 
                 }
 
@@ -498,25 +494,17 @@
 
     function setupRevealAnimation(elements) {
 
-        const reducedMotion =
-            window.matchMedia &&
-            window.matchMedia(
-                "(prefers-reduced-motion: reduce)"
-            ).matches;
-
-
-        if (reducedMotion) {
-
-            revealEverything(
-                elements.revealTargets
-            );
-
+        if (!elements.revealTargets.length) {
             return;
-
         }
 
 
+        const reducedMotion =
+            prefersReducedMotion();
+
+
         if (
+            reducedMotion ||
             !("IntersectionObserver" in window)
         ) {
 
@@ -553,9 +541,7 @@
                             if (
                                 !entry.isIntersecting
                             ) {
-
                                 return;
-
                             }
 
 
@@ -610,249 +596,357 @@
 
 
     /* =========================================================
-       MACHINE NODE INTERACTION
+       BUSINESS-ACTIVITY INTERACTION
        ========================================================= */
 
-    function setupMachineNodes(elements) {
-
-        elements.machineNodes.forEach(
-            function (node) {
-
-                node.setAttribute(
-                    "tabindex",
-                    "0"
-                );
-
-
-                node.addEventListener(
-                    "mouseenter",
-                    function () {
-
-                        node.classList.add(
-                            "is-active"
-                        );
-
-                    }
-                );
-
-
-                node.addEventListener(
-                    "mouseleave",
-                    function () {
-
-                        node.classList.remove(
-                            "is-active"
-                        );
-
-                    }
-                );
-
-
-                node.addEventListener(
-                    "focus",
-                    function () {
-
-                        node.classList.add(
-                            "is-active"
-                        );
-
-                    }
-                );
-
-
-                node.addEventListener(
-                    "blur",
-                    function () {
-
-                        node.classList.remove(
-                            "is-active"
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-    }
-
-
-    /* =========================================================
-       TASK CARD INTERACTION
-       ========================================================= */
-
-    function setupTaskCards(elements) {
-
-        elements.taskCards.forEach(
-            function (card) {
-
-                card.setAttribute(
-                    "tabindex",
-                    "0"
-                );
-
-
-                card.addEventListener(
-                    "focus",
-                    function () {
-
-                        card.classList.add(
-                            "is-focused"
-                        );
-
-                    }
-                );
-
-
-                card.addEventListener(
-                    "blur",
-                    function () {
-
-                        card.classList.remove(
-                            "is-focused"
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-    }
-
-
-    /* =========================================================
-       COPY FLOW
-       ========================================================= */
-
-    function setupCopyNodes(elements) {
-
-        elements.copyNodes.forEach(
-            function (node) {
-
-                node.setAttribute(
-                    "tabindex",
-                    "0"
-                );
-
-
-                node.addEventListener(
-                    "mouseenter",
-                    function () {
-
-                        node.classList.add(
-                            "is-active"
-                        );
-
-                    }
-                );
-
-
-                node.addEventListener(
-                    "mouseleave",
-                    function () {
-
-                        node.classList.remove(
-                            "is-active"
-                        );
-
-                    }
-                );
-
-
-                node.addEventListener(
-                    "focus",
-                    function () {
-
-                        node.classList.add(
-                            "is-active"
-                        );
-
-                    }
-                );
-
-
-                node.addEventListener(
-                    "blur",
-                    function () {
-
-                        node.classList.remove(
-                            "is-active"
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-    }
-
-
-    /* =========================================================
-       SCALE FLOW
-       ========================================================= */
-
-    function setupScaleNodes(elements) {
-
-        elements.scaleNodes.forEach(
-            function (node) {
-
-                node.setAttribute(
-                    "tabindex",
-                    "0"
-                );
-
-
-                node.addEventListener(
-                    "mouseenter",
-                    function () {
-
-                        node.classList.add(
-                            "is-active"
-                        );
-
-                    }
-                );
-
-
-                node.addEventListener(
-                    "mouseleave",
-                    function () {
-
-                        node.classList.remove(
-                            "is-active"
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-    }
-
-
-    /* =========================================================
-       CONVERSION MODEL
-       ========================================================= */
-
-    function setupConversionModel() {
-
-        const conversionNumbers =
-            document.querySelectorAll(
-                ".conversion-number"
+    function getActivityLabel(
+        element,
+        groupName,
+        index
+    ) {
+
+        const explicit =
+            element.getAttribute(
+                "data-activity"
+            ) ||
+            element.getAttribute(
+                "data-label"
+            ) ||
+            element.getAttribute(
+                "aria-label"
             );
 
 
-        conversionNumbers.forEach(
+        if (explicit) {
+            return explicit.trim();
+        }
+
+
+        const heading =
+            element.querySelector(
+                "h1, h2, h3, h4, strong, span"
+            );
+
+
+        if (
+            heading &&
+            heading.textContent.trim()
+        ) {
+
+            return heading.textContent
+                .replace(/\s+/g, " ")
+                .trim();
+
+        }
+
+
+        return (
+            groupName +
+            " " +
+            String(index + 1)
+        );
+
+    }
+
+
+    function clearGroupSelection(
+        groupElements,
+        selectedElement
+    ) {
+
+        groupElements.forEach(
             function (element) {
 
-                element.setAttribute(
-                    "tabindex",
-                    "0"
+                const selected =
+                    element === selectedElement;
+
+
+                element.classList.toggle(
+                    "is-selected",
+                    selected
                 );
 
+
+                element.classList.toggle(
+                    "is-active",
+                    selected
+                );
+
+
+                if (
+                    element.getAttribute("role") ===
+                    "button"
+                ) {
+
+                    element.setAttribute(
+                        "aria-pressed",
+                        selected
+                            ? "true"
+                            : "false"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    function selectActivity(
+        element,
+        groupName,
+        groupElements,
+        index,
+        shouldScroll
+    ) {
+
+        if (!element) {
+            return;
+        }
+
+
+        clearGroupSelection(
+            groupElements,
+            element
+        );
+
+
+        const label =
+            getActivityLabel(
+                element,
+                groupName,
+                index
+            );
+
+
+        saveState(
+            STORAGE.selectedActivity,
+            groupName +
+            ":" +
+            index
+        );
+
+
+        element.dataset.selected =
+            "true";
+
+
+        element.setAttribute(
+            "data-selected",
+            "true"
+        );
+
+
+        /*
+         * aria-current is useful for the active
+         * step in the guided execution sequence.
+         */
+
+        element.setAttribute(
+            "aria-current",
+            "true"
+        );
+
+
+        groupElements.forEach(
+            function (other) {
+
+                if (other !== element) {
+
+                    other.removeAttribute(
+                        "data-selected"
+                    );
+
+                    other.removeAttribute(
+                        "aria-current"
+                    );
+
+                }
+
+            }
+        );
+
+
+        const liveRegion =
+            document.querySelector(
+                "[data-page11-live]"
+            );
+
+
+        if (liveRegion) {
+
+            liveRegion.textContent =
+                label;
+
+        }
+
+
+        if (shouldScroll) {
+
+            scrollElementIntoView(
+                element
+            );
+
+        }
+
+    }
+
+
+    function activateFromKeyboard(
+        event,
+        element,
+        groupName,
+        groupElements,
+        index
+    ) {
+
+        if (
+            event.key !== "Enter" &&
+            event.key !== " "
+        ) {
+            return;
+        }
+
+
+        event.preventDefault();
+
+
+        selectActivity(
+            element,
+            groupName,
+            groupElements,
+            index,
+            true
+        );
+
+    }
+
+
+    function restoreActivitySelection(
+        groupName,
+        groupElements
+    ) {
+
+        const saved =
+            readState(
+                STORAGE.selectedActivity
+            );
+
+
+        if (
+            !saved ||
+            saved.indexOf(
+                groupName + ":"
+            ) !== 0
+        ) {
+
+            return;
+
+        }
+
+
+        const index =
+            Number(
+                saved.split(":")[1]
+            );
+
+
+        if (
+            !Number.isInteger(index) ||
+            index < 0 ||
+            index >= groupElements.length
+        ) {
+
+            return;
+
+        }
+
+
+        selectActivity(
+            groupElements[index],
+            groupName,
+            groupElements,
+            index,
+            false
+        );
+
+    }
+
+
+    function setupActivityGroup(
+        nodeList,
+        groupName
+    ) {
+
+        const groupElements =
+            Array.from(nodeList || []);
+
+
+        if (!groupElements.length) {
+            return;
+        }
+
+
+        groupElements.forEach(
+            function (element, index) {
+
+                if (
+                    !element.hasAttribute(
+                        "tabindex"
+                    )
+                ) {
+
+                    element.setAttribute(
+                        "tabindex",
+                        "0"
+                    );
+
+                }
+
+
+                /*
+                 * Do not add a button role to a container
+                 * that already contains native interactive
+                 * controls.
+                 */
+
+                const containsInteractive =
+                    Boolean(
+                        element.querySelector(
+                            'a, button, input, textarea, select, [contenteditable="true"]'
+                        )
+                    );
+
+
+                if (!containsInteractive) {
+
+                    element.setAttribute(
+                        "role",
+                        "button"
+                    );
+
+                    element.setAttribute(
+                        "aria-pressed",
+                        "false"
+                    );
+
+                }
+
+
+                element.setAttribute(
+                    "aria-label",
+                    getActivityLabel(
+                        element,
+                        groupName,
+                        index
+                    )
+                );
+
+
+                /*
+                 * Pointer hover.
+                 */
 
                 element.addEventListener(
                     "mouseenter",
@@ -870,17 +964,32 @@
                     "mouseleave",
                     function () {
 
-                        element.classList.remove(
-                            "is-active"
-                        );
+                        if (
+                            element.dataset.selected !==
+                            "true"
+                        ) {
+
+                            element.classList.remove(
+                                "is-active"
+                            );
+
+                        }
 
                     }
                 );
 
 
+                /*
+                 * Keyboard focus.
+                 */
+
                 element.addEventListener(
                     "focus",
                     function () {
+
+                        element.classList.add(
+                            "is-focused"
+                        );
 
                         element.classList.add(
                             "is-active"
@@ -895,13 +1004,320 @@
                     function () {
 
                         element.classList.remove(
-                            "is-active"
+                            "is-focused"
+                        );
+
+
+                        if (
+                            element.dataset.selected !==
+                            "true"
+                        ) {
+
+                            element.classList.remove(
+                                "is-active"
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                /*
+                 * Mouse / touch selection.
+                 */
+
+                element.addEventListener(
+                    "click",
+                    function () {
+
+                        selectActivity(
+                            element,
+                            groupName,
+                            groupElements,
+                            index,
+                            false
+                        );
+
+                    }
+                );
+
+
+                /*
+                 * Keyboard selection.
+                 */
+
+                element.addEventListener(
+                    "keydown",
+                    function (event) {
+
+                        activateFromKeyboard(
+                            event,
+                            element,
+                            groupName,
+                            groupElements,
+                            index
                         );
 
                     }
                 );
 
             }
+        );
+
+
+        restoreActivitySelection(
+            groupName,
+            groupElements
+        );
+
+    }
+
+
+    function setupBusinessActivityInteractions(
+        elements
+    ) {
+
+        setupActivityGroup(
+            elements.machineNodes,
+            "execution-sequence"
+        );
+
+
+        setupActivityGroup(
+            elements.taskCards,
+            "task"
+        );
+
+
+        setupActivityGroup(
+            elements.marketStats,
+            "market"
+        );
+
+
+        setupActivityGroup(
+            elements.trialCards,
+            "trial"
+        );
+
+
+        setupActivityGroup(
+            elements.copyNodes,
+            "copy-flow"
+        );
+
+
+        setupActivityGroup(
+            elements.scaleNodes,
+            "scale"
+        );
+
+
+        setupActivityGroup(
+            elements.conversionNumbers,
+            "conversion"
+        );
+
+    }
+
+
+    /* =========================================================
+       PROGRESS
+       ========================================================= */
+
+    function getDocumentProgress() {
+
+        const root =
+            document.documentElement;
+
+
+        const scrollable =
+            Math.max(
+                1,
+                root.scrollHeight -
+                window.innerHeight
+            );
+
+
+        return Math.max(
+            0,
+            Math.min(
+                100,
+                (
+                    window.scrollY /
+                    scrollable
+                ) * 100
+            )
+        );
+
+    }
+
+
+    function updateProgress(elements) {
+
+        const progress =
+            getDocumentProgress();
+
+
+        elements.progressElements.forEach(
+            function (element) {
+
+                const value =
+                    progress.toFixed(1);
+
+
+                const property =
+                    element.getAttribute(
+                        "data-progress-property"
+                    );
+
+
+                if (
+                    property === "width" ||
+                    element.classList.contains(
+                        "global-progress-fill"
+                    ) ||
+                    element.classList.contains(
+                        "progress-fill"
+                    )
+                ) {
+
+                    element.style.width =
+                        value + "%";
+
+                } else if (
+                    element.hasAttribute(
+                        "data-page-progress"
+                    ) ||
+                    element.hasAttribute(
+                        "data-progress-fill"
+                    )
+                ) {
+
+                    element.setAttribute(
+                        "data-progress-value",
+                        value
+                    );
+
+                }
+
+
+                element.setAttribute(
+                    "aria-valuenow",
+                    String(
+                        Math.round(progress)
+                    )
+                );
+
+
+                element.setAttribute(
+                    "aria-valuemin",
+                    "0"
+                );
+
+
+                element.setAttribute(
+                    "aria-valuemax",
+                    "100"
+                );
+
+            }
+        );
+
+
+        document
+            .querySelectorAll(
+                "[data-progress-label]"
+            )
+            .forEach(
+                function (label) {
+
+                    label.textContent =
+                        Math.round(progress) +
+                        "%";
+
+                }
+            );
+
+    }
+
+
+    function scheduleProgressUpdate(
+        elements
+    ) {
+
+        if (progressFrame) {
+            return;
+        }
+
+
+        progressFrame =
+            window.requestAnimationFrame(
+                function () {
+
+                    progressFrame = 0;
+
+                    updateProgress(
+                        elements
+                    );
+
+                }
+            );
+
+    }
+
+
+    function setupProgress(elements) {
+
+        if (
+            !elements.progressElements.length &&
+            !document.querySelector(
+                "[data-progress-label]"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        updateProgress(
+            elements
+        );
+
+
+        if (progressListenersBound) {
+            return;
+        }
+
+
+        progressListenersBound = true;
+
+
+        window.addEventListener(
+            "scroll",
+            function () {
+
+                scheduleProgressUpdate(
+                    elements
+                );
+
+            },
+            { passive: true }
+        );
+
+
+        window.addEventListener(
+            "resize",
+            function () {
+
+                scheduleProgressUpdate(
+                    elements
+                );
+
+            },
+            { passive: true }
         );
 
     }
@@ -924,15 +1340,20 @@
         }
 
 
+        const value =
+            hoursNumber.dataset.hours ||
+            "5000";
+
+
         hoursNumber.setAttribute(
             "aria-label",
-            "5,000 hours"
+            value + " hours"
         );
 
 
         hoursNumber.setAttribute(
             "data-hours",
-            "5000"
+            value
         );
 
     }
@@ -945,21 +1366,25 @@
     function setupSemanticMetrics() {
 
         const metricMap = [
+
             [
                 ".hours-number",
                 "commitment-hours",
                 "5000"
             ],
+
             [
                 ".conversion-number:first-child strong",
                 "conversation-target",
                 "10"
             ],
+
             [
                 ".conversion-result strong",
                 "customer-target",
                 "3"
             ]
+
         ];
 
 
@@ -980,6 +1405,7 @@
                 element.dataset.metric =
                     item[1];
 
+
                 element.dataset.value =
                     item[2];
 
@@ -995,73 +1421,71 @@
 
     function setupImageFallbacks() {
 
-        const images =
-            document.querySelectorAll(
-                "img"
-            );
+        document
+            .querySelectorAll("img")
+            .forEach(
+                function (image) {
+
+                    image.addEventListener(
+                        "error",
+                        function () {
+
+                            /*
+                             * Prevent an endless fallback loop.
+                             */
+
+                            if (
+                                image.dataset
+                                    .fallbackAttempted ===
+                                "true"
+                            ) {
+
+                                return;
+
+                            }
 
 
-        images.forEach(
-            function (image) {
-
-                image.addEventListener(
-                    "error",
-                    function () {
-
-                        /*
-                         * Prevent an endless fallback loop.
-                         */
-
-                        if (
                             image.dataset
-                                .fallbackAttempted ===
-                            "true"
-                        ) {
-
-                            return;
-
-                        }
+                                .fallbackAttempted =
+                                "true";
 
 
-                        image.dataset
-                            .fallbackAttempted =
-                            "true";
+                            const source =
+                                image.getAttribute(
+                                    "src"
+                                ) || "";
 
 
-                        const source =
-                            image.getAttribute(
-                                "src"
-                            ) || "";
+                            /*
+                             * Support both logo filename
+                             * conventions used by the project.
+                             */
+
+                            if (
+                                source ===
+                                "assets/ctmmtptlogo.svg"
+                            ) {
+
+                                image.src =
+                                    "assets/CTMMTPLogo.svg";
 
 
-                        /*
-                         * Support both logo filename
-                         * conventions used by the project.
-                         */
+                            } else if (
+                                source ===
+                                "assets/CTMMTPLogo.svg"
+                            ) {
 
-                        if (
-                            source ===
-                            "assets/ctmmtptlogo.svg"
-                        ) {
+                                image.src =
+                                    "assets/ctmmtptlogo.svg";
 
-                            image.src =
-                                "assets/CTMMTPLogo.svg";
+                            }
 
-                        } else if (
-                            source ===
-                            "assets/CTMMTPLogo.svg"
-                        ) {
+                        },
+                        { once: false }
+                    );
 
-                            image.src =
-                                "assets/ctmmtptlogo.svg";
-
-                        }
-
-                    }
-                );
-
-            }
-        );
+                }
+            );
 
     }
 
@@ -1130,6 +1554,81 @@
                 }
             );
 
+
+        /*
+         * Lightweight live region for selected
+         * business activities.
+         */
+
+        if (
+            !document.querySelector(
+                "[data-page11-live]"
+            )
+        ) {
+
+            const live =
+                document.createElement(
+                    "span"
+                );
+
+
+            live.setAttribute(
+                "data-page11-live",
+                "true"
+            );
+
+
+            live.setAttribute(
+                "aria-live",
+                "polite"
+            );
+
+
+            live.setAttribute(
+                "aria-atomic",
+                "true"
+            );
+
+
+            /*
+             * Visually hidden without requiring
+             * another stylesheet.
+             */
+
+            live.style.position =
+                "absolute";
+
+            live.style.width =
+                "1px";
+
+            live.style.height =
+                "1px";
+
+            live.style.padding =
+                "0";
+
+            live.style.margin =
+                "-1px";
+
+            live.style.overflow =
+                "hidden";
+
+            live.style.clip =
+                "rect(0, 0, 0, 0)";
+
+            live.style.whiteSpace =
+                "nowrap";
+
+            live.style.border =
+                "0";
+
+
+            document.body.appendChild(
+                live
+            );
+
+        }
+
     }
 
 
@@ -1186,13 +1685,21 @@
 
     function preventUnexpectedHashPosition() {
 
-        if (
-            window.location.hash
-        ) {
-
-            forcePageTop();
-
+        if (!window.location.hash) {
+            return;
         }
+
+
+        /*
+         * Page 11 is a guided journey page.
+         * Prevent a stale hash from reopening the
+         * page halfway down the document.
+         */
+
+        window.setTimeout(
+            forcePageTop,
+            0
+        );
 
     }
 
@@ -1224,63 +1731,69 @@
 
         configureScrollRestoration();
 
+
         const elements =
             getElements();
 
 
         markPageVisited();
 
+
         setupNavigation(
             elements
         );
+
 
         setupContinueButton(
             elements
         );
 
+
         setupKeyboardNavigation(
             elements
         );
+
 
         setupRevealAnimation(
             elements
         );
 
-        setupMachineNodes(
+
+        setupBusinessActivityInteractions(
             elements
         );
 
-        setupTaskCards(
-            elements
-        );
-
-        setupCopyNodes(
-            elements
-        );
-
-        setupScaleNodes(
-            elements
-        );
-
-        setupConversionModel();
 
         setupHoursSection();
 
+
         setupSemanticMetrics();
 
+
         setupImageFallbacks();
+
 
         setupAccessibility(
             elements
         );
 
+
         setupCurrentPageMarker();
+
+
+        setupProgress(
+            elements
+        );
+
 
         setupPageShow();
 
+
         preventUnexpectedHashPosition();
 
+
         forcePageTop();
+
 
         markPageReady();
 
